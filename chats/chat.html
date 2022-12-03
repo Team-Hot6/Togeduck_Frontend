@@ -1,0 +1,31 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta charset="utf-8"/> 
+  <title>간단한 채팅에 입실하기</title> 
+</head> 
+<script src="socket_api.js"></script>
+<script src="socket.js"></script>
+<body>
+  <label>채팅 로그 test</label>
+  <br>
+  <textarea id="chat-log" cols="100" rows="20"></textarea>
+  <br>
+  <label>채팅 메세지 전송 테스트</label>
+  <br>
+  <input id="chat_input" type="text" size="100" onkeyup="sumit_message_Enterkey()">
+  <br>
+  <button id="chat_input_submit" type="button" onclick="send_chat_button()" >전송</button>
+  <br>
+  <label>채팅방 통신 테스트</label> 
+  <br>
+  <input id="room_id_input" type="text" size="100" onkeyup="sumit_make_room_Enterkey()">  
+  <br>
+  <button id="room_id_num_1" size="100" value="1" onclick="connect_room_id()">1번</button>
+  <button id="room_id_num_2" size="100" value="2" onclick="connect_room_id()">2번</button>
+  <button id="room_id_num_3" size="100" value="3" onclick="connect_room_id()">3번</button>
+  <button id="chat_input_submit" type="button" onclick="send_message_each_room_button()">전송</button>
+  <br>
+
+</body> 
+</html>
