@@ -40,13 +40,10 @@ function sumit_make_room_Enterkey() {
 }
 
 async function check_is_chat_user_room(user_id) {
-    formData = {"user_id": "1"}
     const response = await fetch('http://127.0.0.1:8000/chats/', {
-        // headers:{
-        //     "Authorization":"Bearer "+localStorage.getItem("access")
-        // },
         headers: {
             "Content-Type": "application/json",
+            // "Authorization":"Bearer "+localStorage.getItem("access")
             "Authorization":"Bearer " + temp_access_token
         },
         method:'POST',
@@ -59,7 +56,6 @@ async function check_is_chat_user_room(user_id) {
     }).then(data => {
         return data
     })
-
     // room_id 를 보내줌 ex) 5
     return response
 }
