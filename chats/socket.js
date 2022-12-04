@@ -39,6 +39,7 @@ function sumit_make_room_Enterkey() {
     }
 }
 
+// post로 로그인 유저와 클릭한 유저의 방이 있는지 확인하고 없으면 만들고 room_id return
 async function check_is_chat_user_room(user_id) {
     const response = await fetch('http://127.0.0.1:8000/chats/', {
         headers: {
