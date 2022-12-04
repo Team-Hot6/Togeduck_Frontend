@@ -52,7 +52,7 @@ async function check_is_chat_user_room(user_id) {
         method:'POST',
         // body: formData
         body: JSON.stringify({
-            "user_id": "1"
+            "user_id": user_id
         })
     }).then(response => {
         return response.json()

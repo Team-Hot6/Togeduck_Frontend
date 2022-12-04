@@ -25,6 +25,13 @@ async function connect_user_chat_room() {
 
     // 만들어지거나 원래 있던 방 room_id로 웹소켓 연결
     user_to_user_room_socket = new WebSocket(`${url}${room_id}/`)
+
+    user_to_user_room_socket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        var message = data['message'];
+        var message_data = JSON.parse(message)['message']
+        document.querySelector('#chat-log').value += (message_data + '\n');
+    };
 }
 
 // 채팅방 id 별로 소켓 연결
