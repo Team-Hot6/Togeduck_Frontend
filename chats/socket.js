@@ -38,3 +38,28 @@ function sumit_make_room_Enterkey() {
         send_message_each_room_button();
     }
 }
+
+async function check_is_chat_user_room(user_id) {
+    formData = {"user_id": "1"}
+    const response = await fetch('http://127.0.0.1:8000/chats/', {
+        // headers:{
+        //     "Authorization":"Bearer "+localStorage.getItem("access")
+        // },
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization":"Bearer " + temp_access_token
+        },
+        method:'POST',
+        // body: formData
+        body: JSON.stringify({
+            "user_id": "1"
+        })
+    }).then(response => {
+        return response.json()
+    }).then(data => {
+        return data
+    })
+
+    // room_id 를 보내줌 ex) 5
+    return response
+}

@@ -6,16 +6,17 @@
 </head> 
 <script src="socket_api.js"></script>
 <script src="socket.js"></script>
+<script src="user.js"></script>
 <body>
   <label>채팅 로그 test</label>
   <br>
   <textarea id="chat-log" cols="100" rows="20"></textarea>
   <br>
-  <label>채팅 메세지 전송 테스트</label>
+  <div id="create_user_list_button">
+    <!-- user 목록 -->
+  </div>
   <br>
-  <input id="chat_input" type="text" size="100" onkeyup="sumit_message_Enterkey()">
-  <br>
-  <button id="chat_input_submit" type="button" onclick="send_chat_button()" >전송</button>
+  <button id="chat_input_submit" type="button" onclick="send_chat_button()" >로그인 된 유저의 채팅방 리스트 보기</button>
   <br>
   <label>채팅방 통신 테스트</label> 
   <br>
