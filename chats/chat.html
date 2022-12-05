@@ -7,6 +7,7 @@
 <script src="socket_api.js"></script>
 <script src="socket.js"></script>
 <script src="user.js"></script>
+<script src="../global.js"></script>
 <body>
   <label>임시 로그인</label>
   <br>
@@ -31,9 +32,6 @@
   <br>
   <input id="room_id_input" type="text" size="100" onkeyup="sumit_make_room_Enterkey()">  
   <br>
-  <button id="room_id_num_1" size="100" value="1" onclick="connect_room_id()">1번</button>
-  <button id="room_id_num_2" size="100" value="2" onclick="connect_room_id()">2번</button>
-  <button id="room_id_num_3" size="100" value="3" onclick="connect_room_id()">3번</button>
   <button id="chat_input_submit" type="button" onclick="send_message_each_room_button()">전송</button>
   <br>
 

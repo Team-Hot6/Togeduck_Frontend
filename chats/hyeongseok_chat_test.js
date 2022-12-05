@@ -38,3 +38,41 @@ each_room_socket.onmessage = function(e) {
     var message_data = JSON.parse(message)['message']
     document.querySelector('#chat-log').value += (message_data + '\n');
 };
+
+// 해당 채팅방으로 메세지 전송
+function send_message_each_room_button() {
+    // socket 연결
+    let send_message = new Websocket_func();
+
+    // 연결된 방 소켓 확인
+    // if (each_room_socket == undefined) {
+    //     alert('방 번호를 선택해 주세요')
+    // } else {
+    //     send_message.send_chat_message(each_room_socket, room_id)
+    // }
+
+    if (user_to_user_room_socket == undefined) {
+        alert('채팅 상대를 선택해 주세요')
+    } else {
+        send_message.send_chat_message(user_to_user_room_socket, room_id)
+    }
+};
+
+// 채팅방 id 별로 소켓 연결
+function connect_room_id() {
+    room_id = event.target.value
+
+    // 연결이 되어있으면 무시
+    if (each_room_socket != undefined) {
+        return
+    }
+
+    each_room_socket = new WebSocket(`${url}${room_id}/`)
+
+    each_room_socket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        var message = data['message'];
+        var message_data = JSON.parse(message)['message']
+        document.querySelector('#chat-log').value += (message_data + '\n');
+    };
+}
