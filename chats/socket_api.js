@@ -58,9 +58,16 @@ function send_message_each_room_button() {
     // socket 연결
     let send_message = new Websocket_func();
 
-    if (each_room_socket == undefined) {
-        alert('방 번호를 선택해 주세요')
+    // 연결된 방 소켓 확인
+    // if (each_room_socket == undefined) {
+    //     alert('방 번호를 선택해 주세요')
+    // } else {
+    //     send_message.send_chat_message(each_room_socket, room_id)
+    // }
+
+    if (user_to_user_room_socket == undefined) {
+        alert('채팅 상대를 선택해 주세요')
     } else {
-        send_message.makeroom(each_room_socket, room_id)
+        send_message.send_chat_message(user_to_user_room_socket, room_id)
     }
 };

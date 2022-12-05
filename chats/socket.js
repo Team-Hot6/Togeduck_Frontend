@@ -13,7 +13,7 @@ class Websocket_func {
         }
 
     // room 1 을 사용한 메세지
-    makeroom(webSocket, room_id) {
+    send_chat_message(webSocket, room_id) {
         const chatinput = document.getElementById('room_id_input')
         const message = chatinput.value
         
@@ -44,8 +44,8 @@ async function check_is_chat_user_room(user_id) {
     const response = await fetch('http://127.0.0.1:8000/chats/', {
         headers: {
             "Content-Type": "application/json",
-            // "Authorization":"Bearer "+localStorage.getItem("access")
-            "Authorization":"Bearer " + temp_access_token
+            "Authorization":"Bearer "+localStorage.getItem("access")
+            // "Authorization":"Bearer " + temp_access_token
         },
         method:'POST',
         // body: formData
@@ -58,5 +58,6 @@ async function check_is_chat_user_room(user_id) {
         return data
     })
     // room_id 를 보내줌 ex) 5
+    console.log(response, 'room connect')
     return response
 }
