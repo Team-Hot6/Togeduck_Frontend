@@ -27,21 +27,9 @@ class Websocket_func {
     }
 }
 
-function sumit_message_Enterkey() {
-    if (window.event.keyCode == 13) {
-        send_chat_button();
-    }
-}
-
-function sumit_make_room_Enterkey() {
-    if (window.event.keyCode == 13) {
-        send_message_each_room_button();
-    }
-}
-
 // post로 로그인 유저와 클릭한 유저의 방이 있는지 확인하고 없으면 만들고 room_id return
-async function check_is_chat_user_room(user_id) {
-    const response = await fetch('http://127.0.0.1:8000/chats/', {
+async function check_is_chat_user_room(target_user_id, sender_id, receiver_id) {
+    const response = await fetch(`${back_end_url}/chats/`, {
         headers: {
             "Content-Type": "application/json",
             "Authorization":"Bearer "+localStorage.getItem("access")
@@ -50,7 +38,9 @@ async function check_is_chat_user_room(user_id) {
         method:'POST',
         // body: formData
         body: JSON.stringify({
-            "user_id": user_id
+            "user_id": target_user_id,
+            "sender_id": sender_id,
+            "receiver_id": receiver_id
         })
     }).then(response => {
         return response.json()
