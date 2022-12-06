@@ -12,15 +12,17 @@ class Websocket_func {
             chatinput.focus()
         }
 
-    // room 1 을 사용한 메세지
-    send_chat_message(webSocket, room_id) {
+    // message 보내기 기능
+    // socket_api.js (send_message_each_room_button) ->
+    send_chat_message(webSocket, room_id, sender_id, receiver_id) {
         const chatinput = document.getElementById('room_id_input')
         const message = chatinput.value
-        
         // webSocket.onopen = () =>
         webSocket.send(JSON.stringify({
             'room_id': room_id,
             'message': message,
+            'sender_id': sender_id,
+            'receiver_id': receiver_id
             }))
             chatinput.value = ''
             chatinput.focus()
@@ -28,7 +30,7 @@ class Websocket_func {
 }
 
 // post로 로그인 유저와 클릭한 유저의 방이 있는지 확인하고 없으면 만들고 room_id return
-async function check_is_chat_user_room(target_user_id, sender_id, receiver_id) {
+async function check_is_chat_user_room(receiver_id) {
     const response = await fetch(`${back_end_url}/chats/`, {
         headers: {
             "Content-Type": "application/json",
@@ -38,9 +40,7 @@ async function check_is_chat_user_room(target_user_id, sender_id, receiver_id) {
         method:'POST',
         // body: formData
         body: JSON.stringify({
-            "user_id": target_user_id,
-            "sender_id": sender_id,
-            "receiver_id": receiver_id
+            "user_id": receiver_id,
         })
     }).then(response => {
         return response.json()
