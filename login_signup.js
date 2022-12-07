@@ -6,6 +6,7 @@ function firstRnder() {
     if(storageMemory){
       sayHiElement.textContent = storageMemory
     }
+    console.log('첫번째 렌더링2')
     changePage()
   }
   
@@ -17,6 +18,8 @@ function firstRnder() {
     const loginBox = document.querySelector('.login-box')
     const singUpBox = document.querySelector('.signup-box')
     let status = localStorage.getItem('status')
+    console.log('찍히나3')
+
   
     function addClass() {
       lightblueBox.classList.add('right')
@@ -26,6 +29,7 @@ function firstRnder() {
       loginBox.classList.add('InBoxRight')
       singUpBox.classList.add('InBoxRight')
     }
+    console.log('얘는 뭐지4')
   
     function removeClass() {
       lightblueBox.classList.remove('right')
@@ -35,6 +39,7 @@ function firstRnder() {
       loginBox.classList.remove('InBoxRight')
       singUpBox.classList.remove('InBoxRight')
     }
+    console.log('배경이 지워지는 건가5')
   
     if(!e && status === 'signup') {
       addClass()
@@ -45,7 +50,7 @@ function firstRnder() {
       addClass()
       localStorage.setItem('status', 'signup')
     }
-  }
+  } console.log('여기도 필요하나1')
   
   window.addEventListener('DOMContentLoaded', function(){
     const buttons = document.querySelectorAll('.signup-btn')
@@ -54,10 +59,12 @@ function firstRnder() {
     const logOutLink = document.querySelector('#logout')
   
     firstRnder()
+    console.log('여기부터 렌더링가나6')
   
     buttons.forEach((button) => {
       button.addEventListener('click', (e) => {
         changePage(e)
+        console.log('체인지?7')
       })
     })
   
