@@ -20,8 +20,11 @@ async function connect_user_chat_room() {
     console.log(current_user_id, '번호 유저와', receiver_id, '와의 chat_room')
 
     if (user_to_user_room_socket != undefined) {
-        return
-    } 
+        user_to_user_room_socket.close();
+        document.querySelector('#chat-log').value='';
+    } else {
+        document.querySelector('#chat-log').value='';
+    }
     // else if (user_to_user_room_socket) {
     //     // user_to_user_room_socket 이 이미 존재, 즉
     //     // 다른 유저와 이미 연결되어 있는게 있다면
@@ -56,6 +59,7 @@ function send_message_each_room_button() {
         alert('채팅 상대를 선택해 주세요')
     } else {
         send_message.send_chat_message(user_to_user_room_socket, room_id, sender_id, receiver_id)
+        login_user_opponent_list()
     }
 };
 
@@ -67,9 +71,10 @@ async function login_user_opponent_list() {
         return
     }
     user_opp_list = await get_user_opponent_list_api()
-
+    var create_opponent_user_list = document.getElementById("create_opponent_user_list")
+    create_opponent_user_list.innerHTML=''
+    
     for (i=0; i < user_opp_list.length; i++) {
-        var create_opponent_user_list = document.getElementById("create_opponent_user_list")
 
         const user_button = document.createElement("Button")
         user_button.className = `${user_opp_list[i]['id']}`

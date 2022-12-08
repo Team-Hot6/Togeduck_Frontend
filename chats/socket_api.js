@@ -54,16 +54,29 @@ async function check_is_chat_user_room(receiver_id) {
 
 // socket.js -> login_user_opponent_list() 에서 호출되며
 // 로그인된 유저와 채팅중인 상대방 정보 가져옴
+// 마지막으로 채팅했던 순서대로 정렬해서 가져옴
 async function get_user_opponent_list_api() {
-    const response = await fetch (`${back_end_url}/chats/users/?connect=list`, {
+    const response = await fetch (`${back_end_url}/chats/users/?connect=sort`, {
         headers: {
             "Content-Type": "application/json",
             "Authorization":"Bearer "+localStorage.getItem("access")
-            // "Authorization":"Bearer " + temp_access_token
         },
         method:'GET',
     }).then(response => {
         return response.json()
     })
     return response
+}
+
+// 채팅 로그 가져오기
+async function get_chat_room_log(cur_websocekt, room_id) {
+    const response = await fetch(`${back_end_url}/chats/rooms/${room_id}`, {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization":"Bearer "+localStorage.getItem("access")
+        },
+        method:'GET',
+    })
+
+    return response.json().data
 }
