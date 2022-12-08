@@ -39,10 +39,9 @@ async function connect_user_chat_room() {
     // socket_api.js 의 채팅 로그 가져오기
     const chat_log = await get_chat_room_log(room_id)
 
-    console.log(chat_log)
-
     user_to_user_room_socket.onmessage = function(e) {
         var data = JSON.parse(e.data);
+        console.log(data)
         var message = data['message'];
         var sender = data['sender']
         var cur_time = data['cur_time']

@@ -15,14 +15,13 @@ class Websocket_func {
     // message 보내기 기능
     // socket_api.js (send_message_each_room_button) ->
     send_chat_message(webSocket, room_id, sender_id, receiver_id) {
-        const chatinput = document.getElementById('room_id_input')
+        const chatinput = document.getElementById('enterMessage')
         const message = chatinput.value
         // webSocket.onopen = () =>
         webSocket.send(JSON.stringify({
             'room_id': room_id,
             'message': message,
             'sender_id': sender_id,
-            'receiver_id': receiver_id
             }))
             chatinput.value = ''
             chatinput.focus()

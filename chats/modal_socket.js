@@ -3,9 +3,6 @@ window.onload = () => {
     // 자신이랑 채팅중인 상대 리스트 목록을 가져오는 함수
     login_user_opponent_list()
 }
-
-// let url = `ws://${window.location.host}/ws/socket-server/`
-
 // 유저 id 가져와서 방 만들기 // 로그인 되어있어야 함
 async function connect_user_chat_room(receiver_id) {
     let current_user_id = JSON.parse(localStorage.getItem('payload'))['user_id'];
@@ -34,11 +31,11 @@ async function connect_user_chat_room(receiver_id) {
     create_chat_log.innerHTML=''
     
     const chat_log = total_chat_log['room_message']
-    console.log(chat_log)
+
     for (i=0; i < chat_log.length; i++) {
 
         const each_chat_log = `
-        <div class="message" id="${chat_log[i]['id']}">
+        <div class="message">
             <div class="message__head">
                 <span class="message__note">${chat_log[i]['user']}</span>
                 <span class="message__note">${chat_log[i]['date']} ${chat_log[i]['cur_time']}</span>
@@ -62,11 +59,28 @@ async function connect_user_chat_room(receiver_id) {
 
     user_to_user_room_socket.onmessage = function(e) {
         var data = JSON.parse(e.data);
-        var message = data['message'];
-        var sender = data['sender']
-        var cur_time = data['cur_time']
-        var date = data['date']
-        var room_id = data['room_id']
+        console.log(data)
+
+        const each_chat_log = `
+        <div class="message">
+            <div class="message__head">
+                <span class="message__note">${data['user']}</span>
+                <span class="message__note">${data['date']} ${data['cur_time']}</span>
+            </div>
+            <div class="message__base">
+                <div class="message__avatar avatar">
+                    <a href="#" class="avatar__wrap">
+                        <img class="avatar__img" src="" width="35" height="35" alt="">
+                    </a>
+                </div>
+                <div class="message__textbox">
+                    <span class="message__text">${data['message']}</span>
+                </div>
+            </div>
+        </div>
+        `
+        create_chat_log.insertAdjacentHTML("beforeend", each_chat_log);
+        document.getElementById("chatbox__scroll").scrollTop = document.getElementById("chatbox__scroll").scrollHeight;
         // document.querySelector('#chat-log').value += (message + '\n');
     };
 }
@@ -82,7 +96,7 @@ function send_message_each_room_button() {
     if (user_to_user_room_socket == undefined) {
         alert('채팅 상대를 선택해 주세요')
     } else {
-        send_message.send_chat_message(user_to_user_room_socket, room_id, sender_id, receiver_id)
+        send_message.send_chat_message(user_to_user_room_socket, room_id, sender_id)
         login_user_opponent_list()
     }
 };
@@ -118,8 +132,9 @@ async function login_user_opponent_list() {
     }
 }
 
-function sumit_make_room_Enterkey() {
+function sumit_send_message_Enterkey() {
     if (window.event.keyCode == 13) {
         send_message_each_room_button();
+        // document.getElementById("enterMessage").value() = '';
     }
 }
