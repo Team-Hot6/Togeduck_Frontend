@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <link rel="stylesheet" href="./css/chat_modal.css">
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
+<link rel="stylesheet" href="./css/chat_modal.css">
+
+<script src="modal_socket_api.js"></script>
+<script src="modal_socket.js"></script>
+<script src="../global.js"></script>
+
   <div class="modal">
     <div class="modal__dialog">
       <div class="modal__close">
         <a href="#" class="modal__icon">
           <i class="fa fa-times" aria-hidden="true"></i>
         </a>
+        <span class="modal__note">닫기</span>
         <span class="modal__note">닫기</span>
       </div>
       <div class="modal__content chat">
@@ -23,31 +20,30 @@
               <div class="search__icon">
                 <i class="fa fa-search" aria-hidden="true"></i>
               </div>
-              <input type="search" class="search__input" placeholder="Быстрый поиск">
+              <input type="search" class="search__input" placeholder="검색">
               <div class="search__icon search__icon_right">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
               </div>
             </div>
           </div>
           <div class="chat__users">
-            <ul class="users">
-              <li class="users__item users__item_group">
+            <ul class="users" id="create_opponent_user_list">
+              <!-- <li class="users__item users__item_group">
                 <div class="users__avatar avatar">
                   <a href="#" class="avatar__wrap">
-                                          M
-                                      </a>
+                  </a>
                 </div>
                 <span class="users__note">상대방 이름</span>
                 <div class="users__counter">
-                  <!-- 읽지 않은 채팅 수 -->
                   <span class="counter">1+</span>
                 </div>
-              </li>
+              </li> -->
 
+              채팅방이 있는 유저 목록 html 부분
               <li class="users__item">
                 <div class="users__avatar avatar avatar_online">
                   <a href="#" class="avatar__wrap">
-                    <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="">
+                    <img class="avatar__img" src="" width="35" height="35" alt="">
                   </a>
                 </div>
                 <span class="users__note">Thomas Brown</span>
@@ -55,10 +51,11 @@
                   <span class="counter">3</span>
                 </div>
               </li>
+              
               <li class="users__item">
                 <div class="users__avatar">
                   <a href="#" class="avatar__wrap">
-                    <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="">
+                    <img class="avatar__img" src="" width="35" height="35" alt="">
                   </a>
                 </div>
                 <span class="users__note">Edward LeCriston</span>
@@ -85,11 +82,11 @@
                 </div>
               </div>
             </div>
-            <div class="chatbox__row chatbox__row_fullheight">
+            <div class="chatbox__row chatbox__row_fullheight" id="chatbox__scroll">
               <!-- 메세지가 담기는 class 여기 밑으로 append child 해주면 됨 -->
-              <div class="chatbox__content">
+              <div class="chatbox__content" id="chatbox__content">
 
-                <div class="message">
+                <!-- <div class="message">
                   <div class="message__head">
                     <span class="message__note">보낸 유저 이름 1</span>
                     <span class="message__note">날짜 시간</span>
@@ -97,7 +94,7 @@
                   <div class="message__base">
                     <div class="message__avatar avatar">
                       <a href="#" class="avatar__wrap">
-                        <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="">
+                        <img class="avatar__img" src="" width="35" height="35" alt="">
                       </a>
                     </div>
                     <div class="message__textbox">
@@ -114,7 +111,7 @@
                   <div class="message__base">
                     <div class="message__avatar avatar">
                       <a href="#" class="avatar__wrap">
-                        <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="">
+                        <img class="avatar__img" src="" width="35" height="35" alt="">
                       </a>
                     </div>
                     <div class="message__textbox">
@@ -131,14 +128,14 @@
                   <div class="message__base">
                     <div class="message__avatar avatar">
                       <a href="#" class="avatar__wrap">
-                        <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="">
+                        <img class="avatar__img" src="" width="35" height="35" alt="">
                       </a>
                     </div>
                     <div class="message__textbox">
                       <span class="message__text">채팅 내용 3_ class = message__text</span>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 
               </div>
             </div>
@@ -171,7 +168,4 @@
   
   
   </div>
-</body>
-</html>
-
 
