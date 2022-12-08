@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>workshop</title>
-    <!-- <script src="../../global.js"></script> -->
-    <script src="/static/js/api.js"></script>
-    <script src="/static/js/community.js"></script>
+
+
     <link rel="stylesheet" href="/static/css/community.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </head>
+
 <body>
     <div class="navbar">네비게이션 바</div>
     <div class="summary">서비스 소개글과 이미지</div>
-
     <section class="main">
         <section class="category">
             <div class="menubar">
@@ -39,37 +47,71 @@
                 <button type="button" class="hobby">자기계발</button>
             </div>
         </section>
-        
-        <div class="sub_info">부가정보(전체카테고리 좋아요 top10 / 각 취미 카테고리 소개글)</div>
-        <!-- 여기서 부터 수정 -->
+
         <section class="content">
-            <div class="article-box" id="article-box">
-                <ul class="articles" id="articles">
-                    <!-- <li>
-                        <div>
-                            <span></span>
-                            <a href=""></a>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </li> -->
-                </ul>
-                <!-- <div class="article">1 샘플 게시글[14] 작성자 작성날짜 작성시간</div> -->
+            <span class="fs-3 fw-bold">전체 카테고리 TOP 10 게시글 </span>
+            <div class="sub_info mt-3">
+                <table class="table">
+                    <colgroup>
+                        <col style="width: 5%;">
+                        <col style="width: 12%;">
+                        <col style="width: 35%;">
+                        <col style="width: 15%;">
+                        <col style="width: 15%;">
+                        <col style="width: 8%;">
+                        <col style="width: 5%;">
+                        <col style="width: 10%;">
+                    </colgroup>
+                    <thead class="table-dark">
+                        <tr align="center">
+                            <th scope="col">번호</th>
+                            <th scope="col">카테고리</th>
+                            <th scope="col">제목</th>
+                            <th scope="col">작성자</th>
+                            <th scope="col">작성일자</th>
+                            <th scope="col">작성시간</th>
+                            <th scope="col">추천</th>
+                            <th scope="col">조회</th>
+                        </tr>
+                    </thead>
+                    <tbody align="center" id="best_article_list"></tbody>
+                </table>
             </div>
-            <!-- <div class="gridbox" id="gridbox"> -->
-                <!-- <div class="workshop">content1</div>
-                <div class="workshop">content2</div>
-                <div class="workshop">content3</div>
-                <div class="workshop">content4</div>
-                <div class="workshop">content5</div>
-                <div class="workshop">content6</div>
-                <div class="workshop">content7</div>
-                <div class="workshop">content8</div>
-                <div class="workshop">content7</div> -->
-            <!-- </div> -->
+            <div class="article-box mt-5" id="article-box">
+                <span class="fs-3 fw-bold">카테고리별 게시글</span>
+                <button type="button" class="btn btn-warning mt-3" onclick="handleArticleCreate()">게시글 작성</button>
+                <table class="table w-100 mt-4">
+                    <colgroup>
+                        <col style="width: 5%;">
+                        <col style="width: 12%;">
+                        <col style="width: 35%;">
+                        <col style="width: 15%;">
+                        <col style="width: 15%;">
+                        <col style="width: 8%;">
+                        <col style="width: 5%;">
+                        <col style="width: 10%;">
+                    </colgroup>
+                    <thead class="table-dark">
+                        <tr align="center">
+                            <th scope="col">번호</th>
+                            <th scope="col">카테고리</th>
+                            <th scope="col">제목</th>
+                            <th scope="col">작성자</th>
+                            <th scope="col">작성일자</th>
+                            <th scope="col">작성시간</th>
+                            <th scope="col">추천</th>
+                            <th scope="col">조회</th>
+                        </tr>
+                    </thead>
+                    <tbody align="center" id="article_list"></tbody>
+                </table>
+            </div>
             <div class="pagination">페이지네이션 번호 (1, 2, 3 ...)</div>
         </section>
     </section>
     <footer class="footer">copyrightⓒ 2022 All rights reserved by team HOT6.</footer>
+    <!-- <script src="../../global.js"></script> -->
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/community.js"></script>
 </body>
 </html>

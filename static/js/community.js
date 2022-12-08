@@ -1,7 +1,7 @@
 console.log('community.js 연결')
-article_list()
 
-async function article_list() {
+// 
+window.onload = async function article_list() {
     const response = await get_articles()
     const data = await response.json()
 
@@ -9,49 +9,55 @@ async function article_list() {
         let id = data[i]['id']
         let title = data[i]['title']
         let comment = data[i]['comment_article']
+        let category = data[i]['category']
         let user = data[i]['user']
         let date = data[i]['date']
         let time = data[i]['time']
+        let like = data[i]['like']
+        let views = data[i]['views']
         
-        
-        const a = document.getElementById('articles')
-        const temp_html = `<li>
-                            <div class="aaa">
-                                <span>${id}</span>
-                                <a href="">${title} [${comment}]</a>
-                                
-                                <span class="test"> ${date} ${time}</span>
-                                <span class="test"> ${user}&nbsp</span>
-                            </div>
-                        </li>`
-        const box = document.getElementById('article-box')
-        box.insertAdjacentHTML('beforeend', temp_html)
-        
-        // const article_item = document.createElement('li')
-        // const article_div = document.createElement('div')
-        // const article_number = document.createElement('span')
-        // const article_a = document.createElement('a')
-        // const author = document.createElement('span')
-        // const datetime = document.createElement('span')
-
-        // article_item.append(article_div)
-        // article_div.append(article_number)
-        // article_number.append(id)
-        // article_div.append(article_a)
-        // article_a.append(title, `[${comment}]`)
-        // article_div.append(author)
-        // author.append(user)
-        // article_div.append(datetime)
-        // datetime.append(date, time)
-
-
-        // const test = document.getElementById('article-box')
-        // test.setAttribute('class', 'article')
-        // test.append(article_div)
-
-        // // article_item.setAttribute('style', 'list-style: none;')
-        
-        // console.log(article_item)
+        const article = `<tr>
+                            <td>${id}</td>
+                            <td>${category}</td>
+                            <td align="left"><a href="">${title} [${comment}]</a></td>
+                            <td>${user}</td>
+                            <td>${date}</td>
+                            <td>${time}</td>
+                            <td>${like}</td>
+                            <td>${views}</td>
+                        </tr>`
+        const article_list = document.getElementById('article_list')
+        article_list.insertAdjacentHTML('beforeend', article)
     }
-    console.log(data)
+
+    // sort 함수를 사용하여 dictionary list의 객체를 like 내림차순 정렬
+    data.sort(function(a, b) {
+        return b.like - a.like; 
+    });
+    
+    for (let i = 0; i < 10; i++){
+        let id = data[i]['id']
+        let title = data[i]['title']
+        let comment = data[i]['comment_article']
+        let category = data[i]['category']
+        let user = data[i]['user']
+        let date = data[i]['date']
+        let time = data[i]['time']
+        let like = data[i]['like']
+        let views = data[i]['views']
+
+        const best_article = `<tr>
+                            <td>${id}</td>
+                            <td>${category}</td>
+                            <td align="left"><a href="">${title} [${comment}]</a></td>
+                            <td>${user}</td>
+                            <td>${date}</td>
+                            <td>${time}</td>
+                            <td>${like}</td>
+                            <td>${views}</td>
+                        </tr>`
+        
+        const best_article_list = document.getElementById('best_article_list')
+        best_article_list.insertAdjacentHTML('beforeend', best_article)
+    }
 }
