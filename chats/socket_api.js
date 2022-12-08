@@ -69,7 +69,7 @@ async function get_user_opponent_list_api() {
 }
 
 // 채팅 로그 가져오기
-async function get_chat_room_log(cur_websocekt, room_id) {
+async function get_chat_room_log(room_id) {
     const response = await fetch(`${back_end_url}/chats/rooms/${room_id}`, {
         headers: {
             "Content-Type": "application/json",
@@ -78,5 +78,5 @@ async function get_chat_room_log(cur_websocekt, room_id) {
         method:'GET',
     })
 
-    return response.json().data
+    return response.json()
 }

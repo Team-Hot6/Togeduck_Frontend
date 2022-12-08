@@ -14,7 +14,7 @@
         <a href="#" class="modal__icon">
           <i class="fa fa-times" aria-hidden="true"></i>
         </a>
-        <span class="modal__note">Закрыть</span>
+        <span class="modal__note">닫기</span>
       </div>
       <div class="modal__content chat">
         <div class="modal__sidebar">
@@ -37,15 +37,17 @@
                                           M
                                       </a>
                 </div>
-                <span class="users__note">MaximModus</span>
+                <span class="users__note">상대방 이름</span>
                 <div class="users__counter">
-                  <span class="counter">99+</span>
+                  <!-- 읽지 않은 채팅 수 -->
+                  <span class="counter">1+</span>
                 </div>
               </li>
+
               <li class="users__item">
                 <div class="users__avatar avatar avatar_online">
                   <a href="#" class="avatar__wrap">
-                    <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
+                    <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="">
                   </a>
                 </div>
                 <span class="users__note">Thomas Brown</span>
@@ -56,7 +58,7 @@
               <li class="users__item">
                 <div class="users__avatar">
                   <a href="#" class="avatar__wrap">
-                    <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
+                    <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="">
                   </a>
                 </div>
                 <span class="users__note">Edward LeCriston</span>
@@ -64,53 +66,7 @@
                   <span class="counter">6</span>
                 </div>
               </li>
-              <li class="users__item">
-                <div class="users__avatar avatar avatar_online">
-                  <a href="#" class="avatar__wrap">
-                    <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                  </a>
-                </div>
-                <span class="users__note">Christian Smitt</span>
-                <div class="users__counter">
-                  <span class="counter">2</span>
-                </div>
-              </li>
-              <li class="users__item">
-                <div class="users__avatar avatar">
-                  <a href="#" class="avatar__wrap">
-                    <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                  </a>
-                </div>
-                <span class="users__note">Sandy Miller</span>
-                <div class="counter"></div>
-              </li>
-              <li class="users__item">
-                <div class="users__avatar avatar avatar_online">
-                  <a href="#" class="avatar__wrap">
-                    <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                  </a>
-                </div>
-                <span class="users__note">Princess Murphy</span>
-                <div class="counter"></div>
-              </li>
-              <li class="users__item">
-                <div class="users__avatar avatar">
-                  <a href="#" class="avatar__wrap">
-                    <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                  </a>
-                </div>
-                <span class="users__note">Artour Bargeman</span>
-                <div class="counter"></div>
-              </li>
-              <li class="users__item">
-                <div class="users__avatar avatar">
-                  <a href="#" class="avatar__wrap">
-                    <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                  </a>
-                </div>
-                <span class="users__note">Andrey Afonin</span>
-                <div class="counter"></div>
-              </li>
+              
             </ul>
           </div>
         </div>
@@ -120,172 +76,78 @@
               <div class="head">
                 <div class="head__avatar avatar avatar_larger">
                   <a href="#" class="avatar__wrap">
-                                          M
-                                      </a>
+                  </a>
                 </div>
-                <div class="head__title">MaximModus</div>
+                <div class="head__title">채팅중인 상대방 이름</div>
                 <div class="head__note">
-                  <span>8 участников</span>
+                  <span>8 участников - 뭔지모름</span>
                   <span class="head__icon"></span>
                 </div>
               </div>
             </div>
             <div class="chatbox__row chatbox__row_fullheight">
+              <!-- 메세지가 담기는 class 여기 밑으로 append child 해주면 됨 -->
               <div class="chatbox__content">
+
                 <div class="message">
                   <div class="message__head">
-                    <span class="message__note">Princess Murphy</span>
-                    <span class="message__note">Вчера, 17:00</span>
+                    <span class="message__note">보낸 유저 이름 1</span>
+                    <span class="message__note">날짜 시간</span>
                   </div>
                   <div class="message__base">
                     <div class="message__avatar avatar">
                       <a href="#" class="avatar__wrap">
-                        <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
+                        <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="">
                       </a>
                     </div>
                     <div class="message__textbox">
-                      <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
-                      <img class="message__smiley" src="http://www.pic4ever.com/images/14k8gag.gif" border="0">
+                      <span class="message__text">채팅 내용 1_ class = message__text</span>
                     </div>
                   </div>
                 </div>
+
                 <div class="message">
                   <div class="message__head">
-                    <span class="message__note">Princess Murphy</span>
-                    <span class="message__note">Вчера, 17:00</span>
+                    <span class="message__note">보낸 유저 이름 2</span>
+                    <span class="message__note">날짜 시간</span>
                   </div>
                   <div class="message__base">
                     <div class="message__avatar avatar">
                       <a href="#" class="avatar__wrap">
-                        <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
+                        <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="">
                       </a>
                     </div>
                     <div class="message__textbox">
-                      <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
+                      <span class="message__text">채팅 내용 2_ class = message__text</span>
                     </div>
                   </div>
                 </div>
+
                 <div class="message">
                   <div class="message__head">
-                    <span class="message__note">Princess Murphy</span>
-                    <span class="message__note">Вчера, 17:00</span>
+                    <span class="message__note">보낸 유저 이름 3</span>
+                    <span class="message__note">날짜 시간</span>
                   </div>
                   <div class="message__base">
                     <div class="message__avatar avatar">
                       <a href="#" class="avatar__wrap">
-                        <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
+                        <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="">
                       </a>
                     </div>
                     <div class="message__textbox">
-                      <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
+                      <span class="message__text">채팅 내용 3_ class = message__text</span>
                     </div>
                   </div>
                 </div>
-                <div class="message">
-                  <div class="message__head">
-                    <span class="message__note">Princess Murphy</span>
-                    <span class="message__note">Вчера, 17:00</span>
-                  </div>
-                  <div class="message__base">
-                    <div class="message__avatar avatar">
-                      <a href="#" class="avatar__wrap">
-                        <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                      </a>
-                    </div>
-                    <div class="message__textbox">
-                      <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="message">
-                  <div class="message__head">
-                    <span class="message__note">Princess Murphy</span>
-                    <span class="message__note">Вчера, 17:00</span>
-                  </div>
-                  <div class="message__base">
-                    <div class="message__avatar avatar">
-                      <a href="#" class="avatar__wrap">
-                        <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                      </a>
-                    </div>
-                    <div class="message__textbox">
-                      <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="message">
-                  <div class="message__head">
-                    <span class="message__note">Princess Murphy</span>
-                    <span class="message__note">Вчера, 17:00</span>
-                  </div>
-                  <div class="message__base">
-                    <div class="message__avatar avatar">
-                      <a href="#" class="avatar__wrap">
-                        <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                      </a>
-                    </div>
-                    <div class="message__textbox">
-                      <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="message">
-                  <div class="message__head">
-                    <span class="message__note">Princess Murphy</span>
-                    <span class="message__note">Вчера, 17:00</span>
-                  </div>
-                  <div class="message__base">
-                    <div class="message__avatar avatar">
-                      <a href="#" class="avatar__wrap">
-                        <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                      </a>
-                    </div>
-                    <div class="message__textbox">
-                      <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="message">
-                  <div class="message__head">
-                    <span class="message__note">Princess Murphy</span>
-                    <span class="message__note">Вчера, 17:00</span>
-                  </div>
-                  <div class="message__base">
-                    <div class="message__avatar avatar">
-                      <a href="#" class="avatar__wrap">
-                        <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                      </a>
-                    </div>
-                    <div class="message__textbox">
-                      <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="message">
-                  <div class="message__head">
-                    <span class="message__note">Princess Murphy</span>
-                    <span class="message__note">Вчера, 17:00</span>
-                  </div>
-                  <div class="message__base">
-                    <div class="message__avatar avatar">
-                      <a href="#" class="avatar__wrap">
-                        <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                      </a>
-                    </div>
-                    <div class="message__textbox">
-                      <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
-                      <img class="message__smiley" src="http://www.pic4ever.com/images/245.gif" border="0">
-                    </div>
-                  </div>
-                </div>
+                
               </div>
             </div>
             <div class="chatbox__row">
               <div class="enter">
                 <div class="enter__submit">
                   <button class="button button_id_submit" type="submit">
-                                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                                  </button>
+                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                  </button>
                 </div>
                 <div class="enter__textarea">
                   <textarea name="enterMessage" id="enterMessage" cols="30" rows="2" placeholder="Say message..."></textarea>
