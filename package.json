@@ -1,0 +1,19 @@
+{
+  "name": "togeduck_frontend",
+  "version": "1.0.0",
+  "description": "투게덕 프론트 입니다",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Team-Hot6/Togeduck_Frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Team-Hot6/Togeduck_Frontend/issues"
+  },
+  "homepage": "https://github.com/Team-Hot6/Togeduck_Frontend#readme"
+}
