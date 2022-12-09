@@ -159,15 +159,6 @@ async function handleSign() {
         return false;
     }
 
-    // if (email == email) {
-
-    //     alert("이메일 중복입니다 ")
-        
-        
-    //     return false
-    // }
-
-
 
     if (nickname == "") {
         alert("닉네임을 입력하세요.");
@@ -176,17 +167,7 @@ async function handleSign() {
        
         return false;    
     }
-
-    // if (nickname == nickname) {
-
-    //     alert("닉네임 중복입니다 ");
-    //     nickname.focus();
-    //     return false; 
-    // }
-
-    
-
-   
+  
     
     if (password == "") {
         alert("비밀번호를 입력하세요.");
