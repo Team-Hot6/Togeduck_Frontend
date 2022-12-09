@@ -125,12 +125,13 @@ body {
 /* 워크샵 카드 */
 .workshop{
     min-height: 260px;
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
     z-index: 0;
     border: 1px solid #DADADA;
     border-radius: 0.5rem;
     padding: 10px;
     max-height: 300px;
+    cursor: pointer;
 }
 
 .workshop_img_frame{
@@ -180,6 +181,14 @@ body {
     background-color: rgb(158, 160, 159);
     margin-top: 30px;
 }
+
+.page_number{
+    cursor: pointer;
+    background-color: rgb(141, 216, 179);
+    border:1px solid #DADADA;
+    border-radius: 10%;
+}
+
 
 /* 하단 저작권 정보 */
 .footer{

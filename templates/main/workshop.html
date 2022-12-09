@@ -18,7 +18,7 @@
     <section class="main">
         <section class="category">
             <div class="menubar">
-                <span class="select_menu">Workshop</span>
+                <span class="select_menu"  onclick="top.location='javascript:location.reload()'">Workshop</span>
                 <span class="menu">Community</span>
                 <span style="float: right; margin: auto;">
                     <span class="sort">최신순</span>
@@ -26,21 +26,11 @@
                 </span>
             </div>
             <div class="hobbys" id="hobbys">
-                <button type="button" class="hobby">핸드메이드</button>
-                <button type="button" class="hobby">쿠킹</button>
-                <button type="button" class="hobby">플라워/가드닝</button>
-                <button type="button" class="hobby">드로잉</button>
-                <button type="button" class="hobby">음악</button>
-                <button type="button" class="hobby">요가/필라테스</button>
-                <button type="button" class="hobby">레저/스포츠</button>
-                <button type="button" class="hobby">뷰티</button>
-                <button type="button" class="hobby">반려동물</button>
-                <button type="button" class="hobby">체험</button>
-                <button type="button" class="hobby">자기계발</button>
+                <!-- <button type="button" class="hobby">핸드메이드</button> -->
             </div>
         </section>
         
-        <div class="sub_info">부가정보(전체카테고리 좋아요 top10 / 각 취미 카테고리 소개글)</div>
+        <div class="sub_info" id="sub_info">부가정보(전체카테고리 좋아요 top10 / 각 취미 카테고리 소개글)</div>
         <section class="content">
             <div class="gridbox" id="gridbox">
                 <!-- <div class="workshop" style="background-color: #ffffff;">
@@ -54,7 +44,9 @@
                     <span class="local">시간</span>
                 </div> -->
             </div>
-            <div class="pagination">페이지네이션 번호 (1, 2, 3 ...)</div>
+            <div class="pagination">
+                <button type="button" class="page_number">1</button>
+            </div>
         </section>
     </section>
     <footer class="footer">copyrightⓒ 2022 All rights reserved by team HOT6.</footer>
