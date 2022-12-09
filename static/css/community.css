@@ -134,13 +134,16 @@ body {
     height: auto;
 }
 
-a{
-    text-decoration: none !important; 
-}
-a:hover {
-    font-weight: bold;
-    text-decoration: underline !important;
-}
 .btn {
     float: right;
+}
+
+#article_id {
+    color: #0d6efd;
+}
+
+#article_id:hover {
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: underline;
 }

@@ -22,7 +22,7 @@ async function article_list() {
         const article = `<tr>
                             <td>${id}</td>
                             <td>${category}</td>
-                            <td align="left"><a href="">${title} [${comment}]</a></td>
+                            <td align="left" id="article_id" onclick="replace_article_detail(${id})">${title} [${comment}]</td>
                             <td>${user}</td>
                             <td>${date}</td>
                             <td>${time}</td>
@@ -53,7 +53,7 @@ async function article_list() {
         const best_article = `<tr>
                             <td>${id}</td>
                             <td>${category}</td>
-                            <td align="left"><a href="">${title} [${comment}]</a></td>
+                            <td align="left" id="article_id" onclick="replace_article_detail(${id})">${title} [${comment}]</td>
                             <td>${user}</td>
                             <td>${date}</td>
                             <td>${time}</td>
@@ -121,13 +121,15 @@ async function select_article_list(category_id) {
             select_articles = `<tr>
                                     <td>${id}</td>
                                     <td>${category}</td>
-                                    <td align="left"><a href="">${title} [${comment}]</a></td>
+                                    <td align="left" id="article_id" onclick="replace_article_detail(${id})">${title} [${comment}]</td>
                                     <td>${user}</td>
                                     <td>${date}</td>
                                     <td>${time}</td>
                                     <td>${like}</td>
                                     <td>${views}</td>
                                 </tr>`
+            // <td align="left"><a onclick="article_detail(${id})" href="">${title} [${comment}]</a></td>
+
             // 카테고리 별 게시글의 table body에 선택한 카테고리의 게시글만 다시 넣기
             article_list.insertAdjacentHTML('beforeend', select_articles)
         }
