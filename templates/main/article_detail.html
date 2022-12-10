@@ -17,33 +17,64 @@
 
 <body>
     <h1 style="text-align: center; margin: 20px auto;">게시글 상세 페이지</h1>
-
-    <div class="article mx-auto mt-2" style="width: 38rem;">
+    <!-- 게시글 세션 -->
+    <div class="article-section mx-auto mt-2" style="width: 40rem;">
+        <!-- 게시글 제목 -->
         <h5 class="card-title text-start" id="article_title"></h5>
+        <!-- 게시글 작성자 정보 및 조회수, 추천수 -->
         <div>
             <span id="author_info"></span>
             <span id="views"></span>
             <span id="likes"></span>
         </div>
-        <div class="card  border border-dark">
-            <img id="article_image" src="/static/images/together_logo.PNG" class="card-img-top" alt="...">
+        <!-- 게시글 이미지&내용 -->
+        <div class="card">
+            <img id="article_image" src="/static/images/together_logo.PNG" class="card-img-top border border-dark"
+                alt="...">
             <div class="card-body border border-dark">
-                <p class="card-text" content></p>
+                <p id="content" class="card-text" content></p>
             </div>
         </div>
     </div>
-    <div class="comment-box mx-auto mt-2" style="width: 38rem;">
-        <div class="d-flex mt-3 mb-4">
-            <input type="text" class="form-control w-75" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="댓글을 입력해주세요">
-            <button type="button" class="btn btn-warning w-25" style="margin: auto; display: block;" onclick="handleCommentCreate()">작성하기</button>
+    <!-- 댓글 세션 -->
+    <div class="comment-section mx-auto mt-2" style="width: 40rem;">
+        <!-- 댓글 작성 -->
+        <div class="d-flex mt-2 mb-4">
+            <input type="text" class="form-control w-75" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default" placeholder="댓글을 입력해주세요">
+            <button type="button" class="btn btn-warning w-25" style="margin: auto; display: block;"
+                onclick="handleCommentCreate()">작성하기</button>
         </div>
-        <div class="card-body border border-dark">
-            <p>댓글입니다~~~~~~~~~~~~~~~~</p>
-            <p>댓글입니다~~~~~~~~~~~~~~~~</p>
-            <p>댓글입니다~~~~~~~~~~~~~~~~</p>
+        <!-- 댓글 박스 -->
+        <div class="card-body border border-dark" id="comment_box">
+            <!-- 댓글 리스트 -->
+            <ul id="comment_list">
+                <!-- 댓글 정보 시작-->
+                <li>
+                    <div class="comment-info d-flex">
+                        <div class="nickname-box">
+                            <span>가보자구</span>
+                        </div>
+                        <div class="comment-box">
+                            <p>여기는 댓글내용입니다!</p>
+                        </div>
+                        <div class="created_at">
+                            <span>12-25</span>
+                            <span>07:13</span>
+                        </div>
+                        <div class="delete_btn">
+                            <button type="button">삭제</button>
+                        </div>
+                    </div>
+                </li>
+                <!-- 댓글 정보 끝 -->
+            </ul>
+            <!-- 댓글 리스트 -->
         </div>
+        <!-- 댓글 박스 -->
     </div>
 </body>
 <script src="/static/js/api.js"></script>
 <script src="/static/js/article_detail.js"></script>
+
 </html>

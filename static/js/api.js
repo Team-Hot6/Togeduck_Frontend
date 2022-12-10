@@ -48,9 +48,17 @@ function replace_article_detail(article_id) {
     location.href = url;
 }
 
-// 게시글 상세 페이지의 API 호출하여 데이터 요청
+// 게시글 상세 페이지의 API 호출하여 특정 게시글 데이터 요청
 async function get_article_detail(article_id){
     const response = await fetch(`${backend_base_url}/articles/${article_id}/`, {
+        method: "GET",
+    })
+    return response
+}
+
+// 게시글 상세 페이지의 댓글 API
+async function get_article_detail_comment(article_id) {
+    const response = await fetch(`${backend_base_url}/articles/${article_id}/comment/`, {
         method: "GET",
     })
     return response
