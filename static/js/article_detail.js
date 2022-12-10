@@ -23,11 +23,11 @@ async function LoadDeatail(article_id) {
     views.innerText = '조회수 : ' + data['views']
     
     // like를 innerText 적용 시 에러 발생 str, number 문제는 아님!!
-    const likes = document.getElementById['likes']
-    // likes.innerText = '추천수 : ' + data['like'] 
+    const likes = document.getElementById('likes')
+    likes.innerText = '추천수 : ' + data['like']
     
-    // const content = document.getElementById('content')
-    // content.innerText = data['content']
+    const article_image = document.getElementById('article_image')
+    article_image.innerText = `${backend_base_url}data['article_image']`
 
     console.log(data)
 }
