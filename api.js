@@ -24,7 +24,7 @@ async function handleLogin() {
   // aeccess, refresh
   const response_json = await response.json();
 
-  console.log(response_json);
+  //console.log(response_json);
   if (response.status == 200) {
     localStorage.setItem("access", response_json.access);
     localStorage.setItem("refresh", response_json.refresh);
@@ -44,7 +44,7 @@ async function handleLogin() {
 
     localStorage.setItem("payload", jsonPayload);
     alert("로그인 됐어욤");
-    window.location.href = "http://127.0.0.1:5500/main.html";
+    window.location.href = "http://127.0.0.1:5501/templates/main/workshop.html";
   } else {
     //로그인 실패시
     alert("로그인 다시 확인해주세염");

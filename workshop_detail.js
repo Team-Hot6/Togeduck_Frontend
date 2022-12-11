@@ -12,7 +12,7 @@ console.log('워크샵아이디',workshop_id)
 async function workshop_get(workshop_id) {
     
     const title = document.getElementById("title") // 소개
-    const max_client = document.getElementById("max_client") // 제한인원
+    const max_guest = document.getElementById("max_guest") // 제한인원
     const amount = document.getElementById("amount") // 참가비
     const content = document.getElementById("content") // 내용
     const workshop_image = document.getElementById("workshop_image") // 이미지
@@ -38,7 +38,7 @@ async function workshop_get(workshop_id) {
 
     title.innerText = response_json.title;
     content.innerText = response_json.content;
-    max_client.innerText = response_json.content;
+    max_guest.innerText = response_json.content;
     amount.innerText = response_json.content;
     workshop_image.setAttribute("src", `http://127.0.0.1:8000/${response_json.image}`);
     category.innerText = response_json.content;
@@ -60,9 +60,9 @@ async function review_get(workshop_id) {
 
     const response = await fetch(`http://127.0.0.1:8000/workshops/${workshop_id}/review/`, {
       method: "GET",
-      headers: {
-        Authorization: localStorage.getItem("access"), // 없어도 되지않나
-      },
+    //   headers: {
+    //     Authorization: localStorage.getItem("access"), // 없어도 되지않나
+    //   },
     });
   
     response_json = await response.json();

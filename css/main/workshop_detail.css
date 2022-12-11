@@ -1,6 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 
+.comment {
+  padding: 20px;
+  background: #eef;
+  border: 1px solid black;
+  margin: 10px 0;
+}
+
+
+
+
 
 
 .form-input {

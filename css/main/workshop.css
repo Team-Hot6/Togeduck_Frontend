@@ -88,7 +88,7 @@ body {
     border-radius: 10px;
 }
 
-.hobbys:::-webkit-scrollbar-track{
+.hobbys::-webkit-scrollbar-track{
     background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
 }
 

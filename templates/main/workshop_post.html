@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="workshop_detail.css">
+    <link rel="stylesheet" href="../../css/main/workshop_detail.css">
     <title>Document</title>
 </head>
 <body>
@@ -40,7 +40,7 @@
                         onchange="showPreview(event, 1);"
                       />
                     </div>
-                    <img id="workshop_image" class="restaurant_img"></img>
+                    <img id="workshop_image" class="form-input"></img>
                     <p id="image">이미지</p>
                     
                 </div>
@@ -59,6 +59,7 @@
                     <p id="likes_count">좋아요 수</p>
                 </div>
                 <div >
+                  <!--<button style="border: none; background: none; margin-top: 3px;"><img onclick="Like_post()" style="width: 20px; height: 20px; margin: 5px 10px 0 0;" src="../static/icon/heart.png" /></button>-->
                   <i onclick="Like_post()" id="like" > 종아유</i>
                   <p id="like">좋아요</p>
               </div>
@@ -89,7 +90,7 @@
                         <p id="title">소개</p>
                     </div>
                     <div >
-                        <p id="max_client">제한인원</p>
+                        <p id="max_guest">제한인원</p>
                     </div>
                     <div >
                         <p id="amount">참가비</p>
@@ -156,10 +157,10 @@
                     </div>
                     <div class="contact-card">
                         
-                        <div id="review_list">
+                        <!-- <div id="review_list">
                           후기댓글
-                      </div>
-                      <div class="parent-container animate-parent is-visible" style="height: 500px;">
+                      </div> -->
+                      <!--<div class="parent-container animate-parent is-visible" style="height: 500px;">-->
                         <!-- input -->
                         <!-- <div class="input-element-wrapper float-up">
                           before
@@ -179,33 +180,59 @@
                         </div>
                         END:TEXTarea 
 
-                        <! --comment box -->
+                        <! -comment box -->
                         
                         <!-- END: comment box -->
                         <!-- View more box -->
-                        <div class="view-more-wrapper">
+                      <!--  <div class="view-more-wrapper">
                           <div class="view-more">
                             <a class="view-more__link show-comments" href="#">View comments</a>
                             <span class="view-more__count display-count">0</span>     
                           </div>
                           <div class="view-more-comments" style="display: block;">
                             <div class="comment-box-wrapper">
-                              <!-- <a class="comment-box-wrapper__link open-comment-box" href="#">Add a comment</a> -->
-                              <div class="comment-area comment-box active">
+                               <a class="comment-box-wrapper__link open-comment-box" href="#">Add a comment</a> -->
+                             <!-- <div class="comment-area comment-box active">
                                 <form class="comment-form">
-                                  <input class="comment-form__field comment-field">
-                                  <button class="comment-form__submit submit-comment">Comment</button>
+                                  <input id="review_post" class="comment-form__field comment-field">
+                                  <button class="comment-form__submit submit-comment" onclick="workshop_review_POST()">Comment</button>
                                 </form>
                               </div>
-                            </div>
-                            <ul  id="review_list" class="comment-list" style>
-                              <li class="comment-wrapper comments">
-                                <p id="review" class="comment-wrapper__comment">댓글</p>
-                                <div class="comment-actions">
+                            </div> -->
+
+                          <!-- <div class="font_">
+                            <ul  id="list" class="comment-list" style>
+                              <li id="review_list" class="comment-wrapper comments">
+                                <div id="user">닉네임</div>
+                                <p id="review" class="comment-wrapper__comment">댓글</p> 
+                                <span id="created_at">생성일</span>
+                                <p id="updated_at">엡데이트일</p>
+                              </li>
+                                 <div class="comment-actions">
                                   <a class="fa fa-times comment-actions__delete delete-comment" href="#"></a>
                                 </div>
-                              </li>
+                              
                             </ul>
+                          </div> --> 
+
+                         <div id="list" class="comment-list">
+                           <!-- <div id="review_list" class="comment">
+                              <div id="user" class="comment-header">닉네임</div>
+                              <p id="review" class="comment-body">내용</p>
+                              <span id="created_at">생성일</span>
+                              <div id="updated_at">엡데이트일</div>
+                              <div class="comment-footer">
+                                <button onclick="review_delete()">삭제버튼</button>
+                                <button onclick="review_put()" > 수정버튼</button>
+                              </div>
+                            </div>-->
+                          </div> 
+
+
+
+
+
+
                           </div>
 
                         </div>
@@ -246,6 +273,9 @@
                 
         </div>
 
-    <script src="workshop_detail.js"></script>
+    <!-- <script src="workshop_detail.js"></script> -->
+    <script src="../../global.js"></script>
+    <script src="../../js/main/workshop_api.js"></script>
+    <script src="../../js/main/workshop_detail.js"></script>
 </body>
 </html>
