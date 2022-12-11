@@ -22,7 +22,7 @@ async function workshop_pick_get(category_id) {
     return response
 }
 
-// 워크샵 카드 클릭 시 워크샵 상세 페이지로 요청
+// 워크샵 상세페이지 로딩 시 해당하는 특정 워크샵 데이터 요청
 async function workshop_detail_get(workshop_id) {
     const response = await fetch(`${back_end_url}/workshops/${workshop_id}/`, {
         method:'GET'

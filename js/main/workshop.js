@@ -90,6 +90,7 @@ async function workshop_pick_list(category_id, category_name){
 
 // 워크샵 상세 페이지로 이동
 async function workshop_detail_move(workshop_id){
-    setCookie("workshop_id", workshop_id, 3)
-    window.location.href = "http://127.0.0.1:5500/templates/main/workshop_detail.html"
+
+    const url = `workshop_detail.html?id=${workshop_id}`
+    window.location.href = url
 }
