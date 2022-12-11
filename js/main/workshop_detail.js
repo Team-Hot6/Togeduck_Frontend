@@ -4,7 +4,6 @@ window.onload = () => {
     workshop_detail_view(workshop_id)
 }
 
-
 // 워크샵 상세 데이터 불러오기
 async function workshop_detail_view(workshop_id){
     const response = await workshop_detail_get(workshop_id)

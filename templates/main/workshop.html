@@ -18,7 +18,7 @@
     <section class="main">
         <section class="category">
             <div class="menubar">
-                <span class="select_menu"  onclick="top.location='javascript:location.reload()'">Workshop</span>
+                <span class="select_menu"  onclick="main_page_move()">Workshop</span>
                 <span class="menu">Community</span>
                 <span style="float: right; margin: auto;">
                     <span class="sort">최신순</span>
@@ -45,7 +45,9 @@
                 </div> -->
             </div>
             <div class="pagination">
-                <button type="button" class="page_number">1</button>
+                <div class="page_numbers" id="page_numbers">
+                    <!-- <button type="button" class="page_number">1</button> -->
+                </div>
             </div>
         </section>
     </section>

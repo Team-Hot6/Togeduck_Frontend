@@ -178,15 +178,27 @@ body {
 
 /* 페이지네이션 번호 */
 .pagination{
-    background-color: rgb(158, 160, 159);
+    /* background-color: rgb(158, 160, 159); */
     margin-top: 30px;
+}
+
+.page_numbers{
+    background-color: rgb(158, 160, 159);
+    margin: auto;
 }
 
 .page_number{
     cursor: pointer;
-    background-color: rgb(141, 216, 179);
-    border:1px solid #DADADA;
-    border-radius: 10%;
+    border:1px solid #DADADA;;
+    border-radius: 100%;
+    margin: 4px;
+    font-size: 1rem;
+    font-weight: 200;
+    color: #a8a8a8;
+    background-color: rgb(255, 255, 255);
+    width: 1.8rem;
+    height: 1.8rem;
+    text-align: center;
 }
 
 
