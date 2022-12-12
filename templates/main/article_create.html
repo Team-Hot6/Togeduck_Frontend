@@ -16,13 +16,28 @@
 <body>
     <h1 style="text-align: center; margin: 100px auto;">게시글 작성 페이지</h1>
     <div class="form w-50 px-5 py-5 mx-auto border border-dark">
+        <span>카테고리</span>
+        <select class="form-select" id="category" aria-label="Default select example">
+            <option selected>카테고리를 선택해주세요!</option>
+            <option value="1">핸드메이드</option>
+            <option value="2">쿠킹</option>
+            <option value="3">플라워/가드닝</option>
+            <option value="4">드로잉</option>
+            <option value="5">음악</option>
+            <option value="6">요가/필라테스</option>
+            <option value="7">레저/스포츠</option>
+            <option value="8">뷰티</option>
+            <option value="9">반려동물</option>
+            <option value="10">체험</option>
+            <option value="11">자기계발</option>
+        </select>
         <span>제목</span>
     <div class="input-group mb-3">
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <input id="title" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
     </div>
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">내용</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <textarea id="content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
     <div class="mb-3">
         <label for="formFile" class="form-label">이미지 업로드</label>
@@ -30,5 +45,8 @@
     </div>
     <button type="button" class="btn btn-warning" style="margin: auto; display: block;" onclick="handleArticleCreate()">작성하기</button>
     </div>
+    <script src="/js/global.js"></script>
+    <script src="/js/main/api.js"></script>
+    <script src="/js/main/article_create.js"></script>
 </body>
 </html>

@@ -2,6 +2,27 @@ console.log('community.js 연결')
 
 article_list()
 hobby_list()
+Login_Status()
+
+// 로그인 유무에 따른 로그인 상태 구분
+async function Login_Status() {
+    const login_status = document.getElementById('navbar')
+    if (token) {
+        let temp_html = `<div>
+                            <span>닉네임 님 안녕하세요!</span>
+                            <button onclick="handleLogout()">로그아웃</button></div>
+                        </div>` 
+        login_status.insertAdjacentHTML('beforeend', temp_html)
+    } else {
+        let temp_html = `<div>
+                            <input id="login_id" type="text" placeholder="아이디">
+                            <input id="login_password" type="password" placeholder="비밀번호">
+                            <button id="login_button" size="100" onclick="sign_in()">로그인</button>
+                            <button onclick="handleLogout()">로그아웃</button>
+                        </div>`
+        login_status.insertAdjacentHTML('beforeend', temp_html)
+    }
+}
 
 // 전체 카테고리의 게시글 목록
 async function article_list() {
@@ -133,5 +154,14 @@ async function select_article_list(category_id) {
             // 카테고리 별 게시글의 table body에 선택한 카테고리의 게시글만 다시 넣기
             article_list.insertAdjacentHTML('beforeend', select_articles)
         }
+    }
+}
+
+// 게시글 작성하기 페이지로 이동(LocalStorage에 access토큰이 유효한 경우)
+function ArticleCreatePage() {
+    if (token) {
+        window.location.replace(`article_create.html`)
+    } else {
+        alert('게시글 작성은 로그인 된 사용자만 가능합니다!')
     }
 }

@@ -33,6 +33,7 @@ async function LoadDeatail(article_id) {
 
     const content = document.getElementById('content')
     content.innerText = data['content']
+    console.log(data)
 }
 
 LoadDeatail_comment(article_id)
