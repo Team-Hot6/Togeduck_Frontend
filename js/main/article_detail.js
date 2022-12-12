@@ -19,14 +19,17 @@ async function LoadDeatail(article_id) {
     const title = document.getElementById('article_title')
     title.innerText = data['title']
 
-    const author = document.getElementById('author_info')
-    author.innerText = data['user'] + data['date'] + data['time']
+    const author = document.getElementById('author')
+    author.innerText = data['user']
     
+    const datetime = document.getElementById('datetime')
+    datetime.innerText = '- ' + data['date'] + ' '+data['time']
+
     const views = document.getElementById('views')
-    views.innerText = '조회수 : ' + data['views']
+    views.innerText = '조회수  ' + data['views']
     
     const likes = document.getElementById('likes')
-    likes.innerText = '추천수 : ' + data['like']
+    likes.innerText = '추천수  ' + data['like']
     
     const article_image = document.getElementById('article_image')
     article_image.src = `${back_end_url}`+data['article_image']
@@ -48,20 +51,20 @@ async function LoadDeatail_comment(article_id) {
         let time = data[i]['created_at'].replace('T', ' ').substr(11,8);
 
         const comment_list = document.getElementById('comment_list')
-        let temp_html = `<li>
+        let temp_html = `<li class='list-group-item'>
                             <div class="comment-info d-flex">
-                                <div class="nickname-box">
-                                    <span>${nickname}</span>
+                                <div class="nickname-box d-flex align-items-center">
+                                    <span class="fw-bold">${nickname}</span>
                                 </div>
-                                <div class="comment-box">
+                                <div class="comment-box w-50 ps-3 pt-3">
                                     <p>${comment}</p>
                                 </div>
-                                <div class="created_at">
-                                    <span>${date}</span>
-                                    <span>${time}</span>
+                                <div class="created_at w-25 d-flex align-items-center">
+                                    <span>${date}&nbsp</span>
+                                    <span>&nbsp${time}</span>
                                 </div>
-                                <div class="delete_btn">
-                                    <button type="button">삭제</button>
+                                <div class="delete_btn d-flex align-items-center">
+                                    <button type="button" class="btn btn-warning fw-bold">삭제</button>
                                 </div>
                             </div>
                         </li>`

@@ -16,17 +16,34 @@
 </head>
 
 <body>
-    <h1 style="text-align: center; margin: 20px auto;">게시글 상세 페이지</h1>
+    <!-- <h1 style="text-align: center; margin: 20px auto;">게시글 상세 페이지</h1> -->
     <!-- 게시글 세션 -->
-    <div class="article-section mx-auto mt-2" style="width: 40rem;">
+    <div class="article-section mx-auto mt-5" style="width: 40rem;">
         <!-- 게시글 제목 -->
-        <h5 class="card-title text-start" id="article_title"></h5>
-        <!-- 게시글 작성자 정보 및 조회수, 추천수 -->
-        <div>
-            <span id="author_info"></span>
-            <span id="views"></span>
-            <span id="likes"></span>
+        <div class="d-flex justify-content-between mt-3 mb-3">
+            <div>
+                <h5 class="card-title text-start fw-bold" id="article_title"></h5>
+            </div>
+            <div>
+                <button type="button" class="btn btn-warning fw-bold">글 수정</button>
+                <button type="button" class="btn btn-warning fw-bold">글 삭제</button>
+            </div>
         </div>
+        
+        <!-- 게시글 작성자 정보 및 조회수, 추천수 -->
+        <div class="d-flex">
+            <div class="flex-grow-2">
+                <span class="fw-bold" id="author"></span>
+            </div>
+            <div class="flex-grow-1">
+                <span class="ps-3" id="datetime"></span>
+            </div>
+            <div>
+                <span id="views"></span>
+                <span id="likes"></span>
+            </div>
+        </div>
+
         <!-- 게시글 이미지&내용 -->
         <div class="card">
             <img id="article_image" src="/static/images/together_logo.PNG" class="card-img-top border border-dark"
@@ -37,38 +54,18 @@
         </div>
     </div>
     <!-- 댓글 세션 -->
-    <div class="comment-section mx-auto mt-2" style="width: 40rem;">
+    <div class="comment-section mx-auto mt-3" style="width: 40rem;">
         <!-- 댓글 작성 -->
         <div class="d-flex mt-2 mb-4">
             <input id="comment" type="text" class="form-control w-75" aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-default" placeholder="댓글을 입력해주세요">
-            <button type="button" class="btn btn-warning w-25" style="margin: auto; display: block;"
+            <button type="button" class="btn btn-warning w-25 fw-bold" style="margin: auto; display: block;"
                 onclick="handleCommentCreate()">작성하기</button>
         </div>
         <!-- 댓글 박스 -->
-        <div class="card-body border border-dark" id="comment_box">
+        <div class="card-body" id="comment_box">
             <!-- 댓글 리스트 -->
-            <ul id="comment_list">
-                <!-- 댓글 정보 시작-->
-                <li>
-                    <div class="comment-info d-flex">
-                        <div class="nickname-box">
-                            <span>가보자구</span>
-                        </div>
-                        <div class="comment-box">
-                            <p>여기는 댓글내용입니다!</p>
-                        </div>
-                        <div class="created_at">
-                            <span>12-25</span>
-                            <span>07:13</span>
-                        </div>
-                        <div class="delete_btn">
-                            <button type="button">삭제</button>
-                        </div>
-                    </div>
-                </li>
-                <!-- 댓글 정보 끝 -->
-            </ul>
+            <ul id="comment_list" class="list-group"></ul>
             <!-- 댓글 리스트 -->
         </div>
         <!-- 댓글 박스 -->
