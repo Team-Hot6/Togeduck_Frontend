@@ -71,7 +71,7 @@ async function get_select_articles(category_id) {
 
 // 게시글 상세 페이지 이동 //
 function replace_article_detail(article_id) {
-    const url = `${front_end_url}/templates/main/article_detail.html?id=${article_id}`;
+    const url = `article_detail.html?id=${article_id}`;
     location.href = url;
 }
 
@@ -100,6 +100,21 @@ async function create_article(title, content, image, category) {
     data.append("article_image", image)
 
     const response = await fetch(`${back_end_url}/articles/create/`, {
-        headers: "application/json"
-    })
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "POST",
+        body: data,
+    });
+    const response_json = await response.json()
+    console.log(response_json)
+
+    if (response.status == 201){
+        alert('작성 완료!!')
+        window.location.replace(`community.html`)
+    } else if(response.status == 401){
+        alert('다시 로그인을 해주세요!')
+    } else {
+        alert('잘못된 요청입니다!')
+    }
 }
