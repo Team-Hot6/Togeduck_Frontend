@@ -12,14 +12,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="navbar">네비게이션 바</div>
-    <div class="summary">서비스 소개글과 이미지</div>
+    <nav class="navbar">
+        <span class="service_name" onclick="main_page_move()">Togeduck</span>
+        <ul class="nav_menu" id="nav_menu">
+            <li id="signup" onclick="window.location.href='../user/login_signup.html'">회원가입</li>
+            <li id="login" onclick="window.location.href='../user/login_signup.html'">로그인</li>
+            <li id="user_email" style="cursor:default;"></li>
+        </ul>
+        
+        <!-- <span class="nav_menu" onclick="window.location.href='../user/my.html'">회원가입</span>
+        <span class="nav_menu" onclick="window.location.href='../user/my.html'">로그인</span>
+        <span class="nav_menu" onclick="window.location.href='../user/my.html'">마이페이지</span> -->
+    </nav>
+    <div class="summary">
+        <div class="intro">Let's enjoy together</div>
+        <div class="intro_content">Togeduck과 함께 취미를 공유해보세요</div>
+        <div class="summary_img_frme">
+            <!-- <img class="summary_img" src="https://velog.velcdn.com/images/def3ff/post/76fbfbab-3f18-4c7b-ba9b-92a1599db4cd/image.png"> -->
+        </div>
+    </div>
 
     <section class="main">
         <section class="category">
             <div class="menubar">
-                <span class="select_menu"  onclick="main_page_move()">Workshop</span>
-                <span class="menu" onclick="main_page_move()">Community</span>
+                <span class="select_menu" onclick="main_page_move()">Workshop</span>
+                <span class="menu" onclick="window.location.href='../main/community.html'">Community</span>
                 <span style="float: right; margin: auto;">
                     <span class="sort">최신순</span>
                     <span class="sort">인기순</span>
@@ -42,7 +59,7 @@
                 </div> -->
             </div>
         </div>
-        <section class="content">
+        <section class="content" id="content">
             <div class="gridbox" id="gridbox">
                 <!-- <div class="workshop" style="background-color: #ffffff;">
                     <div class="workshop_img_frame">
@@ -59,6 +76,9 @@
                 <div class="page_numbers" id="page_numbers">
                     <!-- <button type="button" class="page_number">1</button> -->
                 </div>
+            </div>
+            <div class="none_box_wrap" id="none_box_wrap">
+                <!-- <div class="none_box" id="none_box">선택하신 카테고리의 워크샵이 없습니다</div> -->
             </div>
         </section>
     </section>

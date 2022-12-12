@@ -4,9 +4,37 @@ window.onload = () => {
     if (page == null){
         page = 1
     }
+    if(localStorage.getItem("payload")){
+        const payload = localStorage.getItem("payload");
+        const payload_parse = JSON.parse(payload)
+        const user_email = document.getElementById("user_email")
+        user_email.innerText = `${payload_parse.email}님`
+
+        const signup = document.getElementById("signup")
+        signup.style.display = 'none';
+
+        const login = document.getElementById("login")
+        login.style.display = 'none';
+
+        const nav_menu = document.getElementById("nav_menu")
+        
+        const mypage = `<li id="mypage" onclick="window.location.href='../user/my.html?id=${payload_parse.user_id}'">마이페이지</li>`
+        nav_menu.insertAdjacentHTML("beforeend", mypage);
+
+        const logout = `<li id="logout" onclick="logout()">로그아웃</li>`
+        nav_menu.insertAdjacentHTML("beforeend", logout);        
+    }
     workshop_list(page)
     hobby_list()
     workshop_popular_list()
+}
+
+async function logout() {
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
+    localStorage.removeItem("payload");
+
+    window.location.href = `${front_end_url}/templates/user/login_signup.html`
 }
 
 // 베스트 워크샵 목록 출력
@@ -15,7 +43,6 @@ async function workshop_popular_list(){
 
     if(response.status == 200){
         data = await response.json()
-        console.log(data)
 
         popular_workshops_wrap = document.getElementById("popular_workshops_wrap")
 
@@ -42,8 +69,10 @@ async function workshop_list(page){
         data = await response.json()
         workshop_data = data['results']
 
-        gridbox = document.getElementById("gridbox")
+        const gridbox = document.getElementById("gridbox")
         gridbox.innerHTML = ''
+        const none_box_wrap = document.getElementById("none_box_wrap")
+        none_box_wrap.innerHTML = ''
 
         for (i = 0; i < workshop_data.length; i++) {
          
@@ -105,15 +134,18 @@ async function workshop_pick_list(category_id, category_name, page){
         sub_info.innerHTML = `<span class="info_title">다양한 ${category_name} 워크샵으로 취미를 함께 즐겨보세요!</span>`
 
         const gridbox = document.getElementById("gridbox")
+        gridbox.innerHTML = ''
         const page_numbers = document.getElementById("page_numbers")
         page_numbers.innerHTML = ''
-
+        const none_box_wrap = document.getElementById("none_box_wrap")
+        none_box_wrap.innerHTML = ''
+    
         if(workshop_data.length == 0){
-            gridbox.innerHTML = `<span style="text-align: center;">선택하신 카테고리의 워크샵이 없습니다.</span>`
+            const none_box = `<div class="none_box" id="none_box">선택하신 카테고리의 워크샵이 없습니다</div>`;
+            none_box_wrap.insertAdjacentHTML("beforeend", none_box);
+
         }
         else{
-            gridbox.innerHTML = ''
-
             for (i = 0; i < workshop_data.length; i++) {
             
                 const workshop = `<div class="workshop" onclick="workshop_detail_move(${workshop_data[i]['id']})">
@@ -141,18 +173,18 @@ async function workshop_pick_list(category_id, category_name, page){
 
 // 워크샵 상세 페이지로 이동
 async function workshop_detail_move(workshop_id){
-    const url = `workshop_detail.html?id=${workshop_id}`
+    const url = `${front_end_url}/templates/main/workshop_detail.html?id=${workshop_id}`
     window.location.href = url
 }
 
 // 워크샵 목록 중 특정 페이지로 이동
 async function workshop_page_move(page_nunber){
-    const url = `workshop.html?page=${page_nunber}`
+    const url = `${front_end_url}/templates/main/workshop.html?page=${page_nunber}`
     window.location.href = url
 }
 
 // 메인 페이지로 이동
 async function main_page_move(){
-    const url = `workshop.html`
+    const url = `${front_end_url}/templates/main/workshop.html`
     window.location.href = url
 }
