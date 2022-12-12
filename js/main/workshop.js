@@ -9,13 +9,6 @@ window.onload = () => {
     workshop_popular_list()
 }
 
-async function logout() {
-    localStorage.removeItem("access");
-    localStorage.removeItem("refresh");
-    localStorage.removeItem("payload");
-
-    window.location.href = `${front_end_url}/templates/user/login_signup.html`
-}
 
 // 베스트 워크샵 목록 출력
 async function workshop_popular_list(){

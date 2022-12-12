@@ -42,7 +42,14 @@ function getCookie(key) {
     return result
 };
 
+// 네비바 로그아웃
+async function logout() {
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
+    localStorage.removeItem("payload");
 
+    window.location.href = `${front_end_url}/templates/user/login_signup.html`
+}
 
 // 로그인 후 네비바 변경
 async function navbar() {
