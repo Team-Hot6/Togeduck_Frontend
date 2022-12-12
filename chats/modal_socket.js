@@ -138,3 +138,26 @@ function sumit_send_message_Enterkey() {
         // document.getElementById("enterMessage").value() = '';
     }
 }
+
+// 모달 띄우기
+function modal_view() {
+    const modal_id = document.getElementById('modal');
+    modal_id.style.display = 'block';
+    modal_id.style.position = 'fixed';
+    modal_id.style.top = '50%';
+    modal_id.style.left = '50%';
+    modal_id.style.transform = "translate(-50%, -25%)";
+
+    const pop_button = document.getElementById('popup_open_btn')
+    pop_button.style.display = "none";
+
+    };
+
+// 모달 닫기
+function close_modal() {
+    const modal_id = document.getElementById('modal');
+    modal_id.style.display = 'none';
+
+    const pop_button = document.getElementById('popup_open_btn')
+    pop_button.style.display = "block";
+}
