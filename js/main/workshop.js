@@ -6,6 +6,32 @@ window.onload = () => {
     }
     workshop_list(page)
     hobby_list()
+    workshop_popular_list()
+}
+
+// 베스트 워크샵 목록 출력
+async function workshop_popular_list(){
+    const response = await workshop_popular_get()
+
+    if(response.status == 200){
+        data = await response.json()
+        console.log(data)
+
+        popular_workshops_wrap = document.getElementById("popular_workshops_wrap")
+
+        for (i = 0; i < data.length; i++) {
+
+            const popular_workshop = `<div class="popular_workshop" id="popular_workshop" onclick="workshop_detail_move(${data[i]['id']})">
+                                            <div class="popular_workshop_img_frame">
+                                                <img class="popular_workshop_img" src="${back_end_url}${data[i]['workshop_image']}">
+                                            </div>
+                                            <div class="popular_workshop_hobby">${data[i]['category']}</div>
+                                            <div class="popular_workshop_title">${data[i]['title']}</div>
+                                        </div>`;
+            
+            popular_workshops_wrap.insertAdjacentHTML("beforeend", popular_workshop);
+        }
+    }
 }
 
 // 모든 워크샵 목록 출력
@@ -73,18 +99,17 @@ async function workshop_pick_list(category_id, category_name, page){
     if(response.status == 200){
         data = await response.json()
         workshop_data = data['results']
-        console.log(data)
-        console.log("sssssssssssssss")
 
         const sub_info = document.getElementById("sub_info")
-        sub_info.innerText = `다양한 ${category_name} 워크샵으로 취미를 함께 즐겨보세요!`
+       
+        sub_info.innerHTML = `<span class="info_title">다양한 ${category_name} 워크샵으로 취미를 함께 즐겨보세요!</span>`
 
         const gridbox = document.getElementById("gridbox")
         const page_numbers = document.getElementById("page_numbers")
         page_numbers.innerHTML = ''
 
         if(workshop_data.length == 0){
-            gridbox.innerHTML = `<div>선택하신 카테고리의 워크샵이 없습니다.</div>`
+            gridbox.innerHTML = `<span style="text-align: center;">선택하신 카테고리의 워크샵이 없습니다.</span>`
         }
         else{
             gridbox.innerHTML = ''
@@ -107,7 +132,7 @@ async function workshop_pick_list(category_id, category_name, page){
             page_range = Math.ceil(data['count'] / 12)
 
             for (i = 0; i < page_range; i++) {
-                const page_number = `<button type="button" class="page_number" onclick="workshop_pick_list(${category_id}, '${category_name}', ${i+1})" style="background-color:red;">${i+1}</button>`
+                const page_number = `<button type="button" class="page_number" onclick="workshop_pick_list(${category_id}, '${category_name}', ${i+1})">${i+1}</button>`
                 page_numbers.insertAdjacentHTML("beforeend", page_number);
             }
         }
@@ -116,7 +141,6 @@ async function workshop_pick_list(category_id, category_name, page){
 
 // 워크샵 상세 페이지로 이동
 async function workshop_detail_move(workshop_id){
-
     const url = `workshop_detail.html?id=${workshop_id}`
     window.location.href = url
 }
@@ -127,7 +151,7 @@ async function workshop_page_move(page_nunber){
     window.location.href = url
 }
 
-// 워크샵 목록 중 특정 카테고리의 특정 페이지로 이동
+// 메인 페이지로 이동
 async function main_page_move(){
     const url = `workshop.html`
     window.location.href = url

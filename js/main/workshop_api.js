@@ -1,4 +1,12 @@
-// 모든 워크샵 목록 출력
+// 베스트 워크샵 목록 출력
+async function workshop_popular_get() {
+    const response = await fetch(`${back_end_url}/workshops/popular/`, {
+        method:'GET'
+    })
+    return response
+}
+
+// 모든 워크샵 목록 출력 + 페이지네이션
 async function workshop_get(page) {
     const response = await fetch(`${back_end_url}/workshops/?page=${page}`, {
         method:'GET'
@@ -14,13 +22,8 @@ async function hobby_get() {
     return response
 }
 
-// 특정 카테고리 선택 시 해당하는 워크샵 목록 출력
+// 특정 카테고리 선택 시 해당하는 워크샵 목록 출력 + 페이지네이션
 async function workshop_pick_get(category_id, page) {
-    console.log("----------------------")
-    console.log("page 값 :", page)
-    console.log("fetch 요청주소 값(변경전) :", `${back_end_url}/workshops/?category=${category_id}&page=${page}`)
-    // console.log("fetch 요청주소 값(변경후) :", `${back_end_url}/workshops/?%3Fpage=2&category=${category_id}&?page=${page}`)
-
     const response = await fetch(`${back_end_url}/workshops/?category=${category_id}&page=${page}`, {
         method:'GET'
     })
