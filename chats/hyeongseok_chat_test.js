@@ -58,6 +58,26 @@ function send_message_each_room_button() {
     }
 };
 
+async function send_test_button() {
+    test_room_socket = new WebSocket(`${websocketBaseUrl}/100/`)
+
+    let class_send_message = new Websocket_func();
+
+    class_send_message.onopen = () =>
+    class_send_message.send_chat_message(test_room_socket, 100, 2, 1)
+
+    test_room_socket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        console.log(data)
+        var message = data['message'];
+        console.log(message)
+        var message_data = JSON.parse(message)['message']
+        // var sender = JSON.parse(message)['sender']
+        // var cur_time = JSON.parse(message)['cur_time']
+        // var date = JSON.parse(message)['date']
+        document.querySelector('#chat-log').value += (message_data + '\n');
+}}
+
 // 채팅방 id 별로 소켓 연결
 function connect_room_id() {
     room_id = event.target.value
