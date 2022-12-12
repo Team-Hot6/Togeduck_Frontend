@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>workshop</title>
+    <script src="../../global.js"></script>
+    <script src="../../js/main/workshop_api.js"></script>
+    <script src="../../js/main/workshop.js"></script>
+    <link rel="stylesheet" href="../../css/main/workshop.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">네비게이션 바</div>
+    <div class="summary">서비스 소개글과 이미지</div>
+    <button onclick="workshop_post_go()">워크샵 생성</button>
+
+    <section class="main">
+        <section class="category">
+            <div class="menubar">
+                <span class="select_menu"  onclick="top.location='javascript:location.reload()'">Workshop</span>
+                <span class="menu">Community</span>
+                <span style="float: right; margin: auto;">
+                    <span class="sort">최신순</span>
+                    <span class="sort">인기순</span>
+                </span>
+            </div>
+            <div class="hobbys" id="hobbys">
+                <!-- <button type="button" class="hobby">핸드메이드</button> -->
+            </div>
+        </section>
+        
+        <div class="sub_info" id="sub_info">부가정보(전체카테고리 좋아요 top10 / 각 취미 카테고리 소개글)</div>
+        <section class="content">
+            <div class="gridbox" id="gridbox">
+                <!-- <div class="workshop" style="background-color: #ffffff;">
+                    <div class="workshop_img_frame">
+                        <img class="workshop_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ_Rk0RYE5Wpe1RzOK1FgkVBojQGQgd8zbog&usqp=CAU">
+                    </div>
+                    <div class="title">한강 완주하기</div>
+                    <span class="local">강원도</span>
+                    <span class="local">스포츠</span>
+                    <span class="local">날짜</span>
+                    <span class="local">시간</span>
+                </div> -->
+            </div>
+            <div class="pagination">
+                <button type="button" class="page_number">1</button>
+            </div>
+        </section>
+    </section>
+    <footer class="footer">copyrightⓒ 2022 All rights reserved by team HOT6.</footer>
+</body>
+</html>

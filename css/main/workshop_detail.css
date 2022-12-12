@@ -1,0 +1,526 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+
+.comment {
+  padding: 20px;
+  background: #eef;
+  border: 1px solid black;
+  margin: 10px 0;
+}
+
+
+
+
+
+
+.form-input {
+  width:350px;
+  margin: auto;
+  height: 255px;
+  padding:3px;
+  background:rgb(7, 7, 7);
+  border:2px dashed dodgerblue;
+}
+
+.form-input input {
+  display:none;
+}
+
+.form-input label {
+  display:block;
+  width:100%;
+  height: 100%;
+  /*max-height: 200px;*/
+  background:#333;
+  border-radius:10px;
+  cursor:pointer;
+} 
+
+.form-input img {
+  width:100%;
+  height: 100%;
+  margin: 2px;
+  /*opacity: .4;*/
+}
+
+.imgRemove{
+  position: relative;
+  bottom: 114px;
+  left: 68%;
+  background-color: transparent;
+  border: none;
+  font-size: 30px;
+  outline: none;
+}
+.imgRemove::after{
+  content: ' \21BA';
+  color: #fff;
+  font-weight: 900;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.small{
+  color: #fff;
+}
+
+
+
+
+
+
+
+
+*{
+  margin:0;
+  padding:0;
+  top:0;
+  left:0;
+  font-family: "Poppins" , sans-serif !important;
+}
+.container{
+  width:100%;
+  background:#FFA812;
+  position: absolute;
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);    
+  width: 90%;
+  grid-column-gap: 1%; 
+  
+    
+}
+.card-container{
+  width:350px;
+  justify-self:center;
+ 
+  text-align:center;
+
+    padding: 50px!important;
+}
+.contact-card{
+    width: 100%;
+    padding: 15px !important;
+    background: rgba(255, 255, 255, .3);
+    border-radius: 15px;
+    margin-bottom: 15px !important;
+    z-index: 9999 !important;
+    position: relative;
+    z-index: 2;
+  }
+  .contact-card h2{
+      font-weight: bolder;
+      font-size: x-large;
+  }
+  .contact-card h1{
+    font-weight: bolder;
+    font-size: large;
+}
+  .contact-card h3{
+      color: #fff;
+      margin-top: 5px!important;
+  }
+  
+
+  .flex-center {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  
+  .icon-3d {
+    padding: 10px !important;
+    -webkit-animation: icon3d 200ms 10;
+    animation: icon3d 200ms 10;
+    color: #fff;
+    padding: 10px!important;
+    
+  }
+  i .icon-3d{
+    font-size: 25px !important;
+  }
+  .icon-3d:hover {
+    -webkit-animation: icon3d 200ms infinite;
+    animation: icon3d 200ms infinite;
+  }
+  
+  @keyframes icon3d {
+    0% {
+      text-shadow: 5px 4px #f44336, -5px -6px #2196f3;
+    }
+    25% {
+      text-shadow: -5px -6px #f44336, 5px 4px #2196f3;
+    }
+    50% {
+      text-shadow: 5px -4px #f44336, -8px 4px #2196f3;
+    }
+    75% {
+      text-shadow: -8px -4px #f44336, -5px -4px #2196f3;
+    }
+    100% {
+      text-shadow: -5px 0 #f44336, 5px -4px #2196f3;
+    }
+  }
+
+
+
+/*---------------Base Styles---------------*/
+@import url(https://fonts.googleapis.com/css?family=Lato);
+body {
+  font-family: "Lato";
+}
+
+* {
+  outline: none;
+}
+
+input {
+  border: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+input, textarea {
+  background: none;
+  color: white;
+}
+
+/*-------Color Codes-------*/
+/*-------END: Color Codes-------*/
+/*---------------END: Base Styles---------------*/
+/*---------Header and parent container---------*/
+.header-container {
+  background: white;
+}
+.header-container__header {
+  font-weight: bold;
+  color: #ffc107;
+}
+
+/*---------------Header animation---------------*/
+.animate-header {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  height: 0vh;
+  box-shadow: 0 0 16px 0px rgba(0, 0, 0, 0);
+  transition: 0.8s ease;
+}
+.animate-header .animate-ele {
+  font-size: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.8s ease, 1s box-shadow ease;
+}
+.animate-header.is-visible {
+  height: 30vh;
+  box-shadow: 0 0 16px 0px rgba(0, 0, 0, 0);
+}
+.animate-header.is-animate {
+  height: 80px;
+}
+.animate-header.is-animate .animate-ele {
+  font-size: 20px;
+  left: 30px;
+  transform: translate(0%, -50%);
+}
+
+/*---------------END: Header animation---------------*/
+.parent-container {
+  background: #ffc107;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 70vh;
+  min-height: 400px;
+  padding-top: 100px;
+  margin-top: 20vh;
+  overflow: hidden;
+}
+
+/*----------Animate parent container----------*/
+.animate-parent {
+  width: 0%;
+  transition: 0.8s ease;
+}
+.animate-parent.is-visible {
+  overflow: inherit;
+  width: 100%;
+}
+
+/*----------END: Animate parent container----------*/
+/*---------END: Header and parent container---------*/
+/*---------------Input element Styles---------------*/
+.input-element-wrapper {
+  display: inline-block;
+  position: relative;
+  width: 40%;
+  min-width: 350px;
+  color: white;
+  height: 45px;
+  border-bottom: 1px solid white;
+  transition: 0.2s ease;
+}
+.input-element-wrapper:before {
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 0%;
+  background: white;
+  content: "";
+  transition: 0.2s ease;
+}
+.input-element-wrapper .label-wrapper {
+  display: block;
+  cursor: text;
+  padding-bottom: 4px;
+  font-size: 14px;
+  padding-top: 25px;
+  transition: 0.2s ease;
+}
+.input-element-wrapper .input-wrapper {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 0px;
+  transition: 0.2s ease;
+}
+.input-element-wrapper.float-up {
+  border-color: white;
+}
+.input-element-wrapper.float-up:before {
+  width: 100%;
+}
+.input-element-wrapper.float-up .label-wrapper {
+  color: white;
+  padding-top: 0px;
+  font-size: 10px;
+  cursor: default;
+}
+.input-element-wrapper.float-up .input-wrapper {
+  height: 20px;
+}
+
+/*---------------END: Input element Styles---------------*/
+/*----------------Comment area----------------*/
+.comment-box-wrapper {
+  margin-top: 20px;
+  width: 40%;
+  min-width: 350px;
+  overflow: hidden;
+  height: 35px;
+  position: relative;
+}
+.comment-box-wrapper__link {
+  position: absolute;
+  left: 0;
+  top: 0px;
+  display: inline-block;
+  z-index: 1;
+  color: white;
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 5px 10px;
+  transition: 0.2s ease;
+}
+.comment-box-wrapper__link:hover {
+  color: #ffc107;
+  background: white;
+}
+.comment-box-wrapper .comment-area {
+  position: relative;
+  z-index: 2;
+}
+.comment-box-wrapper .comment-form {
+  display: flex;
+  justify-content: space-between;
+}
+.comment-box-wrapper .comment-form__field, .comment-box-wrapper .comment-form__submit {
+  padding: 5px;
+}
+.comment-box-wrapper .comment-form__field {
+  width: 70%;
+}
+.comment-box-wrapper .comment-form__submit {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/*----------------END: Comment area----------------*/
+/*---------------------Textarea---------------------*/
+.another-wrapper {
+  position: relative;
+  width: 40%;
+  min-width: 350px;
+  border-bottom: 1px solid white;
+}
+.another-wrapper:before {
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 0%;
+  background: white;
+  content: "";
+  transition: 0.2s ease;
+}
+
+.text-area-wrapper {
+  width: 100%;
+  height: 40px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 20px;
+}
+.text-area-wrapper .text-field-wrapper {
+  position: relative;
+}
+.text-area-wrapper .text-field-wrapper__field-box {
+  resize: none;
+  position: absolute;
+  width: 99%;
+  height: 0px;
+  overflow: hidden;
+  left: 0;
+  padding: 0px;
+  border: 0px;
+}
+.text-area-wrapper__label {
+  padding-top: 20px;
+  padding-bottom: 5px;
+  display: block;
+  color: white;
+  position: relative;
+  z-index: 1;
+  cursor: text;
+}
+
+/*---------------------END: Textarea---------------------*/
+/*---------------For animations only---------------*/
+.open-comment-box {
+  opacity: 1;
+  transform-origin: bottom left;
+  transform: scaleY(1) scaleX(1);
+  transition: 0.2s ease;
+}
+.open-comment-box.active {
+  opacity: 0;
+  transform: scaleY(0) scaleX(2);
+}
+
+.comment-box {
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  border-bottom: 2px solid white;
+  transition: 0.2s ease;
+}
+.comment-box.active {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.animate-textarea .field-label {
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.another-wrapper.float-up:before {
+  width: 100%;
+}
+.another-wrapper.float-up .field-label {
+  padding: 0px;
+  color: white;
+  font-size: 10px;
+  cursor: default;
+}
+
+/*---------------END: For animations only---------------*/
+/*-----------------Comment view more area-----------------*/
+.view-more__link {
+  color: white;
+}
+.view-more__link:active, .view-more__link:focus, .view-more__link:hover {
+  color: white;
+}
+.view-more__count {
+  border-radius: 50%;
+  background: white;
+  color: #ffc107;
+  width: 25px;
+  height: 25px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.view-more-comments {
+  display: none;
+  position: absolute;
+  width: 100%;
+  margin: 20px 0px;
+}
+.view-more-comments .comment-list {
+  overflow: hidden;
+}
+.view-more-comments .comment-wrapper {
+  display: flex;
+  border-bottom: 0px;
+  padding: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: white;
+  color: #ffc107;
+  font-weight: bold;
+}
+.view-more-comments .comment-wrapper__comment {
+  flex: 2;
+}
+.view-more-comments .comment-wrapper .comment-actions__delete {
+  color: #dbdbdb;
+}
+.view-more-comments .comment-wrapper .comment-actions__delete:hover {
+  color: #ffc107;
+}
+
+.view-more-wrapper {
+  position: relative;
+  width: 40%;
+  min-width: 350px;
+  margin-top: 20px;
+}
+
+/*Delete comment animation*/
+.comments {
+  transform: translateX(0%);
+  transition: 0.4s ease;
+}
+.comments.delete {
+  transform: translateX(100%);
+}
+
+/*END: Delete comment animation*/
+/*-----------------END: Comment view more area-----------------*/
