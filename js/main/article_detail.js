@@ -7,8 +7,9 @@ const url_str = window.location.search
 const urlParams = new URLSearchParams(url_str);
 // URLSearchParams 객체에서 id 값 추출
 const article_id = urlParams.get("id");
-LoadDeatail(article_id)
 
+LoadDeatail(article_id)
+LoadDeatail_comment(article_id)
 
 // 해당 id 값의 게시글 데이터를 전달받아 html 생성
 async function LoadDeatail(article_id) {
@@ -28,15 +29,14 @@ async function LoadDeatail(article_id) {
     likes.innerText = '추천수 : ' + data['like']
     
     const article_image = document.getElementById('article_image')
-    article_image.src = `${backend_base_url}`+data['article_image']
-    // article_image.setAttribute('src', `${backend_base_url}`+data['article_image'])
+    article_image.src = `${back_end_url}`+data['article_image']
+    // article_image.setAttribute('src', `${back_end_url}`+data['article_image'])
 
     const content = document.getElementById('content')
     content.innerText = data['content']
-    console.log(data)
 }
 
-LoadDeatail_comment(article_id)
+// 해당 id 값을 가진 게시글의 댓글 리스트 출력
 async function LoadDeatail_comment(article_id) {
     const response = await get_article_detail_comment(article_id)
     const data = await response.json()
@@ -69,5 +69,8 @@ async function LoadDeatail_comment(article_id) {
     }
 }
 
-
-
+// 댓글 작성
+async function handleCommentCreate() {
+    const comment = document.getElementById('comment').value
+    create_comment(article_id, comment)
+}

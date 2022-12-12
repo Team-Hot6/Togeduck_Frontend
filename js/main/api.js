@@ -106,8 +106,6 @@ async function create_article(title, content, image, category) {
         method: "POST",
         body: data,
     });
-    const response_json = await response.json()
-    console.log(response_json)
 
     if (response.status == 201){
         alert('작성 완료!!')
@@ -116,5 +114,29 @@ async function create_article(title, content, image, category) {
         alert('다시 로그인을 해주세요!')
     } else {
         alert('잘못된 요청입니다!')
+    }
+}
+
+// 댓글 작성 API
+async function create_comment(article_id, comment) {
+    const response = await fetch(`${back_end_url}/articles/${article_id}/comment/`, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "POST",
+        body: JSON.stringify({
+            "content": comment,
+        }),
+    });
+
+    if (response.status == 201) {
+        alert("댓글 작성 완료!")
+        window.location.reload()
+    } else if(response.status == 401) {
+        alert("댓글 작성은 로그인이 필요한 서비스 입니다!")
+        window.location.reload()
+    } else {
+        alert("잘못된 요청입니다!")
     }
 }
