@@ -41,3 +41,11 @@ function getCookie(key) {
     result = result.slice(cookie_key.length, result.length);
     return result
 };
+
+
+// 네비바 가져오기
+fetch("/templates/main/navbar.html").then(response => {
+    return response.text()
+}).then(data => {
+    document.querySelector("header").innerHTML = data
+})
