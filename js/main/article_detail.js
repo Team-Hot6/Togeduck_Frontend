@@ -45,7 +45,7 @@ async function LoadDeatail(article_id) {
     if (data['user'] == nickname['nickname']){
         const article_btn = document.getElementById('article_btn')
         temp_html = `<button type="button" class="btn btn-warning fw-bold" onclick="LoadArticleUpdate(article_id)">글 수정</button>
-                    <button type="button" class="btn btn-warning fw-bold" onclick="">글 삭제</button>
+                    <button type="button" class="btn btn-warning fw-bold" onclick="delete_article(article_id)">글 삭제</button>
                     `
         article_btn.innerHTML = temp_html
     }

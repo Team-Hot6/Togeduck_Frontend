@@ -154,7 +154,7 @@ async function update_article(article_id, title, content, image, category) {
     data.append("title", title)
     data.append("content", content)
     data.append("article_image", image)
-    
+
     const response = await fetch(`${back_end_url}/articles/${article_id}/`, {
         headers: {
             Authorization: "Bearer " + localStorage.getItem("access"),
@@ -170,6 +170,26 @@ async function update_article(article_id, title, content, image, category) {
         alert('게시글을 수정할 권한이 없습니다!')
         window.location.replace(`article_detail.html?id=${article_id}`);
     } else {
+        alert('잘못된 요청입니다!')
+        window.location.reload();
+    }
+}
+
+// 게시글 삭제 API
+async function delete_article(article_id) {
+    const response = await fetch(`${back_end_url}/articles/${article_id}/`, {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "DELETE",
+    });
+    if (response.status == 200){
+        alert('삭제 완료!')
+        window.location.replace(`community.html`);
+    } else if (response.status == 403){
+        alert('게시글을 삭제할 권한이 없습니다!')
+        window.location.reload();
+    } else{
         alert('잘못된 요청입니다!')
         window.location.reload();
     }
