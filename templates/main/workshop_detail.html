@@ -4,12 +4,286 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>workshop Detail</title>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../../css/main/workshop_detail.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+            <div>
+              <div>
+              <button onclick="PUT_Button()">수정페이지 버트트트틍</button>
+              <button type="button" onclick="workshop_DELETE(workshop_id)">워크샵 삭제제제제ㅔㅈ</button>
+            </div>
+                <div class="container">
+                  <div class="card-container">
+                  <div class="contact-card">
+                  <h2>Haykel Mkaddem</h2>
+                  
+                  <div >
+                    <!-- <div class="form-input">
+                      <label for="file-ip-1">
+                        <img
+                          id="file-ip-1-preview"
+                          src="https://i.ibb.co/ZVFsg37/default.png"
+                        />
+                        <button
+                          type="button"
+                          class="imgRemove"
+                          onclick="myImgRemove(1)"
+                        ></button>
+                      </label>
+      
+                      <input
+                        type="file"
+                        class="real-upload"
+                        name="img_one"
+                        id="file-ip-1"
+                        accept="image/*"
+                        onchange="showPreview(event, 1);"
+                      />
+                    </div> -->
+                    <img id="workshop_image" class="form-input"></img>
+                    <!-- <button onclick="workshop_put()" >워크샵 수정</button> -->
+                    
+                </div>
+                  <h3 class="icon-3d">
+                    ( Ingénieur informatique )
+                  </h3>
+                </div>
+
+                <div class="contact-card">
+                  <h1>réseaux sociaux :</h1>
+
+                  <div >
+                    <p id="category">카테고리</p>
+                </div>
+                <div ><span>좋아요 수:
+                    <p id="likes_count">좋아요 수</p></span>
+                </div>
+                <div >
+       
+                  <!-- <button onclick="Like_post()" id="like" class="button">
+                    <div class="hand">
+                        <div class="thumb"></div>
+                    </div>
+                    <span>Like<span>d</span></span>
+                </button> -->
+                  
+              </div>
+              <div>
+                <button id="liked" onclick="Like_post()" type="button" class="btn_like">
+                  <span class="img_emoti">좋아요</span>
+                  <span class="ani_heart_m"></span>
+                </button>
+              </div>
+                  <div class="flex-center">
+                     <a href="">
+                      <i class='bx bxl-facebook icon-3d'></i>
+                     </a>
+                     <a href="">
+                      <i class='bx bxl-instagram icon-3d' ></i>
+                     </a>
+                     <a href="">
+                      <i class='bx bxl-twitter icon-3d' ></i>
+                     </a>
+                     <a href="">
+                      <i class='bx bxl-linkedin icon-3d' ></i>
+                     </a>
+                     <a href="">
+                      <i class='bx bxl-github icon-3d' ></i>
+                     </a>
+                  </div>
+                  </div>
+
+                  <div class="contact-card">
+                    <div >
+                        <p id="host">호스트</p>
+                    </div>
+                    <div >
+                        <p id="title">소개</p>
+                    </div>
+                    <div >
+                        <p id="max_guest">제한인원</p>
+                    </div>
+                    <div >
+                        <p id="amount">참가비</p>
+                    </div>
+                    <div >
+                        <p id="content">내용</p>
+                    </div>
+
+                    <div >
+                        <p id="participant_count">참가인원</p>
+                    </div>
+                    
+                    
+
+                            
+                  
+                  </div>
+                  
+                </div>
+                  
+                <div class="card-container">
+                    <div class="contact-card">
+                    <h2>Haykel Mkaddem</h2>
+                    <div >
+                        <p id="date">워크샵 날짜</p>
+                    </div>
+
+                    <h3 class="icon-3d">
+                      ( Ingénieur informatique )
+                    </h3>
+                  </div>
+                  <div class="contact-card">
+                    <h1>réseaux sociaux :</h1>
+
+                    <div >
+                        <p id="location">지역</p>
+                    </div>
+                    <div >
+                        <p id="address">주소</p>
+                    </div>
+
+                    <div class="flex-center">
+                       <a href="">
+                        <i class='bx bxl-facebook icon-3d'></i>
+                       </a>
+                       <a href="">
+                        <i class='bx bxl-instagram icon-3d' ></i>
+                       </a>
+                       <a href="">
+                        <i class='bx bxl-twitter icon-3d' ></i>
+                       </a>
+                       <a href="">
+                        <i class='bx bxl-linkedin icon-3d' ></i>
+                       </a>
+                       <a href="">
+                        <i class='bx bxl-github icon-3d' ></i>
+                       </a>
+                    </div>
+                    </div>
+                    <div class="contact-card">
+                        
+                        <!-- <div id="review_list">
+                          후기댓글
+                      </div> -->
+
+                      
+
+                      <div class="parent-container animate-parent is-visible" style="height: 500px;">
+                        <!-- <input type ="button" onclick="getShow()" value=" 리뷰 보이기">
+                          <input type ="button" onclick="getHide()" value=" 리뷰 숨기기"> -->
+
+                          <a href="#" id="show" onclick="return false"style="display:none">Show Comments</a>
+
+                          <a href="#" id="hide" onclick="return false" >Hide Comments</a>
+                        
+                        <div class="view-more-wrapper">
+                          <div class="view-more">
+                            <a id="show" onclick="return false"style="display:none" class="view-more__link show-comments" href="#">View comments</a>
+                            <span class="view-more__count display-count">0</span>     
+                          </div>
+                          <div class="view-more">
+                           <!-- <a href="#" id="hide" onclick="return false" >Hide Comments</a>
+                            <span class="view-more__count display-count">0</span> -->  
+                              
+                          </div>
+                          
+                          
+                          
+                          <div class="view-more-comments" >
+                            <div class="comment-box-wrapper">
+                              <!-- <a class="comment-box-wrapper__link open-comment-box" href="#">Add a comment</a> -->
+                              <div class="comment-area comment-box active">
+                                <form class="comment-form">
+                                  <input id="review_post" class="comment-form__field comment-field">
+                                  <button id="review_button" type="button" class="comment-form__submit submit-comment" onclick="workshop_review_POST(workshop_id)">Comment</button>
+                                </form>
+                              </div>
+                            </div>
+
+                          <!-- <div class="font_">
+                            <ul  id="list" class="comment-list" style>
+                              <li id="review_list" class="comment-wrapper comments">
+                                <div id="user">닉네임</div>
+                                <p id="review" class="comment-wrapper__comment">댓글</p> 
+                                <span id="created_at">생성일</span>
+                                <p id="updated_at">엡데이트일</p>
+                              </li>
+                                 <div class="comment-actions">
+                                  <a class="fa fa-times comment-actions__delete delete-comment" href="#"></a>
+                                </div>
+                              
+                            </ul>
+                          </div> -->
+
+                         <div id="list" class="comment-list">
+                           <!-- <div id="review_list" class="comment">
+                              <div id="user" class="comment-header">닉네임</div>
+                              <p id="review" class="comment-body">내용</p>
+                              <span id="created_at">생성일</span>
+                              <div id="updated_at">엡데이트일</div>
+                              <div class="comment-footer">
+                                <button onclick="review_delete()">삭제버튼</button>
+                                <button onclick="review_put()" > 수정버튼</button>
+                              </div>
+                            </div>-->
+                          </div> 
+
+
+
+
+
+
+                          </div>
+
+                        </div>
+
+
+                        
+
+
+
+
+
+
+
+
+
+                      </div>
+                      
+                      <!-- <b>E-mail :</b>
+                      <br><br>
+                      haykelmkaddem@gmail.com
+                      <br><br>
+                      <b>Adresse :</b><br><br>
+                      XX cité XXXXXX, Tunis.
+                      <br><br>
+                      <b>Numéro de téléphone : </b>
+                      <br><br>
+                      (+216) 28176222 -->
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+
+                </div>
+
+                
+        </div>
+
+    <!-- <script src="workshop_detail.js"></script> -->
+    
     <script src="../../global.js"></script>
     <script src="../../js/main/workshop_api.js"></script>
     <script src="../../js/main/workshop_detail.js"></script>
-</head>
-<body>
-    <div>워크샵 상세페이지</div>
 </body>
 </html>

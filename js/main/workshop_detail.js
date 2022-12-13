@@ -303,36 +303,36 @@ do {
 
 
 
+
+
 // 워크샵 작성
 async function workshop_post() {
 
+    console.log('워크샵 작성하고싶어요 ㅇㅅㅇ')
+
     const content = document.getElementById("content").value
+    //const workshop_image = document.getElementById("img").files[0];
     const workshop_image = document.getElementById("getval").files[0];
     const title = document.getElementById("title").value;
     const date = document.getElementById("date").value;
     const max_guest = document.getElementById("max_guest").value;
     const amount = document.getElementById("amount").value;
-    const category = document.getElementById("category_id").value;
-    const location = document.getElementById("location_id").value;
+    const category = document.getElementById("category").value;
+    const location = document.getElementById("location").value;
     const address = document.getElementById("address").value;
 
-   
 
     const formData = new FormData();
 
-    console.log("content",content)
-    console.log("workshop_image",workshop_image)
-    console.log("title",title)
-    console.log("date",date)
-    console.log("max_guest",max_guest)
-    console.log("amount",amount)
-    console.log("category",category)
-    console.log("location",location)
-    console.log("address",address)
-
-
-
-
+    console.log(title);
+    console.log(content);
+    console.log(workshop_image);
+    console.log(parseInt(max_guest));
+    console.log(parseInt(amount));
+    console.log(parseInt(category));
+    console.log(parseInt(location));
+    console.log(address);
+    console.log(date);
     
 
 
@@ -349,15 +349,24 @@ async function workshop_post() {
 
     const response = await fetch("http://127.0.0.1:8000/workshops/",{
         headers:{
+            //'content-type':'application/json',
             Authorization : "Bearer " + localStorage.getItem("access")
         },
+        
         method:'POST',
+
         body: formData
     })
 
+    console.log(response,'리스폰승ㅅㅇ??')
+
     if (response.status == 200) {
-      alert("새로운 워크샵이 생성되었습니다.");
-      window.location.replace(`${front_end_url}/templates/main/workshop.html`)  
+      alert("★업로드 완료★");
+      window.location.replace("http://127.0.0.1:5501/templates/main/workshop.html")
+      //window.location.replace(`${frontend_base_url}/image.html`);
+      //window.location.href = "http://127.0.0.1:5500/main.html";
+  
+      
     }
     else{
       alert(response.status);
@@ -389,8 +398,8 @@ async function workshop_put(workshop_id){
     const date = document.getElementById("date").value;
     const max_guest = document.getElementById("max_guest").value;
     const amount = document.getElementById("amount").value;
-    const category = document.getElementById("category").value;
-    const location = document.getElementById("location").value;
+    const category = document.getElementById("category_id").value;
+    const location = document.getElementById("location_id").value;
     const address = document.getElementById("address").value;
 
 
