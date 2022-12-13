@@ -1,32 +1,23 @@
-
 window.onload = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const workshop_id = urlParams.get('id');
     workshop_detail_view(workshop_id)
-    workshop_review_view(workshop_id)
-    console.log(window.location.search,'++++++++++')
-    console.log(workshop_id,'5555555555')
-    
+    workshop_review_view(workshop_id)    
 }
-console.log(window.location.search,'7777777777')
+
 
 const urlParams = new URLSearchParams(window.location.search);
 const workshop_id = urlParams.get('id');
 
-console.log(urlParams,"_______________")
-console.log(workshop_id,'==========')
-
 
 // 워크샵 상세 데이터 불러오기
 async function workshop_detail_view(workshop_id){
-    //workshop_id = getCookie("workshop_id")
+
 
     const response = await workshop_detail_get(workshop_id)
    
     if(response.status == 200){
         data = await response.json()
-
-        console.log('1111111111111111',data)
 
         const title = document.getElementById("title") // 소개
         const max_guest = document.getElementById("max_guest") // 제한인원
@@ -53,10 +44,26 @@ async function workshop_detail_view(workshop_id){
         participant_count.innerText = data.participant_count;
         date.innerText = data.date;
         address.innerText = data.address;
-        
+
+        // 로그인 사용자의 닉네임
+        const payload = localStorage.getItem("payload");
+        const payload_parse = JSON.parse(payload)
+
+        // 로그인 사용자와 워크샵의 호스트가 동일인물이 아니라면 <문의하기> 버튼을 출력한다
+        if(payload_parse.nickname != data.host){
+            const chat_button_label = document.getElementById("chat_button_wrap")
+            chat_button_label.innerHTML =`<button type="button" class="chat_button" id="chat_button" onclick="test('${data.host}')">문의하기</button>`
+        }
     }
     //window.location.reload()
 }
+
+// 문의하기 버튼 임시 함수 정상작동 확인
+async function test(host){
+    console.log("test함수 작동시작")
+    console.log(host)
+}
+
 
 console.log('ㅇㅅㅇ')
 
