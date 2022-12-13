@@ -38,12 +38,13 @@ async function LoadDeatail(article_id) {
     const content = document.getElementById('content')
     content.innerText = data['content']
 
+    // 글 작성자만 수정, 삭제 버튼이 보이도록 설정
     const user_id = localStorage.getItem('payload')
     nickname = JSON.parse(user_id)
 
     if (data['user'] == nickname['nickname']){
         const article_btn = document.getElementById('article_btn')
-        temp_html = `<button type="button" class="btn btn-warning fw-bold" onclick="handleArticleUpdate()">글 수정</button>
+        temp_html = `<button type="button" class="btn btn-warning fw-bold" onclick="LoadArticleUpdate(article_id)">글 수정</button>
                     <button type="button" class="btn btn-warning fw-bold" onclick="">글 삭제</button>
                     `
         article_btn.innerHTML = temp_html
@@ -87,4 +88,18 @@ async function LoadDeatail_comment(article_id) {
 async function handleCommentCreate() {
     const comment = document.getElementById('comment').value
     create_comment(article_id, comment)
+}
+
+// 게시글 수정 버튼
+async function LoadArticleUpdate(article_id) {
+    // 게시글 작성자가 맞는지 확인
+    const author = document.getElementById('author').innerText
+    const user_id = localStorage.getItem('payload')
+    const nickname = JSON.parse(user_id)['nickname']
+    if (author == nickname){
+        replace_article_update(article_id)
+    }else {
+        alert('게시글을 수정할 권한이 없습니다!')
+        window.location.reload();
+    }
 }

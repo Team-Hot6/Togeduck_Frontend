@@ -11,14 +11,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    <title>게시글 작성 페이지</title>
+    <title>게시글 수정 페이지</title>
 </head>
 <body>
-    <h1 style="text-align: center; margin: 100px auto;">게시글 작성 페이지</h1>
+    <h1 style="text-align: center; margin: 100px auto;">게시글 수정 페이지</h1>
     <div class="form w-50 px-5 py-5 mx-auto border border-dark">
         <span>카테고리</span>
         <select class="form-select" id="category" aria-label="Default select example">
-            <option selected>카테고리를 선택해주세요!</option>
+            <option class="bg-secondary text-white"selected disabled id="selected_category">카테고리를 선택해주세요!</option>
             <option value="1">핸드메이드</option>
             <option value="2">쿠킹</option>
             <option value="3">플라워/가드닝</option>
@@ -40,10 +40,10 @@
         <textarea id="content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
     <div class="mb-3">
-        <label for="formFile" class="form-label">이미지 업로드</label>
-        <input class="form-control" type="file" id="formFile">
+        <label for="formFile" class="form-label" >이미지 업로드</label>
+        <input class="form-control" type="file" id="formFile" >
     </div>
-    <button type="button" class="btn btn-warning" style="margin: auto; display: block;" onclick="handleArticleCreate()">작성하기</button>
+    <button type="button" class="btn btn-warning" style="margin: auto; display: block;" onclick="handleArticleUpdate(article_id)">수정하기</button>
     </div>
     <script src="/js/global.js"></script>
     <script src="/js/main/api.js"></script>
