@@ -22,6 +22,14 @@ async function hobby_get() {
     return response
 }
 
+// 모든 지역 카테고리 목록 출력
+async function location_get() {
+    const response = await fetch(`${back_end_url}/workshops/location/`, {
+        method:'GET'
+    })
+    return response
+}
+
 // 특정 카테고리 선택 시 해당하는 워크샵 목록 출력 + 페이지네이션
 async function workshop_pick_get(category_id, page) {
     const response = await fetch(`${back_end_url}/workshops/?category=${category_id}&page=${page}`, {

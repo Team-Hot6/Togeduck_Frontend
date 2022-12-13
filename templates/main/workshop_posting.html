@@ -13,13 +13,11 @@
     
      
   <div class="sttngs">
-    <h2>SETTINGS</h2>
+    <h2>워크샵 생성</h2>
 <div class="tabordion">
   <section id="section1">
     <input class="t" type="radio" name="sections" id="option1" checked>
-    <label for="option1" class="trr"> Account</label>
-    <article>
-  
+
     <div class="frm">     
         
 <div id='profile-upload'>
@@ -38,18 +36,32 @@
   
  
 <div class="tr">
+    <label class="label" for="select">취미</label>
+	<div class="select-wrap e">
+		<select class="select" id="category_id">
+            <option value="0">카테고리를 선택해주세요</option>
+           
+		</select>
+	</div>
 
+    <label class="label" for="select">지역</label>
+	<div class="select-wrap e">
+		<select class="select" id="location_id">
+            <option value="0">지역을 선택해주세요</option>
+		</select>
+	</div>
 
-	<label class="label" for="input">title</label>
+    
+
+	<label class="label" for="input">제목</label>
 	<input class="input" type="text" id="title">
 
-    <label class="label" for="input">date</label>
+    <label class="label" for="input">일시</label>
 	<input class="input" type="text" id="date">
 
-    <label class="label" for="input">category</label>
-	<input class="input" type="text" id="category">
 
-    <label class="label" for="input">amount</label>
+
+    <label class="label" for="input">참가비</label>
 	<input class="input" type="text" id="amount">
 	
 	
@@ -62,59 +74,32 @@
   </div>
 
   <br>
-  <label class="label" for="select">GENRE</label>
-	<div class="select-wrap e">
-		<select class="select" id="select">
-			<option value="option">Genre</option>
-			<option value="option2">Option 2</option>
-			<option value="option3">Option 3</option>
-      <option value="option3">Option 3</option>
-      <option value="option3">Option 3</option>
-      <option value="option3">Option 3</option>
-      <option value="option3">Option 3</option>
-      <option value="option3">Option 3</option>
-      <option value="option3">Option 3</option>
-      <option value="option3">Option 3</option>
-		</select>
-	</div>
+    
+    
   
 
 	
-	<label class="label" for="textarea">content<p id="count"></p></label> 
+	<label class="label" for="textarea">워크샵 소개<p id="count"></p></label> 
 	<!--textarea class="textarea" id="textarea"></textarea-->
 
   
    <textarea class="textarea e" rows="7" cols="25" id="content" maxlength="500" ></textarea>
       
-  
-  	
-  
-  <!--div class="social">
-  
-  	<label class="label" for="input">WEBSITE</label>	
-	<input class="input e" type="text" id="input">
-      </div-->
-       <div class="social">
-  <label class="label" for="input">location</label>	
-	<input class="input e" type="text" id="location">
-      </div>
+   
        <div class="social r1">
-  <label class="label" for="input">max_guest</label>	
-	<input class="input e" type="text" id="max_guest">
-</div>
+            <label class="label" for="input">모집인원</label>	
+            <input class="input e" type="text" id="max_guest">
+        </div>
          <div class="social r2">
-  <label class="label" for="input">address</label>	
-	<input class="input e" type="text" id="address">
-
-  
-      </div>
+            <label class="label" for="input">상세주소</label>	
+            <input class="input e" type="text" id="address">  
+        </div>
   
   <button type="button" onclick="workshop_post()" > Update/수정하기 </button>
       
       </div>
        
       
-    </article>
   </section>
   
   <!-- <section id="section2">
@@ -225,5 +210,6 @@
     <script src="../../global.js"></script>
     <script src="../../js/main/workshop_api.js"></script>
     <script src="../../js/main/workshop_detail.js"></script>
+    <script src="../../js/main/workshop_posting.js"></script>
 </body>
 </html>

@@ -767,8 +767,17 @@ body{background:lightgrey}
 
 .sttngs p{color:#000;}
 
-.sttngs{max-width:1064px;margin: 50px auto;background:#fff;padding:15px;height:auto;font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;border-radius:3px;padding-top:30px;
- -webkit-box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.2);}
+.sttngs{
+    max-width:1064px;
+    margin: 50px auto;
+    background:#fff;
+    padding:15px;
+    height:auto;
+    font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
+    border-radius:3px;padding-top:30px;
+ -webkit-box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.2);
+}
+
 .sttngs h2{letter-spacing:2px;margin:20px;color:#000;}
 
 
