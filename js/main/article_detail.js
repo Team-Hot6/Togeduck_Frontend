@@ -56,33 +56,59 @@ async function LoadDeatail_comment(article_id) {
     const response = await get_article_detail_comment(article_id)
     const data = await response.json()
     
+    const login_user = localStorage.getItem('payload')
+    const login_user_nickname = JSON.parse(login_user)['nickname']
+    
+
     for (let i = 0; i < data.length; i++) {
+        let comment_id = data[i]['id']
         let nickname = data[i]['user']
         let comment = data[i]['content']
         let date = data[i]['created_at'].replace('T', ' ').substr(5,5);
         let time = data[i]['created_at'].replace('T', ' ').substr(11,8);
 
-        const comment_list = document.getElementById('comment_list')
-        let temp_html = `<li class='list-group-item'>
-                            <div class="comment-info d-flex">
-                                <div class="nickname-box d-flex align-items-center">
-                                    <span class="fw-bold">${nickname}</span>
+        if (login_user_nickname == nickname){
+            let temp_html = `<li class='list-group-item'>
+                                <div class="comment-info d-flex">
+                                    <div class="nickname-box d-flex align-items-center">
+                                        <span class="fw-bold" id="commenter">${nickname}</span>
+                                    </div>
+                                    <div class="comment-box w-50 ps-3 pt-3">
+                                        <p>${comment}</p>
+                                    </div>
+                                    <div class="created_at w-25 d-flex align-items-center">
+                                        <span>${date}&nbsp</span>
+                                        <span>&nbsp${time}</span>
+                                    </div>
+                                    <div class="delete_btn d-flex align-items-center" id="delete_btn">
+                                        <button type="button" class="btn btn-warning fw-bold" onclick="delete_comment(article_id, ${comment_id})">삭제</button>
+                                    </div>
                                 </div>
-                                <div class="comment-box w-50 ps-3 pt-3">
-                                    <p>${comment}</p>
+                            </li>`
+            comment_list.insertAdjacentHTML('beforeend',temp_html)
+        } else {
+            let temp_html = `<li class='list-group-item'>
+                                <div class="comment-info d-flex">
+                                    <div class="nickname-box d-flex align-items-center">
+                                        <span class="fw-bold" id="commenter">${nickname}</span>
+                                    </div>
+                                    <div class="comment-box w-50 ps-3 pt-3">
+                                        <p>${comment}</p>
+                                    </div>
+                                    <div class="created_at w-25 d-flex align-items-center">
+                                        <span>${date}&nbsp</span>
+                                        <span>&nbsp${time}</span>
+                                    </div>
+                                    <div class="delete_btn d-flex align-items-center" id="delete_btn">
+                                        
+                                    </div>
                                 </div>
-                                <div class="created_at w-25 d-flex align-items-center">
-                                    <span>${date}&nbsp</span>
-                                    <span>&nbsp${time}</span>
-                                </div>
-                                <div class="delete_btn d-flex align-items-center">
-                                    <button type="button" class="btn btn-warning fw-bold">삭제</button>
-                                </div>
-                            </div>
-                        </li>`
-        comment_list.insertAdjacentHTML('beforeend',temp_html)
+                            </li>`
+            comment_list.insertAdjacentHTML('beforeend',temp_html)
+        }
     }
 }
+
 
 // 댓글 작성
 async function handleCommentCreate() {
