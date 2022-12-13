@@ -203,6 +203,7 @@ async function delete_comment(article_id, comment_id) {
         },
         method: "DELETE",
     });
+
     if (response.status == 200){
         alert('삭제 완료!')
         window.location.reload()
@@ -212,5 +213,23 @@ async function delete_comment(article_id, comment_id) {
     }else {
         alert('잘못된 요청입니다!')
         window.location.reload()
+    }
+}
+
+// 게시글 추천하기 API
+async function like_article(article_id) {
+    const response = await fetch(`${back_end_url}/articles/${article_id}/`, {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "POST",
+    })
+    const response_json = await response.json()
+    if (response_json["msg"] == "추천"){
+        alert('게시글 추천 완료')
+        window.location.reload();
+    } else if(response_json["msg"] == "취소"){
+        alert('게시글 추천 취소')
+        window.location.reload();
     }
 }

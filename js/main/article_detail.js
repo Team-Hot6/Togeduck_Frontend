@@ -26,10 +26,10 @@ async function LoadDeatail(article_id) {
     datetime.innerText = '- ' + data['date'] + ' '+data['time']
 
     const views = document.getElementById('views')
-    views.innerText = '조회수  ' + data['views']
+    views.innerText = '👁 ' + data['views']
     
     const likes = document.getElementById('likes')
-    likes.innerText = '추천수  ' + data['like']
+    likes.innerText = '👍 ' + data['like']
     
     const article_image = document.getElementById('article_image')
     article_image.src = `${back_end_url}`+data['article_image']
