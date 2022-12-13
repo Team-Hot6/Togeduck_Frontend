@@ -9,11 +9,8 @@ window.onload = async() => {
 
 
 // 모든 취미 카테고리 목록 출력
-
 async function hobby_category_list(current_category){
-
     const response = await hobby_get()
-    console.log(22222, data)
    
     if(response.status == 200){
         data = await response.json()
@@ -36,7 +33,7 @@ async function hobby_category_list(current_category){
 }
 
 // 모든 지역 카테고리 목록 출력
-async function location_category_list(data){
+async function location_category_list(){
     const response = await location_get()
    
     if(response.status == 200){
@@ -88,8 +85,6 @@ async function workshop_info(workshop_id){
         // location.innerText = data.location;
         date.value = data.date;
         address.value = data.address;
-
-        return data
     }
     return temp_category
 }
