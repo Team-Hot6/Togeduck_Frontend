@@ -6,7 +6,7 @@ const urlParams = new URLSearchParams(url_str);
 const article_id = urlParams.get("id");
 
 LoadCurrentArticle(article_id)
-// 현재 작성되어 있는 게시글 정보를 가져와서 보여줌
+// 현재 작성되어 있는 게시글 정보를 서버에서 가져와서 placeholder에 삽입
 async function LoadCurrentArticle(article_id) {
     const response = await get_article_detail(article_id)
     const data = await response.json()
@@ -22,6 +22,24 @@ async function LoadCurrentArticle(article_id) {
 
     const article_image = document.getElementById('formFile')
     article_image.setAttribute('placeholder', data['article_image'])
+}
+
+// 카테고리 목록 서버에서 가져옴
+window.onload = async function LoadCategory() {
+    const response = await get_hobby()
+    const data = await response.json()
+    
+    for (let i = 0; i < data.length; i++) {
+        let num = data[i]['id']
+        let category = data[i]['category']
+
+        let category_list = document.getElementById('category')
+        let hobby = document.createElement('option')
+        hobby.setAttribute('value', num)
+        hobby.innerText = category
+
+        category_list.appendChild(hobby)
+    }
 }
 
 // 게시글 수정

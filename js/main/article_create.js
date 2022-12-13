@@ -1,4 +1,4 @@
-
+// 카테고리 목록 서버에서 가져옴
 window.onload = async function LoadCategory() {
     const response = await get_hobby()
     const data = await response.json()
