@@ -12,8 +12,6 @@ const workshop_id = urlParams.get('id');
 
 // 워크샵 상세 데이터 불러오기
 async function workshop_detail_view(workshop_id){
-
-
     const response = await workshop_detail_get(workshop_id)
    
     if(response.status == 200){
@@ -52,7 +50,7 @@ async function workshop_detail_view(workshop_id){
         // 로그인 사용자와 워크샵의 호스트가 동일인물이 아니라면 <문의하기> 버튼을 출력한다
         if(payload_parse.nickname != data.host){
             const chat_button_label = document.getElementById("chat_button_wrap")
-            chat_button_label.innerHTML =`<button type="button" class="chat_button" id="chat_button" onclick="test('${data.host}')">문의하기</button>`
+            chat_button_label.innerHTML =`<button type="button" class="chat_user_button" id="chat_button" onclick="click_user_chat(${data.host_id})">문의하기</button>`
         }
     }
     //window.location.reload()
@@ -121,33 +119,18 @@ async function workshop_review_view(workshop_id){
         // review_list.appendChild(updated_at)
 
         // list.append(review_list)
-
-
-
-        
-
-
-
-
-
           console.log('뭐가 찍히누',review)
           console.log('리뷰리스트',review_list)
           console.log('어떻게 해야 반복문이 나올까',list)
-
-
     }
 }
 //window.location.reload()
 }
 
-
-
 // 리뷰 작성
 async function workshop_review_POST(workshop_id){
    
     console.log('뭐크샵아이디',workshop_id)
-
-  
     //workshop_id = location.href.split("?")[1].split("=")[1]
 
     console.log(workshop_id,'뭐누')
@@ -162,7 +145,6 @@ async function workshop_review_POST(workshop_id){
 
     if(response.status == 200){
         alert('댓글 작성 됐습니다')
-    
     }
     else{
         alert(response.status,'qtqtqtq') 
@@ -171,13 +153,8 @@ async function workshop_review_POST(workshop_id){
     //workshop_detail_view(workshop_id)
 }
 
-
-
-
 //리뷰 수정
 async function review_put(id){
-    
-    
     review_id = id
 
     console.log('ㅅㅂ',workshop_id)
@@ -198,14 +175,8 @@ async function review_put(id){
     window.location.reload()
   }
 
-
-
-
 // 리뷰 삭제
 async function review_delete(id) {
-
-   
-
     // const payload = localStorage.getItem("payload");
     // const payload_parse = JSON.parse(payload)
     // review_id = payload_parse.user_id
@@ -227,8 +198,6 @@ async function review_delete(id) {
     window.location.reload()
 }
 
-
-
 // function like(){
 //   console.log("찍히긴 하니")
 
@@ -247,9 +216,6 @@ async function review_delete(id) {
 // update_button.setAttribute("onclick", "Like_post(workshop_id)");
 
 // }
-
-
-
 
 // 좋아요 
 async function Like_post(workshop_id) {
@@ -287,8 +253,6 @@ async function Like_post(workshop_id) {
     location.reload()
   }
   
-
-
 // 썸네일 프리뷰
 var number = 1;
 do {
@@ -307,10 +271,6 @@ do {
   }
   number++;
 } while (number < 5);
-
-
-
-
 
 // 워크샵 작성
 async function workshop_post() {
