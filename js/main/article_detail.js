@@ -37,6 +37,17 @@ async function LoadDeatail(article_id) {
 
     const content = document.getElementById('content')
     content.innerText = data['content']
+
+    const user_id = localStorage.getItem('payload')
+    nickname = JSON.parse(user_id)
+
+    if (data['user'] == nickname['nickname']){
+        const article_btn = document.getElementById('article_btn')
+        temp_html = `<button type="button" class="btn btn-warning fw-bold" onclick="handleArticleUpdate()">글 수정</button>
+                    <button type="button" class="btn btn-warning fw-bold" onclick="">글 삭제</button>
+                    `
+        article_btn.innerHTML = temp_html
+    }
 }
 
 // 해당 id 값을 가진 게시글의 댓글 리스트 출력
