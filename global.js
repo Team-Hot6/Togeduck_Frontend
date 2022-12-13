@@ -82,4 +82,3 @@ fetch("/templates/main/navbar.html").then(response => {
     document.querySelector("header").innerHTML = data
     navbar()
 })
-

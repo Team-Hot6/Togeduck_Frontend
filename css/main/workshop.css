@@ -134,7 +134,19 @@ body {
     top: 0.3rem;
     cursor: pointer;
     font-size: 0.9rem;
-    color: #b9b9b9;;
+    color: #b9b9b9;
+}
+
+.add_workshop{
+    position: relative;
+    top: 0.3rem;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #4d94ff;
+    border-radius: 0.3rem;
+    padding: 0.1rem 0.4rem 0.2rem 0.4rem;
+    font-size: 0.9rem;
+
 }
 
 /* 취미 카테고리 목록 */

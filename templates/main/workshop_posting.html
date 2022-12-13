@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../../css/main/workshop_detail.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+     
+  <div class="sttngs">
+    <h2>SETTINGS</h2>
+<div class="tabordion">
+  <section id="section1">
+    <input class="t" type="radio" name="sections" id="option1" checked>
+    <label for="option1" class="trr"> Account</label>
+    <article>
+  
+    <div class="frm">     
+        
+<div id='profile-upload'>
+<div class="hvr-profile-img">
+  
+  
+  <input type="file" name="logo" id='getval'  class="upload"  accept="image/*" id="imag">
+    
+  <div class="icon">
+    <div class="camera4"><span></span></div>
+  </div>
+  </div>
+ 
+  </div>
+  
+  
+ 
+<div class="tr">
+
+
+	<label class="label" for="input">title</label>
+	<input class="input" type="text" id="title">
+
+    <label class="label" for="input">date</label>
+	<input class="input" type="text" id="date">
+
+    <label class="label" for="input">category</label>
+	<input class="input" type="text" id="category">
+
+    <label class="label" for="input">amount</label>
+	<input class="input" type="text" id="amount">
+	
+	
+	<!-- <label class="label" for="input">PROFILE URL: <span>www.ziki.co.ke/</span><div id="texte"></div></label>	
+	<input class="input texte" type="text" id="input"> -->
+  
+  	<!-- <label class="label" for="input">HOMETOWN</label>	
+	<input class="input" type="text" id="input"> -->
+  
+  </div>
+
+  <br>
+  <label class="label" for="select">GENRE</label>
+	<div class="select-wrap e">
+		<select class="select" id="select">
+			<option value="option">Genre</option>
+			<option value="option2">Option 2</option>
+			<option value="option3">Option 3</option>
+      <option value="option3">Option 3</option>
+      <option value="option3">Option 3</option>
+      <option value="option3">Option 3</option>
+      <option value="option3">Option 3</option>
+      <option value="option3">Option 3</option>
+      <option value="option3">Option 3</option>
+      <option value="option3">Option 3</option>
+		</select>
+	</div>
+  
+
+	
+	<label class="label" for="textarea">content<p id="count"></p></label> 
+	<!--textarea class="textarea" id="textarea"></textarea-->
+
+  
+   <textarea class="textarea e" rows="7" cols="25" id="content" maxlength="500" ></textarea>
+      
+  
+  	
+  
+  <!--div class="social">
+  
+  	<label class="label" for="input">WEBSITE</label>	
+	<input class="input e" type="text" id="input">
+      </div-->
+       <div class="social">
+  <label class="label" for="input">location</label>	
+	<input class="input e" type="text" id="location">
+      </div>
+       <div class="social r1">
+  <label class="label" for="input">max_guest</label>	
+	<input class="input e" type="text" id="max_guest">
+</div>
+         <div class="social r2">
+  <label class="label" for="input">address</label>	
+	<input class="input e" type="text" id="address">
+
+  
+      </div>
+  
+  <button type="button" onclick="workshop_post()" > Update/수정하기 </button>
+      
+      </div>
+       
+      
+    </article>
+  </section>
+  
+  <!-- <section id="section2">
+    
+   
+    
+    <input class="t" type="radio" name="sections" id="option2">
+    
+   
+    
+    <label for="option2" class="trr"> Email</label>
+    <article>
+     
+        <div class="tr wwq">
+  	<label class="label" for="input">Current email</label>	
+	<input class="input e" type="text" id="input">
+
+  <label class="label" for="input">New email</label>	
+	<input class="input e" type="email" id="input">
+          
+          <label class="label" for="input">confirm password</label>	
+	<input class="input e" type="password" id="input">
+
+      </div>
+       <button>Update Email</button>
+    </article>
+  </section>
+  <section id="section3">
+    <input class="t" type="radio" name="sections" id="option3">
+    <label for="option3" class="trr">Password</label>
+    <article>
+   
+      <div class="tr wwq">
+  	<label class="label" for="input">current Password</label>	
+	<input class="input e" type="password" id="input">
+
+  <label class="label" for="input">new password</label>	
+	<input class="input e" type="password" id="input">
+        
+  <label class="label" for="input">repeat password</label>	
+	<input class="input e" type="password" id="input">
+
+
+      </div> 
+      <button>Change Password</button>
+    </article>
+  </section>
+  <section id="section4">
+    <input class="t" type="radio" name="sections" id="option4">
+    <label for="option4" class="trr">Verify</label>
+    <article>
+
+      <p>The green verified badge <span class="ver">&#10026;</span> on ZIki lets people know that an account is authentic.</p>
+    </article>
+  </section>
+</div>-->
+  
+  
+  </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    $("document").ready(function () {
+
+    var textmax=500;
+   
+    $("#count").text(textmax + ' character left');
+    
+    $("#bio").keyup(function(){
+        
+        var userlenght= $("#bio").val().length;
+        
+        var remain= textmax - userlenght ;
+  
+        $("#count").text(remain + ' characters left');
+        
+    });
+    
+  });
+  
+  document.getElementById('getval').addEventListener('change', readURL, true);
+  function readURL(){
+    var file = document.getElementById("getval").files[0];
+    var reader = new FileReader();
+    reader.onloadend = function(){
+        document.getElementById('profile-upload').style.backgroundImage = "url(" + reader.result + ")";        
+    }
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+    }
+  }
+  </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            
+    <script src="../../global.js"></script>
+    <script src="../../js/main/workshop_api.js"></script>
+    <script src="../../js/main/workshop_detail.js"></script>
+</body>
+</html>
