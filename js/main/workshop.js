@@ -7,6 +7,8 @@ window.onload = () => {
     workshop_list(page)
     hobby_list()
     workshop_popular_list()
+
+    const dd = document.querySelector("chat")
 }
 
 

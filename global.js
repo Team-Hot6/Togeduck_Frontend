@@ -56,8 +56,8 @@ async function navbar() {
     if(localStorage.getItem("payload")){
         const payload = localStorage.getItem("payload");
         const payload_parse = JSON.parse(payload)
-        const user_email = document.getElementById("user_email")
-        user_email.innerText = `${payload_parse.email}님`
+        const nickname = document.getElementById("nickname")
+        nickname.innerText = `${payload_parse.nickname}님`
     
         const signup = document.getElementById("signup")
         signup.style.display = 'none';
@@ -82,3 +82,4 @@ fetch("/templates/main/navbar.html").then(response => {
     document.querySelector("header").innerHTML = data
     navbar()
 })
+

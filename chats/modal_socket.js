@@ -1,8 +1,8 @@
-window.onload = () => {
-    console.log('load test')
-    // 자신이랑 채팅중인 상대 리스트 목록을 가져오는 함수
-    login_user_opponent_list()
-}
+// window.onload = () => {
+//     console.log('load test')
+//     // 자신이랑 채팅중인 상대 리스트 목록을 가져오는 함수
+//     login_user_opponent_list()
+// }
 // 유저 id 가져와서 방 만들기 // 로그인 되어있어야 함
 async function connect_user_chat_room(receiver_id) {
     let current_user_id = JSON.parse(localStorage.getItem('payload'))['user_id'];
@@ -148,10 +148,7 @@ function modal_view() {
     modal_id.style.left = '50%';
     modal_id.style.transform = "translate(-50%, -25%)";
 
-    const pop_button = document.getElementById('popup_open_btn')
-    pop_button.style.display = "none";
-
-    };
+};
 
 // 모달 닫기
 function close_modal() {
