@@ -772,7 +772,7 @@ body{background:lightgrey}
     margin: 50px auto;
     background:#fff;
     padding:15px;
-    height:auto;
+    height:1000px;
     font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
     border-radius:3px;padding-top:30px;
  -webkit-box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.2);
@@ -1047,6 +1047,7 @@ input, select, textarea {
 
 .select-wrap {
   position: relative;
+  width: 100%;
 }
 .select-wrap:after {
   position: absolute;
