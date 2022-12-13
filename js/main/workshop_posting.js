@@ -29,7 +29,6 @@ async function location_category_list(){
    
     if(response.status == 200){
         data = await response.json()
-        console.log("data", data)
  
         location_pick_box = document.getElementById("location_id")
         location_pick_box.innerHTML = ''
@@ -45,6 +44,13 @@ async function location_category_list(){
 }
 
 
+
+
+
+
+
+
+////////////////////////////////////////////////////////////
 $("document").ready(function () {
 
     var textmax=500;

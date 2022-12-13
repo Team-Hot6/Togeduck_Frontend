@@ -56,14 +56,6 @@ async function workshop_detail_view(workshop_id){
     //window.location.reload()
 }
 
-// 문의하기 버튼 임시 함수 정상작동 확인
-async function test(host){
-    console.log("test함수 작동시작")
-    console.log(host)
-}
-
-
-console.log('ㅇㅅㅇ')
 
 // 워크샵 리뷰 보기
 async function workshop_review_view(workshop_id){
@@ -278,7 +270,6 @@ async function workshop_post() {
     console.log('워크샵 작성하고싶어요 ㅇㅅㅇ')
 
     const content = document.getElementById("content").value
-    //const workshop_image = document.getElementById("img").files[0];
     const workshop_image = document.getElementById("getval").files[0];
     const title = document.getElementById("title").value;
     const date = document.getElementById("date").value;
@@ -330,37 +321,28 @@ async function workshop_post() {
     if (response.status == 200) {
       alert("새로운 워크샵이 생성되었습니다.");
       window.location.replace(`${front_end_url}/templates/main/workshop.html`)
-      //window.location.replace(`${frontend_base_url}/image.html`);
-      //window.location.href = "http://127.0.0.1:5500/main.html";
-  
+      
       
     }
     else{
       alert(response.status);
     }
-    //return response.json();
-    
-    //window.location.replace(`${frontend_base_url}/image.html`)
+
 }
 
 
 
 function PUT_Button() {
-  console.log('수정페이지로 이동하라고이ㅏㄹㄴ아ㅣ로니')
-  let edit_link = window.location.search.split('?')[1]
-  window.location.replace(`http://127.0.0.1:5501/templates/main/workshop_put.html?${edit_link}`);
+    const urlParams = new URLSearchParams(window.location.search);
+    let id = urlParams.get('id');
+    window.location.href = `${front_end_url}/templates/main/workshop_put.html?id=${id}`
 }
 
 //워크샵 수정
 async function workshop_put(workshop_id){
-    console.log('버튼이 눌리낭ㄹㅇㄴㄹㄴㅇㄴ')
-   
-    //workshop_id = getCookie("workshop_id")
-    //workshop_id = location.href.split("?")[1].split("=")[1]
-    console.log(workshop_id,'워크샵 수정 아디이')
 
     const content = document.getElementById("content").value
-    const workshop_image = document.getElementById("img").files[0];
+    const workshop_image = document.getElementById("getval").files[0];
     const title = document.getElementById("title").value;
     const date = document.getElementById("date").value;
     const max_guest = document.getElementById("max_guest").value;
@@ -372,15 +354,15 @@ async function workshop_put(workshop_id){
 
     const formData = new FormData();
 
-    console.log(title);
-    console.log(title);
-    console.log(workshop_image);
-    console.log(parseInt(max_guest));
-    console.log(parseInt(amount));
-    console.log(parseInt(category));
-    console.log(parseInt(location));
-    console.log(address);
-    console.log(date);
+    console.log("content",content);
+    console.log("workshop_image",workshop_image);
+    console.log("title",title);
+    console.log("date",date);
+    console.log("max_guest",max_guest);
+    console.log("amount",amount);
+    console.log("category",category);
+    console.log("location",location);
+    console.log("address",address);
 
 
     formData.append("title", title);
@@ -406,7 +388,7 @@ async function workshop_put(workshop_id){
     })
     if (response.status == 200){
       alert("워크샵 수정 됐습니다")
-      window.location.replace("http://127.0.0.1:5501/templates/main/workshop.html")
+      window.location.replace(`${front_end_url}/templates/main/workshop_detail.html?id=${workshop_id}`)
       }
     else{
       alert(response.status)
