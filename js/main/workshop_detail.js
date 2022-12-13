@@ -317,8 +317,8 @@ async function workshop_post() {
     const date = document.getElementById("date").value;
     const max_guest = document.getElementById("max_guest").value;
     const amount = document.getElementById("amount").value;
-    const category = document.getElementById("category").value;
-    const location = document.getElementById("location").value;
+    const category = document.getElementById("category_id").value;
+    const location = document.getElementById("location_id").value;
     const address = document.getElementById("address").value;
 
 
@@ -361,8 +361,8 @@ async function workshop_post() {
     console.log(response,'리스폰승ㅅㅇ??')
 
     if (response.status == 200) {
-      alert("★업로드 완료★");
-      window.location.replace("http://127.0.0.1:5501/templates/main/workshop.html")
+      alert("새로운 워크샵이 생성되었습니다.");
+      window.location.replace(`${front_end_url}/templates/main/workshop.html`)
       //window.location.replace(`${frontend_base_url}/image.html`);
       //window.location.href = "http://127.0.0.1:5500/main.html";
   
@@ -464,7 +464,8 @@ async function workshop_DELETE(workshop_id) {
       else{
         alert("워크샵 작성자가 아닙니다")
       }
-      window.location.replace("http://127.0.0.1:5501/templates/main/workshop.html")
+      
+      window.location.replace(`${front_end_url}/templates/main/workshop.html`)
 }
 
 // 리뷰 보이기 / 숨기기
