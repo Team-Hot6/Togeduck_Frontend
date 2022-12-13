@@ -11,6 +11,7 @@ async function hobby_category_list(){
         data = await response.json()
  
         category_pick_box = document.getElementById("category_id")
+        console.log(category_pick_box)
         category_pick_box.innerHTML = ''
 
         const temp = `<option value="0">취미 카테고리를 선택해주세요</option>`;
