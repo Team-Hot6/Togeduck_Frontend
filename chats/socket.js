@@ -36,8 +36,12 @@ async function connect_user_chat_room() {
     // 만들어지거나 원래 있던 방 room_id로 웹소켓 연결
     user_to_user_room_socket = new WebSocket(`${websocketBaseUrl}/${room_id}/`)
 
+    // socket_api.js 의 채팅 로그 가져오기
+    const chat_log = await get_chat_room_log(room_id)
+
     user_to_user_room_socket.onmessage = function(e) {
         var data = JSON.parse(e.data);
+        console.log(data)
         var message = data['message'];
         var sender = data['sender']
         var cur_time = data['cur_time']
