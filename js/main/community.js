@@ -38,9 +38,8 @@ async function article_list() {
 
     // 게시글 베스트 TOP 10 (백엔드 view 작성 후 대체 예정)
     // sort 함수를 사용하여 dictionary list의 객체를 like 내림차순 정렬
-    data.sort(function (a, b) {
-        return b.like - a.like;
-    });
+    response = await get_lank_articles()
+    data = await response.json()
 
     for (let i = 0; i < 10; i++) {
         let id = data[i]['id']
