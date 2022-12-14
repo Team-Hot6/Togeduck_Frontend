@@ -1,5 +1,7 @@
-article_list()
-hobby_list()
+window.onload = async() => {
+    article_list()
+    hobby_list()
+}
 
 // 전체 카테고리의 게시글 목록
 async function article_list() {

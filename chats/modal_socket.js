@@ -155,8 +155,7 @@ function close_modal() {
     pop_button.style.display = "block";
 }
 
-function click_user_chat(receiver_id) {
-    console.log('test')
-    connect_user_chat_room(receiver_id)
+async function click_user_chat(receiver_id) {
+    await connect_user_chat_room(receiver_id)
     modal_view();
 }
