@@ -5,7 +5,6 @@ const token = localStorage.getItem("access");
 async function sign_in() {
     const email = document.getElementById("login_id").value
     const password = document.getElementById("login_password").value
-    console.log(email)
     const response = await fetch('http://127.0.0.1:8000/users/api/token/', {
         headers: {
             'content-type': 'application/json',
@@ -18,9 +17,6 @@ async function sign_in() {
     });
 
     const response_json = await response.json();
-
-    console.log(response_json);
-    console.log('login success')
 
     localStorage.setItem("access", response_json.access); //로컬스토리지에 access 토큰 저장
     localStorage.setItem("refresh", response_json.refresh);
@@ -107,10 +103,10 @@ async function create_article(title, content, image, category) {
         body: data,
     });
 
-    if (response.status == 201){
+    if (response.status == 201) {
         alert('작성 완료!!')
         window.location.replace(`community.html`)
-    } else if(response.status == 401){
+    } else if (response.status == 401) {
         alert('다시 로그인을 해주세요!')
     } else {
         alert('잘못된 요청입니다!')
@@ -133,7 +129,7 @@ async function create_comment(article_id, comment) {
     if (response.status == 201) {
         alert("댓글 작성 완료!")
         window.location.reload()
-    } else if(response.status == 401) {
+    } else if (response.status == 401) {
         alert("댓글 작성은 로그인이 필요한 서비스 입니다!")
         window.location.reload()
     } else {

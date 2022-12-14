@@ -1,14 +1,14 @@
 // user 목록을 출력하는 로직
 async function send_chat_button() {
     const response = await fetch('http://127.0.0.1:8000/chats/users/', {
-        // headers:{
-        //     "Authorization":"Bearer "+localStorage.getItem("access")
-        // },
-        method:'GET'
-    })
-    .then(response => {
-        return response.json();
-    })
+            // headers:{
+            //     "Authorization":"Bearer "+localStorage.getItem("access")
+            // },
+            method: 'GET'
+        })
+        .then(response => {
+            return response.json();
+        })
 
     // 
     for (i = 0; i < response.length; i++) {
@@ -23,13 +23,13 @@ async function send_chat_button() {
         user_button.innerText = user_email
 
         user_list_div.appendChild(user_button);
-}}
+    }
+}
 
 // 로그인 하는 로직
 async function sign_in() {
     const email = document.getElementById("login_id").value
     const password = document.getElementById("login_password").value
-    console.log(email)
     const response = await fetch('http://127.0.0.1:8000/users/api/token/', {
         headers: {
             'content-type': 'application/json',
@@ -42,9 +42,6 @@ async function sign_in() {
     });
 
     const response_json = await response.json();
-
-    console.log(response_json);
-    console.log('login success')
 
     localStorage.setItem("access", response_json.access); //로컬스토리지에 access 토큰 저장
     localStorage.setItem("refresh", response_json.refresh);
