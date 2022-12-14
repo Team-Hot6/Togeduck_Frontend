@@ -140,3 +140,96 @@ async function create_comment(article_id, comment) {
         alert("잘못된 요청입니다!")
     }
 }
+
+// 게시글 수정 페이지로 이동
+async function replace_article_update(article_id) {
+    const url = `article_update.html?id=${article_id}`;
+    location.href = url;
+}
+
+// 게시글 수정 API
+async function update_article(article_id, title, content, image, category) {
+    const data = new FormData()
+    data.append("category", category)
+    data.append("title", title)
+    data.append("content", content)
+    data.append("article_image", image)
+
+    const response = await fetch(`${back_end_url}/articles/${article_id}/`, {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "PUT",
+        body: data,
+    });
+
+    if (response.status == 201){
+        alert('수정 완료!!')
+        window.location.replace(`article_detail.html?id=${article_id}`);
+    } else if(response.status == 403){
+        alert('게시글을 수정할 권한이 없습니다!')
+        window.location.replace(`article_detail.html?id=${article_id}`);
+    } else {
+        alert('잘못된 요청입니다!')
+        window.location.reload();
+    }
+}
+
+// 게시글 삭제 API
+async function delete_article(article_id) {
+    const response = await fetch(`${back_end_url}/articles/${article_id}/`, {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "DELETE",
+    });
+    if (response.status == 200){
+        alert('삭제 완료!')
+        window.location.replace(`community.html`);
+    } else if (response.status == 403){
+        alert('게시글을 삭제할 권한이 없습니다!')
+        window.location.reload();
+    } else{
+        alert('잘못된 요청입니다!')
+        window.location.reload();
+    }
+}
+
+// 댓글 삭제 API
+async function delete_comment(article_id, comment_id) {
+    const response = await fetch(`${back_end_url}/articles/${article_id}/comment/${comment_id}/`, {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "DELETE",
+    });
+
+    if (response.status == 200){
+        alert('삭제 완료!')
+        window.location.reload()
+    }else if(response.status == 403){
+        alert('댓글을 삭제할 권한이 없습니다!')
+        window.location.reload()
+    }else {
+        alert('잘못된 요청입니다!')
+        window.location.reload()
+    }
+}
+
+// 게시글 추천하기 API
+async function like_article(article_id) {
+    const response = await fetch(`${back_end_url}/articles/${article_id}/`, {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "POST",
+    })
+    const response_json = await response.json()
+    if (response_json["msg"] == "추천"){
+        alert('게시글 추천 완료')
+        window.location.reload();
+    } else if(response_json["msg"] == "취소"){
+        alert('게시글 추천 취소')
+        window.location.reload();
+    }
+}

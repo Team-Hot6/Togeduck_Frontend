@@ -1,5 +1,12 @@
-/* 커뮤니티 아티클 start*/
+/* 워크샵 + 페이지네이션 묶음 */
+.content{
+    margin-top: 30px;
+}
 
+/* 커뮤니티 아티클 start*/
+.article-box{
+    height: auto;
+}
 
 .btn {
     float: right;
@@ -13,12 +20,4 @@
     cursor: pointer;
     font-weight: bold;
     text-decoration: underline;
-}
-
-.table-dark {
-    background-color: #4d94ff;
-    color: #ffffff;
-    font-size: 1rem;
-    font-weight: 200;
-    height: 10ㅔㅌ;
 }
