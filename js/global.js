@@ -67,7 +67,7 @@ async function navbar() {
     
         const nav_menu = document.getElementById("nav_menu")
 
-        const mypage = `<li id="mypage" onclick="window.location.href='../user/my.html?id=${payload_parse.user_id}'">마이페이지</li>`
+        const mypage = `<li id="mypage" onclick="window.location.href='../user/mypage.html?id=${payload_parse.user_id}'">마이페이지</li>`
         nav_menu.insertAdjacentHTML("beforeend", mypage);
     
         const logout = `<li id="logout" onclick="logout()">로그아웃</li>`
@@ -76,7 +76,7 @@ async function navbar() {
 };
 
 // 네비바 공통적용
-fetch("/templates/main/navbar.html").then(response => {
+fetch("../../templates/main/navbar.html").then(response => {
     return response.text()
 }).then(data => {
     document.querySelector("header").innerHTML = data
@@ -86,7 +86,7 @@ fetch("/templates/main/navbar.html").then(response => {
 
 
 // 채팅창 공통적용
-fetch("/templates/main/chat.html").then(response => {
+fetch("../../templates/main/chat.html").then(response => {
     return response.text()
 }).then(data => {
     document.querySelector("chat").innerHTML = data
