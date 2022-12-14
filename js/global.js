@@ -82,3 +82,12 @@ fetch("/templates/main/navbar.html").then(response => {
     document.querySelector("header").innerHTML = data
     navbar()
 })
+
+
+
+// 채팅창 공통적용
+fetch("/templates/main/chat.html").then(response => {
+    return response.text()
+}).then(data => {
+    document.querySelector("chat").innerHTML = data
+})

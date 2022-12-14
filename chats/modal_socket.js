@@ -160,6 +160,6 @@ function close_modal() {
 
 function click_user_chat(receiver_id) {
     console.log('test')
-    modal_view();
     connect_user_chat_room(receiver_id)
+    modal_view();
 }
