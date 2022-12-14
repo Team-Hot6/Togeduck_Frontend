@@ -1,0 +1,45 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta charset="utf-8"/> 
+  <title>간단한 채팅에 입실하기</title> 
+</head> 
+<script src="socket_api.js"></script>
+<script src="socket.js"></script>
+<script src="user.js"></script>
+<script src="../global.js"></script>
+<body>
+  <label>임시 로그인</label>
+  <br>
+  <input id="login_id" type="text">
+  <br>
+  <input id="login_password" type="text">
+  <br>
+  <button id="login_button" size="100" onclick="sign_in()">로그인</button>
+  <br>
+  
+  <label>채팅 로그 test</label>
+  <br>
+  <textarea id="chat-log" cols="100" rows="20"></textarea>
+  <br>
+  <div id="create_user_list_button">
+    <!-- user 목록 -->
+  </div>
+  <br>
+  <button id="chat_input_submit" type="button" onclick="send_chat_button()" >로그인 된 유저의 채팅방 리스트 보기</button>
+  <br>
+  <label>현재 유저의 채팅 상대 목록</label>
+  <br>
+  <div id="create_opponent_user_list">
+    <!-- 현재 유저와 채팅중인 user list -->
+  </div>
+  <br>
+  <label>채팅방 통신 테스트</label> 
+  <br>
+  <input id="room_id_input" type="text" size="100" onkeyup="sumit_make_room_Enterkey()">  
+  <br>
+  <button id="chat_input_submit" type="button" onclick="send_message_each_room_button()">전송</button>
+  <br>
+
+</body> 
+</html>

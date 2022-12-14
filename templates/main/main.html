@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>community</title>
+   
+    <!-- <link rel="stylesheet" href="../../css/main/community.css"> -->
+    <link rel="stylesheet" href="../../css/main/workshop.css">
+    <link rel="stylesheet" href="../../chats/css/test.css">
+
+
+    <!-- Bootstrap CSS -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous">
+    </script>
+
+    <link rel="stylesheet" href="../../css/main/navbar.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+<body>
+    <header></header>
+    
+    <div class="summary">
+        <div class="intro">Let's enjoy together</div>
+        <div class="intro_content">Togeduck과 함께 취미를 공유해보세요</div>
+        <div class="summary_img_frme">
+            <!-- <img class="summary_img" src="https://velog.velcdn.com/images/def3ff/post/76fbfbab-3f18-4c7b-ba9b-92a1599db4cd/image.png"> -->
+        </div>
+    </div>
+
+    <section class="main">
+        <section class="category">
+            <div class="menubar">
+                <span class="menu" onclick="window.location.href='../main/workshop.html'">Workshop</span>
+                <span class="select_menu" onclick="window.location.href='../main/community_test.html'">Community</span>
+                <span style="float: right; margin: auto;">
+                    <span class="sort">최신순</span>
+                    <span class="sort">인기순</span>
+                    <span class="create_button" onclick="window.location.href='../main/workshop_posting.html'">게시글 생성</span>
+                </span>
+            </div>
+            <div class="hobbys" id="hobbys">
+            </div>
+        </section>
+        
+        <div class="sub_info" id="sub_info">
+            <div>인기 게시글</div>
+            <div class="popular_workshops_wrap" id="popular_workshops_wrap">
+            </div>
+        </div>
+        <section class="content" id="content">
+            <div class="gridbox" id="gridbox">
+            </div>
+            <div class="pagination">
+                <div class="page_numbers" id="page_numbers">
+                </div>
+            </div>
+            <div class="none_box_wrap" id="none_box_wrap">
+            </div>
+        </section>
+    </section>
+    <footer class="footer">copyrightⓒ 2022 All rights reserved by team HOT6.</footer>
+
+
+    <chat>
+      <div class="modal" id="modal">
+          <div class="modal__dialog">
+            <div class="modal__close" onclick="close_modal()">
+              <a href="#" class="modal__icon">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </a>
+              <span class="modal__note" id="modal__note">X</span>
+            </div>
+            <div class="modal__content chat">
+              <div class="modal__sidebar">
+                <div class="chat__search search">
+                  <div class="search">
+                    <div class="search__icon">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                    </div>
+                    <!-- <input type="search" class="search__input" placeholder="🔍search">
+                    <div class="search__icon search__icon_right">
+                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </div> -->
+                  </div>
+                </div>
+                <div class="chat__users">
+                  <ul class="users" id="create_opponent_user_list">
+      
+                  </ul>
+                </div>
+              </div>
+              <div class="modal__main">
+                <div class="chatbox">
+                  <div class="chatbox__row">
+                    <div class="head">
+                      <div class="head__avatar avatar avatar_larger">
+                        <a href="#" class="avatar__wrap">
+                        </a>
+                      </div>
+                      <div class="head__title">채팅중인 상대방 이름</div>
+                      <div class="head__note">
+                        <span>뭔가 들어갈 자리</span>
+                        <!-- <span class="head__icon"></span> -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="chatbox__row chatbox__row_fullheight" id="chatbox__scroll">
+                    <!-- 메세지가 담기는 class 여기 밑으로 append child 해주면 됨 -->
+                    <div class="chatbox__content" id="chatbox__content">
+      
+                    </div>
+                  </div>
+                  <div class="chatbox__row">
+                    <div class="enter">
+                      <div class="enter__submit">
+                        <button class="button button_id_submit" type="submit" onclick="send_message_each_room_button()">
+                          <i class="fa fa-paper-plane" aria-hidden="true">✉</i>
+                        </button>
+                      </div>
+                      <div class="enter__textarea">
+                        <textarea name="enterMessage" id="enterMessage" cols="30" rows="2" placeholder="메세지를 입력해 주세요..." onkeyup="sumit_send_message_Enterkey()"></textarea>
+                      </div>
+                      <div class="enter__icons">
+                        <a href="#" class="enter__icon">
+                          <i class="fa fa-paperclip" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="enter__icon">
+                          <i class="fa fa-smile-o" aria-hidden="true"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="chat_button" onclick="modal_view()">
+        <span class="material-symbols-outlined" id="chat_icon">forum</span>
+      </div>
+    </chat>
+    <script src="../../js/global.js"></script>
+    <script src="../../js/main/api.js"></script>
+    <script src="../../js/main/community.js"></script>
+    <script src="../../chats/modal_socket.js"></script>
+    <script src="../../chats/modal_socket_api.js"></script>
+</body>
+</html>
