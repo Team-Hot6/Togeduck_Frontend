@@ -46,30 +46,11 @@ async function location_category_list(){
 
 
 
-
-
-
-
-
 ////////////////////////////////////////////////////////////
-$("document").ready(function () {
 
-    var textmax=500;
-   
-    $("#count").text(textmax + ' character left');
-    
-    $("#bio").keyup(function(){
-        
-        var userlenght= $("#bio").val().length;
-        
-        var remain= textmax - userlenght ;
   
-        $("#count").text(remain + ' characters left');
-        
-    });
-    
-  });
-  
+
+  // 업로드한 이미지 미리보기
   document.getElementById('getval').addEventListener('change', readURL, true);
   function readURL(){
     var file = document.getElementById("getval").files[0];

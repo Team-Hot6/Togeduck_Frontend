@@ -30,6 +30,12 @@ async function workshop_detail_view(workshop_id){
         const date = document.getElementById("date") // 워크샵 날짜
         const address = document.getElementById("address") // 주소
 
+        console.log(title)
+
+
+
+
+
         title.innerText = data.title;
         content.innerText = data.content;
         max_guest.innerText = data.max_guest;
@@ -40,7 +46,12 @@ async function workshop_detail_view(workshop_id){
         host.innerText = data.host;
         likes_count.innerText = data.likes_count;
         participant_count.innerText = data.participant_count;
-        date.innerText = data.date;
+
+        const today = new Date(data.date)
+        // date.innerText = today.toLocaleDateString()
+        var options = { hour: "numeric", minute: "numeric" };
+        date.innerText = today.toLocaleString("ko-kr",options)
+
         address.innerText = data.address;
 
         // 로그인 사용자의 닉네임
@@ -52,25 +63,30 @@ async function workshop_detail_view(workshop_id){
             const chat_button_label = document.getElementById("chat_button_wrap")
             chat_button_label.innerHTML =`<button type="button" class="chat_user_button" id="chat_button" onclick="click_user_chat(${data.host_id})">문의하기</button>`
         }
+
+        if(payload_parse.nickname == data.host){
+            const put_delete_box = document.getElementById("put_delete_box")
+            put_delete_box.innerHTML = `<button onclick="PUT_Button()">수정</button>
+                                        <button type="button" onclick="workshop_DELETE(workshop_id)">삭제</button>`
+        }
     }
-    //window.location.reload()
 }
 
 
 // 워크샵 리뷰 보기
 async function workshop_review_view(workshop_id){
-  
 
-    console.log(workshop_id,'워크샵 아이디...........')
     const response = await workshop_review_get(workshop_id)
    
     if(response.status == 200){
-        data = await response.json()
+      
+      data = await response.json()
 
-        console.log('리뷰 데이터',data)
-        const list = document.getElementById("list")
-        //const review_list = document.getElementById("review_list")
-        
+      console.log(data,'+++++++++++=')
+      
+
+
+      const list = document.getElementById("list")
 
       for (let i=0; i<data.length; i++){
         
@@ -81,59 +97,115 @@ async function workshop_review_view(workshop_id){
 
 
 
-        const new_review = `<div id="list" class="comment-list">
-                      <div id="review_list" class="comment">
+        const new_review = `
+                      <div id="review_list(${data[i].id})" class="comment">
                         <div id="user"  style="font-size:15px" class="comment-header">${user}</div>
-                        <input style="color : #046582;" type=text value="${review}" id="review" class="comment-body">
+                        <input style="color : #046582;" id="update_button(${data[i].id})" class="comment-body" value=" ${review}">
                         <p style="font-size:11px" id="created_at">${created_at}</p>
                         <p style="font-size:11px" id="updated_at">${updated_at}</p>
-                        <div class="comment-footer">
+                        <div id="comment-footer${data[i].id}" class="comment-footer" >
                           <button type="button" onclick="review_delete(${data[i].id})">삭제버튼</button>
-                          <button  onclick="review_put(${data[i].id})" > 수정버튼</button>
+                          <button  class="open" id="update_button" type="button" onclick="updateMode(${data[i].id})" > 수정하기</button>
+                          <div  class="btn" id="btn${data[i].id}" >
+                          <button  id="button" type="button" onclick="review_put(${data[i].id})" > 수정완료</button>
+                          
                         </div>
                       </div>
-                    </div>`
+                    `
         
         list.insertAdjacentHTML("beforeend",new_review)
 
-        // const review = document.getElementById("review")
-        // const user = document.getElementById("user")
-        // const created_at = document.getElementById("created_at")
-        // const updated_at = document.getElementById("updated_at")
-        // review.innerText = data[i].content
-        // user.innerText = data[i].user
-        // created_at.innerText = data[i].created_at
-        // updated_at.innerText = data[i].updated_at
-        
-        // review_list.appendChild(review)
-        // review_list.appendChild(user)
-        // review_list.appendChild(created_at)
-        // review_list.appendChild(updated_at)
+         
 
-        // list.append(review_list)
-          console.log('뭐가 찍히누',review)
-          console.log('리뷰리스트',review_list)
-          console.log('어떻게 해야 반복문이 나올까',list)
+          const update_btn = document.getElementById(`comment-footer${data[i].id}`)
+          const payload = localStorage.getItem("payload");
+          const payload_parse = JSON.parse(payload)
+          nickname = payload_parse.nickname
+
+          if(nickname != data[i].user){
+          
+          update_btn.style.display = "none"
+          
+          }
+          //<button type="button" class="close">수정 닫기</button> </div>
+          // style="display: none"
+         //const btn = document.querySelector('.btn');
+         //const open = document.querySelector('.open');
+         //const close = document.querySelector('.close');
+         //open.addEventListener('click', () => {
+         //    btn.style.display = 'block';
+         //    });
+         //  
+         //close.addEventListener('click', () => {
+         // btn.style.display = 'none';
+         // });
+
     }
+
+    
 }
-//window.location.reload()
+
 }
+
+
+// 리뷰 수정 화면
+function updateMode(id) {
+
+    const content = document.getElementById(`update_button(${id})`); // 원래 리뷰 내용
+    
+    content.style.visibility = "hidden"; // 원래 내용 숨기기
+  
+    const input_content = document.createElement("textarea"); // 수정할 수 있는 입력창
+    input_content.setAttribute("id", `input_content${id}`); // 수정 내용
+    input_content.setAttribute("placeholder", "수정할 내용을 입력해주세요")
+    input_content.innerText = content.innerHTML; // 안하면 공란처리
+    input_content.rows = 3;
+  
+    const reviews_list = document.getElementById(`review_list(${id})`); // 넣을 댓글창
+    reviews_list.insertBefore(input_content, content);
+  
+    const update_button = document.getElementById("update_button"); //수정하기 버튼
+    update_button.setAttribute("onclick", "review_put(id)");
+    // 업데이트 버튼을 가져오고 클릭시 review_put(id) 함수 실행
+  
+  
+   
+  
+  }
+  
+  
+  
+  
+  
+  //리뷰 수정
+  async function review_put(id){
+      
+      
+      review_id = id
+  
+      const content = document.getElementById(`input_content${id}`).value // 수정 내용
+  
+      const response = await workshop_review_put(workshop_id,review_id,content)
+  
+      if (response.status == 200){
+   
+        alert("댓글을 수정 했습니다.")
+        }
+      else{
+        alert(response.status,'작성자가 아닙니다')
+      }
+      window.location.reload()
+    }
+
+
+
 
 // 리뷰 작성
 async function workshop_review_POST(workshop_id){
    
-    console.log('뭐크샵아이디',workshop_id)
-    //workshop_id = location.href.split("?")[1].split("=")[1]
-
-    console.log(workshop_id,'뭐누')
-
     const review_post = document.getElementById("review_post").value
 
     const response = await workshop_review_post(workshop_id, review_post)
-
-    console.log(response,'리스폰스')
-    console.log(review_post,'댓글작성 어디다해')
-    console.log(review_post.value,'콘텐트 밸류')
 
     if(response.status == 200){
         alert('댓글 작성 됐습니다')
@@ -142,43 +214,13 @@ async function workshop_review_POST(workshop_id){
         alert(response.status,'qtqtqtq') 
     }
     location.reload()
-    //workshop_detail_view(workshop_id)
 }
 
-//리뷰 수정
-async function review_put(id){
-    review_id = id
 
-    console.log('ㅅㅂ',workshop_id)
-    console.log('수정 리뷰아이디 나와',review_id)
-
-    const content = document.getElementById("review").value
-    console.log('수정 톤텐트',content)
-
-    const response = await workshop_review_put(workshop_id,review_id,content)
-
-    if (response.status == 200){
-      
-      alert("댓글을 수정 했습니다.")
-      }
-    else{
-      alert(response.status,'수정이 왜 안 되느냐')
-    }
-    window.location.reload()
-  }
 
 // 리뷰 삭제
 async function review_delete(id) {
-    // const payload = localStorage.getItem("payload");
-    // const payload_parse = JSON.parse(payload)
-    // review_id = payload_parse.user_id
-    //review_id = localStorage.getItem(payload);
-    //review_id = getCookie("review_id")
     review_id = id
- 
-    console.log(workshop_id, '워크샵 삭제')
-    console.log(review_id, '리뷰아이디 뭐야')
-
     const response = await workshop_review_delete(workshop_id,review_id)
 
     if (response.status == 403){
@@ -190,55 +232,20 @@ async function review_delete(id) {
     window.location.reload()
 }
 
-// function like(){
-//   console.log("찍히긴 하니")
-
-//   if($(this).hasClass('btn_unlike')){
-//     $(this).removeClass('btn_unlike');
-//     $('.ani_heart_m').removeClass('hi');
-//     $('.ani_heart_m').addClass('bye');
-//   }
-//   else{
-//     $(this).addClass('btn_unlike');
-//     $('.ani_heart_m').addClass('hi');
-//     $('.ani_heart_m').removeClass('bye');
-//   }
-
-// const update_button = document.getElementById("liked");
-// update_button.setAttribute("onclick", "Like_post(workshop_id)");
-
-// }
-
 // 좋아요 
 async function Like_post(workshop_id) {
     
     workshop_id = location.href.split("?")[1].split("=")[1]
-    console.log(workshop_id,'잉게 맞ㄴ다고요')
+
     const response = await workshop_like(workshop_id)
-        
-    console.log('좋아요 리스폰스',response)
+
 
     if (response.status == 200) {
     
     data = await response.json()
-    console.log(data['msg'],"-ㅅ-")
    
     alert(`${data['msg']}`)
     
-    //console.log(review_id,'좋아요 아이디 보기')
-    // $('button').click(function(){
-    //   if($(this).hasClass('btn_unlike')){
-    //     $(this).removeClass('btn_unlike');
-    //     $('.ani_heart_m').removeClass('hi');
-    //     $('.ani_heart_m').addClass('bye');
-    //   }
-    //   else{
-    //     $(this).addClass('btn_unlike');
-    //     $('.ani_heart_m').addClass('hi');
-    //     $('.ani_heart_m').removeClass('bye');
-    //   }
-    // });
-
     } else {
       alert(response.status);
     }
@@ -267,8 +274,6 @@ do {
 // 워크샵 작성
 async function workshop_post() {
 
-    console.log('워크샵 작성하고싶어요 ㅇㅅㅇ')
-
     const content = document.getElementById("content").value
     const workshop_image = document.getElementById("getval").files[0];
     const title = document.getElementById("title").value;
@@ -281,17 +286,6 @@ async function workshop_post() {
 
 
     const formData = new FormData();
-
-    console.log(title);
-    console.log(content);
-    console.log(workshop_image);
-    console.log(parseInt(max_guest));
-    console.log(parseInt(amount));
-    console.log(parseInt(category));
-    console.log(parseInt(location));
-    console.log(address);
-    console.log(date);
-    
 
 
     formData.append("title", title);
@@ -307,7 +301,6 @@ async function workshop_post() {
 
     const response = await fetch("http://127.0.0.1:8000/workshops/",{
         headers:{
-            //'content-type':'application/json',
             Authorization : "Bearer " + localStorage.getItem("access")
         },
         
@@ -316,13 +309,9 @@ async function workshop_post() {
         body: formData
     })
 
-    console.log(response,'리스폰승ㅅㅇ??')
-
     if (response.status == 200) {
       alert("새로운 워크샵이 생성되었습니다.");
       window.location.replace(`${front_end_url}/templates/main/workshop.html`)
-      
-      
     }
     else{
       alert(response.status);
@@ -396,8 +385,6 @@ async function workshop_put(workshop_id){
     
   }
 
- 
-
 
 
 
@@ -440,69 +427,3 @@ function showComments() {
     $("#hide").bind("click", hideComments);
   });
 
-
-
-//workshop_detail_view(workshop_id)
-
-
-
- //리뷰 보이기 숨기기 
-// document.getElementById("list").style.visibility = "hidden"; 
-
-// function getShow(){
-// 	alert("display : 공백");
-// 	document.getElementById("list").style.display = "";
-//     const list = document.getElementById("list");
-//     list.style.visibility = "visible";
-	
-// }
-
-// function getHide(){
-// 	alert("display : none");
-// 	document.getElementById("list").style.display = "none";
-	
-// }
-
-
-
-// 포스팅
-// $("document").ready(function () {
-
-//   var textmax=500;
- 
-//   $("#count").text(textmax + ' character left');
-  
-//   $("#bio").keyup(function(){
-      
-//       var userlenght= $("#bio").val().length;
-      
-//       var remain= textmax - userlenght ;
-
-//       $("#count").text(remain + ' characters left');
-      
-//   });
-  
-// });
-
-// document.getElementById('getval').addEventListener('change', readURL, true);
-// function readURL(){
-//   var file = document.getElementById("getval").files[0];
-//   var reader = new FileReader();
-//   reader.onloadend = function(){
-//       document.getElementById('profile-upload').style.backgroundImage = "url(" + reader.result + ")";        
-//   }
-//   if(file){
-//       reader.readAsDataURL(file);
-//   }else{
-//   }
-// }
-
-// $(function () {
-// var $text = $('#texte');
-// var $input = $('.texte');
-// $input.on('keydown', function () {
-//   setTimeout(function () {
-//     $text.html($input.val());
-//   }, 0);
-// });
-// })
