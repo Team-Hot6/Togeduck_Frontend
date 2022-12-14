@@ -57,6 +57,13 @@ async function get_articles() {
     return response
 }
 
+async function get_lank_articles() {
+    const response = await fetch(`${back_end_url}/articles/lank/`, {
+        method: "GET",
+    })
+    return response
+}
+
 // 카테고리 선택 시 해당 카테고리 게시글 리스트 API
 async function get_select_articles(category_id) {
     const response = await fetch(`${back_end_url}/articles/?category=${category_id}`, {
@@ -93,6 +100,7 @@ async function create_article(title, content, image, category) {
     data.append("category", category)
     data.append("title", title)
     data.append("content", content)
+
     if(image){
         data.append("article_image", image)
     }
@@ -106,8 +114,10 @@ async function create_article(title, content, image, category) {
     });
 
     if (response.status == 201) {
+        console.log(window.location)
+        window.location.href = 'community.html'
         alert('작성 완료!!')
-        window.location.replace(`community.html`)
+       
     } else if (response.status == 401) {
         alert('다시 로그인을 해주세요!')
     } else {

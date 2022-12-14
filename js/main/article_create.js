@@ -1,7 +1,10 @@
 // 카테고리 목록 서버에서 가져옴
 window.onload = async function LoadCategory() {
+    console.log('teststest')
     const response = await get_hobby()
     const data = await response.json()
+
+    console.log(data)
     
     for (let i = 0; i < data.length; i++) {
         let num = data[i]['id']

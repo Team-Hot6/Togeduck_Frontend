@@ -148,10 +148,11 @@ async function workshop_pick_list(category_id, category_name, page) {
 async function workshop_detail_move(workshop_id) {
     const url = `${front_end_url}/templates/main/workshop_detail.html?id=${workshop_id}`
     window.location.href = url
-}
+                                                                            }
 
 // 워크샵 목록 중 특정 페이지로 이동
 async function workshop_page_move(page_nunber) {
+    console.log(window.location)
     const url = `${front_end_url}/templates/main/workshop.html?page=${page_nunber}`
     window.location.href = url
 }
