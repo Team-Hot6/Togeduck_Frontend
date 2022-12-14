@@ -189,7 +189,7 @@ async function handleSign() {
         }
     } else {
         alert("회원가입 성공 로그인 해주세요")
-        window.location.href = "http://127.0.0.1:5500/login_signup.html"
-
+        //window.location.href = "http://127.0.0.1:5500/login_signup.html"
+        window.location.reload()
     }
 }

@@ -280,7 +280,7 @@ async function workshop_post() {
         alert("새로운 워크샵이 생성되었습니다.");
         window.location.replace(`${front_end_url}/templates/main/workshop.html`)
     } else {
-        alert(response.status);
+        alert('생성 목록을 모두 작성해주세요',response.status);
     }
 
 }
