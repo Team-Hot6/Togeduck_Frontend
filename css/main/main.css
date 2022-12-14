@@ -1,0 +1,216 @@
+body {
+    margin: 0;
+}
+
+
+
+
+
+/* 서비스 소개 */
+.summary{
+    background-color: #4d94ff;
+    height: 38vh;
+    width: 100%;   
+}
+.intro{
+    position: relative;
+    top: 30%;
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.intro_content{
+    color: #bcd7ff;
+    /* font-size: 2rem;
+    font-weight: 500; */
+    text-align: center;
+    position: relative;
+    top: 33%;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.summary_img_frme{
+    width: 38vh;
+    overflow: hidden;
+    margin: auto;
+    position: absolute;
+    /* top: 20%; */
+}
+
+.summary_img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* 주요 컨텐츠 */
+.main{
+    max-width: 1000px;
+    margin: auto;
+    padding: 0px 7%;
+}
+
+/* menubar + hobby 묶음*/
+.category{
+    margin: 30px 0px;
+}
+
+/* 워크샵, 게시글 선택 + 정렬 버튼 */
+.menubar{
+    /* background-color: rgb(252, 178, 125); */
+    margin-bottom: 5px;
+    height: 35px;
+    margin-bottom: 25px;
+}
+
+/* 메뉴 */
+.menu{
+    padding: 0 0.2rem 0.3rem 0.2rem;
+    font-size: 1.22rem;
+    font-weight: 400;
+    margin-right: 0.4rem;
+    cursor: pointer;
+    color: #c4c4c4;
+}
+
+/* 선택한 메뉴 */
+.select_menu{
+    padding: 0 0.2rem 0.3rem 0.2rem;
+    font-size: 1.22rem;
+    font-weight: 900;
+    margin-right: 0.4rem;
+    cursor: pointer;
+    border-bottom:4px solid #000000;
+}
+
+/* 정렬버튼 */
+.sort{
+    position: relative;
+    top: 0.3rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #b9b9b9;
+}
+
+.create_button{
+    position: relative;
+    top: 0.3rem;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #4d94ff;
+    border-radius: 0.3rem;
+    padding: 0.1rem 0.4rem 0.2rem 0.4rem;
+    font-size: 0.9rem;
+}
+
+/* 취미 카테고리 목록 */
+.hobbys{
+    /* height: 5vh; */
+    height: auto;
+    overflow: auto;
+    white-space: nowrap;
+    /* -ms-overflow-style: none;
+    scrollbar-width: none; */
+}
+
+.hobbys::-webkit-scrollbar{
+    height: 4px;
+    /* display: none; */
+}
+
+.hobbys::-webkit-scrollbar-thumb{
+    height: 30%;
+    background: #d6d6d6; 
+    border-radius: 10px;
+}
+
+.hobbys::-webkit-scrollbar-track{
+    background: #f3f3f3;  /*스크롤바 뒷 배경 색상*/
+}
+
+/* 취미 카테고리 버튼 */
+.hobby{
+    background-color: #ffffff;
+    border:1px solid #c2c1c1;;
+    border-radius: 1rem;
+    padding: 0.02rem 0.6rem 0.15rem 0.6rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-bottom: 0.54rem;
+    margin-right: 0.4rem;
+    color: #919191;
+}
+
+.hobby:hover{
+    background-color: #c2c1c1;
+    border:0px solid #ffffff;
+    color: #ffffff;
+}
+
+/* top10 워크샵 / 카테고리 소개 */
+.sub_info{
+    /* background-color: rgb(228, 228, 228); */
+    height: auto;
+
+    
+}
+
+.info_title{
+    /* background-color: #4d94ff; */
+    margin: auto;
+    font-size: 1.22rem;
+    font-weight: 600;
+
+}
+
+/* 페이지네이션 번호 */
+.pagination{
+    /* background-color: rgb(158, 160, 159); */
+    margin-top: 30px;
+}
+
+.page_numbers{
+    /* background-color: rgb(158, 160, 159); */
+    margin: auto;
+}
+
+.page_number{
+    cursor: pointer;
+    border:1px solid #DADADA;;
+    border-radius: 100%;
+    margin: 4px;
+    font-size: 1rem;
+    font-weight: 200;
+    color: #a8a8a8;
+    background-color: rgb(255, 255, 255);
+    width: 1.8rem;
+    height: 1.8rem;
+    text-align: center;
+}
+
+
+.none_box{
+    text-align: center;
+    background-color: #f1f1f1;
+    height: 20vh;
+    position: relative;
+    top: -2.4vh;
+    display: table-cell;
+    vertical-align: middle;
+    width: 1000px;
+    color: #a1a1a1;
+    border-radius: 0.5rem;
+}
+
+
+/* 하단 저작권 정보 */
+.footer{
+    border-top:1px solid #DADADA;
+    padding: 3vh 0px 3.6vh 0px;
+    text-align: center;
+    font-size: 14px;
+    color: #AEAEAE;
+}
