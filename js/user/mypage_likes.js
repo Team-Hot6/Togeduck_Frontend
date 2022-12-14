@@ -2,6 +2,9 @@ const mypage = document.createElement('div')
 mypage.setAttribute('class', 'mypage')
 document.body.prepend(mypage)
 
+// 로그인 사용자 pk값 가져오기
+const payload = localStorage.getItem("payload");
+const payload_parse = JSON.parse(payload)
 
 // 마이페이지 좌측 프로필 사진 부분
 const mypageLeftSide = document.createElement('div')
@@ -14,7 +17,7 @@ async function myPageProfile_fuc() {
     const id = localStorage.getItem("payload")
     const id_json = JSON.parse(id)
 
-    const response = await fetch('http://127.0.0.1:8000/users/' + 2 + '/', {
+    const response = await fetch('http://127.0.0.1:8000/users/' + payload_parse.user_id + '/', {
 
             method: 'GET',
         })
@@ -113,7 +116,7 @@ async function myPageWorkshopLikes_fuc() {
     const id = localStorage.getItem("payload")
     const id_json = JSON.parse(id)
 
-    const response = await fetch('http://127.0.0.1:8000/users/' + 2 + '/', {
+    const response = await fetch('http://127.0.0.1:8000/users/' + payload_parse.user_id + '/', {
 
             method: 'GET',
         })
