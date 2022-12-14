@@ -1,8 +1,3 @@
-window.onload = () => {
-    console.log('load test')
-    // 자신이랑 채팅중인 상대 리스트 목록을 가져오는 함수
-    login_user_opponent_list()
-}
 // 유저 id 가져와서 방 만들기 // 로그인 되어있어야 함
 async function connect_user_chat_room(receiver_id) {
     let current_user_id = JSON.parse(localStorage.getItem('payload'))['user_id'];
@@ -59,7 +54,6 @@ async function connect_user_chat_room(receiver_id) {
 
     user_to_user_room_socket.onmessage = function(e) {
         var data = JSON.parse(e.data);
-        console.log(data)
 
         const each_chat_log = `
         <div class="message">
@@ -95,6 +89,9 @@ function send_message_each_room_button() {
     // 다른 채팅방을 만들면 그 채팅방으로 바뀌어야 함
     if (user_to_user_room_socket == undefined) {
         alert('채팅 상대를 선택해 주세요')
+        const chatinput = document.getElementById('enterMessage')
+        chatinput.value = ''
+        chatinput.focus()
     } else {
         send_message.send_chat_message(user_to_user_room_socket, room_id, sender_id)
         login_user_opponent_list()
@@ -148,10 +145,9 @@ function modal_view() {
     modal_id.style.left = '50%';
     modal_id.style.transform = "translate(-50%, -25%)";
 
-    const pop_button = document.getElementById('popup_open_btn')
-    pop_button.style.display = "none";
+    login_user_opponent_list()
 
-    };
+};
 
 // 모달 닫기
 function close_modal() {
@@ -160,4 +156,10 @@ function close_modal() {
 
     const pop_button = document.getElementById('popup_open_btn')
     pop_button.style.display = "block";
+}
+
+function click_user_chat(receiver_id) {
+    console.log('test')
+    modal_view();
+    connect_user_chat_room(receiver_id)
 }

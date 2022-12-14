@@ -5,19 +5,19 @@ body {
   height: 100%;
 
 /* 추가 부분 */
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 400;
-  line-height: normal;
-  background-color: silver;
+  line-height: normal; */
+  /* background-color: silver; */
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 400;
-  line-height: normal;
-  background-color: silver;
+  line-height: normal; */
+  /* background-color: silver; */
 }
 
 .button {
@@ -28,11 +28,11 @@ body {
   transition: background-color ease 0.2s;
 }
 
-.button:hover,
+/* .button:hover,
 button:focus {
   background-color: #4cceea;
   border-radius: 50%;
-}
+} */
 
 .button_id_submit {
   border-radius: 50%;
@@ -98,8 +98,8 @@ button:focus {
 .modal__close {
   font-size: 0;
   position: absolute;
-  right: 25px;
-  top: -30px;
+  right: 0px;
+  top: -40px;
   cursor: pointer;
 }
 
@@ -120,8 +120,8 @@ button:focus {
   display: inline-block;
   vertical-align: top;
   margin-left: 9px;
-  font-size: 14px;
-  color: #fff;
+  font-size: 1.2rem;
+  color: rgb(201, 201, 201);
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -524,4 +524,44 @@ button:focus {
 
 .enter__icon {
   margin-right: 12px;
+}
+
+
+.popup_open_btn{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  margin: 10px;
+}
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+.chat_button{
+  border-radius: 50%;
+  background-color: #ffffff;
+  width: 3.5rem;
+  height: 3.5rem;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 0;
+  margin: 1.7rem;
+  text-align: center;
+  /* border:1px solid #4d94ff; */
+  cursor: pointer;
+  box-shadow: 0px 0px 10px 0px #bed8ff;
+}
+
+#chat_icon{
+  color: #4d94ff;
+  font-size: 1.8rem;
+  padding-top: 26%;
 }

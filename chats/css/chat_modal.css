@@ -80,11 +80,9 @@ button:focus {
 
 
 /* Modal window */
-.modal__lab {
-    display: none;
-}
+
 .modal {
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
