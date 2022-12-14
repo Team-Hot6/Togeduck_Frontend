@@ -5,9 +5,6 @@ async function connect_user_chat_room(receiver_id) {
     if (current_user_id == receiver_id) {
         return alert('본인입니다.')
     }
-
-    console.log(current_user_id, '번호 유저와', receiver_id, '와의 chat_room')
-
     if (user_to_user_room_socket != undefined) {
         user_to_user_room_socket.close();
         // document.querySelector('#chatbox__content').innerHTML='';
@@ -23,11 +20,11 @@ async function connect_user_chat_room(receiver_id) {
     const total_chat_log = await get_chat_room_log(room_id)
 
     var create_chat_log = document.getElementById("chatbox__content")
-    create_chat_log.innerHTML=''
-    
+    create_chat_log.innerHTML = ''
+
     const chat_log = total_chat_log['room_message']
 
-    for (i=0; i < chat_log.length; i++) {
+    for (i = 0; i < chat_log.length; i++) {
 
         const each_chat_log = `
         <div class="message">
@@ -108,9 +105,9 @@ async function login_user_opponent_list() {
     }
     user_opp_list = await get_user_opponent_list_api()
     var create_opponent_user_list = document.getElementById("create_opponent_user_list")
-    create_opponent_user_list.innerHTML=''
-    
-    for (i=0; i < user_opp_list.length; i++) {
+    create_opponent_user_list.innerHTML = ''
+
+    for (i = 0; i < user_opp_list.length; i++) {
 
         const user_item_li = `
         <li class="users__item" onclick="connect_user_chat_room(${user_opp_list[i]['id']})">
@@ -160,6 +157,6 @@ function close_modal() {
 
 function click_user_chat(receiver_id) {
     console.log('test')
-    modal_view();
     connect_user_chat_room(receiver_id)
+    modal_view();
 }

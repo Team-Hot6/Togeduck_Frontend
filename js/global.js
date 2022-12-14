@@ -2,7 +2,6 @@
 // 전역변수는 어디서 사용하는지 적어주기
 
 const front_end_url = "http://127.0.0.1:5500"
-// const front_end_url = window.location.host
 const back_end_url = "http://127.0.0.1:8000"
 const base_websocket_url = `ws://${window.location.host}`
 const websocketBaseUrl = "ws://127.0.0.1:8000/ws/socket-server"
@@ -29,11 +28,11 @@ function setCookie(key, value, miuntes) {
 
 function getCookie(key) {
     let cookie_key = key + "=";
-    let all_cookies = decodeURIComponent(document.cookie).split('; ');   
+    let all_cookies = decodeURIComponent(document.cookie).split('; ');
     let result;
 
-    for(let i = 0; i < all_cookies.length; i++) {
-        if(all_cookies[i].match(cookie_key)){
+    for (let i = 0; i < all_cookies.length; i++) {
+        if (all_cookies[i].match(cookie_key)) {
             result = all_cookies[i];
             break
         }
@@ -47,31 +46,30 @@ async function logout() {
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
     localStorage.removeItem("payload");
-
     window.location.href = `${front_end_url}/templates/user/login_signup.html`
 }
 
 // 로그인 후 네비바 변경
 async function navbar() {
-    if(localStorage.getItem("payload")){
+    if (localStorage.getItem("payload")) {
         const payload = localStorage.getItem("payload");
         const payload_parse = JSON.parse(payload)
         const nickname = document.getElementById("nickname")
         nickname.innerText = `${payload_parse.nickname}님`
-    
+
         const signup = document.getElementById("signup")
         signup.style.display = 'none';
-    
+
         const login = document.getElementById("login")
         login.style.display = 'none';
-    
+
         const nav_menu = document.getElementById("nav_menu")
 
         const mypage = `<li id="mypage" onclick="window.location.href='../user/my.html?id=${payload_parse.user_id}'">마이페이지</li>`
         nav_menu.insertAdjacentHTML("beforeend", mypage);
-    
+
         const logout = `<li id="logout" onclick="logout()">로그아웃</li>`
-        nav_menu.insertAdjacentHTML("beforeend", logout);    
+        nav_menu.insertAdjacentHTML("beforeend", logout);
     };
 };
 

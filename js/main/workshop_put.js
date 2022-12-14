@@ -8,12 +8,12 @@ window.onload = async() => {
 }
 
 // 모든 취미 카테고리 목록 출력
-async function hobby_category_list(current_data){
+async function hobby_category_list(current_data) {
     const response = await hobby_get()
-   
-    if(response.status == 200){
+
+    if (response.status == 200) {
         data = await response.json()
- 
+
         category_pick_box = document.getElementById("category_id")
         category_pick_box.innerHTML = ''
 
@@ -30,12 +30,12 @@ async function hobby_category_list(current_data){
 }
 
 // 모든 지역 카테고리 목록 출력
-async function location_category_list(current_data){
+async function location_category_list(current_data) {
     const response = await location_get()
-   
-    if(response.status == 200){
+
+    if (response.status == 200) {
         data = await response.json()
- 
+
         location_pick_box = document.getElementById("location_id")
         location_pick_box.innerHTML = ''
 
@@ -51,11 +51,11 @@ async function location_category_list(current_data){
     }
 }
 
-async function workshop_info(workshop_id){
+async function workshop_info(workshop_id) {
     const response = await workshop_detail_get(workshop_id)
     data = await response.json()
 
-    if(response.status == 200){
+    if (response.status == 200) {
         const content = document.getElementById("content");
         const workshop_image = document.getElementById("getval");
         const workshop_image_frame = document.getElementById("hvr-profile-img");
@@ -69,19 +69,15 @@ async function workshop_info(workshop_id){
         content.value = data.content;
         max_guest.value = data.max_guest;
         amount.value = data.amount;
-        workshop_image.setAttribute("src", `http://127.0.0.1:8000${data.workshop_image}`); 
+        workshop_image.setAttribute("src", `http://127.0.0.1:8000${data.workshop_image}`);
         date.value = data.date;
         address.value = data.address;
-        console.log(workshop_image)
-
-        console.log(workshop_image.files)
-
 
         workshop_image_frame.style.opacity = 100;
         workshop_image_frame.innerHTML = `<input type="file" name="logo" id='getval' class="upload" accept="image/*" id="imag">
                                             <img class="workshop_img" id="temp_img" src=http://127.0.0.1:8000${data.workshop_image}>`
 
-        workshop_image.style.zIndex =10;
+        workshop_image.style.zIndex = 10;
 
 
         aaa = `<div class="hvr-profile-img" id="hvr-profile-img">
@@ -91,20 +87,20 @@ async function workshop_info(workshop_id){
                     </div>
                 </div>`
 
-      
-          // 업로드한 이미지 미리보기
+
+        // 업로드한 이미지 미리보기
         document.getElementById('getval').addEventListener('change', readURL, true);
-        function readURL(){
+
+        function readURL() {
             var file = document.getElementById("getval").files[0];
             var reader = new FileReader();
-            reader.onloadend = function(){
-                document.getElementById('temp_img').src = reader.result;        
+            reader.onloadend = function() {
+                document.getElementById('temp_img').src = reader.result;
             }
-            if(file){
+            if (file) {
                 reader.readAsDataURL(file);
-            }else{
-            }
+            } else {}
         }
-        }
+    }
     return data
 }
