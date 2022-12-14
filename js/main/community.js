@@ -88,6 +88,7 @@ async function select_article_list(category_id) {
     // 선택한 카테고리의 게시글이 없는 경우
     if (data.length == 0) {
         let best_article_box = document.getElementById('best_article_box')
+        console.log("best_article_box 는",best_article_box)
         best_article_box.innerHTML = `<span class="fs-3 fw-bold" id="testspan">해당 카테고리의 게시글이 없습니다!</span>`
 
         let article_list = document.getElementById('article_list')
@@ -98,6 +99,7 @@ async function select_article_list(category_id) {
     } else {
         // BEST 10 게시글 지우기
         let best_article_box = document.getElementById('best_article_box')
+        console.log("best_article_box",best_article_box)
         best_article_box.innerHTML = ``
 
         // 카테고리 별 게시글의 table body 비우기

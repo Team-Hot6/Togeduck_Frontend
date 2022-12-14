@@ -76,7 +76,7 @@ async function navbar() {
 };
 
 // 네비바 공통적용
-fetch("/templates/main/navbar.html").then(response => {
+fetch("../../templates/main/navbar.html").then(response => {
     return response.text()
 }).then(data => {
     document.querySelector("header").innerHTML = data
@@ -86,7 +86,7 @@ fetch("/templates/main/navbar.html").then(response => {
 
 
 // 채팅창 공통적용
-fetch("/templates/main/chat.html").then(response => {
+fetch("../../templates/main/chat.html").then(response => {
     return response.text()
 }).then(data => {
     document.querySelector("chat").innerHTML = data
