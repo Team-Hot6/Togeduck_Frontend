@@ -14,7 +14,6 @@ myPageProfile_fuc()
 
 async function myPageProfile_fuc() {
 
-
     const response = await fetch('http://127.0.0.1:8000/users/' + payload_parse.user_id + '/', {
 
             method: 'GET',
