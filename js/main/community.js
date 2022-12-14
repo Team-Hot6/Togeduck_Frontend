@@ -34,20 +34,19 @@ async function article_list() {
 
     // 게시글 베스트 TOP 10 (백엔드 view 작성 후 대체 예정)
     // sort 함수를 사용하여 dictionary list의 객체를 like 내림차순 정렬
-    data.sort(function(a, b) {
-        return b.like - a.like;
-    });
+    const response_lank = await get_lank_articles()
+    const data_lank = await response_lank.json()
 
     for (let i = 0; i < 10; i++) {
-        let id = data[i]['id']
-        let title = data[i]['title']
-        let comment = data[i]['comment_article']
-        let category = data[i]['category']
-        let user = data[i]['user']
-        let date = data[i]['date']
-        let time = data[i]['time']
-        let like = data[i]['like']
-        let views = data[i]['views']
+        let id = data_lank[i]['id']
+        let title = data_lank[i]['title']
+        let comment = data_lank[i]['comment_article']
+        let category = data_lank[i]['category']
+        let user = data_lank[i]['user']
+        let date = data_lank[i]['date']
+        let time = data_lank[i]['time']
+        let like = data_lank[i]['like']
+        let views = data_lank[i]['views']
 
         const best_article = `<tr>
                             <td>${id}</td>
@@ -70,7 +69,7 @@ async function article_list() {
 async function hobby_list() {
     const response = await get_hobby()
     const data = await response.json()
-    console.log(data)
+
     for (let i = 0; i < data.length; i++) {
         const hobby = `<button type="button" class="hobby" onclick="select_article_list(${data[i]['id']})">${data[i]['category']}</button>`;
 

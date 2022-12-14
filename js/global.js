@@ -67,7 +67,7 @@ async function navbar() {
     
         const nav_menu = document.getElementById("nav_menu")
 
-        const mypage = `<li id="mypage" onclick="window.location.href='../user/my.html?id=${payload_parse.user_id}'">마이페이지</li>`
+        const mypage = `<li id="mypage" onclick="window.location.href='../user/mypage.html?id=${payload_parse.user_id}'">마이페이지</li>`
         nav_menu.insertAdjacentHTML("beforeend", mypage);
     
         const logout = `<li id="logout" onclick="logout()">로그아웃</li>`
