@@ -1,59 +1,82 @@
-const websocketBaseUrl = "ws://localhost:8000"
-let user_to_user_room_socket = undefined
-let room_id = undefined
-let temp_access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMjA5MjQ1LCJpYXQiOjE2NzAxNjcyNDUsImp0aSI6IjA2YTk3MjhhMTUzOTRlZjFhZmExODZjNjZlZmQ3Y2RkIiwidXNlcl9pZCI6MiwiZW1haWwiOiJ0ZXN0QG5hdmVyLmNvbSJ9.4hyT-t1F6eJ7HJdDzH_U66OvLKRw1s-p57SGHRDAELA"
+// 웹 소켓 관련 기능
+class Websocket_func {
+    // 메세지 전송
+    sendchat(webSocket) {
+        const chatinput = document.getElementById('chat_input')
+        const message = chatinput.value
+        webSocket.send(JSON.stringify({
+            'message': message,
+            'testmessage': 'hyeongseok'
+            }))
+            chatinput.value = ''
+            chatinput.focus()
+        }
 
-window.onload = () => {
-    console.log('load test')
-}
-
-// let url = `ws://${window.location.host}/ws/socket-server/`
-
-// 유저 id 가져와서 방 만들기 // 로그인 되어있어야 함
-async function connect_user_chat_room() {
-    const user_id = payload.user_id
-    let target_user_id = event.target.value
-
-    console.log(user_id, '번호 유저와 ', target_user_id, '와의 chat_room')
-
-    if (user_to_user_room_socket != undefined) {
-        return
-    }
-    // 해당 유저와 연결된 방이 있는지 socket.js 파일 함수로 연결 -> return : room_id
-    room_id = await check_is_chat_user_room(target_user_id)
-
-    // 만들어지거나 원래 있던 방 room_id로 웹소켓 연결
-    user_to_user_room_socket = new WebSocket(`${url}${room_id}/`)
-
-    user_to_user_room_socket.onmessage = function(e) {
-        var data = JSON.parse(e.data);
-        var message = data['message'];
-        var message_data = JSON.parse(message)['message']
-        document.querySelector('#chat-log').value += (message_data + '\n');
-    };
-}
-
-// 해당 채팅방으로 메세지 전송
-function send_message_each_room_button() {
-    // socket.js 웹소켓 class 가져옴
-    let send_message = new Websocket_func();
-
-    // 다른 채팅방을 만들면 그 채팅방으로 바뀌어야 함
-    if (user_to_user_room_socket == undefined) {
-        alert('채팅 상대를 선택해 주세요')
-    } else {
-        send_message.send_chat_message(user_to_user_room_socket, room_id)
-    }
-};
-
-function sumit_make_room_Enterkey() {
-    if (window.event.keyCode == 13) {
-        send_message_each_room_button();
+    // message 보내기 기능
+    // socket_api.js (send_message_each_room_button) ->
+    send_chat_message(webSocket, room_id, sender_id, receiver_id) {
+        const chatinput = document.getElementById('room_id_input')
+        const message = chatinput.value
+        // webSocket.onopen = () =>
+        webSocket.send(JSON.stringify({
+            'room_id': room_id,
+            'message': message,
+            'sender_id': sender_id,
+            'receiver_id': receiver_id
+            }))
+            chatinput.value = ''
+            chatinput.focus()
     }
 }
 
-// 채팅 메세지 로그 불러오기
-function get_chat_room_message_log() {
-    // 일단 원래 있는 채팅 로그를 클리어 해야함
+// post로 로그인 유저와 클릭한 유저의 방이 있는지 확인하고 없으면 만들고 room_id return
+async function check_is_chat_user_room(receiver_id) {
+    const response = await fetch(`${back_end_url}/chats/`, {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization":"Bearer "+localStorage.getItem("access")
+            // "Authorization":"Bearer " + temp_access_token
+        },
+        method:'POST',
+        // body: formData
+        body: JSON.stringify({
+            "user_id": receiver_id,
+        })
+    }).then(response => {
+        return response.json()
+    }).then(data => {
+        return data
+    })
+    // room_id 를 보내줌 ex) 5
+    console.log(response, 'room connect')
+    return response
+}
 
+// socket.js -> login_user_opponent_list() 에서 호출되며
+// 로그인된 유저와 채팅중인 상대방 정보 가져옴
+// 마지막으로 채팅했던 순서대로 정렬해서 가져옴
+async function get_user_opponent_list_api() {
+    const response = await fetch (`${back_end_url}/chats/users/?connect=sort`, {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization":"Bearer "+localStorage.getItem("access")
+        },
+        method:'GET',
+    }).then(response => {
+        return response.json()
+    })
+    return response
+}
+
+// 채팅 로그 가져오기
+async function get_chat_room_log(cur_websocekt, room_id) {
+    const response = await fetch(`${back_end_url}/chats/rooms/${room_id}`, {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization":"Bearer "+localStorage.getItem("access")
+        },
+        method:'GET',
+    })
+
+    return response.json().data
 }
