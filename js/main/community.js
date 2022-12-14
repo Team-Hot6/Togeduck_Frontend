@@ -6,8 +6,9 @@ hobby_list()
 // 전체 카테고리의 게시글 목록
 async function article_list() {
     const response = await get_articles()
-    const data = await response.json()
-    console.log
+    const response_json = await response.json()
+    const data = response_json['results']
+    
     for (let i = 0; i < data.length; i++) {
         let id = data[i]['id']
         let title = data[i]['title']
@@ -71,7 +72,7 @@ async function article_list() {
 async function hobby_list() {
     const response = await get_hobby()
     const data = await response.json()
-
+    console.log(data)
     for (let i = 0; i < data.length; i++) {
         const hobby = `<button type="button" class="hobby" onclick="select_article_list(${data[i]['id']})">${data[i]['category']}</button>`;
         
@@ -83,7 +84,8 @@ async function hobby_list() {
 // 선택한 카테고리의 게시글 목록
 async function select_article_list(category_id) {
     const response = await get_select_articles(category_id)
-    const data = await response.json()
+    const response_json = await response.json()
+    const data = response_json['results']
 
     // 선택한 카테고리의 게시글이 없는 경우
     if (data.length == 0){
