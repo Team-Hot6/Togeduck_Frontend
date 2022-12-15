@@ -34,37 +34,31 @@
 
     <section class="main">
 
-        <section class="category">
-            <div class="menubar">
-                <span class="select_menu" onclick="main_page_move()">Workshop</span>
-                <span class="menu" onclick="window.location.href='../main/community.html'">Community</span>
-                <span style="float: right; margin: auto;">
-                    <span class="sort">최신순</span>
-                    <span class="sort">인기순</span>
-                    <span class="create_button" onclick="window.location.href='../main/workshop_posting.html'">워크샵 생성</span>
-                </span>
-            </div>
-            <div class="hobbys" id="hobbys">
-                <!-- <button type="button" class="hobby">핸드메이드</button> -->
-            </div>
-        </section>
-        
-        <div class="sub_info" id="sub_info">
-            <div>인기 워크샵</div>
-            <div class="popular_workshops_wrap" id="popular_workshops_wrap">
-                <!-- <div class="popular_workshop" id="popular_workshop" onclick="">
-                    <div class="popular_workshop_img_frame">
-                        <img class="popular_workshop_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ_Rk0RYE5Wpe1RzOK1FgkVBojQGQgd8zbog&usqp=CAU">
-                    </div>
-                    <div class="popular_workshop_hobby">카테고리</div>
-                    <div class="popular_workshop_title">제목</div>
-                </div> -->
-            </div>
-
+      <section class="category">
+        <div class="menubar">
+          <span class="select_menu" onclick="main_page_move()">Workshop</span>
+          <span class="menu" onclick="window.location.href='../main/community.html'">Community</span>
+          <span style="float: right; margin: auto;">
+            <span class="sort">최신순</span>
+            <span class="sort">인기순</span>
+            <span class="create_button" onclick="window.location.href='../main/workshop_posting.html'">워크샵 생성</span>
+          </span>
         </div>
         <div class="hobbys" id="hobbys">
           <!-- <button type="button" class="hobby">핸드메이드</button> -->
         </div>
+      </section>
+
+      <div class="sub_info" id="sub_info">
+        <div>인기 워크샵</div>
+        <div class="popular_workshops_wrap" id="popular_workshops_wrap">
+          <!-- <div class="popular_workshop" id="popular_workshop" onclick=""> <div class="popular_workshop_img_frame"> <img class="popular_workshop_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ_Rk0RYE5Wpe1RzOK1FgkVBojQGQgd8zbog&usqp=CAU"> </div> <div class="popular_workshop_hobby">카테고리</div> <div class="popular_workshop_title">제목</div> </div> -->
+        </div>
+
+      </div>
+      <div class="hobbys" id="hobbys">
+        <!-- <button type="button" class="hobby">핸드메이드</button> -->
+      </div>
 
       <div class="sub_info" id="sub_info">
         <div class="popular_workshops_wrap" id="popular_workshops_wrap">
@@ -87,77 +81,7 @@
     </section>
     <footer class="footer">copyrightⓒ 2022 All rights reserved by team HOT6.</footer>
 
-    <chat>
-      <div class="modal" id="modal">
-        <div class="modal__dialog">
-          <div class="modal__close" onclick="close_modal()">
-            <a href="#" class="modal__icon">
-              <i class="fa fa-times" aria-hidden="true"></i>
-            </a>
-            <span class="modal__note" id="modal__note">X</span>
-          </div>
-          <div class="modal__content chat">
-            <div class="modal__sidebar">
-              <div class="chat__search search">
-                <div class="search">
-                  <div class="search__icon">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                  </div>
-                  <!-- <input type="search" class="search__input" placeholder="🔍search"> <div class="search__icon search__icon_right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </div> -->
-                </div>
-              </div>
-              <div class="chat__users">
-                <ul class="users" id="create_opponent_user_list"></ul>
-              </div>
-            </div>
-            <div class="modal__main">
-              <div class="chatbox">
-                <div class="chatbox__row">
-                  <div class="head">
-                    <div class="head__avatar avatar avatar_larger">
-                      <a href="#" class="avatar__wrap"></a>
-                    </div>
-                    <div class="head__title">채팅중인 상대방 이름</div>
-                    <div class="head__note">
-                      <span>뭔가 들어갈 자리</span>
-                      <!-- <span class="head__icon"></span> -->
-                    </div>
-                  </div>
-                </div>
-                <div class="chatbox__row chatbox__row_fullheight" id="chatbox__scroll">
-                  <!-- 메세지가 담기는 class 여기 밑으로 append child 해주면 됨 -->
-                  <div class="chatbox__content" id="chatbox__content"></div>
-                </div>
-                <div class="chatbox__row">
-                  <div class="enter">
-                    <div class="enter__submit">
-                      <button class="button button_id_submit" type="submit" onclick="send_message_each_room_button()">
-                        <i class="fa fa-paper-plane" aria-hidden="true">✉</i>
-                      </button>
-                    </div>
-                    <div class="enter__textarea">
-                      <textarea name="enterMessage" id="enterMessage" cols="30" rows="2" placeholder="메세지를 입력해 주세요..." onkeyup="sumit_send_message_Enterkey()"></textarea>
-                    </div>
-                    <div class="enter__icons">
-                      <a href="#" class="enter__icon">
-                        <i class="fa fa-paperclip" aria-hidden="true"></i>
-                      </a>
-                      <a href="#" class="enter__icon">
-                        <i class="fa fa-smile-o" aria-hidden="true"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="chat_button" onclick="modal_view()">
-        <span class="material-symbols-outlined" id="chat_icon">forum</span>
-      </div>
-    </chat>
+    <chat></chat>
   </body>
 
 </html>
