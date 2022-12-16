@@ -1,117 +1,126 @@
+const urlParams = new URLSearchParams(window.location.search);
+let workshop_id = urlParams.get('id');
+
+
+const main = document.querySelector("main")
 const wsManage = document.createElement('div')
 wsManage.setAttribute('class', 'workshop-manage')
-document.body.prepend(wsManage)
+main.appendChild(wsManage)
+
+
 
 
 // 워크샵 관리페이지 좌측 워크샵 사진 부분
 const wsManageLeftSide = document.createElement('div')
 wsManageLeftSide.setAttribute('class', 'workshop-manage-leftside')
 wsManage.appendChild(wsManageLeftSide)
-wsManageCard_fuc()
+
+
 
 async function wsManageCard_fuc() {
 
-    const id = localStorage.getItem("payload")
-    const id_json = JSON.parse(id)
+    const response = await workshop_apply_get(workshop_id)
 
-    const response = await fetch('http://127.0.0.1:8000/workshops/' + 1 + '/', {
+    if(response.status == 200){
+        data = await response.json()
+        console.log("----------------------------------")
+        setTimeout(function() {
+            console.log(data);
+            }, 1000);
+        console.log("----------------------------------")
+        console.log(data)
+        console.log("----------------------------------")
+      
 
-            method: 'GET',
-        })
-        // backend에서 받은 데이터 가져오기
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
+        const wsManagePicture = document.createElement('div')
+        wsManagePicture.setAttribute('class', 'workshop-manage-picture')
+        wsManageLeftSide.appendChild(wsManagePicture)
 
-            const wsManagePicture = document.createElement('div')
-            wsManagePicture.setAttribute('class', 'workshop-manage-picture')
-            wsManageLeftSide.appendChild(wsManagePicture)
+        const wsManagePictureImg = document.createElement('img')
+        wsManagePictureImg.setAttribute('class', 'workshop-manage-pictureimg')
+        wsManagePictureImg.setAttribute('src', 'http://127.0.0.1:8000' + data["workshop_image"])
+        wsManagePicture.appendChild(wsManagePictureImg)
 
-            const wsManagePictureImg = document.createElement('img')
-            wsManagePictureImg.setAttribute('class', 'workshop-manage-pictureimg')
-            wsManagePictureImg.setAttribute('src', 'http://127.0.0.1:8000' + data["workshop_image"])
-            wsManagePicture.appendChild(wsManagePictureImg)
+        const wsManageName = document.createElement('div')
+        wsManageName.setAttribute('class', 'workshop-manage-name')
+        wsManageName.innerText = data["title"]
+        wsManageLeftSide.appendChild(wsManageName)
 
-            const wsManageName = document.createElement('div')
-            wsManageName.setAttribute('class', 'workshop-manage-name')
-            wsManageName.innerText = data["title"]
-            wsManageLeftSide.appendChild(wsManageName)
+        const wsManageDate = document.createElement('div')
+        wsManageDate.setAttribute('class', 'workshop-manage-date')
+        wsManageDate.innerText = data["created_at"].slice(0, 10) + ' ' + data["created_at"].slice(11, 16)
+        wsManageLeftSide.appendChild(wsManageDate)
 
-            const wsManageDate = document.createElement('div')
-            wsManageDate.setAttribute('class', 'workshop-manage-date')
-            wsManageDate.innerText = data["created_at"].slice(0, 10) + ' ' + data["created_at"].slice(11, 16)
-            wsManageLeftSide.appendChild(wsManageDate)
+        const wsManageMiddleLine = document.createElement('div')
+        wsManageMiddleLine.setAttribute('class', 'workshop-manage-middleline')
+        wsManageLeftSide.appendChild(wsManageMiddleLine)
 
-            const wsManageMiddleLine = document.createElement('div')
-            wsManageMiddleLine.setAttribute('class', 'workshop-manage-middleline')
-            wsManageLeftSide.appendChild(wsManageMiddleLine)
+        const wsManageApplyWait = document.createElement('div')
+        wsManageApplyWait.setAttribute('class', 'workshop-manage-applywait')
+        wsManageLeftSide.appendChild(wsManageApplyWait)
 
-            const wsManageApplyWait = document.createElement('div')
-            wsManageApplyWait.setAttribute('class', 'workshop-manage-applywait')
-            wsManageLeftSide.appendChild(wsManageApplyWait)
+        const wsManageApplyWait1 = document.createElement('div')
+        wsManageApplyWait1.setAttribute('class', 'workshop-manage-applywait-1')
+        wsManageApplyWait1.innerText = '신청대기'
+        wsManageApplyWait.appendChild(wsManageApplyWait1)
 
-            const wsManageApplyWait1 = document.createElement('div')
-            wsManageApplyWait1.setAttribute('class', 'workshop-manage-applywait-1')
-            wsManageApplyWait1.innerText = '신청대기'
-            wsManageApplyWait.appendChild(wsManageApplyWait1)
-
-            const wsManageApplyWait2 = document.createElement('div')
-            wsManageApplyWait2.setAttribute('class', 'workshop-manage-applywait-2')
-            sum = 0
-            for (i = 0; i < data["workshop_apply"].length; i++) {
-                if (data['workshop_apply'][i]['result'] == '대기') {
-                    sum += 1
-                }
+        const wsManageApplyWait2 = document.createElement('div')
+        wsManageApplyWait2.setAttribute('class', 'workshop-manage-applywait-2')
+        sum = 0
+        for (i = 0; i < data["workshop_apply"].length; i++) {
+            if (data['workshop_apply'][i]['result'] == '대기') {
+                sum += 1
             }
-            wsManageApplyWait2.innerText = sum + '명'
-            wsManageApplyWait.appendChild(wsManageApplyWait2)
+        }
+        wsManageApplyWait2.innerText = sum + '명'
+        wsManageApplyWait.appendChild(wsManageApplyWait2)
 
-            const wsManageApplyRatio = document.createElement('div')
-            wsManageApplyRatio.setAttribute('class', 'workshop-manage-applyratio')
-            wsManageLeftSide.appendChild(wsManageApplyRatio)
+        const wsManageApplyRatio = document.createElement('div')
+        wsManageApplyRatio.setAttribute('class', 'workshop-manage-applyratio')
+        wsManageLeftSide.appendChild(wsManageApplyRatio)
 
-            const wsManageApplyRatio1 = document.createElement('div')
-            wsManageApplyRatio1.setAttribute('class', 'workshop-manage-applyratio-1')
-            wsManageApplyRatio1.innerText = '모집현황'
-            wsManageApplyRatio.appendChild(wsManageApplyRatio1)
+        const wsManageApplyRatio1 = document.createElement('div')
+        wsManageApplyRatio1.setAttribute('class', 'workshop-manage-applyratio-1')
+        wsManageApplyRatio1.innerText = '모집현황'
+        wsManageApplyRatio.appendChild(wsManageApplyRatio1)
 
-            const wsManageApplyRatio2 = document.createElement('div')
-            wsManageApplyRatio2.setAttribute('class', 'workshop-manage-applyratio-2')
-            sum = 0
-            for (i = 0; i < data["workshop_apply"].length; i++) {
-                if (data['workshop_apply'][i]['result'] == '승인') {
-                    sum += 1
-                }
+        const wsManageApplyRatio2 = document.createElement('div')
+        wsManageApplyRatio2.setAttribute('class', 'workshop-manage-applyratio-2')
+        sum = 0
+        for (i = 0; i < data["workshop_apply"].length; i++) {
+            if (data['workshop_apply'][i]['result'] == '승인') {
+                sum += 1
             }
-            wsManageApplyRatio2.innerText = sum + '/' + data['max_guest']
-            wsManageApplyRatio.appendChild(wsManageApplyRatio2)
+        }
+        wsManageApplyRatio2.innerText = sum + '/' + data['max_guest']
+        wsManageApplyRatio.appendChild(wsManageApplyRatio2)
 
-            const wsManageLocation = document.createElement('div')
-            wsManageLocation.setAttribute('class', 'workshop-manage-location')
-            wsManageLeftSide.appendChild(wsManageLocation)
+        const wsManageLocation = document.createElement('div')
+        wsManageLocation.setAttribute('class', 'workshop-manage-location')
+        wsManageLeftSide.appendChild(wsManageLocation)
 
-            const wsManageLocation1 = document.createElement('div')
-            wsManageLocation1.setAttribute('class', 'workshop-manage-location-1')
-            wsManageLocation1.innerText = '지역'
-            wsManageLocation.appendChild(wsManageLocation1)
+        const wsManageLocation1 = document.createElement('div')
+        wsManageLocation1.setAttribute('class', 'workshop-manage-location-1')
+        wsManageLocation1.innerText = '지역'
+        wsManageLocation.appendChild(wsManageLocation1)
 
-            const wsManageLocation2 = document.createElement('div')
-            wsManageLocation2.setAttribute('class', 'workshop-manage-location-2')
-            wsManageLocation2.innerText = data['location']
-            wsManageLocation.appendChild(wsManageLocation2)
-        })
+        const wsManageLocation2 = document.createElement('div')
+        wsManageLocation2.setAttribute('class', 'workshop-manage-location-2')
+        wsManageLocation2.innerText = data['location']
+        wsManageLocation.appendChild(wsManageLocation2)
+    }
 }
 
+wsManageCard_fuc()
 
 // 마이페이지 우측 부분
 const wsManageRightSide = document.createElement('div')
 wsManageRightSide.setAttribute('class', 'workshop-manage-rightside')
 wsManage.appendChild(wsManageRightSide)
 
-const navbar = document.createElement('nav')
-navbar.setAttribute('class', 'nav nav-pills flex-column flex-sm-row')
-wsManageRightSide.appendChild(navbar)
+const navbar0 = document.createElement('nav')
+navbar0.setAttribute('class', 'nav nav-pills flex-column flex-sm-row')
+wsManageRightSide.appendChild(navbar0)
 
 const wsApplyWaitNav = document.createElement('a')
 wsApplyWaitNav.setAttribute('id', 'nav-apply-wait')
@@ -119,8 +128,8 @@ wsApplyWaitNav.setAttribute('class', 'flex-sm-fill text-sm-center nav-link')
 wsApplyWaitNav.setAttribute('onclick', 'wsManageApplyWait_fuc()')
 wsApplyWaitNav.setAttribute('style', 'cursor: pointer;')
 wsApplyWaitNav.innerText = '신청 대기자'
-navbar.appendChild(wsApplyWaitNav)
-wsManageApplyWait_fuc()
+navbar0.appendChild(wsApplyWaitNav)
+
 
 const wsApplyConfirmedNav = document.createElement('a')
 wsApplyConfirmedNav.setAttribute('id', 'nav-apply-confirmed')
@@ -128,13 +137,15 @@ wsApplyConfirmedNav.setAttribute('class', 'flex-sm-fill text-sm-center nav-link'
 wsApplyConfirmedNav.setAttribute('onclick', 'wsManageConfirmedUser()')
 wsApplyConfirmedNav.setAttribute('style', 'cursor: pointer;')
 wsApplyConfirmedNav.innerText = '참여 확정자'
-navbar.appendChild(wsApplyConfirmedNav)
+navbar0.appendChild(wsApplyConfirmedNav)
 
 
 async function wsManageApplyWait_fuc() {
-    const id = localStorage.getItem("payload")
-    const id_json = JSON.parse(id)
-    const response = await fetch('http://127.0.0.1:8000/workshops/' + 2 + '/', {
+    console.log("wsManageApplyWait_fuc 실행중")
+
+
+    
+    const response = await fetch(`${back_end_url}/workshops/${workshop_id}/apply/`, {
 
             method: 'GET',
         })
@@ -215,6 +226,9 @@ async function wsManageApplyWait_fuc() {
             wsAWUTableReject.setAttribute('id', 'workshop-manage-applywaituser-table-th-ar-sort')
             wsAWUTableReject.innerText = '거절'
             wsAWUTableTr.appendChild(wsAWUTableReject)
+            
+
+            console.log(data)
 
             // '신청 대기자' 항목 리스트 작성
             for (i = 0; i < data['workshop_apply'].length; i++) {
@@ -232,7 +246,8 @@ async function wsManageApplyWait_fuc() {
                     const wsAWUTableThUsernameNum = document.createElement('th')
                     wsAWUTableThUsernameNum.setAttribute('class', 'workshop-manage-applywaituser-table-th-name')
                     wsAWUTableThUsernameNum.setAttribute('id', 'workshop-manage-applywaituser-table-th-name' + (i + 1))
-                    wsAWUTableThUsernameNum.innerText = data['workshop_apply'][i]['guest_name']
+                    // wsAWUTableThUsernameNum.innerText = data['workshop_apply'][i]['guest_name']
+                    wsAWUTableThUsernameNum.innerText = "##############"
                     wsAWUTableTrNum.appendChild(wsAWUTableThUsernameNum)
 
                     const wsAWUTableThChatNum = document.createElement('th')
@@ -273,6 +288,7 @@ async function wsManageApplyWait_fuc() {
 
         })
 }
+wsManageApplyWait_fuc()
 
 async function wsManageWaitApprove() {
     console.log("현재 버튼을 클릭한 상태입니다."); // 버튼이 눌러지고 있는지 확인 필수
