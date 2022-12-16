@@ -159,7 +159,7 @@ async function review_put(id) {
 
     review_id = id
     const content =document.getElementById(`update_button(${id})`).value // input 박스 
-    console.log(document.getElementById(`input_content${id}`),'ㅇㅁㅇ')
+    //console.log(document.getElementById(`input_content${id}`),'ㅇㅁㅇ')
     //const content = document.getElementById(`input_content${id}`).value // 수정된 텍스트 박스
     
     const response = await workshop_review_put(workshop_id, review_id, content)
