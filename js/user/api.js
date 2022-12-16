@@ -6,7 +6,7 @@ console.log('로딩됐나')
 async function handleLogin() {
     const email = document.getElementById("loginEmail").value;
     const password = document.getElementById("loginPassword").value;
-    const response = await fetch("http://127.0.0.1:8000/users/api/token/", {
+    const response = await fetch(`${back_end_url}/users/api/token/`, {
         headers: {
             "content-type": "application/json",
         },
@@ -63,7 +63,7 @@ window.onload = () => {
 
 // tag 불러오는 함수
 async function show_tag_fuc() {
-    const response = await fetch('http://127.0.0.1:8000/workshops/hobby/', {
+    const response = await fetch(`${back_end_url}/workshops/hobby/`, {
             headers: {
                 'content-type': 'application/json',
             },
@@ -166,7 +166,7 @@ async function handleSign() {
     }
 
 
-    const response = await fetch("http://127.0.0.1:8000/users/signup/", {
+    const response = await fetch(`${back_end_url}/users/signup/`, {
         headers: {
             "content-type": "application/json",
         },
@@ -189,7 +189,6 @@ async function handleSign() {
         }
     } else {
         alert("회원가입 성공 로그인 해주세요")
-        //window.location.href = "http://127.0.0.1:5500/login_signup.html"
         window.location.reload()
     }
 }
