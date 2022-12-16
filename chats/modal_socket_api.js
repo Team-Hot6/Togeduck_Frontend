@@ -17,12 +17,14 @@ class Websocket_func {
     send_chat_message(webSocket, room_id, sender_id, receiver_id) {
         const chatinput = document.getElementById('enterMessage')
         const message = chatinput.value
-        // webSocket.onopen = () =>
+        
         webSocket.send(JSON.stringify({
             'room_id': room_id,
             'message': message,
             'sender_id': sender_id,
             }))
+        // webSocket.onopen = () =>
+
             chatinput.value = ''
             chatinput.focus()
     }
@@ -41,14 +43,9 @@ async function check_is_chat_user_room(receiver_id) {
         body: JSON.stringify({
             "user_id": receiver_id,
         })
-    }).then(response => {
-        return response.json()
-    }).then(data => {
-        return data
     })
-    // room_id 를 보내줌 ex) 5
-    console.log(response, 'room connect')
-    return response
+
+    return response.json()
 }
 
 // socket.js -> login_user_opponent_list() 에서 호출되며
