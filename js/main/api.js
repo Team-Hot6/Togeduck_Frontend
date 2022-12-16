@@ -56,7 +56,7 @@ async function get_articles(sort, category_id) {
     })
     return response
 }
-
+// 인기 게시글 10 목록
 async function get_lank_articles() {
     const response = await fetch(`${back_end_url}/articles/lank/`, {
         method: "GET",
@@ -117,7 +117,7 @@ async function create_article(title, content, image, category) {
         console.log(window.location)
         window.location.href = 'community.html'
         alert('작성 완료!!')
-       
+    
     } else if (response.status == 401) {
         alert('다시 로그인을 해주세요!')
     } else {

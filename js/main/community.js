@@ -10,7 +10,7 @@ async function article_list(sort, category_id) {
     const data = response_json['results']
     
     const article_list = document.getElementById('article_list')
-    article_list.innerHTML = ''
+    article_list.innerHTML = ``
 
     for (let i = 0; i < data.length; i++) {
         let id = data[i]['id']
@@ -37,10 +37,11 @@ async function article_list(sort, category_id) {
         article_list.insertAdjacentHTML('beforeend', article)
     }
 
-    // 게시글 베스트 TOP 10 (백엔드 view 작성 후 대체 예정)
-    // sort 함수를 사용하여 dictionary list의 객체를 like 내림차순 정렬
+    // 게시글 베스트 TOP 10
     const response_lank = await get_lank_articles()
     const data_lank = await response_lank.json()
+
+    best_article_list.innerHTML = ``
 
     for (let i = 0; i < 10; i++) {
         let id = data_lank[i]['id']
@@ -70,7 +71,7 @@ async function article_list(sort, category_id) {
 }
 
 
-// 카테고리 목록
+// 취미 카테고리 목록
 async function hobby_list() {
     const response = await get_hobby()
     const data = await response.json()
@@ -88,7 +89,7 @@ async function select_article_list(category_id, sort) {
     const sort_btn = document.getElementById('sort_btn')
     temp_html = `<span class="sort" id="latest" onclick="select_article_list(${category_id}, 'latest')">최신순</span>
                 <span class="sort" id="like" onclick="select_article_list(${category_id}, 'like')">인기순</span>`
-    sort_btn.innerHTML = ''
+    sort_btn.innerHTML = ``
     sort_btn.insertAdjacentHTML('beforeend', temp_html)
     
     const response = await get_select_articles(category_id, sort)
@@ -97,26 +98,21 @@ async function select_article_list(category_id, sort) {
 
     // 선택한 카테고리의 게시글이 없는 경우
     if (data.length == 0) {
-        let best_article_box = document.getElementById('best_article_box')
-        best_article_box.innerHTML = `<span class="fs-3 fw-bold" id="testspan">해당 카테고리의 게시글이 없습니다!</span>`
-
-        let article_list = document.getElementById('article_list')
-        article_list.innerHTML = ``
-
         let article_box = document.getElementById('article_box')
         article_box.style.display = 'none';
+        
+        let notice = document.getElementById('notice')
+        let temp = `<h1>해당 카테고리의 게시글이 없습니다!</h1>` 
+        notice.innerHTML = temp 
     } else {
-        // BEST 10 게시글 지우기
-        let best_article_box = document.getElementById('best_article_box')
-        console.log("best_article_box",best_article_box)
-        best_article_box.innerHTML = ``
-
-        // 카테고리 별 게시글의 table body 비우기
         const article_list = document.getElementById('article_list')
         article_list.innerHTML = ``
 
-        let sss = document.getElementById('article_box')
-        sss.style.display = 'block';
+        let article_box = document.getElementById('article_box')
+        article_box.style.display = 'block';
+
+        let notice = document.getElementById('notice')
+        notice.innerHTML = ``
 
         for (let i = 0; i < data.length; i++) {
             let id = data[i]['id']
@@ -139,9 +135,7 @@ async function select_article_list(category_id, sort) {
                                     <td>${like}</td>
                                     <td>${views}</td>
                                 </tr>`
-                // <td align="left"><a onclick="article_detail(${id})" href="">${title} [${comment}]</a></td>
 
-            // 카테고리 별 게시글의 table body에 선택한 카테고리의 게시글만 다시 넣기
             article_list.insertAdjacentHTML('beforeend', select_articles)
         }
     }
