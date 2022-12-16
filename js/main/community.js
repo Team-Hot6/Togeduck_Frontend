@@ -1,11 +1,17 @@
 window.onload = async() => {
-    article_list()
+    const urlParams = new URLSearchParams(window.location.search);
+    let page = urlParams.get('page');
+    if (page == null) {
+        page = 1
+    }
+
+    article_list(page)
     hobby_list()
 }
 
 // 전체 카테고리의 게시글 목록
-async function article_list(sort, category_id) {
-    const response = await get_articles(sort, category_id)
+async function article_list(page, sort, category_id) {
+    const response = await get_articles(page, sort, category_id)
     const response_json = await response.json()
     const data = response_json['results']
     
@@ -35,6 +41,15 @@ async function article_list(sort, category_id) {
                         </tr>`
                         
         article_list.insertAdjacentHTML('beforeend', article)
+        
+        page_range = Math.ceil(response_json['count'] / 20)
+        const page_numbers = document.getElementById('page_numbers')
+        page_numbers.innerHTML = ''
+
+        for (let i = 0; i < page_range; i++){
+            const page_number = `<button type="button" class="page_number" onclick="move_article_page(${i+1})">${i+1}</button>`
+            page_numbers.insertAdjacentHTML('beforeend', page_number)
+        }
     }
 
     // 게시글 베스트 TOP 10
@@ -137,6 +152,15 @@ async function select_article_list(category_id, sort) {
                                 </tr>`
 
             article_list.insertAdjacentHTML('beforeend', select_articles)
+
+            page_range = Math.ceil(response_json['count'] / 20)
+            const page_numbers = document.getElementById('page_numbers')
+            page_numbers.innerHTML = ''
+
+            for (let i = 0; i < page_range; i++){
+                const page_number = `<button type="button" class="page_number" onclick="move_category_page(${category_id}, ${i+1})">${i+1}</button>`
+                page_numbers.insertAdjacentHTML('beforeend', page_number)
+        }
         }
     }
 }
@@ -148,4 +172,11 @@ function ArticleCreatePage() {
     } else {
         alert('게시글 작성은 로그인 된 사용자만 가능합니다!')
     }
+}
+
+
+// 전체 게시글 페이지 이동
+async function move_article_page(page_number) {
+    const url = `${front_end_url}/templates/main/community.html?page=${page_number}`
+    window.location.href = url
 }

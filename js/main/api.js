@@ -50,8 +50,8 @@ async function get_hobby() {
 }
 
 // 게시글 전체 목록 API
-async function get_articles(sort, category_id) {
-    const response = await fetch(`${back_end_url}/articles/?sort=${sort}&category=${category_id}`, {
+async function get_articles(page, sort, category_id) {
+    const response = await fetch(`${back_end_url}/articles/?page=${page}&sort=${sort}&category=${category_id}`, {
         method: "GET",
     })
     return response
