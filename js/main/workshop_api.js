@@ -1,6 +1,6 @@
 // 베스트 워크샵 목록 출력
 async function workshop_popular_get() {
-    const response = await fetch(`${back_end_url}/workshops/popular/`, {
+    const response = await fetch(`${back_end_url}/workshops/lank/`, {
         method: 'GET'
     })
     return response
