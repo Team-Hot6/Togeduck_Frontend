@@ -475,10 +475,7 @@ async function myPageCreatedWorkshop_fuc() {
 
 // 마이페이지 > 생성 워크샵 > 특정 워크샵 클릭 시 상세페이지(관리:승인/거절)로 이동
 async function workshop_apply_move(workshop_id) {
-    console.log("@@@@@@@@@@")
-    console.log(workshop_id)
     const url = `${front_end_url}/templates/main/workshop_manage.html?id=${workshop_id}`
-    console.log(url)
-    // window.location.href = url
+    window.location.href = url
 }
 
