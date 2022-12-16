@@ -2,6 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 let workshop_id = urlParams.get('id');
 
 
+
 const main = document.querySelector("main")
 const wsManage = document.createElement('div')
 wsManage.setAttribute('class', 'workshop-manage')
@@ -16,21 +17,13 @@ wsManageLeftSide.setAttribute('class', 'workshop-manage-leftside')
 wsManage.appendChild(wsManageLeftSide)
 
 
-
+// 왼쪽카드 틀 생성. 데이터 넣기
 async function wsManageCard_fuc() {
 
     const response = await workshop_apply_get(workshop_id)
 
     if(response.status == 200){
         data = await response.json()
-        console.log("----------------------------------")
-        setTimeout(function() {
-            console.log(data);
-            }, 1000);
-        console.log("----------------------------------")
-        console.log(data)
-        console.log("----------------------------------")
-      
 
         const wsManagePicture = document.createElement('div')
         wsManagePicture.setAttribute('class', 'workshop-manage-picture')
@@ -113,7 +106,7 @@ async function wsManageCard_fuc() {
 
 wsManageCard_fuc()
 
-// 마이페이지 우측 부분
+// 마이페이지 우측 부분 (메뉴바)
 const wsManageRightSide = document.createElement('div')
 wsManageRightSide.setAttribute('class', 'workshop-manage-rightside')
 wsManage.appendChild(wsManageRightSide)
@@ -140,13 +133,13 @@ wsApplyConfirmedNav.innerText = '참여 확정자'
 navbar0.appendChild(wsApplyConfirmedNav)
 
 
+// 신청 대기자 목록 불러오기
 async function wsManageApplyWait_fuc() {
-    console.log("wsManageApplyWait_fuc 실행중")
-
-
     
     const response = await fetch(`${back_end_url}/workshops/${workshop_id}/apply/`, {
-
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("access")
+            },
             method: 'GET',
         })
         // backend에서 받은 데이터 가져오기
@@ -227,7 +220,7 @@ async function wsManageApplyWait_fuc() {
             wsAWUTableReject.innerText = '거절'
             wsAWUTableTr.appendChild(wsAWUTableReject)
             
-
+            console.log("--------------------------------------")
             console.log(data)
 
             // '신청 대기자' 항목 리스트 작성
@@ -246,8 +239,8 @@ async function wsManageApplyWait_fuc() {
                     const wsAWUTableThUsernameNum = document.createElement('th')
                     wsAWUTableThUsernameNum.setAttribute('class', 'workshop-manage-applywaituser-table-th-name')
                     wsAWUTableThUsernameNum.setAttribute('id', 'workshop-manage-applywaituser-table-th-name' + (i + 1))
-                    // wsAWUTableThUsernameNum.innerText = data['workshop_apply'][i]['guest_name']
-                    wsAWUTableThUsernameNum.innerText = "##############"
+                    wsAWUTableThUsernameNum.innerText = data['workshop_apply'][i]['guest_nickname']
+                    // wsAWUTableThUsernameNum.innerText = "##############"
                     wsAWUTableTrNum.appendChild(wsAWUTableThUsernameNum)
 
                     const wsAWUTableThChatNum = document.createElement('th')
@@ -270,14 +263,14 @@ async function wsManageApplyWait_fuc() {
                     const wsAWUTableApproveBtn = document.createElement('button')
                     wsAWUTableApproveBtn.setAttribute('type', 'button')
                     wsAWUTableApproveBtn.setAttribute('id', 'workshop-manage-applywaituser-approve-button')
-                    wsAWUTableApproveBtn.setAttribute('onclick', 'wsManageWaitApprove()')
+                    wsAWUTableApproveBtn.setAttribute('onclick', "workshop_apply_result("+data['workshop_apply'][i]['guest']+", '승인')")
                     wsAWUTableApproveBtn.innerText = '승인'
                     wsAWUTableApproveNum.appendChild(wsAWUTableApproveBtn)
 
                     const wsAWUTableRejectBtn = document.createElement('button')
                     wsAWUTableRejectBtn.setAttribute('type', 'button')
                     wsAWUTableApproveBtn.setAttribute('id', 'workshop-manage-applywaituser-reject-button')
-                    wsAWUTableRejectBtn.setAttribute('onclick', 'wsManageWaitReject()')
+                    wsAWUTableRejectBtn.setAttribute('onclick', "workshop_apply_result("+data['workshop_apply'][i]['guest']+", '거절')")
                     wsAWUTableRejectBtn.innerText = '거절'
                     wsAWUTableRejectNum.appendChild(wsAWUTableRejectBtn)
 
@@ -290,68 +283,31 @@ async function wsManageApplyWait_fuc() {
 }
 wsManageApplyWait_fuc()
 
-async function wsManageWaitApprove() {
-    console.log("현재 버튼을 클릭한 상태입니다."); // 버튼이 눌러지고 있는지 확인 필수
-    const id = localStorage.getItem("payload")
-    const id_json = JSON.parse(id)
 
-    let token = localStorage.getItem("access")
 
-    const response = await fetch('http://127.0.0.1:8000/workshops/' + 1 + '/apply/', {
 
-            method: 'PUT',
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": `application/json`
-            },
-            body: JSON.stringify({
-                "guest": 7,
-                "result": "승인"
-            }),
-        })
-        // backend에서 받은 데이터 가져오기
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {});
+// 승인. 거절 처리
+async function workshop_apply_result(guest_id, result) {
+    const response = await apply_result_put(workshop_id, guest_id, result)
 
-}
-
-async function wsManageWaitReject() {
-    console.log("현재 버튼을 클릭한 상태입니다."); // 버튼이 눌러지고 있는지 확인 필수
-    const id = localStorage.getItem("payload")
-    const id_json = JSON.parse(id)
-
-    let token = localStorage.getItem("access")
-
-    const response = await fetch('http://127.0.0.1:8000/workshops/' + 1 + '/apply/', {
-
-            method: 'PUT',
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": `application/json`
-            },
-            body: JSON.stringify({
-                "guest": 7,
-                "result": "거절"
-            }),
-        })
-        // backend에서 받은 데이터 가져오기
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {});
-
+    if(response.status == 200){
+        data = await response.json()
+        window.location.reload()
+        alert(`${result}이 완료되었습니다.`)
+    }
 }
 
 
+// 참여확정자의 목록 데이터 불러오기
 async function wsManageConfirmedUser() {
 
     const id = localStorage.getItem("payload")
     const id_json = JSON.parse(id)
 
-    const response = await fetch('http://127.0.0.1:8000/workshops/' + 2 + '/', {
-
+    const response = await fetch(`${back_end_url}/workshops/${workshop_id}/apply/`, {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("access")
+            },
             method: 'GET',
         })
         // backend에서 받은 데이터 가져오기
@@ -435,7 +391,7 @@ async function wsManageConfirmedUser() {
                     const wsConfUserTableThNameNum = document.createElement('th')
                     wsConfUserTableThNameNum.setAttribute('class', 'workshop-manage-conf-user-table-th-name')
                     wsConfUserTableThNameNum.setAttribute('id', 'workshop-manage-conf-user-table-th-name' + (i + 1))
-                    wsConfUserTableThNameNum.innerText = data['workshop_apply'][i]['guest_name']
+                    wsConfUserTableThNameNum.innerText = data['workshop_apply'][i]['guest_nickname']
                     wsConfUserTableTrNum.appendChild(wsConfUserTableThNameNum)
 
                     const wsConfUserTableChatNum = document.createElement('th')
