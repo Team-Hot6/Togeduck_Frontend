@@ -56,6 +56,7 @@ async function connect_user_chat_room(receiver_id) {
         `
         create_chat_log.insertAdjacentHTML("beforeend", each_chat_log);
     }
+    document.getElementById("chatbox__scroll").scrollTop = document.getElementById("chatbox__scroll").scrollHeight;
 
     user_to_user_room_socket.onmessage = function(e) {
         var data = JSON.parse(e.data);
