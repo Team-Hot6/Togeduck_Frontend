@@ -1,6 +1,7 @@
+const main = document.querySelector("main")
 const mypage = document.createElement('div')
 mypage.setAttribute('class', 'mypage')
-document.body.prepend(mypage)
+main.appendChild(mypage)
 
 // 로그인 사용자 pk값 가져오기
 const payload = localStorage.getItem("payload");
@@ -108,9 +109,9 @@ const mypageRightSide = document.createElement('div')
 mypageRightSide.setAttribute('class', 'mypage-rightside')
 mypage.appendChild(mypageRightSide)
 
-const navbar = document.createElement('nav')
-navbar.setAttribute('class', 'nav nav-pills flex-column flex-sm-row')
-mypageRightSide.appendChild(navbar)
+const navbar0 = document.createElement('nav')
+navbar0.setAttribute('class', 'nav nav-pills flex-column flex-sm-row')
+mypageRightSide.appendChild(navbar0)
 
 const shNav = document.createElement('a')
 shNav.setAttribute('id', 'nav-selectedhobby')
@@ -118,7 +119,7 @@ shNav.setAttribute('class', 'flex-sm-fill text-sm-center nav-link')
 shNav.setAttribute('onclick', 'myPageSelectedHobby_fuc()')
 shNav.setAttribute('style', 'cursor: pointer;')
 shNav.innerText = '내가 선택한 취미'
-navbar.appendChild(shNav)
+navbar0.appendChild(shNav)
 myPageSelectedHobby_fuc()
 
 const awNav = document.createElement('a')
@@ -127,7 +128,7 @@ awNav.setAttribute('class', 'flex-sm-fill text-sm-center nav-link')
 awNav.setAttribute('onclick', 'myPageAppliedWorkshop_fuc()')
 awNav.setAttribute('style', 'cursor: pointer;')
 awNav.innerText = '신청 워크샵'
-navbar.appendChild(awNav)
+navbar0.appendChild(awNav)
 
 const cwNav = document.createElement('a')
 cwNav.setAttribute('id', 'nav-createdworkshop')
@@ -135,7 +136,7 @@ cwNav.setAttribute('class', 'flex-sm-fill text-sm-center nav-link')
 cwNav.setAttribute('onclick', 'myPageCreatedWorkshop_fuc()')
 cwNav.setAttribute('style', 'cursor: pointer;')
 cwNav.innerText = '생성 워크샵'
-navbar.appendChild(cwNav)
+navbar0.appendChild(cwNav)
 
 
 async function myPageSelectedHobby_fuc() {
@@ -422,11 +423,11 @@ async function myPageCreatedWorkshop_fuc() {
             cwThStatus.setAttribute('id', 'mypage-createdworkshop-table-th-status-sort')
             cwThStatus.innerText = '모집현황'
             cwTableTr.appendChild(cwThStatus)
-
+ 
 
             for (i = 0; i < data["workshop_host"].length; i++) {
 
-                console.log(data)
+                
 
                 const cwTableTheadNum = document.createElement('thead')
                 cwTableTheadNum.setAttribute('class', 'mypage-createdworkshop-table-thead')
@@ -441,6 +442,7 @@ async function myPageCreatedWorkshop_fuc() {
                 const cwTableThNameNum = document.createElement('th')
                 cwTableThNameNum.setAttribute('class', 'mypage-createdworkshop-table-th-name')
                 cwTableThNameNum.setAttribute('id', 'mypage-createdworkshop-table-th-name-' + (i + 1))
+                cwTableThNameNum.setAttribute('onclick', 'workshop_apply_move('+data['workshop_host'][i]['id']+')')
                 cwTableThNameNum.innerText = data['workshop_host'][i]['title']
                 cwTableTrNum.appendChild(cwTableThNameNum)
 
@@ -470,3 +472,13 @@ async function myPageCreatedWorkshop_fuc() {
             }
         })
 }
+
+// 마이페이지 > 생성 워크샵 > 특정 워크샵 클릭 시 상세페이지(관리:승인/거절)로 이동
+async function workshop_apply_move(workshop_id) {
+    console.log("@@@@@@@@@@")
+    console.log(workshop_id)
+    const url = `${front_end_url}/templates/main/workshop_manage.html?id=${workshop_id}`
+    console.log(url)
+    // window.location.href = url
+}
+
