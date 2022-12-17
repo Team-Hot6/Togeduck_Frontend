@@ -4,7 +4,7 @@ window.onload = () => {
     if (page == null) {
         page = 1
     }
-    workshop_list(page)
+    workshop_list(page, '')
     hobby_list()
     workshop_popular_list()
 }
@@ -35,8 +35,8 @@ async function workshop_popular_list() {
 }
 
 // 모든 워크샵 목록 출력
-async function workshop_list(page) {
-    const response = await workshop_get(page)
+async function workshop_list(page, sort) {
+    const response = await workshop_get(page, sort)
 
     if (response.status == 200) {
         data = await response.json()
@@ -87,7 +87,7 @@ async function hobby_list() {
 
         for (i = 0; i < data.length; i++) {
 
-            const hobby = `<button type="button" class="hobby" onclick="workshop_pick_list(${data[i]['id']}, '${data[i]['category']}', 1)">${data[i]['category']}</button>`;
+            const hobby = `<button type="button" class="hobby" onclick="workshop_pick_list(${data[i]['id']}, '${data[i]['category']}', 1, '')">${data[i]['category']}</button>`;
 
             hobbys.insertAdjacentHTML("beforeend", hobby);
         }
@@ -95,9 +95,12 @@ async function hobby_list() {
 }
 
 // 특정 카테고리 선택 시 해당하는 워크샵 목록 출력
-async function workshop_pick_list(category_id, category_name, page) {
+async function workshop_pick_list(category_id, category_name, page, sort) {
+    const sort_button = document.querySelector("sort")
+    sort_button.innerHTML = `<span class="sort" onclick="workshop_pick_list(${category_id}, '${category_name}', 1,'latest')">최신순</span>
+                        <span class="sort" onclick="workshop_pick_list(${category_id}, '${category_name}', 1,'like')">인기순</span>`
 
-    const response = await workshop_pick_get(category_id, page)
+    const response = await workshop_pick_get(category_id, page, sort)
 
     if (response.status == 200) {
         data = await response.json()
@@ -137,7 +140,7 @@ async function workshop_pick_list(category_id, category_name, page) {
             page_range = Math.ceil(data['count'] / 12)
 
             for (i = 0; i < page_range; i++) {
-                const page_number = `<button type="button" class="page_number" onclick="workshop_pick_list(${category_id}, '${category_name}', ${i+1})">${i+1}</button>`
+                const page_number = `<button type="button" class="page_number" onclick="workshop_pick_list(${category_id}, '${category_name}', ${i+1}, '${sort}')">${i+1}</button>`
                 page_numbers.insertAdjacentHTML("beforeend", page_number);
             }
         }
