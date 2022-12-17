@@ -51,3 +51,8 @@ async function handleArticleUpdate(article_id) {
 
     update_article(article_id, title, content, image, category)
 }
+
+// 게시글 수정 페이지 취소 버튼
+function handleCancel() {
+    window.location.replace(`article_detail.html?id=${article_id}`)
+}

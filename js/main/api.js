@@ -114,10 +114,8 @@ async function create_article(title, content, image, category) {
     });
 
     if (response.status == 201) {
-        console.log(window.location)
         window.location.href = 'community.html'
         alert('작성 완료!!')
-    
     } else if (response.status == 401) {
         alert('다시 로그인을 해주세요!')
     } else {
