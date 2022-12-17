@@ -58,14 +58,26 @@ async function workshop_detail_view(workshop_id) {
             chat_button_label.innerHTML = `<button type="button" class="chat_user_button" id="chat_button" onclick="click_user_chat(${data.host_id})">문의하기</button>`
         }
 
+        const put_delete_box = document.getElementById("put_delete_box")
+
         if (payload_parse.nickname == data.host) {
-            const put_delete_box = document.getElementById("put_delete_box")
             put_delete_box.innerHTML = `<button onclick="PUT_Button()">수정</button>
                                         <button type="button" onclick="workshop_DELETE(workshop_id)">삭제</button>`
+        }else{
+            put_delete_box.innerHTML = `<button type="button" onclick="workshop_apply_for(${workshop_id})">워크샵 신청</button>`
         }
     }
 }
 
+// 워크샵 신청 접수하기 + 신청 철회
+async function workshop_apply_for(workshop_id){
+    const response = await workshop_apply_post(workshop_id)
+
+    if(response.status == 200){
+        data = await response.json()
+        alert(data['msg'])
+    }
+}
 
 // 워크샵 리뷰 보기
 async function workshop_review_view(workshop_id) {
