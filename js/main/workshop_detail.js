@@ -308,7 +308,7 @@ async function workshop_post() {
 function PUT_Button() {
     const urlParams = new URLSearchParams(window.location.search);
     let id = urlParams.get('id');
-    window.location.href = `${front_end_url}/templates/main/workshop_put.html?id=${id}`
+    window.location.href = `${front_end_url}/templates/main/workshop_put.html?id=${id}` //수정 해야함
 }
 
 //워크샵 수정

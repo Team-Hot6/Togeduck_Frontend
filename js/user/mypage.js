@@ -479,3 +479,11 @@ async function workshop_apply_move(workshop_id) {
     window.location.href = url
 }
 
+
+// 비밀번호 변경 페이지 이동
+async function password_move() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let id = urlParams.get('id');
+    const url = `${front_end_url}/templates/user/password.html?id=${id}` // 수정 예정
+    window.location.href = url
+}
