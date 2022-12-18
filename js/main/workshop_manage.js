@@ -1,6 +1,10 @@
 const urlParams = new URLSearchParams(window.location.search);
 let workshop_id = urlParams.get('id');
 
+console.log(urlParams)
+console.log(workshop_id)
+
+
 
 
 const main = document.querySelector("main")
@@ -22,7 +26,7 @@ async function wsManageCard_fuc() {
 
     const response = await workshop_apply_get(workshop_id)
 
-    if(response.status == 200){
+    if (response.status == 200) {
         data = await response.json()
 
         const wsManagePicture = document.createElement('div')
@@ -135,10 +139,10 @@ navbar0.appendChild(wsApplyConfirmedNav)
 
 // 신청 대기자 목록 불러오기
 async function wsManageApplyWait_fuc() {
-    
+
     const response = await fetch(`${back_end_url}/workshops/${workshop_id}/apply/`, {
             headers: {
-                "Authorization":"Bearer "+localStorage.getItem("access")
+                "Authorization": "Bearer " + localStorage.getItem("access")
             },
             method: 'GET',
         })
@@ -219,7 +223,7 @@ async function wsManageApplyWait_fuc() {
             wsAWUTableReject.setAttribute('id', 'workshop-manage-applywaituser-table-th-ar-sort')
             wsAWUTableReject.innerText = '거절'
             wsAWUTableTr.appendChild(wsAWUTableReject)
-            
+
             console.log("--------------------------------------")
             console.log(data)
 
@@ -240,7 +244,7 @@ async function wsManageApplyWait_fuc() {
                     wsAWUTableThUsernameNum.setAttribute('class', 'workshop-manage-applywaituser-table-th-name')
                     wsAWUTableThUsernameNum.setAttribute('id', 'workshop-manage-applywaituser-table-th-name' + (i + 1))
                     wsAWUTableThUsernameNum.innerText = data['workshop_apply'][i]['guest_nickname']
-                    // wsAWUTableThUsernameNum.innerText = "##############"
+                        // wsAWUTableThUsernameNum.innerText = "##############"
                     wsAWUTableTrNum.appendChild(wsAWUTableThUsernameNum)
 
                     const wsAWUTableThChatNum = document.createElement('th')
@@ -263,14 +267,14 @@ async function wsManageApplyWait_fuc() {
                     const wsAWUTableApproveBtn = document.createElement('button')
                     wsAWUTableApproveBtn.setAttribute('type', 'button')
                     wsAWUTableApproveBtn.setAttribute('id', 'workshop-manage-applywaituser-approve-button')
-                    wsAWUTableApproveBtn.setAttribute('onclick', "workshop_apply_result("+data['workshop_apply'][i]['guest']+", '승인')")
+                    wsAWUTableApproveBtn.setAttribute('onclick', "workshop_apply_result(" + data['workshop_apply'][i]['guest'] + ", '승인')")
                     wsAWUTableApproveBtn.innerText = '승인'
                     wsAWUTableApproveNum.appendChild(wsAWUTableApproveBtn)
 
                     const wsAWUTableRejectBtn = document.createElement('button')
                     wsAWUTableRejectBtn.setAttribute('type', 'button')
                     wsAWUTableApproveBtn.setAttribute('id', 'workshop-manage-applywaituser-reject-button')
-                    wsAWUTableRejectBtn.setAttribute('onclick', "workshop_apply_result("+data['workshop_apply'][i]['guest']+", '거절')")
+                    wsAWUTableRejectBtn.setAttribute('onclick', "workshop_apply_result(" + data['workshop_apply'][i]['guest'] + ", '거절')")
                     wsAWUTableRejectBtn.innerText = '거절'
                     wsAWUTableRejectNum.appendChild(wsAWUTableRejectBtn)
 
@@ -290,7 +294,7 @@ wsManageApplyWait_fuc()
 async function workshop_apply_result(guest_id, result) {
     const response = await apply_result_put(workshop_id, guest_id, result)
 
-    if(response.status == 200){
+    if (response.status == 200) {
         data = await response.json()
         window.location.reload()
         alert(`${result}이 완료되었습니다.`)
@@ -306,7 +310,7 @@ async function wsManageConfirmedUser() {
 
     const response = await fetch(`${back_end_url}/workshops/${workshop_id}/apply/`, {
             headers: {
-                "Authorization":"Bearer "+localStorage.getItem("access")
+                "Authorization": "Bearer " + localStorage.getItem("access")
             },
             method: 'GET',
         })
