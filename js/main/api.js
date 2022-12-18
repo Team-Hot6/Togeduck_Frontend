@@ -50,8 +50,8 @@ async function get_hobby() {
 }
 
 // 게시글 전체 목록 API
-async function get_articles() {
-    const response = await fetch(`${back_end_url}/articles/`, {
+async function get_articles(sort, category_id) {
+    const response = await fetch(`${back_end_url}/articles/?sort=${sort}&category=${category_id}`, {
         method: "GET",
     })
     return response
@@ -65,8 +65,8 @@ async function get_lank_articles() {
 }
 
 // 카테고리 선택 시 해당 카테고리 게시글 리스트 API
-async function get_select_articles(category_id) {
-    const response = await fetch(`${back_end_url}/articles/?category=${category_id}`, {
+async function get_select_articles(category_id, sort) {
+    const response = await fetch(`${back_end_url}/articles/?category=${category_id}&sort=${sort}`, {
         method: "GET",
     })
     return response

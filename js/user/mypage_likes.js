@@ -1,6 +1,9 @@
+const main = document.querySelector("main")
 const mypage = document.createElement('div')
 mypage.setAttribute('class', 'mypage')
-document.body.prepend(mypage)
+main.appendChild(mypage)
+
+
 
 // 로그인 사용자 pk값 가져오기
 const payload = localStorage.getItem("payload");

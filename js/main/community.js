@@ -4,11 +4,14 @@ window.onload = async() => {
 }
 
 // 전체 카테고리의 게시글 목록
-async function article_list() {
-    const response = await get_articles()
+async function article_list(sort, category_id) {
+    const response = await get_articles(sort, category_id)
     const response_json = await response.json()
     const data = response_json['results']
     
+    const article_list = document.getElementById('article_list')
+    article_list.innerHTML = ''
+
     for (let i = 0; i < data.length; i++) {
         let id = data[i]['id']
         let title = data[i]['title']
@@ -30,7 +33,7 @@ async function article_list() {
                             <td>${like}</td>
                             <td>${views}</td>
                         </tr>`
-        const article_list = document.getElementById('article_list')
+                        
         article_list.insertAdjacentHTML('beforeend', article)
     }
 
@@ -73,7 +76,7 @@ async function hobby_list() {
     const data = await response.json()
 
     for (let i = 0; i < data.length; i++) {
-        const hobby = `<button type="button" class="hobby" onclick="select_article_list(${data[i]['id']})">${data[i]['category']}</button>`;
+        const hobby = `<button type="button" class="hobby" onclick="select_article_list(${data[i]['id']}, '')">${data[i]['category']}</button>`;
 
         hobbys = document.getElementById("hobbys")
         hobbys.insertAdjacentHTML("beforeend", hobby);
@@ -81,8 +84,14 @@ async function hobby_list() {
 }
 
 // 선택한 카테고리의 게시글 목록
-async function select_article_list(category_id) {
-    const response = await get_select_articles(category_id)
+async function select_article_list(category_id, sort) {
+    const sort_btn = document.getElementById('sort_btn')
+    temp_html = `<span class="sort" id="latest" onclick="select_article_list(${category_id}, 'latest')">최신순</span>
+                <span class="sort" id="like" onclick="select_article_list(${category_id}, 'like')">인기순</span>`
+    sort_btn.innerHTML = ''
+    sort_btn.insertAdjacentHTML('beforeend', temp_html)
+    
+    const response = await get_select_articles(category_id, sort)
     const response_json = await response.json()
     const data = response_json['results']
 
