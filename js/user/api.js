@@ -196,11 +196,10 @@ async function handleSign() {
 
 const urlParams = new URLSearchParams(window.location.search);
 const user_id = urlParams.get('id');
-console.log(user_id,'asdsadasdsad')
+
 
 // 비밀번호 변경
 async function change_Password(user_id){
-    console.log(user_id,'유저아이디 ㅇㅁㅇ')
 
     const password = document.getElementById("password").value;
     const password2 = document.getElementById("password2").value;
@@ -249,8 +248,6 @@ async function change_Password(user_id){
     }
     
 
-    console.log('꺠빡진짜',user_id)
-
     const response = await fetch(`${back_end_url}/users/change_password/${user_id}/`,{
         headers:{
             'Authorization':'Bearer '+localStorage.getItem("access"),
@@ -266,17 +263,14 @@ async function change_Password(user_id){
 
     response_json = await response.json()
     
-    console.log(response_json, '데이버버ㅓ법ㅂ')
-    
-    console.log(response_json['old_password'], '롸로라ㅗ랄')
     if(response.status == 200){
         alert('비밀번호를 변경했습니다')
         window.location.replace(`/templates/user/mypage.html?id=${user_id}`)
         
         
     }else if(response.status == 400){
-        console.log(response_json['old_password']['old_password'], '로로로로ㅗㄹㄹ')
+        
         alert(`${response_json['old_password']['old_password']}`)
-        //window.location.reload()
+        
     }
 }
