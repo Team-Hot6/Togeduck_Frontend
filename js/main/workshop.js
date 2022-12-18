@@ -40,7 +40,6 @@ async function workshop_list(page, sort) {
 
     if (response.status == 200) {
         data = await response.json()
-        console.log(data)
         workshop_data = data['results']
 
         const gridbox = document.getElementById("gridbox")

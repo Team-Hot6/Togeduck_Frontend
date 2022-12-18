@@ -64,10 +64,19 @@ async function workshop_detail_view(workshop_id) {
             put_delete_box.innerHTML = `<button onclick="PUT_Button()">수정</button>
                                         <button type="button" onclick="workshop_DELETE(workshop_id)">삭제</button>`
         }else{
-            put_delete_box.innerHTML = `<button type="button" onclick="workshop_apply_for(${workshop_id})">워크샵 신청</button>`
+            participant_id_list = data["participant"]
+            login_user_id = payload_parse.user_id
+        
+            if(participant_id_list.includes(login_user_id) == true){
+                put_delete_box.innerHTML = `<button type="button" onclick="workshop_apply_for(${workshop_id})">워크샵 신청 취소</button>`
+
+            }else{
+                put_delete_box.innerHTML = `<button type="button" onclick="workshop_apply_for(${workshop_id})">워크샵 신청</button>`
+            }            
         }
     }
 }
+
 
 // 워크샵 신청 접수하기 + 신청 철회
 async function workshop_apply_for(workshop_id){
@@ -75,6 +84,7 @@ async function workshop_apply_for(workshop_id){
 
     if(response.status == 200){
         data = await response.json()
+        window.location.reload()
         alert(data['msg'])
     }
 }
