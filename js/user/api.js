@@ -271,7 +271,7 @@ async function change_Password(user_id){
     console.log(response_json['old_password'], '롸로라ㅗ랄')
     if(response.status == 200){
         alert('비밀번호를 변경했습니다')
-        window.location.replace(`/html/user_info.html?id=${userinfo_user_id}`)
+        window.location.replace(`/templates/user/mypage.html?id=${user_id}`)
         
         
     }else if(response.status == 400){
