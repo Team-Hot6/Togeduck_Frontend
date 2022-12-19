@@ -40,11 +40,10 @@ async function workshop_detail_view(workshop_id) {
         likes_count.innerText = data.likes_count;
         participant_count.innerText = data.participant_count;
         review_workshop_count.innerText = data.review_workshop_count
-
+        
         const today = new Date(data.date)
-            // date.innerText = today.toLocaleDateString()
         var options = { hour: "numeric", minute: "numeric" };
-        date.innerText = today.toLocaleString("ko-kr", options)
+        date.innerText = today.toLocaleDateString() + ' ' + today.toLocaleString("ko-kr", options)
 
         address.innerText = data.address;
 
@@ -268,12 +267,14 @@ async function workshop_post() {
     const content = document.getElementById("content").value
     const workshop_image = document.getElementById("imag").files[0];
     const title = document.getElementById("title").value;
-    const date = document.getElementById("date").value;
     const max_guest = document.getElementById("max_guest").value;
     const amount = document.getElementById("amount").value;
     const category = document.getElementById("category_id").value;
     const location = document.getElementById("location_id").value;
     const address = document.getElementById("address").value;
+    const date_1 = document.getElementById("date_1").value;
+    const date_2 = document.getElementById("date_2").value;
+    const date = `${date_1} ${date_2} `
 
     const formData = new FormData();
 
@@ -315,12 +316,14 @@ async function workshop_put(workshop_id) {
     const content = document.getElementById("content").value
     const workshop_image = document.getElementById("getval").files[0];
     const title = document.getElementById("title").value;
-    const date = document.getElementById("date").value;
     const max_guest = document.getElementById("max_guest").value;
     const amount = document.getElementById("amount").value;
     const category = document.getElementById("category_id").value;
     const location = document.getElementById("location_id").value;
     const address = document.getElementById("address").value;
+    const date_1 = document.getElementById("date_1").value;
+    const date_2 = document.getElementById("date_2").value;
+    const date = `${date_1} ${date_2} `
 
     const formData = new FormData();
 
