@@ -15,9 +15,16 @@ async function workshop_popular_list() {
 
     if (response.status == 200) {
         data = await response.json()
+
+        console.log(data)
+
         popular_workshops_wrap = document.getElementById("popular_workshops_wrap")
 
+        console.log("베스트 워크샵")
         for (i = 0; i < data.length; i++) {
+            
+            console.log("원본url : ", data[i]['workshop_image'])
+            console.log("src_url : ", `"${back_end_url}${data[i]['workshop_image']}"`)       
 
             const popular_workshop = `<div class="popular_workshop" id="popular_workshop" onclick="workshop_detail_move(${data[i]['id']})">
                                             <div class="popular_workshop_img_frame">
@@ -29,6 +36,7 @@ async function workshop_popular_list() {
 
             popular_workshops_wrap.insertAdjacentHTML("beforeend", popular_workshop);
         }
+        console.log("-------------------------------------------")
     }
 }
 
@@ -40,16 +48,22 @@ async function workshop_list(page, sort) {
         data = await response.json()
         workshop_data = data['results']
 
+        console.log(workshop_data)
+
         const gridbox = document.getElementById("gridbox")
         gridbox.innerHTML = ''
         const none_box_wrap = document.getElementById("none_box_wrap")
         none_box_wrap.innerHTML = ''
 
+        console.log("그냥 워크샵")
         for (i = 0; i < workshop_data.length; i++) {
+           
+            console.log("원본url : ", workshop_data[i]['workshop_image'])
+            console.log("src_url : ", `"${back_end_url}/${workshop_data[i]['workshop_image']}"`)
 
             const workshop = `<div class="workshop" onclick="workshop_detail_move(${workshop_data[i]['id']})">
                                 <div class="workshop_img_frame">
-                                    <img class="workshop_img" src="${workshop_data[i]['workshop_image']}">
+                                    <img class="workshop_img" src="${back_end_url}${workshop_data[i]['workshop_image']}">
                                 </div>
                                 <span class="date">${workshop_data[i]['date']} | ${workshop_data[i]['cur_time']}</span>
                                 <div class="title">${workshop_data[i]['title']}</div>
