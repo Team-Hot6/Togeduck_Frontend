@@ -7,8 +7,8 @@ async function workshop_popular_get() {
 }
 
 // 모든 워크샵 목록 출력 + 페이지네이션
-async function workshop_get(page) {
-    const response = await fetch(`${back_end_url}/workshops/?page=${page}`, {
+async function workshop_get(page, sort) {
+    const response = await fetch(`${back_end_url}/workshops/?page=${page}&sort=${sort}`, {
         method: 'GET'
     })
     return response
@@ -31,8 +31,8 @@ async function location_get() {
 }
 
 // 특정 카테고리 선택 시 해당하는 워크샵 목록 출력 + 페이지네이션
-async function workshop_pick_get(category_id, page) {
-    const response = await fetch(`${back_end_url}/workshops/?category=${category_id}&page=${page}`, {
+async function workshop_pick_get(category_id, page, sort) {
+    const response = await fetch(`${back_end_url}/workshops/?category=${category_id}&page=${page}&sort=${sort}`, {
         method: 'GET'
     })
     return response
