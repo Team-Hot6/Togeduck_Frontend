@@ -100,6 +100,18 @@ async function myPageProfile_fuc() {
             profilePartiLike2.innerText = data['workshop_likes'].length + "개"
             profilePartiLike.appendChild(profilePartiLike2)
 
+            // 마이페이지 프로필 카드 아래 개인정보 변경 버튼
+            const mypagePutButtonFrame = document.createElement('div')
+            mypagePutButtonFrame.setAttribute('class', 'mypage_put_button_frame')
+            mypageLeftSide.appendChild(mypagePutButtonFrame)
+
+            const mypagePutButton = document.createElement('button')
+            mypagePutButton.setAttribute('onclick', 'password_move()')
+            mypagePutButton.setAttribute('class', 'mypage_put_button')
+            mypagePutButton.innerText = '개인정보 수정'
+            mypageLeftSide.appendChild(mypagePutButton)
+            mypagePutButtonFrame.appendChild(mypagePutButton)
+
         })
 
 }
@@ -524,11 +536,14 @@ async function myPageCreatedWorkshop_del_fuc(workshop_id) {
 }
 
 
+
+
 // 마이페이지 > 생성 워크샵 > 특정 워크샵 클릭 시 상세페이지(관리:승인/거절)로 이동
 async function workshop_apply_move(workshop_id) {
     const url = `${front_end_url}/templates/main/workshop_manage.html?id=${workshop_id}`
     window.location.href = url
 }
+
 
 
 // 비밀번호 변경 페이지 이동
