@@ -1,11 +1,3 @@
-// // 현재 URL의 쿼리스트링 값을 가져옴
-// const url_str = window.location.search
-//     // url_str의 URLSearchParams 객체를 생성
-// const urlParams = new URLSearchParams(url_str);
-// // URLSearchParams 객체에서 id 값 추출
-// const workshop_id = urlParams.get("id");
-
-
 const main = document.querySelector("main")
 const mypage = document.createElement('div')
 mypage.setAttribute('class', 'mypage')
@@ -26,7 +18,6 @@ myPageProfile_fuc()
 async function myPageProfile_fuc() {
 
     const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/`, {
-
             method: 'GET',
         })
         // backend에서 받은 데이터 가져오기
@@ -150,11 +141,8 @@ navbar0.appendChild(cwNav)
 
 
 async function myPageSelectedHobby_fuc() {
-    const id = localStorage.getItem("payload")
-    const id_json = JSON.parse(id)
 
     const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/`, {
-
             method: 'GET',
         })
         // backend에서 받은 데이터 가져오기
@@ -175,8 +163,6 @@ async function myPageSelectedHobby_fuc() {
             if (tempCw) {
                 tempCw.remove()
             }
-
-
 
             // 네비게이션바에서 '내가 선택한 취미' 버튼 클릭 시 색상 변경
 
@@ -215,11 +201,7 @@ async function myPageSelectedHobby_fuc() {
 
 async function myPageAppliedWorkshop_fuc() {
 
-    const id = localStorage.getItem("payload")
-    const id_json = JSON.parse(id)
-
     const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/`, {
-
             method: 'GET',
         })
         // backend에서 받은 데이터 가져오기
