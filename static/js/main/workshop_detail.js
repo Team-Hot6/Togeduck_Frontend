@@ -29,6 +29,7 @@ async function workshop_detail_view(workshop_id) {
         const participant_count = document.getElementById("participant_count") // 참가인원
         const date = document.getElementById("date") // 워크샵 날짜
         const address = document.getElementById("address") // 주소
+        const review_workshop_count = document.getElementById("review_workshop_count") // 좋아요 수
 
         title.innerText = data.title;
         content.innerText = data.content;
@@ -40,6 +41,7 @@ async function workshop_detail_view(workshop_id) {
         host.innerText = data.host;
         likes_count.innerText = data.likes_count;
         participant_count.innerText = data.participant_count;
+        review_workshop_count.innerText = data.review_workshop_count
 
         const today = new Date(data.date)
             // date.innerText = today.toLocaleDateString()
@@ -116,7 +118,7 @@ async function workshop_review_view(workshop_id) {
                         <p style="font-size:10px" id="created_at">${created_at}</p>
                         <p style="font-size:10px" id="updated_at">${updated_at}</p>
                         <input style="color : #046582;" id="update_button(${data[i].id})" class="comment-body" value=" ${review}">
-                        <button  id="update(${data[i].id})" type="button" onclick="updateMode(${data[i].id})" > 수정하기</button>
+                        
                         <button  id="put_btn(${data[i].id})" type="button" onclick="review_put(${data[i].id})" > 수정완료</button>
                         <button id="delete_btn(${data[i].id})" type="button" onclick="review_delete(${data[i].id})">삭제버튼</button>
                       </div>
@@ -124,11 +126,11 @@ async function workshop_review_view(workshop_id) {
 
             list.insertAdjacentHTML("beforeend", new_review)
 
-
+            //<button  id="update(${data[i].id})" type="button" onclick="updateMode(${data[i].id})" > 수정하기</button> // 수정화면 버튼
             //<div id="comment-footer${data[i].id}" class="comment-footer" ></div>
             //const update_btn = document.getElementById(`comment-footer${data[i].id}`)
             const put_btn = document.getElementById(`put_btn(${data[i].id})`)
-            const update = document.getElementById(`update(${data[i].id})`)
+            //const update = document.getElementById(`update(${data[i].id})`)
             const delete_btn = document.getElementById(`delete_btn(${data[i].id})`)
             const payload = localStorage.getItem("payload");
             const payload_parse = JSON.parse(payload)
@@ -138,7 +140,7 @@ async function workshop_review_view(workshop_id) {
 
                 //update_btn.style.display = "none"
                 put_btn.style.display = "none"
-                update.style.display = "none"
+                //update.style.display = "none"
                 delete_btn.style.display = "none"
 
             }
