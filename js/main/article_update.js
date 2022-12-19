@@ -43,12 +43,12 @@ window.onload = async function LoadCategory() {
 }
 
 // 게시글 수정
-async function handleArticleUpdate(article_id) {
+function handleArticleUpdate(article_id) {
     const category = document.getElementById('category').value
     const title = document.getElementById('title').value
     const content = document.getElementById('content').value
     const image = document.getElementById('formFile').files[0]
-
+    
     update_article(article_id, title, content, image, category)
 }
 

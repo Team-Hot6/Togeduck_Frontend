@@ -159,7 +159,9 @@ async function update_article(article_id, title, content, image, category) {
     data.append("category", category)
     data.append("title", title)
     data.append("content", content)
-    data.append("article_image", image)
+    if(image){
+        data.append("article_image", image)
+    }
 
     const response = await fetch(`${back_end_url}/articles/${article_id}/`, {
         headers: {
