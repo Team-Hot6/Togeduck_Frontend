@@ -5,7 +5,8 @@ const token = localStorage.getItem("access");
 async function sign_in() {
     const email = document.getElementById("login_id").value
     const password = document.getElementById("login_password").value
-    const response = await fetch('http://127.0.0.1:8000/users/api/token/', {
+    
+    const response = await fetch(`${back_end_url}/users/api/token/`, {
         headers: {
             'content-type': 'application/json',
         },

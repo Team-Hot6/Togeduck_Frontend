@@ -1,21 +1,15 @@
 const urlParams = new URLSearchParams(window.location.search);
 let workshop_id = urlParams.get('id');
 
-
-
 const main = document.querySelector("main")
 const wsManage = document.createElement('div')
 wsManage.setAttribute('class', 'workshop-manage')
 main.appendChild(wsManage)
 
-
-
-
 // 워크샵 관리페이지 좌측 워크샵 사진 부분
 const wsManageLeftSide = document.createElement('div')
 wsManageLeftSide.setAttribute('class', 'workshop-manage-leftside')
 wsManage.appendChild(wsManageLeftSide)
-
 
 // 왼쪽카드 틀 생성. 데이터 넣기
 async function wsManageCard_fuc() {
@@ -31,7 +25,7 @@ async function wsManageCard_fuc() {
 
         const wsManagePictureImg = document.createElement('img')
         wsManagePictureImg.setAttribute('class', 'workshop-manage-pictureimg')
-        wsManagePictureImg.setAttribute('src', 'http://127.0.0.1:8000' + data["workshop_image"])
+        wsManagePictureImg.setAttribute('src', back_end_url + data["workshop_image"])
         wsManagePicture.appendChild(wsManagePictureImg)
 
         const wsManageName = document.createElement('div')
@@ -123,7 +117,6 @@ wsApplyWaitNav.setAttribute('style', 'cursor: pointer;')
 wsApplyWaitNav.innerText = '신청 대기자'
 navbar0.appendChild(wsApplyWaitNav)
 
-
 const wsApplyConfirmedNav = document.createElement('a')
 wsApplyConfirmedNav.setAttribute('id', 'nav-apply-confirmed')
 wsApplyConfirmedNav.setAttribute('class', 'flex-sm-fill text-sm-center nav-link')
@@ -131,7 +124,6 @@ wsApplyConfirmedNav.setAttribute('onclick', 'wsManageConfirmedUser()')
 wsApplyConfirmedNav.setAttribute('style', 'cursor: pointer;')
 wsApplyConfirmedNav.innerText = '참여 확정자'
 navbar0.appendChild(wsApplyConfirmedNav)
-
 
 // 신청 대기자 목록 불러오기
 async function wsManageApplyWait_fuc() {
@@ -156,8 +148,6 @@ async function wsManageApplyWait_fuc() {
             if (tempWSConfUser) {
                 tempWSConfUser.remove()
             }
-
-
 
             // 네비게이션바에서 '신청 대기자' 버튼 클릭 시 색상 변경
 
@@ -219,9 +209,6 @@ async function wsManageApplyWait_fuc() {
             wsAWUTableReject.setAttribute('id', 'workshop-manage-applywaituser-table-th-ar-sort')
             wsAWUTableReject.innerText = '거절'
             wsAWUTableTr.appendChild(wsAWUTableReject)
-            
-            console.log("--------------------------------------")
-            console.log(data)
 
             // '신청 대기자' 항목 리스트 작성
             for (i = 0; i < data['workshop_apply'].length; i++) {
@@ -240,7 +227,6 @@ async function wsManageApplyWait_fuc() {
                     wsAWUTableThUsernameNum.setAttribute('class', 'workshop-manage-applywaituser-table-th-name')
                     wsAWUTableThUsernameNum.setAttribute('id', 'workshop-manage-applywaituser-table-th-name' + (i + 1))
                     wsAWUTableThUsernameNum.innerText = data['workshop_apply'][i]['guest_nickname']
-                    // wsAWUTableThUsernameNum.innerText = "##############"
                     wsAWUTableTrNum.appendChild(wsAWUTableThUsernameNum)
 
                     const wsAWUTableThChatNum = document.createElement('th')
@@ -273,18 +259,11 @@ async function wsManageApplyWait_fuc() {
                     wsAWUTableRejectBtn.setAttribute('onclick', "workshop_apply_result("+data['workshop_apply'][i]['guest']+", '거절')")
                     wsAWUTableRejectBtn.innerText = '거절'
                     wsAWUTableRejectNum.appendChild(wsAWUTableRejectBtn)
-
                 }
             }
-
-
-
         })
 }
 wsManageApplyWait_fuc()
-
-
-
 
 // 승인. 거절 처리
 async function workshop_apply_result(guest_id, result) {
@@ -297,13 +276,8 @@ async function workshop_apply_result(guest_id, result) {
     }
 }
 
-
 // 참여확정자의 목록 데이터 불러오기
 async function wsManageConfirmedUser() {
-
-    const id = localStorage.getItem("payload")
-    const id_json = JSON.parse(id)
-
     const response = await fetch(`${back_end_url}/workshops/${workshop_id}/apply/`, {
             headers: {
                 "Authorization":"Bearer "+localStorage.getItem("access")
@@ -328,7 +302,6 @@ async function wsManageConfirmedUser() {
             if (tempWSConfUser) {
                 tempWSConfUser.remove()
             }
-
 
             // '참여 확정자' div 작성
             const wsConfUser = document.createElement('div')

@@ -9,14 +9,12 @@ window.onload = () => {
     workshop_popular_list()
 }
 
-
 // 베스트 워크샵 목록 출력
 async function workshop_popular_list() {
     const response = await workshop_popular_get()
 
     if (response.status == 200) {
         data = await response.json()
-
         popular_workshops_wrap = document.getElementById("popular_workshops_wrap")
 
         for (i = 0; i < data.length; i++) {
@@ -154,13 +152,6 @@ async function workshop_detail_move(workshop_id) {
 
 // 워크샵 목록 중 특정 페이지로 이동
 async function workshop_page_move(page_nunber) {
-    console.log(window.location)
     const url = `${front_end_url}/workshop.html?page=${page_nunber}`
-    window.location.href = url
-}
-
-// 메인 페이지로 이동
-async function main_page_move() {
-    const url = `${front_end_url}/workshop.html`
     window.location.href = url
 }

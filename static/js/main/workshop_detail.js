@@ -5,10 +5,8 @@ window.onload = () => {
     workshop_review_view(workshop_id)
 }
 
-
 const urlParams = new URLSearchParams(window.location.search);
 const workshop_id = urlParams.get('id');
-
 
 // 워크샵 상세 데이터 불러오기
 async function workshop_detail_view(workshop_id) {
@@ -35,7 +33,7 @@ async function workshop_detail_view(workshop_id) {
         content.innerText = data.content;
         max_guest.innerText = data.max_guest;
         amount.innerText = data.amount;
-        workshop_image.setAttribute("src", `http://127.0.0.1:8000${data.workshop_image}`);
+        workshop_image.setAttribute("src", `${back_end_url}${data.workshop_image}`);
         category.innerText = data.category;
         location.innerText = data.location;
         host.innerText = data.host;
@@ -97,9 +95,7 @@ async function workshop_review_view(workshop_id) {
     const response = await workshop_review_get(workshop_id)
 
     if (response.status == 200) {
-
         data = await response.json()
-
         const list = document.getElementById("list")
 
         for (let i = 0; i < data.length; i++) {
@@ -108,8 +104,6 @@ async function workshop_review_view(workshop_id) {
             const user = data[i].user
             const created_at = data[i].created_at
             const updated_at = data[i].updated_at
-
-
 
             const new_review = `
                       <div id="review_list(${data[i].id})" class="comment">
@@ -173,13 +167,8 @@ function updateMode(id) {
     // 업데이트 버튼을 가져오고 클릭시 review_put(id) 함수 실행
 }
 
-
-
-
-
 //리뷰 수정
 async function review_put(id) {
-
 
     review_id = id
     const content =document.getElementById(`update_button(${id})`).value // input 박스 
@@ -189,7 +178,6 @@ async function review_put(id) {
     const response = await workshop_review_put(workshop_id, review_id, content)
 
     const content_previous = document.getElementById(`update(${id})`).previousElementSibling // 
-    console.log(content,'원래 내용으로')
     content_previous.style.visibility = "visible" // 원래 내용 보이기
 
     const content_update = document.getElementById(`update(${id})`)
@@ -205,9 +193,6 @@ async function review_put(id) {
     window.location.reload()
 }
 
-
-
-
 // 리뷰 작성
 async function workshop_review_POST(workshop_id) {
 
@@ -216,14 +201,12 @@ async function workshop_review_POST(workshop_id) {
     const response = await workshop_review_post(workshop_id, review_post)
 
     if (response.status == 200) {
-        alert('댓글 작성 됐습니다')
+        alert('댓글이 작성되었습니다.')
     } else {
-        alert(response.status, 'qtqtqtq')
+        alert(response.status)
     }
     location.reload()
 }
-
-
 
 // 리뷰 삭제
 async function review_delete(id) {
@@ -242,9 +225,7 @@ async function review_delete(id) {
 async function Like_post(workshop_id) {
 
     workshop_id = location.href.split("?")[1].split("=")[1]
-
     const response = await workshop_like(workshop_id)
-
 
     if (response.status == 200) {
 
@@ -296,7 +277,6 @@ async function workshop_post() {
 
     const formData = new FormData();
 
-
     formData.append("title", title);
     formData.append("content", content);
     formData.append("date", date);
@@ -306,15 +286,12 @@ async function workshop_post() {
     formData.append("category", category);
     formData.append("location", location);
     formData.append("address", address);
-
-
-    const response = await fetch("http://127.0.0.1:8000/workshops/", {
+    
+    const response = await fetch(`${back_end_url}/workshops/`, {
         headers: {
             Authorization: "Bearer " + localStorage.getItem("access")
         },
-
         method: 'POST',
-
         body: formData
     })
 
@@ -324,10 +301,7 @@ async function workshop_post() {
     } else {
         alert('생성 목록을 모두 작성해주세요',response.status);
     }
-
 }
-
-
 
 function PUT_Button() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -348,7 +322,6 @@ async function workshop_put(workshop_id) {
     const location = document.getElementById("location_id").value;
     const address = document.getElementById("address").value;
 
-
     const formData = new FormData();
 
     formData.append("title", title);
@@ -361,17 +334,12 @@ async function workshop_put(workshop_id) {
     formData.append("location", location);
     formData.append("address", address);
 
-
-
-    const response = await fetch(`http://127.0.0.1:8000/workshops/${workshop_id}/`, {
+    const response = await fetch(`${back_end_url}/workshops/${workshop_id}/`, {
         headers: {
-
             Authorization: "Bearer " + localStorage.getItem("access")
         },
-
         method: "PUT",
         body: formData
-
     })
     if (response.status == 200) {
         alert("워크샵 수정 됐습니다")
@@ -379,24 +347,16 @@ async function workshop_put(workshop_id) {
     } else {
         alert(response.status)
     }
-
 }
-
-
-
 
 // 워크샵 삭제
 async function workshop_DELETE(workshop_id) {
-
-
-
     const response = await workshop_delete(workshop_id)
     if (response.status == 204) {
         alert("워크샵을 삭제 했습니다.")
     } else {
         alert("워크샵 작성자가 아닙니다")
     }
-
     window.location.replace(`${front_end_url}/workshop.html`)
 }
 

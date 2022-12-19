@@ -1,6 +1,3 @@
-console.log('article detail JS 로딩 확인')
-
-
 // 현재 URL의 쿼리스트링 값을 가져옴
 const url_str = window.location.search
 // url_str의 URLSearchParams 객체를 생성
@@ -108,7 +105,6 @@ async function LoadDeatail_comment(article_id) {
         }
     }
 }
-
 
 // 댓글 작성
 async function handleCommentCreate() {

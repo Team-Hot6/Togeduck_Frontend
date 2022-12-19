@@ -69,13 +69,13 @@ async function workshop_info(workshop_id) {
         content.value = data.content;
         max_guest.value = data.max_guest;
         amount.value = data.amount;
-        workshop_image.setAttribute("src", `http://127.0.0.1:8000${data.workshop_image}`);
+        workshop_image.setAttribute("src", `${back_end_url}${data.workshop_image}`);
         date.value = data.date;
         address.value = data.address;
 
         workshop_image_frame.style.opacity = 100;
         workshop_image_frame.innerHTML = `<input type="file" name="logo" id='getval' class="upload" accept="image/*" id="imag">
-                                            <img class="workshop_img" id="temp_img" src=http://127.0.0.1:8000${data.workshop_image}>`
+                                            <img class="workshop_img" id="temp_img" src=${back_end_url}${data.workshop_image}>`
 
         workshop_image.style.zIndex = 10;
 

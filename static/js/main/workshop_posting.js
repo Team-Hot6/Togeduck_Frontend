@@ -43,14 +43,7 @@ async function location_category_list() {
     }
 }
 
-
-
-////////////////////////////////////////////////////////////
-
-
-
-
-
+// 업로드한 이미지 미리보기
 function readURL() {
     var file = document.getElementById("imag").files[0];
     var reader = new FileReader();
@@ -62,5 +55,4 @@ function readURL() {
     } else {}
 }
 
-// 업로드한 이미지 미리보기
 document.getElementById('imag').addEventListener('change', readURL, true);
