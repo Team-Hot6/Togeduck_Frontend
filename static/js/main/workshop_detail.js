@@ -276,6 +276,11 @@ async function workshop_post() {
     const date_2 = document.getElementById("date_2").value;
     const date = `${date_1} ${date_2} `
 
+    if (workshop_image == undefined){
+        alert("이미지를 업로드해주세요")
+        return 
+    }
+    
     const formData = new FormData();
 
     formData.append("title", title);
@@ -300,7 +305,7 @@ async function workshop_post() {
         alert("새로운 워크샵이 생성되었습니다.");
         window.location.replace(`${front_end_url}/workshop.html`)
     } else {
-        alert('생성 목록을 모두 작성해주세요',response.status);
+        alert('모든 항목에 내용을 작성해주세요',response.status);
     }
 }
 
