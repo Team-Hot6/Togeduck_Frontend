@@ -38,6 +38,7 @@
               <span class="sort" id="latest" onclick="article_list('latest', '')">최신순</span>
               <span class="sort" id="like" onclick="article_list('like', '')">인기순</span>  
             </span>
+            <span class="create_button" onclick="ArticleCreatePage()">게시글 작성</span>
           </span>
         </div>
         <div class="hobbys" id="hobbys"></div>
@@ -74,7 +75,6 @@
         </div>
         <div class="article-box mt-5" id="article_box">
           <span class="fs-3 fw-bold" id="article_box_span">카테고리별 게시글</span>
-          <button type="button" class="btn btn-warning mt-3" onclick="ArticleCreatePage()">게시글 작성</button>
           <table class="table w-100 mt-4">
             <colgroup>
               <col style="width: 5%;">
