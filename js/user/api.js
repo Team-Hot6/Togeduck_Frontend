@@ -192,3 +192,85 @@ async function handleSign() {
         window.location.reload()
     }
 }
+
+
+const urlParams = new URLSearchParams(window.location.search);
+const user_id = urlParams.get('id');
+
+
+// 비밀번호 변경
+async function change_Password(user_id){
+
+    const password = document.getElementById("password").value;
+    const password2 = document.getElementById("password2").value;
+    const old_password = document.getElementById("old_password").value;
+
+
+    if (old_password == "") {
+        alert("기존 비밀번호를 입력해주세요");
+        password.focus();
+        return false;
+    }
+
+
+    if (password == "") {
+        alert("새로운 비밀번호를 입력하세요.");
+        password.focus();
+        return false;
+    }
+
+    if (password == old_password) {
+        alert("현재 사용중인 비밀번호와 동일한 비밀번호를 사용할 수 없습니다");
+        password.focus();
+        return false;
+    }
+    
+
+    var pwdCheck = /^(?=.*[!@#$%^*+=-])(?=.*[0-9]).{2,25}$/;
+
+    if (!pwdCheck.test(password)) {
+        alert("비밀번호는  숫자, 특수문자를 사용하여 2자리 이상으로 입력해줘요");
+        password.focus();
+        return false;
+    }
+
+
+    if (password2 == "") {
+        alert(" 새로운 비밀번호를 확인해주세요.");
+        password.focus();
+        return false;
+    }
+
+    if (password2 != password) {
+        alert(" 새로운 비밀번호와 동일하지 않습니다");
+        password.focus();
+        return false;
+    }
+    
+
+    const response = await fetch(`${back_end_url}/users/change_password/${user_id}/`,{
+        headers:{
+            'Authorization':'Bearer '+localStorage.getItem("access"),
+            'content-type':'application/json'
+        },
+        method:'PUT',
+        body:JSON.stringify({
+            password: password,
+            password2: password2,
+            old_password:old_password
+        })
+    })
+
+    response_json = await response.json()
+    
+    if(response.status == 200){
+        alert('비밀번호를 변경했습니다')
+        window.location.replace(`/templates/user/mypage.html?id=${user_id}`)
+        
+        
+    }else if(response.status == 400){
+        
+        alert(`${response_json['old_password']['old_password']}`)
+        
+    }
+}
