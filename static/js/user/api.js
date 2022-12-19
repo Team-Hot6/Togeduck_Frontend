@@ -200,6 +200,7 @@ const user_id = urlParams.get('id');
 
 // 비밀번호 변경
 async function change_Password(user_id){
+    console.log('개뻐ㅏㄱ')
 
     const password = document.getElementById("password").value;
     const password2 = document.getElementById("password2").value;
@@ -265,7 +266,7 @@ async function change_Password(user_id){
     
     if(response.status == 200){
         alert('비밀번호를 변경했습니다')
-        window.location.replace(`/templates/user/mypage.html?id=${user_id}`)
+        window.location.replace(`/mypage.html?id=${user_id}`)
         
         
     }else if(response.status == 400){

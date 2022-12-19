@@ -49,7 +49,7 @@ async function workshop_list(page, sort) {
 
             const workshop = `<div class="workshop" onclick="workshop_detail_move(${workshop_data[i]['id']})">
                                 <div class="workshop_img_frame">
-                                    <img class="workshop_img" src="${workshop_data[i]['workshop_image']}">
+                                    <img class="workshop_img" src="${back_end_url}${workshop_data[i]['workshop_image']}">
                                 </div>
                                 <span class="date">${workshop_data[i]['date']} | ${workshop_data[i]['cur_time']}</span>
                                 <div class="title">${workshop_data[i]['title']}</div>
