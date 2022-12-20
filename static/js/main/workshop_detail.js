@@ -147,7 +147,6 @@ function updateMode(id) {
 
     //const content = document.getElementById(`update_button(${id})`) // 원래 리뷰 내용
     const content = document.getElementById(`update(${id})`).previousElementSibling
-    console.log(content, '내용')
     content.style.visibility = "hidden"; // 원래 내용 숨기기
 
     const input_content = document.createElement("textarea"); // 수정할 수 있는 입력창
@@ -161,7 +160,6 @@ function updateMode(id) {
 
 
     const update_button = document.getElementById(`update(${id})`); //수정하기 버튼
-    console.log(update_button, '업데이트 버튼인디')
     update_button.setAttribute("onclick", "review_put(id)");
     // 업데이트 버튼을 가져오고 클릭시 review_put(id) 함수 실행
 }
@@ -171,7 +169,6 @@ async function review_put(id) {
 
     review_id = id
     const content = document.getElementById(`update_button(${id})`).value // input 박스 
-        //console.log(document.getElementById(`input_content${id}`),'ㅇㅁㅇ')
         //const content = document.getElementById(`input_content${id}`).value // 수정된 텍스트 박스
 
     const response = await workshop_review_put(workshop_id, review_id, content)
