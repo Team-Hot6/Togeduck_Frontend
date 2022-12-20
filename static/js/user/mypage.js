@@ -7,6 +7,8 @@ main.appendChild(mypage)
 const payload = localStorage.getItem("payload");
 const payload_parse = JSON.parse(payload)
 
+let token = localStorage.getItem("access")
+
 // 마이페이지 좌측 프로필 사진 부분
 const mypageLeftSide = document.createElement('div')
 mypageLeftSide.setAttribute('class', 'mypage-leftside')
@@ -14,9 +16,8 @@ mypage.appendChild(mypageLeftSide)
 myPageProfile_fuc()
 
 async function myPageProfile_fuc() {
-    
-    const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/`, {
 
+    const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/`, {
             method: 'GET',
         })
         // backend에서 받은 데이터 가져오기
@@ -31,20 +32,13 @@ async function myPageProfile_fuc() {
 
             const profilePictureImg = document.createElement('img')
             profilePictureImg.setAttribute('class', 'mypage-profilepictureimg')
-            profilePictureImg.setAttribute('src', 'http://127.0.0.1:8000' + data["profile_image"])
+            profilePictureImg.setAttribute('src', `${back_end_url}` + data["profile_image"])
             profilePicture.appendChild(profilePictureImg)
 
             const profileName = document.createElement('div')
             profileName.setAttribute('class', 'mypage-profilename')
             profileName.innerText = data["nickname"]
             mypageLeftSide.appendChild(profileName)
-
-            const profilepassword = document.createElement('button') // 비밀번호 변경 버튼 추가
-            profilepassword.setAttribute('class', 'mypage-profilepassword')
-            profilepassword.setAttribute('type', 'button')
-            profilepassword.setAttribute('onclick', 'password_move()')
-            profilepassword.innerText = '비밀번호 변경'
-            mypageLeftSide.appendChild(profilepassword)
 
             const profileEmail = document.createElement('div')
             profileEmail.setAttribute('class', 'mypage-profileemail')
@@ -102,9 +96,21 @@ async function myPageProfile_fuc() {
             const profilePartiLike2 = document.createElement('div')
             profilePartiLike2.setAttribute('class', 'mypage-profileparticipatelike-2')
             profilePartiLike2.setAttribute('style', 'cursor: pointer;')
-            profilePartiLike2.setAttribute('onClick', "location.href='mypage_likes.html'")
+            profilePartiLike2.setAttribute('onclick', "location.href=`${front_end_url}/mypage_likes.html?id=${payload_parse.user_id}`")
             profilePartiLike2.innerText = data['workshop_likes'].length + "개"
             profilePartiLike.appendChild(profilePartiLike2)
+
+            // 마이페이지 프로필 카드 아래 개인정보 변경 버튼
+            const mypagePutButtonFrame = document.createElement('div')
+            mypagePutButtonFrame.setAttribute('class', 'mypage_put_button_frame')
+            mypageLeftSide.appendChild(mypagePutButtonFrame)
+
+            const mypagePutButton = document.createElement('button')
+            mypagePutButton.setAttribute('onclick', 'password_move()')
+            mypagePutButton.setAttribute('class', 'mypage_put_button')
+            mypagePutButton.innerText = '개인정보 수정'
+            mypageLeftSide.appendChild(mypagePutButton)
+            mypagePutButtonFrame.appendChild(mypagePutButton)
 
         })
 
@@ -118,6 +124,7 @@ mypage.appendChild(mypageRightSide)
 
 const navbar0 = document.createElement('nav')
 navbar0.setAttribute('class', 'nav nav-pills flex-column flex-sm-row')
+navbar0.setAttribute('id', 'mypage-rightside-navbar')
 mypageRightSide.appendChild(navbar0)
 
 const shNav = document.createElement('a')
@@ -147,9 +154,8 @@ navbar0.appendChild(cwNav)
 
 
 async function myPageSelectedHobby_fuc() {
-    
-    const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/`, {
 
+    const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/`, {
             method: 'GET',
         })
         // backend에서 받은 데이터 가져오기
@@ -170,8 +176,6 @@ async function myPageSelectedHobby_fuc() {
             if (tempCw) {
                 tempCw.remove()
             }
-
-
 
             // 네비게이션바에서 '내가 선택한 취미' 버튼 클릭 시 색상 변경
 
@@ -204,7 +208,6 @@ async function myPageSelectedHobby_fuc() {
                 shCategory.innerText = data["hobby"][i]["category"]
                 shContent.appendChild(shCategory)
             }
-            console.log(data)
         })
 }
 
@@ -212,7 +215,6 @@ async function myPageSelectedHobby_fuc() {
 async function myPageAppliedWorkshop_fuc() {
 
     const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/`, {
-
             method: 'GET',
         })
         // backend에서 받은 데이터 가져오기
@@ -220,6 +222,7 @@ async function myPageAppliedWorkshop_fuc() {
             return response.json();
         })
         .then(data => {
+
 
             // 네비게이션바에서 '신청 워크샵' 버튼 클릭 시 색상 변경
             shNav.className = 'flex-sm-fill text-sm-center nav-link'
@@ -238,7 +241,6 @@ async function myPageAppliedWorkshop_fuc() {
             if (tempCw) {
                 tempCw.remove()
             }
-
 
             // '신청 워크샵' div 작성
             const aw = document.createElement('div')
@@ -291,6 +293,12 @@ async function myPageAppliedWorkshop_fuc() {
             awThStatus.innerText = '신청현황'
             awTableTr.appendChild(awThStatus)
 
+            const awThDelete = document.createElement('th')
+            awThDelete.setAttribute('class', 'mypage-appliedworkshop-table-th-status-delete')
+            awThDelete.setAttribute('id', 'mypage-appliedworkshop-table-th-status-delete')
+            awThDelete.innerText = '삭제'
+            awTableTr.appendChild(awThDelete)
+
             // 신청 워크샵 표 항목 리스트
             for (i = 0; i < data["workshop_apply_guest"].length; i++) {
 
@@ -321,28 +329,45 @@ async function myPageAppliedWorkshop_fuc() {
                 awTableThStatusNum.setAttribute('id', 'mypage-appliedworkshop-table-th-status' + (i + 1))
                 awTableThStatusNum.innerText = data["workshop_apply_guest"][i]['result']
                 awTableTrNum.appendChild(awTableThStatusNum)
+
+                const awTableThDeleteNum = document.createElement('th')
+                awTableThDeleteNum.setAttribute('class', 'mypage-appliedworkshop-table-th-delete')
+                awTableThDeleteNum.setAttribute('id', 'mypage-appliedworkshop-table-th-delete' + (i + 1))
+                const awTableThDeleteButton = document.createElement('button')
+                awTableThDeleteButton.setAttribute('onclick', 'myPageAppliedWorkshop_del_fuc(' + data['workshop_apply_guest'][i]['workshop_id'] + ')')
+                awTableThDeleteButton.innerText = '삭제'
+                awTableThDeleteButton.setAttribute('class', 'mypage-appliedworkshop-table-th-delete-button')
+                awTableThDeleteNum.appendChild(awTableThDeleteButton)
+                awTableTrNum.appendChild(awTableThDeleteNum)
             }
         })
 }
 
 
-async function myPageAppliedWorkshop_cancel_fuc() {
-
-    const response = fetch(`${back_end_url}/workshops/${payload_parse.user_id}/apply/`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-        .then(response => response.json())
-        .then(data => data);
+async function myPageAppliedWorkshop_del_fuc(workshop_id) {
+    var alert_select = confirm("삭제 하시겠습니까?");
+    if (alert_select) {
+        alert("삭제 되었습니다")
+        const response = await fetch(`${back_end_url}/workshops/${workshop_id}/apply/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+                body: JSON.stringify({}),
+            })
+            .then(response => response.json())
+            .then(data => {});
+        window.location.reload()
+    } else {
+        alert("취소 되었습니다");
+    }
 }
 
 
 async function myPageCreatedWorkshop_fuc() {
 
     const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/`, {
-
             method: 'GET',
         })
         // backend에서 받은 데이터 가져오기
@@ -420,12 +445,14 @@ async function myPageCreatedWorkshop_fuc() {
             cwThStatus.setAttribute('id', 'mypage-createdworkshop-table-th-status-sort')
             cwThStatus.innerText = '모집현황'
             cwTableTr.appendChild(cwThStatus)
-            console.log("----------------")
-            console.log(data["workshop_host"])
- 
+
+            const cwThDelete = document.createElement('th')
+            cwThDelete.setAttribute('class', 'mypage-appliedworkshop-table-th-status-delete')
+            cwThDelete.setAttribute('id', 'mypage-appliedworkshop-table-th-status-delete')
+            cwThDelete.innerText = '삭제'
+            cwTableTr.appendChild(cwThDelete)
 
             for (i = 0; i < data["workshop_host"].length; i++) {
-                
 
                 const cwTableTheadNum = document.createElement('thead')
                 cwTableTheadNum.setAttribute('class', 'mypage-createdworkshop-table-thead')
@@ -440,7 +467,7 @@ async function myPageCreatedWorkshop_fuc() {
                 const cwTableThNameNum = document.createElement('th')
                 cwTableThNameNum.setAttribute('class', 'mypage-createdworkshop-table-th-name')
                 cwTableThNameNum.setAttribute('id', 'mypage-createdworkshop-table-th-name-' + (i + 1))
-                cwTableThNameNum.setAttribute('onclick', 'workshop_apply_move('+data['workshop_host'][i]['id']+')')
+                cwTableThNameNum.setAttribute('onclick', 'workshop_apply_move(' + data['workshop_host'][i]['id'] + ')')
                 cwTableThNameNum.innerText = data['workshop_host'][i]['title']
                 cwTableTrNum.appendChild(cwTableThNameNum)
 
@@ -467,9 +494,42 @@ async function myPageCreatedWorkshop_fuc() {
                 }
                 cwTableThStatusNum.innerText = sum_appove + '/' + data['workshop_host'][i]['max_guest']
                 cwTableTrNum.appendChild(cwTableThStatusNum)
+
+                const cwTableThDeleteNum = document.createElement('th')
+                cwTableThDeleteNum.setAttribute('class', 'mypage-createdworkshop-table-th-delete')
+                cwTableThDeleteNum.setAttribute('id', 'mypage-createdworkshop-table-th-delete' + (i + 1))
+                const cwTableThDeleteButton = document.createElement('button')
+                cwTableThDeleteButton.setAttribute('onclick', 'myPageCreatedWorkshop_del_fuc(' + data["workshop_host"][i]["pk"] + ')')
+                cwTableThDeleteButton.innerText = '삭제'
+                cwTableThDeleteButton.setAttribute('class', 'mypage-createdworkshop-table-th-delete-button')
+                cwTableThDeleteNum.appendChild(cwTableThDeleteButton)
+                cwTableTrNum.appendChild(cwTableThDeleteNum)
             }
         })
 }
+
+
+async function myPageCreatedWorkshop_del_fuc(workshop_id) {
+
+    var alert_select = confirm("삭제 하시겠습니까?");
+    if (alert_select) {
+        alert("삭제 되었습니다")
+        const response = await fetch(`${back_end_url}/workshops/${workshop_id}/`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+                body: JSON.stringify({}),
+            })
+            .then(response => response.json())
+            .then(data => {});
+        window.location.reload()
+    } else {
+        alert("취소 되었습니다");
+    }
+}
+
 
 // 마이페이지 > 생성 워크샵 > 특정 워크샵 클릭 시 상세페이지(관리:승인/거절)로 이동
 async function workshop_apply_move(workshop_id) {
@@ -477,10 +537,11 @@ async function workshop_apply_move(workshop_id) {
     window.location.href = url
 }
 
+
 // 비밀번호 변경 페이지 이동
 async function password_move() {
     const urlParams = new URLSearchParams(window.location.search);
     let id = urlParams.get('id');
-    const url = `${front_end_url}/password.html?id=${id}` // 수정 예정
+    const url = `${front_end_url}/mypage_put.html?id=${id}` // 수정 예정
     window.location.href = url
 }

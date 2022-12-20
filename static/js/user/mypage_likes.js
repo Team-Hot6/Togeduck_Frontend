@@ -33,7 +33,7 @@ async function myPageProfile_fuc() {
 
             const profilePictureImg = document.createElement('img')
             profilePictureImg.setAttribute('class', 'mypage-profilepictureimg')
-            profilePictureImg.setAttribute('src', 'http://127.0.0.1:8000' + data["profile_image"])
+            profilePictureImg.setAttribute('src', `${back_end_url}` + data["profile_image"])
             profilePicture.appendChild(profilePictureImg)
 
             const profileName = document.createElement('div')
@@ -97,7 +97,6 @@ async function myPageProfile_fuc() {
             const profilePartiLike2 = document.createElement('div')
             profilePartiLike2.setAttribute('class', 'mypage-profileparticipatelike-2')
             profilePartiLike2.setAttribute('style', 'cursor: pointer;')
-            profilePartiLike2.setAttribute('onClick', "location.href='./mypage_likes.html'")
             profilePartiLike2.innerText = data['workshop_likes'].length + "개"
             profilePartiLike.appendChild(profilePartiLike2)
 
@@ -113,8 +112,6 @@ mypage.appendChild(mypageRightSide)
 myPageWorkshopLikes_fuc()
 
 async function myPageWorkshopLikes_fuc() {
-    const id = localStorage.getItem("payload")
-    const id_json = JSON.parse(id)
 
     const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/`, {
 
@@ -131,7 +128,7 @@ async function myPageWorkshopLikes_fuc() {
             toMypageButton.setAttribute('class', 'to-mypage')
             toMypageButton.setAttribute('type', 'button')
             toMypageButton.innerText = '마이페이지로'
-            toMypageButton.setAttribute('onClick', "location.href='./mypage.html'")
+            toMypageButton.setAttribute('onclick', "location.href=`${front_end_url}/mypage.html?id=${payload_parse.user_id}`")
             mypageRightSide.appendChild(toMypageButton)
 
             const wsLikes = document.createElement('div')
@@ -163,10 +160,14 @@ async function myPageWorkshopLikes_fuc() {
                 wsLikesCardFrame.setAttribute('id', 'mypage-workshop-likes-card-frame')
                 wsLikesCard.appendChild(wsLikesCardFrame)
 
+                // const wsLikesCardA = document.createElement('a')
+                // wsLikesCardA.setAttribute('href', `${front_end_url}/workshop_detail.html?id=${workshop_id}`)
+                // wsLikesCardFrame.appendChild(wsLikesCardA)
+
                 const wsLikesCardImg = document.createElement('img')
                 wsLikesCardImg.setAttribute('class', 'mypage-workshop-likes-card-img')
                 wsLikesCardImg.setAttribute('id', 'mypage-workshop-likes-card-img')
-                wsLikesCardImg.setAttribute('src', 'http://127.0.0.1:8000' + data["workshop_likes"][i]['workshop_image'])
+                wsLikesCardImg.setAttribute('src', `${back_end_url}` + data["workshop_likes"][i]['workshop_image'])
                 wsLikesCardFrame.appendChild(wsLikesCardImg)
 
                 const wsLikesCardTitle = document.createElement('div')
