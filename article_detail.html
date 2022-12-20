@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/css/main/chat.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/main/article_detail.css">
+    <title>게시글 상세 페이지</title>
+  </head>
+
+  <body>
+    <!-- <h1 style="text-align: center; margin: 20px auto;">게시글 상세 페이지</h1> -->
+    <!-- 게시글 세션 -->
+    <div class="article-section mx-auto mt-5" style="width: 40rem;">
+      <!-- 게시글 제목 -->
+      <div class="d-flex justify-content-between mt-3 mb-3">
+        <div>
+          <h3 class="card-title text-start fw-bold" id="article_title"></h3>
+        </div>
+        <div id="article_btn"></div>
+      </div>
+
+      <!-- 게시글 작성자 정보 및 조회수, 추천수 -->
+      <div class="d-flex">
+        <div class="flex-grow-2">
+          <p class="fw-bold" id="author"></p>
+        </div>
+        <div class="flex-grow-1">
+          <span class="ps-3" id="datetime"></span>
+        </div>
+        <div>
+          <span id="views"></span>
+          <span id="likes"></span>
+        </div>
+      </div>
+
+      <!-- 게시글 이미지&내용 -->
+      <div class="card">
+        <img id="article_image" src="./static/images/together_logo.PNG" class="card-img-top border border-dark" alt="...">
+        <div class="card-body border border-dark">
+          <p id="content" class="card-text" content="content"></p>
+        </div>
+      </div>
+      <!-- 추천하기 버튼 -->
+      <div class="d-flex align-items-center justify-content-center">
+        <button type="button" class="btn btn-warning w-25 mt-3 fw-bold" onclick="like_article(article_id)">👍 LIKE</button>
+      </div>
+    </div>
+    <!-- 댓글 세션 -->
+    <div class="comment-section mx-auto mt-3" style="width: 40rem;">
+      <!-- 댓글 작성 -->
+      <div class="d-flex mt-5 mb-3">
+        <input id="comment" type="text" class="form-control w-75" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="댓글을 입력해주세요">
+        <button type="button" class="btn btn-warning w-25 fw-bold" style="margin: auto; display: block;" onclick="handleCommentCreate()">작성하기</button>
+      </div>
+      <!-- 댓글 박스 -->
+      <div class="card-body" id="comment_box">
+        <!-- 댓글 리스트 -->
+        <ul id="comment_list" class="list-group"></ul>
+        <!-- 댓글 리스트 -->
+      </div>
+      <!-- 댓글 박스 -->
+    </div>
+  </body>
+  <chat style="display: none;"></chat>
+  <script src="./static/js/global.js"></script>
+  <script src="./static/js/main/api.js"></script>
+  <script src="./static/js/main/article_detail.js"></script>
+  <script src="./static/js/main/modal_socket.js"></script>
+  <script src="./static/js/main/modal_socket_api.js"></script>
+
+</html>
