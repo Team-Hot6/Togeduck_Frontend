@@ -12,7 +12,7 @@ async function LoadCurrentArticle(article_id) {
     const data = await response.json()
 
     const selected_category = document.getElementById('selected_category')
-    selected_category.innerText = data['category']
+    selected_category.innerText = '이 게시글의 카테고리 : ' + data['category']
 
     const title = document.getElementById('title')
     title.setAttribute('placeholder',data['title'])
@@ -43,11 +43,16 @@ window.onload = async function LoadCategory() {
 }
 
 // 게시글 수정
-async function handleArticleUpdate(article_id) {
+function handleArticleUpdate(article_id) {
     const category = document.getElementById('category').value
     const title = document.getElementById('title').value
     const content = document.getElementById('content').value
     const image = document.getElementById('formFile').files[0]
 
     update_article(article_id, title, content, image, category)
+}
+
+// 게시글 수정 페이지 취소 버튼
+function handleCancel() {
+    window.location.replace(`article_detail.html?id=${article_id}`)
 }

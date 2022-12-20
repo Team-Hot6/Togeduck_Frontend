@@ -51,13 +51,14 @@ async function get_hobby() {
 }
 
 // 게시글 전체 목록 API
-async function get_articles(sort, category_id) {
-    const response = await fetch(`${back_end_url}/articles/?sort=${sort}&category=${category_id}`, {
+async function get_articles(page, sort) {
+    const response = await fetch(`${back_end_url}/articles/?page=${page}&sort=${sort}`, {
         method: "GET",
     })
     return response
 }
 
+// 인기 게시글 10 목록
 async function get_lank_articles() {
     const response = await fetch(`${back_end_url}/articles/lank/`, {
         method: "GET",
@@ -66,10 +67,11 @@ async function get_lank_articles() {
 }
 
 // 카테고리 선택 시 해당 카테고리 게시글 리스트 API
-async function get_select_articles(category_id, sort) {
-    const response = await fetch(`${back_end_url}/articles/?category=${category_id}&sort=${sort}`, {
+async function get_select_articles(category_id, page, sort) {
+    const response = await fetch(`${back_end_url}/articles/?category=${category_id}&page=${page}&sort=${sort}`, {
         method: "GET",
     })
+
     return response
 }
 
@@ -115,10 +117,8 @@ async function create_article(title, content, image, category) {
     });
 
     if (response.status == 201) {
-        console.log(window.location)
         window.location.href = 'community.html'
         alert('작성 완료!!')
-       
     } else if (response.status == 401) {
         alert('다시 로그인을 해주세요!')
     } else {
@@ -150,6 +150,31 @@ async function create_comment(article_id, comment) {
     }
 }
 
+// 대댓글 작성 API
+async function create_reply(article_id, comment_id, reply){
+    const response = await fetch(`${back_end_url}/articles/${article_id}/comment/${comment_id}/reply/`, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem('access'),
+        },
+        method: "POST",
+        body: JSON.stringify({
+            "content": reply,
+        }),
+    });
+    
+    if (response.status == 201){
+        alert('답글 작성 완료!')
+        window.location.reload();
+    } else if(response.status == 401){
+        alert('답글 작성은 로그인이 필요한 서비스 입니다!')
+        window.location.reload();
+    } else {
+        alert('잘못된 요청입니다!')
+        window.location.reload();
+    }
+}
+
 // 게시글 수정 페이지로 이동
 async function replace_article_update(article_id) {
     const url = `article_update.html?id=${article_id}`;
@@ -162,7 +187,9 @@ async function update_article(article_id, title, content, image, category) {
     data.append("category", category)
     data.append("title", title)
     data.append("content", content)
-    data.append("article_image", image)
+    if(image){
+        data.append("article_image", image)
+    }
 
     const response = await fetch(`${back_end_url}/articles/${article_id}/`, {
         headers: {
@@ -207,6 +234,27 @@ async function delete_article(article_id) {
 // 댓글 삭제 API
 async function delete_comment(article_id, comment_id) {
     const response = await fetch(`${back_end_url}/articles/${article_id}/comment/${comment_id}/`, {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "DELETE",
+    });
+
+    if (response.status == 200){
+        alert('삭제 완료!')
+        window.location.reload()
+    }else if(response.status == 403){
+        alert('댓글을 삭제할 권한이 없습니다!')
+        window.location.reload()
+    }else {
+        alert('잘못된 요청입니다!')
+        window.location.reload()
+    }
+}
+
+// 대댓글 삭제 API
+async function delete_reply(article_id, comment_id, reply_id) {
+    const response = await fetch(`${back_end_url}/articles/${article_id}/comment/${comment_id}/reply/${reply_id}/`, {
         headers: {
             Authorization: "Bearer " + localStorage.getItem("access"),
         },
