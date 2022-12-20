@@ -14,8 +14,8 @@ mypage.appendChild(mypageLeftSide)
 myPageProfile_fuc()
 
 async function myPageProfile_fuc() {
-
-    const response = await fetch('http://127.0.0.1:8000/users/' + payload_parse.user_id + '/', {
+    
+    const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/`, {
 
             method: 'GET',
         })
@@ -140,10 +140,8 @@ navbar0.appendChild(cwNav)
 
 
 async function myPageSelectedHobby_fuc() {
-    const id = localStorage.getItem("payload")
-    const id_json = JSON.parse(id)
-
-    const response = await fetch('http://127.0.0.1:8000/users/' + payload_parse.user_id + '/', {
+    
+    const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/`, {
 
             method: 'GET',
         })
@@ -206,13 +204,7 @@ async function myPageSelectedHobby_fuc() {
 
 async function myPageAppliedWorkshop_fuc() {
 
-    console.log("현재 버튼을 클릭한 상태입니다."); // 버튼이 눌러지고 있는지 확인 필수
-    const id = localStorage.getItem("payload")
-    const id_json = JSON.parse(id)
-
-    console.log("실행중~~~")
-
-    const response = await fetch('http://127.0.0.1:8000/users/' + payload_parse.user_id + '/', {
+    const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/`, {
 
             method: 'GET',
         })

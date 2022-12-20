@@ -60,17 +60,22 @@ async function workshop_info(workshop_id) {
         const workshop_image = document.getElementById("getval");
         const workshop_image_frame = document.getElementById("hvr-profile-img");
         const title = document.getElementById("title");
-        const date = document.getElementById("date");
         const max_guest = document.getElementById("max_guest");
         const amount = document.getElementById("amount");
         const address = document.getElementById("address");
+        const date_1 = document.getElementById("date_1");
+        const date_2 = document.getElementById("date_2");
+
+        const date_1_content = data.date.split('T')[0];
+        const date_2_content = data.date.split('T')[1];
 
         title.value = data.title;
         content.value = data.content;
         max_guest.value = data.max_guest;
         amount.value = data.amount;
         workshop_image.setAttribute("src", `${back_end_url}${data.workshop_image}`);
-        date.value = data.date;
+        date_1.value = date_1_content;
+        date_2.value = date_2_content;
         address.value = data.address;
 
         workshop_image_frame.style.opacity = 100;
