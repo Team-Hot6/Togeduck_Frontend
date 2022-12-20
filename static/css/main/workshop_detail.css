@@ -1,40 +1,36 @@
-
-
-
 .comment {
-  padding: 10px;
-  border: 1px solid rgb(247, 240, 240);
-  margin: 10px 0;
+    padding: 10px;
+    border: 1px solid rgb(247, 240, 240);
+    margin: 10px 0;
 }
 
 
 /*좋아요 하트*/
+
 .btn_like {
-  position: relative;
+    position: relative;
     top: -5rem;
     right: -1.5rem;
-  
-  display: block;
-  width: 44px;
-  height: 44px;
-  border: 1px solid #e8e8e8;
-  border-radius: 44px;
-  font-family: notokr-bold,sans-serif;
-  font-size: 14px;
-  line-height: 16px;
-  background-color: rgb(245, 83, 83);
-  color: #f76055;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.03);
-  transition: border .2s ease-out,box-shadow .1s ease-out,background-color .4s ease-out;
-  cursor: pointer;
+    display: block;
+    width: 44px;
+    height: 44px;
+    border: 1px solid #e8e8e8;
+    border-radius: 44px;
+    font-family: notokr-bold, sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    background-color: rgb(245, 83, 83);
+    color: #f76055;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03);
+    transition: border .2s ease-out, box-shadow .1s ease-out, background-color .4s ease-out;
+    cursor: pointer;
 }
 
 .btn_like:hover {
-  border: 1px solid rgba(228,89,89,0.3);
-  background-color: rgba(228,89,89,0.02);
-  box-shadow: 0 2px 4px 0 rgba(228,89,89,0.2);
+    border: 1px solid rgba(228, 89, 89, 0.3);
+    background-color: rgba(228, 89, 89, 0.02);
+    box-shadow: 0 2px 4px 0 rgba(228, 89, 89, 0.2);
 }
-
 
 .img_emoti {
     display: inline-block;
@@ -67,88 +63,82 @@
 }
 
 
-
-
-
-
-
 /* 라이크 버튼 */
+
 .button {
-  --color: #1E2235;
-  --coor-hover: #1E2235;
-  --color-active: #fff;
-  --icon: #BBC1E1;
-  --icon-hover: #8A91B4;
-  --icon-active: #fff;
-  --background: #fff;
-  --background-hover: #fff;
-  --background-active: #362A89;
-  --border: #E1E6F9;
-  --border-active: #362A89;
-  --shadow: rgba(0, 17, 119, 0.025);
-  display: block;
-  outline: none;
-  cursor: pointer;
-  position: relative;
-  border: 0;
-  background: none;
-  padding: 8px 20px 8px 24px;
-  border-radius: 9px;
-  line-height: 27px;
-  font-family: inherit;
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--color);
-  --webkit-appearance: none;
-  -webkit-tap-highlight-color: transparent;
-  transition: color 0.2s linear;
+    --color: #1E2235;
+    --coor-hover: #1E2235;
+    --color-active: #fff;
+    --icon: #BBC1E1;
+    --icon-hover: #8A91B4;
+    --icon-active: #fff;
+    --background: #fff;
+    --background-hover: #fff;
+    --background-active: #362A89;
+    --border: #E1E6F9;
+    --border-active: #362A89;
+    --shadow: rgba(0, 17, 119, 0.025);
+    display: block;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    border: 0;
+    background: none;
+    padding: 8px 20px 8px 24px;
+    border-radius: 9px;
+    line-height: 27px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--color);
+    --webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.2s linear;
 }
 
 
 /*사진 업로드*/
+
 .form-input {
-    width:100%;
-    height:100%;
-    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 0.5rem;
 }
 
-
-.container{
-  width:100%;
-  margin: auto;
-  width: 90%;
-  grid-column-gap: 1%; 
+.container {
+    width: 100%;
+    margin: auto;
+    width: 90%;
+    grid-column-gap: 1%;
 }
 
-.card-container{
-max-width: 1000px;
-  justify-self:center;
-  /* text-align:center; */
-  margin: auto;
-
+.card-container {
+    max-width: 1000px;
+    justify-self: center;
+    /* text-align:center; */
+    margin: auto;
 }
 
-.contact-card{
+.contact-card {
     padding: 15px !important;
-    background: rgba(255, 255, 255); /* 카드 색 */
+    background: rgba(255, 255, 255);
+    /* 카드 색 */
     border-radius: 15px;
     margin: 7%;
     box-shadow: 0px 0px 10px 0px #e2e2e2;
 }
 
-.column{
+.column {
     font-size: 1.1rem;
     font-weight: 900;
 }
 
-.w_item{
+.w_item {
     margin: 1rem;
 }
 
-.put_delete_box{
+.put_delete_box {
     position: relative;
     top: 10%;
 }
-
-/

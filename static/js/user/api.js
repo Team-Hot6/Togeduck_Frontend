@@ -1,7 +1,3 @@
-console.log('로딩됐나')
-
-
-
 //로그인
 async function handleLogin() {
     const email = document.getElementById("loginEmail").value;
@@ -199,8 +195,7 @@ const user_id = urlParams.get('id');
 
 
 // 비밀번호 변경
-async function change_Password(user_id){
-    console.log('개뻐ㅏㄱ')
+async function change_Password(user_id) {
 
     const password = document.getElementById("password").value;
     const password2 = document.getElementById("password2").value;
@@ -225,7 +220,7 @@ async function change_Password(user_id){
         password.focus();
         return false;
     }
-    
+
 
     var pwdCheck = /^(?=.*[!@#$%^*+=-])(?=.*[0-9]).{2,25}$/;
 
@@ -247,31 +242,30 @@ async function change_Password(user_id){
         password.focus();
         return false;
     }
-    
 
-    const response = await fetch(`${back_end_url}/users/change_password/${user_id}/`,{
-        headers:{
-            'Authorization':'Bearer '+localStorage.getItem("access"),
-            'content-type':'application/json'
+
+    const response = await fetch(`${back_end_url}/users/change_password/${user_id}/`, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("access"),
+            'content-type': 'application/json'
         },
-        method:'PUT',
-        body:JSON.stringify({
+        method: 'PUT',
+        body: JSON.stringify({
             password: password,
             password2: password2,
-            old_password:old_password
+            old_password: old_password
         })
     })
 
     response_json = await response.json()
-    
-    if(response.status == 200){
+
+    if (response.status == 200) {
         alert('비밀번호를 변경했습니다')
         window.location.replace(`/mypage.html?id=${user_id}`)
-        
-        
-    }else if(response.status == 400){
-        
+
+    } else if (response.status == 400) {
+
         alert(`${response_json['old_password']['old_password']}`)
-        
+
     }
 }
