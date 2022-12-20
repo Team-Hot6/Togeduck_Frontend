@@ -31,7 +31,7 @@ async function myPageProfile_fuc() {
 
             const profilePictureImg = document.createElement('img')
             profilePictureImg.setAttribute('class', 'mypage-profilepictureimg')
-            profilePictureImg.setAttribute('src', 'http://127.0.0.1:8000' + data["profile_image"])
+            profilePictureImg.setAttribute('src', `${back_end_url}` + data["profile_image"])
             profilePicture.appendChild(profilePictureImg)
 
             const profileName = document.createElement('div')
@@ -197,7 +197,6 @@ async function myPageSelectedHobby_fuc() {
                 shCategory.innerText = data["hobby"][i]["category"]
                 shContent.appendChild(shCategory)
             }
-            console.log(data)
         })
 }
 
@@ -413,9 +412,6 @@ async function myPageCreatedWorkshop_fuc() {
             cwThStatus.setAttribute('id', 'mypage-createdworkshop-table-th-status-sort')
             cwThStatus.innerText = '모집현황'
             cwTableTr.appendChild(cwThStatus)
-            console.log("----------------")
-            console.log(data["workshop_host"])
- 
 
             for (i = 0; i < data["workshop_host"].length; i++) {
                 

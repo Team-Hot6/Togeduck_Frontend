@@ -98,7 +98,7 @@ async function select_article_list(category_id, sort) {
     // 선택한 카테고리의 게시글이 없는 경우
     if (data.length == 0) {
         let best_article_box = document.getElementById('best_article_box')
-        best_article_box.innerHTML = `<span class="fs-3 fw-bold" id="testspan">해당 카테고리의 게시글이 없습니다!</span>`
+        best_article_box.innerHTML = `<div class="none_box" id="none_box">선택하신 카테고리의 워크샵이 없습니다</div>`
 
         let article_list = document.getElementById('article_list')
         article_list.innerHTML = ``
