@@ -1,15 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
 let workshop_id = urlParams.get('id');
 
-<<<<<<< HEAD:js/main/workshop_manage.js
-console.log(urlParams)
-console.log(workshop_id)
-
-
-
-
-=======
->>>>>>> 414d123b1c1367dd51ff563d08a4cf27af7890ab:static/js/main/workshop_manage.js
 const main = document.querySelector("main")
 const wsManage = document.createElement('div')
 wsManage.setAttribute('class', 'workshop-manage')
@@ -34,11 +25,7 @@ async function wsManageCard_fuc() {
 
         const wsManagePictureImg = document.createElement('img')
         wsManagePictureImg.setAttribute('class', 'workshop-manage-pictureimg')
-<<<<<<< HEAD:js/main/workshop_manage.js
         wsManagePictureImg.setAttribute('src', `${back_end_url}` + data["workshop_image"])
-=======
-        wsManagePictureImg.setAttribute('src', back_end_url + data["workshop_image"])
->>>>>>> 414d123b1c1367dd51ff563d08a4cf27af7890ab:static/js/main/workshop_manage.js
         wsManagePicture.appendChild(wsManagePictureImg)
 
         const wsManageName = document.createElement('div')

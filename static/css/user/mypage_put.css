@@ -39,7 +39,6 @@ body :-ms-input-placeholder {
     font-family: 'Source Sans Pro', sans-serif;
     color: white;
     font-weight: 300;
-<<<<<<< HEAD:css/user/password.css
 }
 
 
@@ -56,7 +55,7 @@ body :-ms-input-placeholder {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 80vh;
+    height: 100%;
     transform: translate(-50%, -50%);
 }
 
@@ -64,13 +63,13 @@ body :-ms-input-placeholder {
 /*Formulaire */
 
 #contenneurform {
-    margin: 0.5% auto;
+    margin: 7% auto;
     width: 350px;
     padding: 45px 30px 15px;
     position: relative;
     box-shadow: 5px 5px 25px rgba(0, 0, 0, .2);
     border-radius: 1px;
-    height: 98%;
+    height: 70%;
     overflow: hidden;
 }
 
@@ -93,57 +92,6 @@ body :-ms-input-placeholder {
 }
 
 #contenneurform>button:nth-child(2) {
-=======
-  }
-  
-  /*Container génerale*/
-  
-  .back{
-      background: #507ba3;
-      background: linear-gradient(top left, #0f8ee4 0%, #53dee3 100%);
-      background: linear-gradient(to bottom right, #6f87d3 0%, #53dee3 100%);
-      overflow: hidden;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      transform: translate(-50%, -50%);
-  }
-  
-  
-  /*Formulaire */
-  
-  #contenneurform {
-      margin: 7% auto;
-      width: 350px;
-      padding:45px 30px 15px;
-      position: relative;
-      box-shadow: 5px 5px 25px rgba(0,0,0,.2);
-      border-radius: 1px;
-      height: 70%;
-      overflow: hidden;
-  }
-
-  #contenneurform > button:hover{
-  cursor: pointer;
-  }
-  #contenneurform > button {
-      border:none;
-      background:none;
-      background-color: rgba(0,0,0,.1);
-      border: 1px solid rgba(0,0,0,.3);;
-      color: #FFF;
-      float:left;
-      border-bottom-right-radius: 20px;
-      border-top-right-radius: 20px;
-      padding:2px 10px;
-      z-index: 12;
-  }
-  #contenneurform > button:nth-child(2){
->>>>>>> 414d123b1c1367dd51ff563d08a4cf27af7890ab:static/css/user/password.css
     z-index: 99;
 }
 

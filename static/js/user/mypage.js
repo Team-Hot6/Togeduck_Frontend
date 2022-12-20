@@ -40,13 +40,6 @@ async function myPageProfile_fuc() {
             profileName.innerText = data["nickname"]
             mypageLeftSide.appendChild(profileName)
 
-            const profilepassword = document.createElement('button') // 비밀번호 변경 버튼 추가
-            profilepassword.setAttribute('class', 'mypage-profilepassword')
-            profilepassword.setAttribute('type', 'button')
-            profilepassword.setAttribute('onclick', 'password_move()')
-            profilepassword.innerText = '비밀번호 변경'
-            mypageLeftSide.appendChild(profilepassword)
-
             const profileEmail = document.createElement('div')
             profileEmail.setAttribute('class', 'mypage-profileemail')
             profileEmail.innerText = data["email"]
@@ -103,7 +96,7 @@ async function myPageProfile_fuc() {
             const profilePartiLike2 = document.createElement('div')
             profilePartiLike2.setAttribute('class', 'mypage-profileparticipatelike-2')
             profilePartiLike2.setAttribute('style', 'cursor: pointer;')
-            profilePartiLike2.setAttribute('onClick', "location.href='mypage_likes.html'")
+            profilePartiLike2.setAttribute('onclick', "location.href=`${front_end_url}/mypage_likes.html?id=${payload_parse.user_id}`")
             profilePartiLike2.innerText = data['workshop_likes'].length + "개"
             profilePartiLike.appendChild(profilePartiLike2)
 
@@ -549,6 +542,6 @@ async function workshop_apply_move(workshop_id) {
 async function password_move() {
     const urlParams = new URLSearchParams(window.location.search);
     let id = urlParams.get('id');
-    const url = `${front_end_url}/password.html?id=${id}` // 수정 예정
+    const url = `${front_end_url}/mypage_put.html?id=${id}` // 수정 예정
     window.location.href = url
 }
