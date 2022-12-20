@@ -37,6 +37,8 @@ async function connect_user_chat_room(receiver_id) {
    
 
     for (i = 0; i < chat_log.length; i++) {
+
+        console.log(`${back_end_url}/media/${chat_log[i]['user_profile']}`)
         const each_chat_log = `
         <div class="message">
             <div class="message__head">
