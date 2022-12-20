@@ -200,7 +200,6 @@ const user_id = urlParams.get('id');
 
 // 비밀번호 변경
 async function change_Password(user_id){
-    console.log('개뻐ㅏㄱ')
 
     const password = document.getElementById("password").value;
     const password2 = document.getElementById("password2").value;
