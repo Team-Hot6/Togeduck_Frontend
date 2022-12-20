@@ -142,7 +142,7 @@ async function workshop_review_view(workshop_id) {
 }
 
 
-// 리뷰 수정 화면
+// 리뷰 수정 화면 -> 추후 수정 예정
 function updateMode(id) {
 
     //const content = document.getElementById(`update_button(${id})`) // 원래 리뷰 내용
@@ -176,11 +176,11 @@ async function review_put(id) {
     
     const response = await workshop_review_put(workshop_id, review_id, content)
 
-    const content_previous = document.getElementById(`update(${id})`).previousElementSibling // 
-    content_previous.style.visibility = "visible" // 원래 내용 보이기
+    // const content_previous = document.getElementById(`update(${id})`).previousElementSibling // 
+    // content_previous.style.visibility = "visible" // 원래 내용 보이기
 
-    const content_update = document.getElementById(`update(${id})`)
-    content_update.setAttribute("onclick", "updateMode(id)")
+    // const content_update = document.getElementById(`update(${id})`)
+    // content_update.setAttribute("onclick", "updateMode(id)")
     //content.remove()
 
     if (response.status == 200) {

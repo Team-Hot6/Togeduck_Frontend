@@ -39,6 +39,13 @@ async function myPageProfile_fuc() {
             profileName.innerText = data["nickname"]
             mypageLeftSide.appendChild(profileName)
 
+            const profilepassword = document.createElement('button') // 비밀번호 변경 버튼 추가
+            profilepassword.setAttribute('class', 'mypage-profilepassword')
+            profilepassword.setAttribute('type', 'button')
+            profilepassword.setAttribute('onclick', 'password_move()')
+            profilepassword.innerText = '비밀번호 변경'
+            mypageLeftSide.appendChild(profilepassword)
+
             const profileEmail = document.createElement('div')
             profileEmail.setAttribute('class', 'mypage-profileemail')
             profileEmail.innerText = data["email"]
