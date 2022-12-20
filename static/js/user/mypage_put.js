@@ -26,33 +26,18 @@ async function change_mypage_profile(user_id) {
     })
 
     // 유효성 검사
-    if (email == "") {
-        alert("이메일을 입력하세요.");
-        email.focus();
-
-        return false;
-    }
-
-    var emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; //이메일 정규식
-
-    if (!emailRule.test(email)) {
-        alert("이메일 형식을 똑바로 입력하세요 ");
-        email.focus();
-        return false;
-    }
-
-    if (nickname == "") {
-        alert("닉네임을 입력하세요.");
-        nickname.focus();
-        return false;
+    response_json = await response.json()
+    if (response.status == 400) {
+        if (response_json['email'] != null) {
+            alert(`${response_json['email']}`)
+        } else {
+            alert(`${response_json['nickname']}`)
+        }
     }
 
     // 프로필 정보 수정 완료 시,
     if (response.status == 200) {
         alert("프로필 정보가 수정되었습니다.");
         window.location.replace(`${front_end_url}/mypage.html?id=${user_id}`)
-    } else {
-        alert('프로필 정보를 다시 입력해주세요', response.status);
     }
-
 }
