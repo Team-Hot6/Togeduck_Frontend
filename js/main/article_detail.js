@@ -84,8 +84,8 @@ async function LoadDeatail_comment(article_id) {
                                     </div>
                                 </div>
                                 <div id="reply_create_box${comment_id}" style="display: none;">
-                                    <input type="text">
-                                    <button tyoe="button">작성하기</button>
+                                    <input type="text" id="reply${comment_id}">
+                                    <button tyoe="button" onclick="handleReplyCreate(${article_id}, ${comment_id})">작성하기</button>
                                 </div>
                                 <div id="all_reply_btn${comment_id}" style="display: none; padding-left: 20px; margin-bottom: 10px;">
                                     <span onclick="all_reply(${comment_id})">답글 더보기</span>
@@ -138,6 +138,7 @@ async function all_reply(comment_id) {
         reply_box.style.display = 'none';
     }
 }
+
 // 대댓글 작성 입력창 보기/숨기기
 async function reply_create(comment_id) {
     let reply_create_box = document.getElementById(`reply_create_box${comment_id}`)
@@ -145,6 +146,17 @@ async function reply_create(comment_id) {
         reply_create_box.style.display = 'block';
     } else {
         reply_create_box.style.display = 'none';
+    }
+}
+
+// 대댓글 작성
+async function handleReplyCreate(article_id, comment_id) {
+    let reply = document.getElementById(`reply${comment_id}`).value
+    if (reply == ''){
+        alert('답글을 입력 후 작성 버튼을 눌러주세요!')
+        document.getElementById(`reply${comment_id}`).focus();
+    } else {
+        create_reply(article_id, comment_id, reply)
     }
 }
 

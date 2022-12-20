@@ -12,7 +12,7 @@ async function LoadCurrentArticle(article_id) {
     const data = await response.json()
 
     const selected_category = document.getElementById('selected_category')
-    selected_category.innerText = data['category']
+    selected_category.innerText = '이 게시글의 카테고리 : ' + data['category']
 
     const title = document.getElementById('title')
     title.setAttribute('placeholder',data['title'])
@@ -48,7 +48,7 @@ function handleArticleUpdate(article_id) {
     const title = document.getElementById('title').value
     const content = document.getElementById('content').value
     const image = document.getElementById('formFile').files[0]
-    
+
     update_article(article_id, title, content, image, category)
 }
 

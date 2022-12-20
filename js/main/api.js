@@ -147,6 +147,31 @@ async function create_comment(article_id, comment) {
     }
 }
 
+// 대댓글 작성 API
+async function create_reply(article_id, comment_id, reply){
+    const response = await fetch(`${back_end_url}/articles/${article_id}/comment/${comment_id}/reply/`, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem('access'),
+        },
+        method: "POST",
+        body: JSON.stringify({
+            "content": reply,
+        }),
+    });
+    
+    if (response.status == 201){
+        alert('답글 작성 완료!')
+        window.location.reload();
+    } else if(response.status == 401){
+        alert('답글 작성은 로그인이 필요한 서비스 입니다!')
+        window.location.reload();
+    } else {
+        alert('잘못된 요청입니다!')
+        window.location.reload();
+    }
+}
+
 // 게시글 수정 페이지로 이동
 async function replace_article_update(article_id) {
     const url = `article_update.html?id=${article_id}`;
