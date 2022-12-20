@@ -117,13 +117,23 @@ async function LoadDeatail_comment(article_id) {
                 let date = reply[i]['date']
                 let time = reply[i]['time']
                 
-                let reply_html = `<div>
-                                    <span>${reply_user}</span>
-                                    <span>└ ${content}</span>
-                                    <span>${date}</span>
-                                    <span>${time}</span>
+                let reply_html = `<div style="display:flex;">
+                                    <div>
+                                        <span>${reply_user}</span>
+                                        <span>└ ${content}</span>
+                                        <span>${date}</span>
+                                        <span>${time}</span>
+                                    </div>
+                                    <div id="reply_delete_btn${reply_id}">
+                                        
+                                    </div>
                                 </div>` 
                 reply_box.insertAdjacentHTML('beforeend', reply_html)
+
+                if (login_user_nickname == reply_user) {
+                    let reply_delete_btn = document.getElementById(`reply_delete_btn${reply_id}`)
+                    reply_delete_btn.innerHTML = `<button type="button" class="btn btn-warning fw-bold" onclick="handleReplyDelete(${article_id}, ${comment_id}, ${reply_id})">삭제</button>`
+                }
             }
         }
     }
@@ -158,6 +168,10 @@ async function handleReplyCreate(article_id, comment_id) {
     } else {
         create_reply(article_id, comment_id, reply)
     }
+}
+// 대댓글 삭제
+async function handleReplyDelete(article_id, comment_id, reply_id) {
+
 }
 
 // 댓글 작성
