@@ -249,6 +249,27 @@ async function delete_comment(article_id, comment_id) {
     }
 }
 
+// 대댓글 삭제 API
+async function delete_reply(article_id, comment_id, reply_id) {
+    const response = await fetch(`${back_end_url}/articles/${article_id}/comment/${comment_id}/reply/${reply_id}/`, {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "DELETE",
+    });
+
+    if (response.status == 200){
+        alert('삭제 완료!')
+        window.location.reload()
+    }else if(response.status == 403){
+        alert('댓글을 삭제할 권한이 없습니다!')
+        window.location.reload()
+    }else {
+        alert('잘못된 요청입니다!')
+        window.location.reload()
+    }
+}
+
 // 게시글 추천하기 API
 async function like_article(article_id) {
     const response = await fetch(`${back_end_url}/articles/${article_id}/`, {

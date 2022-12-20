@@ -132,7 +132,7 @@ async function LoadDeatail_comment(article_id) {
 
                 if (login_user_nickname == reply_user) {
                     let reply_delete_btn = document.getElementById(`reply_delete_btn${reply_id}`)
-                    reply_delete_btn.innerHTML = `<button type="button" class="btn btn-warning fw-bold" onclick="handleReplyDelete(${article_id}, ${comment_id}, ${reply_id})">삭제</button>`
+                    reply_delete_btn.innerHTML = `<button type="button" class="btn btn-warning fw-bold" onclick="delete_reply(${article_id}, ${comment_id}, ${reply_id})">삭제</button>`
                 }
             }
         }
@@ -168,10 +168,6 @@ async function handleReplyCreate(article_id, comment_id) {
     } else {
         create_reply(article_id, comment_id, reply)
     }
-}
-// 대댓글 삭제
-async function handleReplyDelete(article_id, comment_id, reply_id) {
-
 }
 
 // 댓글 작성
