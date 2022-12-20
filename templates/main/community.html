@@ -35,8 +35,8 @@
           <span class="select_menu" onclick="window.location.href='../main/community.html'">Community</span>
           <span style="float: right; margin: auto;">
             <span id="sort_btn">
-              <span class="sort" id="latest" onclick="article_list('latest', '')">최신순</span>
-              <span class="sort" id="like" onclick="article_list('like', '')">인기순</span>  
+              <span class="sort" id="latest" onclick="article_list(1, 'latest')">최신순</span>
+              <span class="sort" id="like" onclick="article_list(1, 'like')">인기순</span>  
             </span>
           </span>
         </div>
@@ -44,7 +44,7 @@
       </section>
       <section class="content" id="content_section">
         <div class="sub_info" id="best_article_box">
-          <span id="testspan">전체 카테고리 TOP 10 게시글</span>
+          <h1>전체 카테고리 TOP 10 게시글</h1>
           <button type="button" class="btn" onclick="ArticleCreatePage()">게시글 작성</button>
           <table>
             <colgroup>
@@ -74,7 +74,7 @@
         </div>
         <div id="notice"></div>
         <div class="article-box" id="article_box">
-          <span id="article_box_span">카테고리별 게시글</span>
+          <h1>카테고리별 게시글</h1>
           <table>
             <colgroup>
               <col style="width: 5%;">

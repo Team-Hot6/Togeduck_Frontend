@@ -50,12 +50,13 @@ async function get_hobby() {
 }
 
 // 게시글 전체 목록 API
-async function get_articles(page, sort, category_id) {
-    const response = await fetch(`${back_end_url}/articles/?page=${page}&sort=${sort}&category=${category_id}`, {
+async function get_articles(page, sort) {
+    const response = await fetch(`${back_end_url}/articles/?page=${page}&sort=${sort}`, {
         method: "GET",
     })
     return response
 }
+
 // 인기 게시글 10 목록
 async function get_lank_articles() {
     const response = await fetch(`${back_end_url}/articles/lank/`, {
@@ -65,10 +66,11 @@ async function get_lank_articles() {
 }
 
 // 카테고리 선택 시 해당 카테고리 게시글 리스트 API
-async function get_select_articles(category_id, sort) {
-    const response = await fetch(`${back_end_url}/articles/?category=${category_id}&sort=${sort}`, {
+async function get_select_articles(category_id, page, sort) {
+    const response = await fetch(`${back_end_url}/articles/?category=${category_id}&page=${page}&sort=${sort}`, {
         method: "GET",
     })
+
     return response
 }
 

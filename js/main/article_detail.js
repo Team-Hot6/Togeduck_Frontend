@@ -66,7 +66,7 @@ async function LoadDeatail_comment(article_id) {
         let date = data[i]['created_at'].replace('T', ' ').substr(5, 5);
         let time = data[i]['created_at'].replace('T', ' ').substr(11, 8);
         let reply = data[i]['reply_comment']
-
+        
         let temp_html = `<li class='list-group-item' id="${comment_id}">
                                 <div class="comment-info d-flex">
                                     <div class="nickname-box d-flex align-items-center">

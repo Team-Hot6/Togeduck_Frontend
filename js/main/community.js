@@ -4,14 +4,15 @@ window.onload = async() => {
     if (page == null) {
         page = 1
     }
-
-    article_list(page)
+    let sort = urlParams.get('sort')
+    article_list(page, sort)
     hobby_list()
 }
 
 // 전체 카테고리의 게시글 목록
-async function article_list(page, sort, category_id) {
-    const response = await get_articles(page, sort, category_id)
+async function article_list(page, sort) {
+    console.log(sort)
+    const response = await get_articles(page, sort)
     const response_json = await response.json()
     const data = response_json['results']
     
@@ -47,7 +48,7 @@ async function article_list(page, sort, category_id) {
         page_numbers.innerHTML = ''
 
         for (let i = 0; i < page_range; i++){
-            const page_number = `<button type="button" class="page_number" onclick="move_article_page(${i+1})">${i+1}</button>`
+            const page_number = `<button type="button" class="page_number" onclick="move_article_page(${i+1}, '${sort}')">${i+1}</button>`
             page_numbers.insertAdjacentHTML('beforeend', page_number)
         }
     }
@@ -92,7 +93,7 @@ async function hobby_list() {
     const data = await response.json()
 
     for (let i = 0; i < data.length; i++) {
-        const hobby = `<button type="button" class="hobby" onclick="select_article_list(${data[i]['id']}, '')">${data[i]['category']}</button>`;
+        const hobby = `<button type="button" class="hobby" onclick="select_article_list(${data[i]['id']}, 1, '')">${data[i]['category']}</button>`;
 
         hobbys = document.getElementById("hobbys")
         hobbys.insertAdjacentHTML("beforeend", hobby);
@@ -100,14 +101,14 @@ async function hobby_list() {
 }
 
 // 선택한 카테고리의 게시글 목록
-async function select_article_list(category_id, sort) {
+async function select_article_list(category_id, page, sort) {
     const sort_btn = document.getElementById('sort_btn')
-    temp_html = `<span class="sort" id="latest" onclick="select_article_list(${category_id}, 'latest')">최신순</span>
-                <span class="sort" id="like" onclick="select_article_list(${category_id}, 'like')">인기순</span>`
+    temp_html = `<span class="sort" id="latest" onclick="select_article_list(${category_id}, 1, 'latest')">최신순</span>
+                <span class="sort" id="like" onclick="select_article_list(${category_id}, 1, 'like')">인기순</span>`
     sort_btn.innerHTML = ``
     sort_btn.insertAdjacentHTML('beforeend', temp_html)
     
-    const response = await get_select_articles(category_id, sort)
+    const response = await get_select_articles(category_id, page, sort)
     const response_json = await response.json()
     const data = response_json['results']
 
@@ -158,7 +159,7 @@ async function select_article_list(category_id, sort) {
             page_numbers.innerHTML = ''
 
             for (let i = 0; i < page_range; i++){
-                const page_number = `<button type="button" class="page_number" onclick="move_category_page(${category_id}, ${i+1})">${i+1}</button>`
+                const page_number = `<button type="button" class="page_number" onclick="move_category_page(${category_id}, ${i+1}, '${sort}')">${i+1}</button>`
                 page_numbers.insertAdjacentHTML('beforeend', page_number)
         }
         }
@@ -176,7 +177,13 @@ function ArticleCreatePage() {
 
 
 // 전체 게시글 페이지 이동
-async function move_article_page(page_number) {
-    const url = `${front_end_url}/templates/main/community.html?page=${page_number}`
+async function move_article_page(page_number, sort) {
+    const url = `${front_end_url}/templates/main/community.html?page=${page_number}&sort=${sort}`
+    window.location.href = url
+}
+
+// 카테고리 선택 시 페이지 이동
+async function move_category_page(category_id, page_number, sort) {
+    const url = `${front_end_url}/templates/main/community.html?category_id=${category_id}&page=${page_number}&sort=${sort}`
     window.location.href = url
 }
