@@ -332,10 +332,13 @@ async function workshop_put(workshop_id) {
 
     const formData = new FormData();
 
+    if (workshop_image) {
+        formData.append("workshop_image", workshop_image);
+    }
+
     formData.append("title", title);
     formData.append("content", content);
     formData.append("date", date);
-    formData.append("workshop_image", workshop_image);
     formData.append("max_guest", max_guest);
     formData.append("amount", amount);
     formData.append("category", category);
