@@ -20,7 +20,7 @@ async function myPageProfile_fuc() {
     const id = localStorage.getItem("payload")
     const id_json = JSON.parse(id)
 
-    const response = await fetch('http://127.0.0.1:8000/users/' + payload_parse.user_id + '/', {
+    const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/`, {
 
             method: 'GET',
         })
@@ -36,7 +36,7 @@ async function myPageProfile_fuc() {
 
             const profilePictureImg = document.createElement('img')
             profilePictureImg.setAttribute('class', 'mypage-profilepictureimg')
-            profilePictureImg.setAttribute('src', 'http://127.0.0.1:8000' + data["profile_image"])
+            profilePictureImg.setAttribute('src', `${back_end_url}` + data["profile_image"])
             profilePicture.appendChild(profilePictureImg)
 
             const profileName = document.createElement('div')
@@ -116,10 +116,8 @@ mypage.appendChild(mypageRightSide)
 myPageWorkshopLikes_fuc()
 
 async function myPageWorkshopLikes_fuc() {
-    const id = localStorage.getItem("payload")
-    const id_json = JSON.parse(id)
 
-    const response = await fetch('http://127.0.0.1:8000/users/' + payload_parse.user_id + '/', {
+    const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/`, {
 
             method: 'GET',
         })
@@ -166,10 +164,14 @@ async function myPageWorkshopLikes_fuc() {
                 wsLikesCardFrame.setAttribute('id', 'mypage-workshop-likes-card-frame')
                 wsLikesCard.appendChild(wsLikesCardFrame)
 
+                const wsLikesCardA = document.createElement('a')
+                wsLikesCardA.setAttribute('href', `${front_end_url}/templates/main/workshop_detail.html?id=${workshop_id}`)
+                wsLikesCardFrame.appendChild(wsLikesCardA)
+
                 const wsLikesCardImg = document.createElement('img')
                 wsLikesCardImg.setAttribute('class', 'mypage-workshop-likes-card-img')
                 wsLikesCardImg.setAttribute('id', 'mypage-workshop-likes-card-img')
-                wsLikesCardImg.setAttribute('src', 'http://127.0.0.1:8000' + data["workshop_likes"][i]['workshop_image'])
+                wsLikesCardImg.setAttribute('src', `${back_end_url}` + data["workshop_likes"][i]['workshop_image'])
                 wsLikesCardFrame.appendChild(wsLikesCardImg)
 
                 const wsLikesCardTitle = document.createElement('div')

@@ -35,7 +35,7 @@ async function wsManageCard_fuc() {
 
         const wsManagePictureImg = document.createElement('img')
         wsManagePictureImg.setAttribute('class', 'workshop-manage-pictureimg')
-        wsManagePictureImg.setAttribute('src', 'http://127.0.0.1:8000' + data["workshop_image"])
+        wsManagePictureImg.setAttribute('src', `${back_end_url}` + data["workshop_image"])
         wsManagePicture.appendChild(wsManagePictureImg)
 
         const wsManageName = document.createElement('div')
@@ -224,9 +224,6 @@ async function wsManageApplyWait_fuc() {
             wsAWUTableReject.innerText = '거절'
             wsAWUTableTr.appendChild(wsAWUTableReject)
 
-            console.log("--------------------------------------")
-            console.log(data)
-
             // '신청 대기자' 항목 리스트 작성
             for (i = 0; i < data['workshop_apply'].length; i++) {
                 if (data['workshop_apply'][i]['result'] == '대기') {
@@ -244,7 +241,6 @@ async function wsManageApplyWait_fuc() {
                     wsAWUTableThUsernameNum.setAttribute('class', 'workshop-manage-applywaituser-table-th-name')
                     wsAWUTableThUsernameNum.setAttribute('id', 'workshop-manage-applywaituser-table-th-name' + (i + 1))
                     wsAWUTableThUsernameNum.innerText = data['workshop_apply'][i]['guest_nickname']
-                        // wsAWUTableThUsernameNum.innerText = "##############"
                     wsAWUTableTrNum.appendChild(wsAWUTableThUsernameNum)
 
                     const wsAWUTableThChatNum = document.createElement('th')

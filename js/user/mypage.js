@@ -124,6 +124,7 @@ mypage.appendChild(mypageRightSide)
 
 const navbar0 = document.createElement('nav')
 navbar0.setAttribute('class', 'nav nav-pills flex-column flex-sm-row')
+navbar0.setAttribute('id', 'mypage-rightside-navbar')
 mypageRightSide.appendChild(navbar0)
 
 const shNav = document.createElement('a')

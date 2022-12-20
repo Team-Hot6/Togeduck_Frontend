@@ -214,6 +214,59 @@
 }
 
 
+/* 마이페이지 메뉴바 버튼 */
+
+#mypage-rightside-navbar {
+    width: 700px;
+    height: 50px;
+}
+
+#nav-selectedhobby {
+    width: 150px;
+    height: 50px;
+    margin: 10px 20px 10px 20px;
+    font-size: 18px;
+}
+
+#nav-selectedhobby:hover {
+    background-color: rgb(210, 228, 246);
+    width: 150px;
+    height: 50px;
+    margin: 10px 20px 10px 20px;
+    font-size: 18px;
+}
+
+#nav-appliedworkshop {
+    width: 150px;
+    height: 50px;
+    margin: 10px 20px 10px 20px;
+    font-size: 18px;
+}
+
+#nav-appliedworkshop:hover {
+    background-color: rgb(210, 228, 246);
+    width: 150px;
+    height: 50px;
+    margin: 10px 20px 10px 20px;
+    font-size: 18px;
+}
+
+#nav-createdworkshop {
+    width: 150px;
+    height: 50px;
+    margin: 10px 20px 10px 20px;
+    font-size: 18px;
+}
+
+#nav-createdworkshop:hover {
+    background-color: rgb(210, 228, 246);
+    width: 150px;
+    height: 50px;
+    margin: 10px 20px 10px 20px;
+    font-size: 18px;
+}
+
+
 /* 마이페이지 - 내가 선택한 취미 카테고리 버튼 */
 
 .btn-selectedhobby-1 {
@@ -381,7 +434,7 @@
 }
 
 .mypage-createdworkshop-table-th-status-sort {
-    width: 300px;
+    width: 200px;
     height: 50px;
     text-align: center;
 }

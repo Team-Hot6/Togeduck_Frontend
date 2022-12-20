@@ -26,7 +26,7 @@ async function change_mypage_profile(user_id) {
     })
     if (response.status == 200) {
         alert("프로필 정보가 수정되었습니다.");
-        window.location.replace(`${front_end_url}/templates/main/workshop.html`)
+        window.location.replace(`${front_end_url}/templates/user/mypage.html?id=${user_id}`)
     } else {
         alert('프로필 정보를 다시 입력해주세요', response.status);
     }
