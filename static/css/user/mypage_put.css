@@ -181,7 +181,7 @@ body :-ms-input-placeholder {
 
 .container h1 {
     font-size: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     transition-duration: 1s;
     transition-timing-function: ease-in- put;
     font-weight: 200;
@@ -189,7 +189,7 @@ body :-ms-input-placeholder {
 
 .container2 h1 {
     font-size: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     transition-duration: 1s;
     transition-timing-function: ease-in- put;
     font-weight: 200;
@@ -478,7 +478,7 @@ form {
 }
 
 .password_put_title {
-    margin-bottom: 15px;
+    margin-bottom: 40px;
     font-size: 18px;
 }
 
