@@ -4,13 +4,17 @@
 
 /*포스팅*/
 
-body{background:lightgrey}
+body{background-color: rgb(250, 250, 249);}
+
+.workshop_post_box{
+  padding: 100px 0 100px 0;
+}
 
 .sttngs p{color:#000;}
 
 .sttngs{
     max-width:1064px;
-    margin: 50px auto;
+    margin: auto;
     background:#fff;
     padding:15px;
     height:1000px;
@@ -43,7 +47,7 @@ body{background:lightgrey}
   color:#999;letter-spacing:1px;
   position: relative;
   width: 130px;
-  z-index:100;
+  /* z-index:100; */
 }
 
 
@@ -95,11 +99,11 @@ body{background:lightgrey}
 
 
 
-:root {
+/* :root {
   back3ground-color: #FCFEFD;
   font-family: helvetica, arial, sans-serif;
   font-size: 15px;
-}
+} */
 
 
 
@@ -254,7 +258,7 @@ input, select, textarea {
 .hvr-profile-img{opacity:.3;}
 
 #profile-upload input.upload {
-    z-index:1;
+    /* z-index:1; */
     left: 0;
     margin: 0;
     bottom: 0;
@@ -279,7 +283,7 @@ input, select, textarea {
 
 .select {
   position: relative;
-  z-index: 1;
+  /* z-index: 1; */
   padding-right: 40px;
 }
 .select::-ms-expand {
@@ -295,7 +299,7 @@ input, select, textarea {
   top: 0;
   right: 0;
   bottom: 0;
-  z-index: 2;
+  /* z-index: 2; */
   padding: 0 15px;
   width: 10px;
   height: 100%;
@@ -313,7 +317,7 @@ input, select, textarea {
 .tr span{display:inline-block;color:grey;font-size:11px;letter-spacing:0;font-weight:700;text-transform:none;}
 #texte{display:inline-block;color:grey;text-transfgorm:none;letter-spacing:0;}
 
-.sttngs button {
+.ok_button {
   text-transform: uppercase;font-weight:800;letter-spacing:1px;
   outline: 0;
   background: limegreen;

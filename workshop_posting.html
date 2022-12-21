@@ -9,11 +9,15 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./static/css/main/workshop_posting.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="./static/css/main/chat.css">
+    <link rel="stylesheet" href="./static/css/main/navbar.css">
     <title>workshop create</title>
   </head>
 
   <body>
-    <header style="display: none;"></header>
+    <header></header>
+
+    <div class="workshop_post_box">
 
     <div class="sttngs">
       <h2>워크샵 생성</h2>
@@ -66,15 +70,18 @@
               <textarea class="textarea e" rows="7" cols="25" id="content" maxlength="500"></textarea>
             </div>
           </div>
-          <button type="button" onclick="workshop_post()">완료</button>
+          <button class="ok_button" type="button" onclick="workshop_post()">완료</button>
         </section>
       </div>
-      <chat style="display: none;"></chat>
+    </div>
+      <chat></chat>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script src="./static/js/global.js"></script>
       <script src="./static/js/main/workshop_api.js"></script>
       <script src="./static/js/main/workshop_detail.js"></script>
       <script src="./static/js/main/workshop_posting.js"></script>
+      <script src="./static/js/main/modal_socket.js"></script>
+      <script src="./static/js/main/modal_socket_api.js"></script>
       
     </body>
 
