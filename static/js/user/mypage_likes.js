@@ -160,14 +160,12 @@ async function myPageWorkshopLikes_fuc() {
                 wsLikesCardFrame.setAttribute('id', 'mypage-workshop-likes-card-frame')
                 wsLikesCard.appendChild(wsLikesCardFrame)
 
-                // const wsLikesCardA = document.createElement('a')
-                // wsLikesCardA.setAttribute('href', `${front_end_url}/workshop_detail.html?id=${workshop_id}`)
-                // wsLikesCardFrame.appendChild(wsLikesCardA)
-
                 const wsLikesCardImg = document.createElement('img')
                 wsLikesCardImg.setAttribute('class', 'mypage-workshop-likes-card-img')
                 wsLikesCardImg.setAttribute('id', 'mypage-workshop-likes-card-img')
                 wsLikesCardImg.setAttribute('src', `${back_end_url}` + data["workshop_likes"][i]['workshop_image'])
+                wsLikesCardImg.setAttribute('onclick', 'toWorkshopDetailPage_fuc(' + data['workshop_likes'][i]['pk'] + ')')
+                wsLikesCardImg.setAttribute('style', 'cursor:pointer;')
                 wsLikesCardFrame.appendChild(wsLikesCardImg)
 
                 const wsLikesCardTitle = document.createElement('div')
@@ -183,4 +181,10 @@ async function myPageWorkshopLikes_fuc() {
                 wsLikesCard.appendChild(wsLikesCardLocation)
             }
         })
+}
+
+
+// 워크샵 좋아요 한 항목 이미지 클릭 시 해당 워크샵 상세페이지로 이동
+async function toWorkshopDetailPage_fuc(workshop_id) {
+    location.href = `${front_end_url}/workshop_detail.html?id=${workshop_id}`
 }
