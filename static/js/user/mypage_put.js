@@ -15,7 +15,9 @@ async function change_mypage_profile(user_id) {
 
     formData.append('nickname', nickname)
     formData.append('email', email)
-    formData.append('profile_image', profile_image)
+    if (profile_image){
+        formData.append('profile_image', profile_image)
+    }
 
     const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/put/`, {
         headers: {
@@ -24,7 +26,6 @@ async function change_mypage_profile(user_id) {
         method: "PUT",
         body: formData
     })
-
     // 유효성 검사
     response_json = await response.json()
     if (response.status == 400) {
