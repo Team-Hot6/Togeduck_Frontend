@@ -268,9 +268,7 @@ async function workshop_post() {
     const category = document.getElementById("category_id").value;
     const location = document.getElementById("location_id").value;
     const address = document.getElementById("address").value;
-    const date_1 = document.getElementById("date_1").value;
-    const date_2 = document.getElementById("date_2").value;
-    const date = `${date_1} ${date_2} `
+    const date = document.getElementById("date").value;
 
     if (workshop_image == undefined) {
         alert("이미지를 업로드해주세요")
@@ -322,9 +320,7 @@ async function workshop_put(workshop_id) {
     const category = document.getElementById("category_id").value;
     const location = document.getElementById("location_id").value;
     const address = document.getElementById("address").value;
-    const date_1 = document.getElementById("date_1").value;
-    const date_2 = document.getElementById("date_2").value;
-    const date = `${date_1} ${date_2} `
+    const date = document.getElementById("date").value;
 
     const formData = new FormData();
 
