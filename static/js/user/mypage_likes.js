@@ -100,8 +100,28 @@ async function myPageProfile_fuc() {
             profilePartiLike2.innerText = data['workshop_likes'].length + "개"
             profilePartiLike.appendChild(profilePartiLike2)
 
+            // 마이페이지 프로필 카드 아래 개인정보 변경 버튼
+            const mypagePutButtonFrame = document.createElement('div')
+            mypagePutButtonFrame.setAttribute('class', 'mypage_put_button_frame')
+            mypageLeftSide.appendChild(mypagePutButtonFrame)
+
+            const mypagePutButton = document.createElement('button')
+            mypagePutButton.setAttribute('onclick', 'password_move()')
+            mypagePutButton.setAttribute('class', 'mypage_put_button')
+            mypagePutButton.innerText = '개인정보 수정'
+            mypageLeftSide.appendChild(mypagePutButton)
+            mypagePutButtonFrame.appendChild(mypagePutButton)
+
         })
 
+}
+
+// 비밀번호 변경 페이지 이동
+async function password_move() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let id = urlParams.get('id');
+    const url = `${front_end_url}/mypage_put.html?id=${id}` // 수정 예정
+    window.location.href = url
 }
 
 
@@ -160,14 +180,12 @@ async function myPageWorkshopLikes_fuc() {
                 wsLikesCardFrame.setAttribute('id', 'mypage-workshop-likes-card-frame')
                 wsLikesCard.appendChild(wsLikesCardFrame)
 
-                // const wsLikesCardA = document.createElement('a')
-                // wsLikesCardA.setAttribute('href', `${front_end_url}/workshop_detail.html?id=${workshop_id}`)
-                // wsLikesCardFrame.appendChild(wsLikesCardA)
-
                 const wsLikesCardImg = document.createElement('img')
                 wsLikesCardImg.setAttribute('class', 'mypage-workshop-likes-card-img')
                 wsLikesCardImg.setAttribute('id', 'mypage-workshop-likes-card-img')
                 wsLikesCardImg.setAttribute('src', `${back_end_url}` + data["workshop_likes"][i]['workshop_image'])
+                wsLikesCardImg.setAttribute('onclick', 'toWorkshopDetailPage_fuc(' + data['workshop_likes'][i]['pk'] + ')')
+                wsLikesCardImg.setAttribute('style', 'cursor:pointer;')
                 wsLikesCardFrame.appendChild(wsLikesCardImg)
 
                 const wsLikesCardTitle = document.createElement('div')
@@ -183,4 +201,10 @@ async function myPageWorkshopLikes_fuc() {
                 wsLikesCard.appendChild(wsLikesCardLocation)
             }
         })
+}
+
+
+// 워크샵 좋아요 한 항목 이미지 클릭 시 해당 워크샵 상세페이지로 이동
+async function toWorkshopDetailPage_fuc(workshop_id) {
+    location.href = `${front_end_url}/workshop_detail.html?id=${workshop_id}`
 }

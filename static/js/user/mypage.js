@@ -513,7 +513,7 @@ async function myPageCreatedWorkshop_del_fuc(workshop_id) {
 
     var alert_select = confirm("삭제 하시겠습니까?");
     if (alert_select) {
-        alert("삭제 되었습니다")
+
         const response = await fetch(`${back_end_url}/workshops/${workshop_id}/`, {
                 method: "DELETE",
                 headers: {

@@ -21,6 +21,10 @@ async function change_mypage_profile(user_id) {
         formData.append('profile_image', profile_image)
     }
 
+    if (profile_image) {
+        formData.append("profile_image", profile_image);
+    }
+
     const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/put/`, {
         headers: {
             "Authorization": `Bearer ${token}`
