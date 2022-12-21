@@ -31,9 +31,12 @@
         <label for="formFile" class="form-label">이미지 업로드</label>
         <input class="form-control" type="file" id="formFile">
       </div>
-      <button type="button" class="btn btn-warning" style="margin: auto; display: block;" onclick="handleArticleUpdate(article_id)">수정하기</button>
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-warning" style="display: block;" onclick="handleCancel()">취소</button>
+        <button type="button" class="btn btn-warning" style="display: block;" onclick="handleArticleUpdate(article_id)">수정하기</button>
+      </div>
     </div>
-    <chat></chat>
+    <chat style="display: none;"></chat>
     <script src="./static/js/global.js"></script>
     <script src="./static/js/main/api.js"></script>
     <script src="./static/js/main/article_update.js"></script>

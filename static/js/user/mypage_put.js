@@ -11,11 +11,15 @@ async function change_mypage_profile(user_id) {
     const email = document.getElementById("profile_email_put").value;
     const profile_image = document.getElementById("profile_image_put").files[0];
 
+    
+
     const formData = new FormData();
 
     formData.append('nickname', nickname)
     formData.append('email', email)
-    formData.append('profile_image', profile_image)
+    if (profile_image) {
+        formData.append('profile_image', profile_image)
+    }
 
     if (profile_image) {
         formData.append("profile_image", profile_image);
@@ -31,6 +35,7 @@ async function change_mypage_profile(user_id) {
 
     // 유효성 검사
     response_json = await response.json()
+    console.log(response_json,'')
     if (response.status == 400) {
         if (response_json['email'] != null) {
             alert(`${response_json['email']}`)
