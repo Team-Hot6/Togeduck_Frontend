@@ -175,13 +175,15 @@ async function workshop_review_view(workshop_id) {
             //<div id="comment-footer${data[i].id}" class="comment-footer" ></div>
             //const update_btn = document.getElementById(`comment-footer${data[i].id}`)
             const put_btn = document.getElementById(`put_btn(${data[i].id})`)
-                //const update = document.getElementById(`update(${data[i].id})`)
+            //const update = document.getElementById(`update(${data[i].id})`)
             const delete_btn = document.getElementById(`delete_btn(${data[i].id})`)
             const payload = localStorage.getItem("payload");
             const payload_parse = JSON.parse(payload)
-            nickname = payload_parse.nickname
+            user_id = payload_parse.user_id
 
-            if (nickname != data[i].user) {
+            console.log(user_id,'유저 아이디')
+            console.log(data[i].user_id,'리뷰 유저 아이디')
+            if (user_id != data[i].user_id) {
 
                 //update_btn.style.display = "none"
                 put_btn.style.display = "none"
@@ -330,6 +332,11 @@ async function workshop_post() {
         return
     }
 
+    if (address2.length > 20) {
+        alert("상세주소는 최대 20자 이하입니다")
+        return
+    }
+
     const formData = new FormData();
 
     formData.append("title", title);
@@ -375,11 +382,16 @@ async function workshop_put(workshop_id) {
     const amount = document.getElementById("amount").value;
     const category = document.getElementById("category_id").value;
     const location = document.getElementById("location_id").value;
-    const address1 = document.getElementById("member_addr").value;
-    const address2 = document.getElementById("address").value;
+    const address1 = document.getElementById("member_addr").value; // 주소
+    const address2 = document.getElementById("address").value; // 상세주소
     const date_1 = document.getElementById("date_1").value;
     const date_2 = document.getElementById("date_2").value;
     const date = `${date_1} ${date_2} `
+
+    if (address2.length > 20) {
+        alert("상세주소는 최대 20자 이하입니다")
+        return
+    }
 
     const formData = new FormData();
 
@@ -396,6 +408,16 @@ async function workshop_put(workshop_id) {
     formData.append("location", location);
     formData.append("address", address1);
     formData.append("address2", address2);
+
+    console.log(title,'제목')
+    console.log(content,'내용')
+    console.log(date,'날짜')
+    console.log(max_guest,'인원수')
+    console.log(amount,'가격')
+    console.log(category,'카테고리')
+    console.log(location,'지역')
+    console.log(address1,'주소')
+    console.log(address2,'상세주소')
 
 
     const response = await fetch(`${back_end_url}/workshops/${workshop_id}/`, {
