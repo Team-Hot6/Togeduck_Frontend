@@ -11,14 +11,11 @@ async function LoadCurrentArticle(article_id) {
     const response = await get_article_detail(article_id)
     const data = await response.json()
 
-    const selected_category = document.getElementById('selected_category')
-    selected_category.innerText = '이 게시글의 카테고리 : ' + data['category']
-
     const title = document.getElementById('title')
-    title.setAttribute('placeholder',data['title'])
+    title.value = data['title']
 
     const content = document.getElementById('content')
-    content.setAttribute('placeholder', data['content'])
+    content.value = data['content']
 
     const article_image = document.getElementById('formFile')
     article_image.setAttribute('placeholder', data['article_image'])
@@ -26,18 +23,32 @@ async function LoadCurrentArticle(article_id) {
 
 // 카테고리 목록 서버에서 가져옴
 window.onload = async function LoadCategory() {
-    const response = await get_hobby()
+    var response = await get_article_detail(article_id)
+    const current_data = await response.json()
+    
+    let selected_category = current_data['category']
+    let selected_category_id = current_data['category_id']
+
+    var response = await get_hobby()
     const data = await response.json()
     
     for (let i = 0; i < data.length; i++) {
         let num = data[i]['id']
         let category = data[i]['category']
 
+        if (selected_category == category){
+            let category_list = document.getElementById('category')
+            var hobby = document.createElement('option')
+            hobby.setAttribute('value', selected_category_id)
+            hobby.setAttribute('selected', 'selected')
+            hobby.innerText = selected_category
+            category_list.appendChild(hobby)
+            continue;
+        }
         let category_list = document.getElementById('category')
-        let hobby = document.createElement('option')
+        var hobby = document.createElement('option')
         hobby.setAttribute('value', num)
         hobby.innerText = category
-
         category_list.appendChild(hobby)
     }
 }
