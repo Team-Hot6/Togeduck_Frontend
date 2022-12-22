@@ -76,7 +76,7 @@ async function workshop_info(workshop_id) {
         workshop_image.setAttribute("src", `${back_end_url}${data.workshop_image}`);
         date_1.value = date_1_content;
         date_2.value = date_2_content;
-        address.value = data.address;
+        address.value = data.address2;
 
         workshop_image_frame.style.opacity = 100;
         workshop_image_frame.innerHTML = `<input type="file" name="logo" id='getval' class="upload" accept="image/*" id="imag">

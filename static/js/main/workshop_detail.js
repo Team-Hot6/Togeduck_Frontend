@@ -26,8 +26,10 @@ async function workshop_detail_view(workshop_id) {
         const likes_count = document.getElementById("likes_count") // 좋아요 수
         const participant_count = document.getElementById("participant_count") // 참가인원
         const date = document.getElementById("date") // 워크샵 날짜
-        const address = document.getElementById("address") // 주소
-        const review_workshop_count = document.getElementById("review_workshop_count") // 좋아요 수
+        //const address2 = document.getElementById("address2") // 상세주소2
+        //const address1 = document.getElementById("address") // 주소1
+        const address = document.getElementById("address") // 주소 = 주소1 + 상세주소2
+        const review_workshop_count = document.getElementById("review_workshop_count") // 리뷰 개수
 
         title.innerText = data.title;
         content.innerText = data.content;
@@ -45,7 +47,57 @@ async function workshop_detail_view(workshop_id) {
         var options = { hour: "numeric", minute: "numeric" };
         date.innerText = today.toLocaleDateString() + ' ' + today.toLocaleString("ko-kr", options)
 
-        address.innerText = data.address;
+        //address1.innerText = data.address;
+        //address2.innerText = data.address2;
+        console.log(data.address2,'00000000000')
+        address.innerText = data.address + ' ' + data.address2 // 주소
+
+
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+console.log(data.address,'11111111111111111')
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch(`${data.address}`, function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+        console.log(result[0]['address_name'],'도로명')
+        console.log(result[0]['address']['address_name'],'주소명')
+        console.log(result[0]['road_address'],'도로명 제이슨')
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            content: `<div style="width:150px;text-align:center;padding:6px 0;">${result[0]['address_name']}</div>
+            <div style="width:150px;text-align:center;padding:6px 0;">${result[0]['address']['address_name']}</div>`
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});    
+
+
+
+
+
 
         // 로그인 사용자의 닉네임
         const payload = localStorage.getItem("payload");
@@ -267,7 +319,8 @@ async function workshop_post() {
     const amount = document.getElementById("amount").value;
     const category = document.getElementById("category_id").value;
     const location = document.getElementById("location_id").value;
-    const address = document.getElementById("address").value;
+    const address1 = document.getElementById("member_addr").value; // 주소 id 변경 address -> member_addr
+    const address2 = document.getElementById("address").value; //상세주소
     const date_1 = document.getElementById("date_1").value;
     const date_2 = document.getElementById("date_2").value;
     const date = `${date_1} ${date_2} `
@@ -287,7 +340,8 @@ async function workshop_post() {
     formData.append("amount", amount);
     formData.append("category", category);
     formData.append("location", location);
-    formData.append("address", address);
+    formData.append("address", address1);
+    formData.append("address2", address2);
 
     const response = await fetch(`${back_end_url}/workshops/`, {
         headers: {
@@ -321,7 +375,8 @@ async function workshop_put(workshop_id) {
     const amount = document.getElementById("amount").value;
     const category = document.getElementById("category_id").value;
     const location = document.getElementById("location_id").value;
-    const address = document.getElementById("address").value;
+    const address1 = document.getElementById("member_addr").value;
+    const address2 = document.getElementById("address").value;
     const date_1 = document.getElementById("date_1").value;
     const date_2 = document.getElementById("date_2").value;
     const date = `${date_1} ${date_2} `
@@ -339,7 +394,9 @@ async function workshop_put(workshop_id) {
     formData.append("amount", amount);
     formData.append("category", category);
     formData.append("location", location);
-    formData.append("address", address);
+    formData.append("address", address1);
+    formData.append("address2", address2);
+
 
     const response = await fetch(`${back_end_url}/workshops/${workshop_id}/`, {
         headers: {
