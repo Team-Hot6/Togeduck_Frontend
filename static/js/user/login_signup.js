@@ -64,7 +64,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 window.Kakao.init("f04d6d9992136b1c2b45358537926d29");
 
-function kakaoLogin() {
+function kakao_login() {
     window.Kakao.Auth.login({
         scope: 'profile_nickname, account_email, profile_image',
         success: function (authObj) {
