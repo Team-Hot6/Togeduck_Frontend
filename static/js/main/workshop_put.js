@@ -77,7 +77,8 @@ async function workshop_info(workshop_id) {
         const title = document.getElementById("title");
         const max_guest = document.getElementById("max_guest");
         const amount = document.getElementById("amount");
-        const address = document.getElementById("address");
+        const address = document.getElementById("member_addr"); //주소
+        const address2 = document.getElementById("address"); // 상세주소
         const date = document.getElementById("date");
 
         title.value = data.title;
@@ -85,8 +86,11 @@ async function workshop_info(workshop_id) {
         max_guest.value = data.max_guest;
         amount.value = data.amount;
         workshop_image.setAttribute("src", `${back_end_url}${data.workshop_image}`);
-        date.value = data.date;
+        address2.value = data.address2;
         address.value = data.address;
+        date.value = data.date;
+    
+
 
         workshop_image_frame.style.opacity = 100;
         workshop_image_frame.innerHTML = `<input type="file" name="logo" id='getval' class="upload" accept="image/*" id="imag">
