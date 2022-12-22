@@ -27,7 +27,6 @@ async function change_mypage_profile(user_id) {
         method: "PUT",
         body: formData
     })
-
     // 유효성 검사
     response_json = await response.json()
 

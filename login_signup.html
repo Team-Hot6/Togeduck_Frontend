@@ -30,6 +30,9 @@
             <button id="loginBtn" class="signin-btn" onclick="handleLogin()">
               <span class="front">SIGN IN</span>
             </button>
+            <button id="kakao_login_btn" onclick="kakaoLogin()">
+              <img src="/static/images/kakao_login.png">
+            </button>
           </div>
           <div class="signup-box">
             <h1>Ceate Account</h1>
@@ -75,6 +78,7 @@
       </div>
     </div>
   </div>
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
   <script src="./static/js/global.js"></script>
   <script src="./static/js/user/api.js"></script>
   <script src="./static/js/user/login_signup.js"></script>

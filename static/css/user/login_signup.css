@@ -181,3 +181,11 @@
     transform: translateY(-2px);
   }
   
+  #kakao_login_btn {
+    padding: 0;
+    margin-top: 25px;
+    cursor: pointer;
+    color: white;
+    border-color: white;
+    
+  }
