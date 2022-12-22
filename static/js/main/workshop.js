@@ -46,7 +46,7 @@ async function workshop_list(page, sort) {
         gridbox.innerHTML = ''
         const none_box_wrap = document.getElementById("none_box_wrap")
         none_box_wrap.innerHTML = ''
-
+        
         for (i = 0; i < workshop_data.length; i++) {
 
             const workshop = `<div class="workshop" onclick="workshop_detail_move(${workshop_data[i]['id']})">

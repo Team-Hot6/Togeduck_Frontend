@@ -49,7 +49,6 @@ async function workshop_detail_view(workshop_id) {
 
         //address1.innerText = data.address;
         //address2.innerText = data.address2;
-        console.log(data.address2,'00000000000')
         address.innerText = data.address + ' ' + data.address2 // 주소
 
 
@@ -65,7 +64,6 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
-console.log(data.address,'11111111111111111')
 // 주소로 좌표를 검색합니다
 geocoder.addressSearch(`${data.address}`, function(result, status) {
 
@@ -79,9 +77,9 @@ geocoder.addressSearch(`${data.address}`, function(result, status) {
             map: map,
             position: coords
         });
-        console.log(result[0]['address_name'],'도로명')
-        console.log(result[0]['address']['address_name'],'주소명')
-        console.log(result[0]['road_address'],'도로명 제이슨')
+        // console.log(result[0]['address_name'],'도로명')
+        // console.log(result[0]['address']['address_name'],'주소명')
+        // console.log(result[0]['road_address'],'도로명 제이슨')
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
             content: `<div style="width:150px;text-align:center;padding:6px 0;">${result[0]['address_name']}</div>
@@ -181,8 +179,6 @@ async function workshop_review_view(workshop_id) {
             const payload_parse = JSON.parse(payload)
             user_id = payload_parse.user_id
 
-            console.log(user_id,'유저 아이디')
-            console.log(data[i].user_id,'리뷰 유저 아이디')
             if (user_id != data[i].user_id) {
 
                 //update_btn.style.display = "none"
