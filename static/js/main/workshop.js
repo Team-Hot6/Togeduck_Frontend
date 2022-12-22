@@ -35,6 +35,7 @@ async function workshop_popular_list() {
 
 // 모든 워크샵 목록 출력
 async function workshop_list(page, sort) {
+
     const response = await workshop_get(page, sort)
 
     if (response.status == 200) {
@@ -67,10 +68,13 @@ async function workshop_list(page, sort) {
         page_numbers.innerHTML = ''
 
         for (i = 0; i < page_range; i++) {
-            const page_number = `<button type="button" class="page_number" onclick="workshop_page_move(${i+1})">${i+1}</button>`
+            const page_number = `<button type="button" class="page_number" onclick="workshop_list(${i+1}, '${sort}')">${i+1}</button>`
             page_numbers.insertAdjacentHTML("beforeend", page_number);
         }
+
+        
     }
+    window.scrollTo(0,230);
 }
 
 // 모든 취미 카테고리 목록 출력
@@ -143,6 +147,7 @@ async function workshop_pick_list(category_id, category_name, page, sort) {
             }
         }
     }
+    window.scrollTo(0,230);
 }
 
 // 워크샵 상세 페이지로 이동

@@ -149,6 +149,13 @@
     font-weight: bold;
 }
 
+.mypage-profileparticipatelike-2:hover {
+    background-color: rgb(210, 228, 246);
+    width: 75px;
+    height: 42px;
+    font-size: 18px;
+}
+
 
 /* 개인정보 수정 페이지로 이동 버튼 */
 

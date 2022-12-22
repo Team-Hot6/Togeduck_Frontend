@@ -19,9 +19,9 @@
 
         <section id="contenneurform">
 
-            <button class="waves-effect waves-light active" id="login"></button>
+            <button class="waves-effect waves-light active" id="login">개인정보 수정하기</button>
             <div style="clear: both;"></div>
-            <button class="waves-effect waves-light" id="register"></button>
+            <button class="waves-effect waves-light" id="register">비밀번호 변경하기</button>
 
 
             <form class="col s12 container">
@@ -38,14 +38,29 @@
                     </div>
                     <div class="mypage_profile_put">
                         <div class="mypage_profile_put_title" align="left">이메일 수정</div>
-                        <input class="inputanimation" id="profile_email_put" type="text">
+                        <input class="inputanimation" id="profile_email_put" type="Email">
                     </div>
                     <button class="bouttonanimation" onclick="change_mypage_profile(user_id)" type="button" id="profile-put-button">프로필 수정</button>
 
                 </div>
-                <div class="middle_boundary"></div>
-                <div class="password_put">
-                    <div class="password_put_title">비밀번호</div>
+                
+
+                <ul class="animate">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+
+            </form>
+
+
+            <form class="col s12 container2">
+                <div class="password_put_title"></div>
+                <h1>비밀번호 변경</h1>
                     <form class="form">
                         <div class="password_info_put">
                             <div class="mypage_profile_put_title" align="left">기존 비밀번호</div>
@@ -68,22 +83,7 @@
 
                         </div>
                     </form>
-                </div>
-
-                <ul class="animate">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-
-            </form>
-
-
-            <form class="col s12 container2">
+                
 
                 <ul class="animate">
                     <li></li>
@@ -129,6 +129,59 @@
             }
         }
     </script>
+    <script>if(window.addEventListener){
+        window.addEventListener('load', maFonctionDeTest, false);
+    }else{
+        window.attachEvent('onload', maFonctionDeTest);
+    }
+    
+    function maFonctionDeTest(){
+        const back = document.querySelector('.back');
+    
+        const t1 = new TimelineMax();
+        
+        t1.fromTo(
+        
+            back,
+            1, 
+            { height: "0%" }, 
+            { height: "80%", ease: Power2.easeInOut }
+        
+        );
+    }
+    
+    var register = document.querySelector('#register');
+    var login = document.querySelector('#login');
+    
+    
+    register.addEventListener("click", change());
+    login.addEventListener("click", change());
+    
+    
+    function change() {
+        let $id = (id) => document.getElementById(id);
+        var [login, register, form] = ['login', 'register', 'contenneurform'].map(id => $id(id));
+        
+        [login, register].map(element => {
+            element.onclick = function () {
+                [login, register].map($ele => {
+                    $ele.classList.remove("active");
+                });                        
+                this.classList.add("active");
+                if( this.getAttribute("id") === "register"){
+                    form.classList.add("active");
+                    login.style.visibility ='visible';
+                    login.style.background ='#0f8ee4';
+                    register.style.visibility='hidden';
+                }else{
+                    form.classList.remove("active");
+                    login.style.visibility ='hidden';
+                    register.style.visibility='visible';
+                }
+              
+            }
+        });
+    }</script>
     <script src="./static/js/global.js"></script>
     <script src="./static/js/user/api.js"></script>
     <script src="./static/js/user/mypage_put.js"></script>
