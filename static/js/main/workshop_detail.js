@@ -52,14 +52,14 @@ async function workshop_detail_view(workshop_id) {
         const payload_parse = JSON.parse(payload)
 
         // 로그인 사용자와 워크샵의 호스트가 동일인물이 아니라면 <문의하기> 버튼을 출력한다
-        if (payload_parse.nickname != data.host) {
+        if (payload_parse.user_id != data.host_id) {
             const chat_button_label = document.getElementById("chat_button_wrap")
             chat_button_label.innerHTML = `<button type="button" class="chat_user_button" id="chat_button" onclick="click_user_chat(${data.host_id})">문의하기</button>`
         }
 
         const put_delete_box = document.getElementById("put_delete_box")
 
-        if (payload_parse.nickname == data.host) {
+        if (payload_parse.user_id == data.host_id) {
             put_delete_box.innerHTML = `<button onclick="PUT_Button()">수정</button>
                                         <button type="button" onclick="workshop_DELETE(workshop_id)">삭제</button>`
         } else {
