@@ -48,8 +48,8 @@
     float: left;
     cursor: pointer;
     margin: 0 2.4rem 0 0;
-    overflow:hidden;
-    word-wrap:break-word;
+    /* overflow:hidden;
+    word-wrap:break-word; */
 }
 
 .popular_workshop_img_frame{
