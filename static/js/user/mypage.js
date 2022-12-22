@@ -345,20 +345,21 @@ async function myPageAppliedWorkshop_fuc() {
 
 
 async function myPageAppliedWorkshop_del_fuc(workshop_id) {
-    var alert_select = confirm("삭제 하시겠습니까?");
+    var alert_select = confirm("신청을 취소하시겠습니까?");
     if (alert_select) {
-        alert("삭제 되었습니다")
+
         const response = await fetch(`${back_end_url}/workshops/${workshop_id}/apply/`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
+   
                     "Authorization": `Bearer ${token}`,
                 },
-                body: JSON.stringify({}),
+
             })
-            .then(response => response.json())
-            .then(data => {});
-        window.location.reload()
+        myPageAppliedWorkshop_fuc()
+        alert("신청이 취소되었습니다")
+
+       
     } else {
         alert("취소 되었습니다");
     }
@@ -451,8 +452,14 @@ async function myPageCreatedWorkshop_fuc() {
             cwThDelete.setAttribute('id', 'mypage-appliedworkshop-table-th-status-delete')
             cwThDelete.innerText = '삭제'
             cwTableTr.appendChild(cwThDelete)
+            
+            console.log("################")
+            console.log(data)
+            console.log("################")
+            console.log(data['workshop_host'])
 
             for (i = 0; i < data["workshop_host"].length; i++) {
+                
 
                 const cwTableTheadNum = document.createElement('thead')
                 cwTableTheadNum.setAttribute('class', 'mypage-createdworkshop-table-thead')
@@ -517,14 +524,11 @@ async function myPageCreatedWorkshop_del_fuc(workshop_id) {
         const response = await fetch(`${back_end_url}/workshops/${workshop_id}/`, {
                 method: "DELETE",
                 headers: {
-                    "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`,
-                },
-                body: JSON.stringify({}),
-            })
-            .then(response => response.json())
-            .then(data => {});
-        window.location.reload()
+            },
+        })
+        myPageCreatedWorkshop_fuc()
+        alert("식제가 완료되었습니다");
     } else {
         alert("취소 되었습니다");
     }
