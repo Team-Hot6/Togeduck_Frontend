@@ -187,7 +187,7 @@ async function workshop_review_view(workshop_id) {
 
                 //update_btn.style.display = "none"
                 put_btn.style.display = "none"
-                    //update.style.display = "none"
+                //update.style.display = "none"
                 delete_btn.style.display = "none"
 
             }
