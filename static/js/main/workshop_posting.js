@@ -3,6 +3,21 @@ window.onload = () => {
     location_category_list()
 }
 
+// 워크샵 진행일시 선택 : 현 시점으로부터 과거 날짜 선택 붙가하도록 
+var now_utc = Date.now() // 지금 날짜를 밀리초로
+var timeOff = new Date().getTimezoneOffset()*60000; // getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환 -> 분단위를 밀리초로 변환
+var today = new Date(now_utc-timeOff).toISOString().substring(0, 16); // new Date(today-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+document.getElementById("date").setAttribute("min", today);
+
+async function time_check() {
+    let date_box = document.getElementById('date');
+    let date = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, -5);
+    if(date_box.value < date) {
+        alert('시간을 다시 확인해주세요.');
+        date_box.value = date;
+    }
+}
+
 // 모든 취미 카테고리 목록 출력
 async function hobby_category_list() {
     const response = await hobby_get()

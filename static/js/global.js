@@ -2,14 +2,11 @@
 // 전역변수는 어디서 사용하는지 적어주기
 
 
-// const front_end_url = "http://bluecomma.shop"
-const front_end_url = "http://127.0.0.1:5500"
-// const front_end_url = window.location.host
-const back_end_url = "http://127.0.0.1:8000"
-//const back_end_url = "http://3.34.40.115"
+const front_end_url = "http://bluecomma.shop"
+const back_end_url = "http://www.carrotww.shop"
 const base_websocket_url = `ws://${window.location.host}`
-const websocketBaseUrl = "ws://127.0.0.1:8000/ws/socket-server"
-const websocket_Chat_BaseUrl = "ws://127.0.0.1:8000"
+const websocketBaseUrl = "ws://3.34.40.115/ws/socket-server"
+const websocket_Chat_BaseUrl = "ws://3.34.40.115"
 
 // 전역 변수 부분
 // chat 부분에서 소켓과 room_id 특정하기 위해 사용

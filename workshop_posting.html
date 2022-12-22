@@ -26,15 +26,17 @@
           <input class="t" type="radio" name="sections" id="option1" checked="checked">
 
           <div class="frm">
-            <div id='profile-upload'>
-              <div class="hvr-profile-img">
-                <input type="file" name="logo" id="imag" class="upload" accept="image/*">
-                <div class="icon">
-                  <div class="camera4">
-                    <span></span></div>
+            <label  for="imag">
+              <div id='profile-upload'>
+                <div class="hvr-profile-img">
+                  <input type="file" name="logo" id="imag" class="upload" accept="image/*">
+                  <div class="icon">
+                    <div class="camera4">
+                      <span></span></div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </label>
 
             <div class="tr">
               <label class="label" for="select">취미</label>
@@ -59,11 +61,8 @@
               <label class="label" for="input">제목</label>
               <input class="input" type="text" id="title">
 
-              <label class="label" for="date_submit">일시</label>
-              <date id="date_submit">
-                <input type="date" value="xxx" min="yyy" max="zzz" id="date_1">
-                <input type="time" id="date_2"> 
-              </date>
+              <label class="label" for="date">일시</label>
+              <input type="datetime-local" id="date" onchange="time_check()">
 
               <label class="label" for="input">참가비</label>
               <input class="input" type="text" id="amount">
