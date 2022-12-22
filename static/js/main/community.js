@@ -182,12 +182,12 @@ function ArticleCreatePage() {
 
 // 전체 게시글 페이지 이동
 async function move_article_page(page_number, sort) {
-    const url = `${front_end_url}/templates/main/community.html?page=${page_number}&sort=${sort}`
+    const url = `${front_end_url}/community.html?page=${page_number}&sort=${sort}`
     window.location.href = url
 }
 
 // 카테고리 선택 시 페이지 이동
 async function move_category_page(category_id, page_number, sort) {
-    const url = `${front_end_url}/templates/main/community.html?category_id=${category_id}&page=${page_number}&sort=${sort}`
+    const url = `${front_end_url}/community.html?category_id=${category_id}&page=${page_number}&sort=${sort}`
     window.location.href = url
 }
