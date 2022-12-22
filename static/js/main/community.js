@@ -11,7 +11,6 @@ window.onload = async() => {
 
 // 전체 카테고리의 게시글 목록
 async function article_list(page, sort) {
-    console.log(sort)
     const response = await get_articles(page, sort)
     const response_json = await response.json()
     const data = response_json['results']
