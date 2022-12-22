@@ -453,10 +453,6 @@ async function myPageCreatedWorkshop_fuc() {
             cwThDelete.innerText = '삭제'
             cwTableTr.appendChild(cwThDelete)
             
-            console.log("################")
-            console.log(data)
-            console.log("################")
-            console.log(data['workshop_host'])
 
             for (i = 0; i < data["workshop_host"].length; i++) {
                 
@@ -474,7 +470,7 @@ async function myPageCreatedWorkshop_fuc() {
                 const cwTableThNameNum = document.createElement('th')
                 cwTableThNameNum.setAttribute('class', 'mypage-createdworkshop-table-th-name')
                 cwTableThNameNum.setAttribute('id', 'mypage-createdworkshop-table-th-name-' + (i + 1))
-                cwTableThNameNum.setAttribute('onclick', 'workshop_apply_move(' + data['workshop_host'][i]['id'] + ')')
+                cwTableThNameNum.setAttribute('onclick', 'workshop_apply_move(' + data['workshop_host'][i]['pk'] + ')')
                 cwTableThNameNum.innerText = data['workshop_host'][i]['title']
                 cwTableTrNum.appendChild(cwTableThNameNum)
 
