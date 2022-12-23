@@ -42,6 +42,14 @@ async function handleLogin() {
     }
 }
 
+// id값으로 닉네임 값 확인
+async function get_nickname(user_id) {
+    const response = await fetch(`${back_end_url}/users/nickname/${user_id}/`,{
+        method: "GET",
+    })
+    return response
+}
+
 //로그아웃
 async function handleIogout() {
     localStorage.removeItem("access");
