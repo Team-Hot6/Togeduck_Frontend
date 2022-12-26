@@ -100,7 +100,7 @@ geocoder.addressSearch(`${data.address}`, function(result, status) {
         // 로그인 사용자의 닉네임
         const payload = localStorage.getItem("payload");
         const payload_parse = JSON.parse(payload)
-
+        console.log(payload_parse,'-------------')
         // 로그인 사용자와 워크샵의 호스트가 동일인물이 아니라면 <문의하기> 버튼을 출력한다
         if (payload_parse.user_id != data.host_id) {
             const chat_button_label = document.getElementById("chat_button_wrap")
@@ -123,6 +123,25 @@ geocoder.addressSearch(`${data.address}`, function(result, status) {
                 put_delete_box.innerHTML = `<button type="button" onclick="workshop_apply_for(${workshop_id})">워크샵 신청</button>`
             }
         }
+        console.log(data['likes'],'iiiiiiiiiii^a^')
+        const likes = document.getElementById("liked") // 좋아요
+        if (data['likes'].includes(payload_parse.user_id)) {
+            
+              
+                $(likes).addClass('btn_unlike');
+                $('.ani_heart_m').addClass('hi');
+                $('.ani_heart_m').removeClass('bye');
+              
+            //likes.classList.add('btn_unlike')
+        } else {
+            $(likes).hasClass('btn_unlike')
+                $(likes).removeClass('btn_unlike');
+                $('.ani_heart_m').removeClass('hi');
+                $('.ani_heart_m').addClass('bye');
+              
+            //likes.classList.remove('btn_unlike')
+        }
+
     }
 }
 
@@ -152,21 +171,24 @@ async function workshop_review_view(workshop_id) {
             const review = data[i].content
             const user = data[i].user
             
-            //const created_at = data[i].created_at 
-            const created_at = new Date(data[i].created_at).toLocaleString("ko-kr") + ' '+'생성일'
-            const updated_at = new Date(data[i].updated_at).toLocaleString("ko-kr") + ' '+'업데이드일'
+            //const created_at = data[i].created_at 생성일 데이터
+            //const created_at = new Date(data[i].created_at).toLocaleString("ko-kr") 생성일 날짜 
+            //<p style="font-size:10px" id="created_at">${created_at}</p> 생성일 태그
+            const updated_at = new Date(data[i].updated_at).toLocaleString("ko-kr")
 
             const new_review = `
                       <div id="review_list(${data[i].id})" class="comment">
                         <div id="user"  style="font-size:15px" class="comment-header">${user}</div>
                         
-                        <p style="font-size:10px" id="created_at">${created_at}</p>
+                        
                         <p style="font-size:10px" id="updated_at">${updated_at}</p>
+                        <div id="id_${data[i].id}"  style="font-size:15px" class="comment-header">
                         <p id="update_button(${data[i].id})"  style="font-size:15px" class="comment-header">${review}</p>
                         <button  id="update(${data[i].id})" type="button" onclick="updateMode(${data[i].id})" > 수정</button>
                         <button  id="put_btn(${data[i].id})" type="button" onclick="review_put(${data[i].id})" > 수정완료</button>
 
                         <button id="delete_btn(${data[i].id})" type="button" onclick="review_delete(${data[i].id})">삭제</button>
+                        </div>
                       </div>
                     `
 
@@ -179,11 +201,14 @@ async function workshop_review_view(workshop_id) {
             const put_btn = document.getElementById(`put_btn(${data[i].id})`)
             const update = document.getElementById(`update(${data[i].id})`)
             const delete_btn = document.getElementById(`delete_btn(${data[i].id})`)
+            
             const payload = localStorage.getItem("payload");
             const payload_parse = JSON.parse(payload)
+            console.log(payload_parse,'+++++++')
             user_id = payload_parse.user_id
             //put_btn.style.display = "none"
-            if (user_id != data[i].user_id) {
+            
+            if (user_id != data[i].user_id || payload_parse == null) {
 
                 //update_btn.style.display = "none"
                 put_btn.style.display = "none"
@@ -196,7 +221,7 @@ async function workshop_review_view(workshop_id) {
 }
 
 
-// 리뷰 수정 화면 -> 추후 수정 예정
+// 리뷰 수정 화면 
 function updateMode(id) {
 
     const update_ = document.getElementById(`update(${id})`); //수정하기 버튼
@@ -223,7 +248,7 @@ function updateMode(id) {
     update_delete.setAttribute("onclick", "update_delete(id)")
     update_delete.innerText = '수정 취소'
 
-    const reviews_list = document.getElementById(`review_list(${id})`); // 넣을 댓글 리스트
+    const reviews_list = document.getElementById(`id_${id}`); // 넣을 댓글 리스트-> div id
     reviews_list.insertBefore(input_content, content); // 원래 내용 -> 수정 내용 바꿈
     reviews_list.appendChild(update_delete); // 리스트에 수정취소 버튼 붙여줌 (수정 버튼 누르면 나타나게)
     //reviews_list.appendChild(update_button)
@@ -270,7 +295,7 @@ async function review_put(id) {
 
         alert("댓글을 수정 했습니다.")
     } else {
-        alert(response.status, "작성자가 아닙니다")
+        alert("작성자가 아닙니다")
     }
     window.location.reload()
 }
@@ -284,8 +309,8 @@ async function workshop_review_POST(workshop_id) {
 
     if (response.status == 200) {
         alert('댓글이 작성되었습니다.')
-    } else {
-        alert(response.status)
+    } else if (response.status == 401) {
+        alert('로그인 후 이용해 주세욤')
     }
     location.reload()
 }
@@ -312,7 +337,7 @@ async function Like_post(workshop_id) {
     if (response.status == 200) {
 
         data = await response.json()
-
+  
         alert(`${data['msg']}`)
 
     } else if (response.status == 401) {
