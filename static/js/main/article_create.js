@@ -20,7 +20,9 @@ window.onload = async function LoadCategory() {
 async function handleArticleCreate() {
     const category = document.getElementById('category').value
     const title = document.getElementById('title').value
-    const content = document.getElementById('content').value
+    // const content = document.getElementById('content').value
+    const content = editor.getHTML();
+    
     const image = document.getElementById('formFile').files[0]
     
     if (category == '카테고리를 선택해주세요!'){
@@ -38,3 +40,15 @@ async function handleArticleCreate() {
         create_article(title, content, image, category)
     }
 }
+
+const {Editor} = toastui;
+const {colorSyntax} = Editor.plugin;
+
+const editor = new toastui.Editor({
+    el: document.querySelector("#editor"),
+    height: '500px',
+    placeholder: '게시글의 내용을 입력해주세요.',
+    initialValue: '',
+    initialEditType: 'wysiwyg',
+    plugins: [colorSyntax]
+});

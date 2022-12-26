@@ -30,10 +30,12 @@ async function LoadDeatail(article_id) {
 
     const article_image = document.getElementById('article_image')
     article_image.src = `${back_end_url}` + data['article_image']
-    // article_image.setAttribute('src', `${back_end_url}`+data['article_image'])
 
-    const content = document.getElementById('content')
-    content.innerText = data['content']
+    const viewer = toastui.Editor.factory({
+        el: document.querySelector('#viewer'),
+        viewer: true,
+        initialValue: `${data['content']}`
+    });
 
     // 글 작성자만 수정, 삭제 버튼이 보이도록 설정
     const user_id = localStorage.getItem('payload')
