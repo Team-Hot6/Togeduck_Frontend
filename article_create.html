@@ -12,6 +12,14 @@
     <link rel="stylesheet" href="./static/css/main/navbar.css">
     <link rel="stylesheet" href="./static/css/main/chat.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+
+    <link rel="stylesheet" href="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.css"/>
+    <script src="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.js"></script>
+
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.css"/>
+    <script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
     <title>게시글 작성 페이지</title>
   </head>
 
@@ -30,12 +38,10 @@
           <input id="title" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
         </div>
         <div class="mb-3">
-          <label for="content" class="form-label">내용</label>
-          <textarea id="content" class="form-control" rows="3"></textarea>
-        </div>
-        <div class="mb-3">
-          <label for="formFile" class="form-label">이미지 업로드</label>
-          <input class="form-control" type="file" id="formFile">
+          <label for="content" class="form-label" id="editor_label">내용</label>
+          <div id="editor">
+
+          </div>
         </div>
         <button type="button" class="btn btn-warning" style="margin: auto; display: block;" onclick="handleArticleCreate()">작성하기</button>
       </div>

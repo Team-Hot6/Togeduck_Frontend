@@ -98,15 +98,11 @@ async function get_article_detail_comment(article_id) {
 }
 
 // 게시글 작성 API
-async function create_article(title, content, image, category) {
+async function create_article(title, content, category) {
     const data = new FormData()
     data.append("category", category)
     data.append("title", title)
     data.append("content", content)
-
-    if(image){
-        data.append("article_image", image)
-    }
 
     const response = await fetch(`${back_end_url}/articles/create/`, {
         headers: {
@@ -182,14 +178,11 @@ async function replace_article_update(article_id) {
 }
 
 // 게시글 수정 API
-async function update_article(article_id, title, content, image, category) {
+async function update_article(article_id, title, content, category) {
     const data = new FormData()
     data.append("category", category)
     data.append("title", title)
     data.append("content", content)
-    if(image){
-        data.append("article_image", image)
-    }
 
     const response = await fetch(`${back_end_url}/articles/${article_id}/`, {
         headers: {

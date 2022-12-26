@@ -5,20 +5,27 @@ const urlParams = new URLSearchParams(url_str);
 // URLSearchParams 객체에서 id 값 추출
 const article_id = urlParams.get("id");
 
-LoadCurrentArticle(article_id)
+const {Editor} = toastui;
+const {colorSyntax} = Editor.plugin;
+
+const editor = new toastui.Editor({
+    el: document.querySelector("#editor"),
+    height: '500px',
+    initialValue: '',
+    initialEditType: 'wysiwyg',
+    plugins: [colorSyntax]
+});
+
+LoadCurrentArticle(article_id, editor)
 // 현재 작성되어 있는 게시글 정보를 서버에서 가져와서 placeholder에 삽입
-async function LoadCurrentArticle(article_id) {
+async function LoadCurrentArticle(article_id, editor) {
     const response = await get_article_detail(article_id)
     const data = await response.json()
 
     const title = document.getElementById('title')
     title.value = data['title']
-
-    const content = document.getElementById('content')
-    content.value = data['content']
-
-    const article_image = document.getElementById('formFile')
-    article_image.setAttribute('placeholder', data['article_image'])
+    
+    document.getElementsByClassName('ProseMirror')[1].innerHTML = data['content']
 }
 
 // 카테고리 목록 서버에서 가져옴
@@ -57,10 +64,9 @@ window.onload = async function LoadCategory() {
 function handleArticleUpdate(article_id) {
     const category = document.getElementById('category').value
     const title = document.getElementById('title').value
-    const content = document.getElementById('content').value
-    const image = document.getElementById('formFile').files[0]
+    const content = editor.getHTML();
 
-    update_article(article_id, title, content, image, category)
+    update_article(article_id, title, content, category)
 }
 
 // 게시글 수정 페이지 취소 버튼
