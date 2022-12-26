@@ -77,7 +77,7 @@ function kakao_login() {
                         'nickname': kakaoAccount['profile']['nickname'],
                         'profile_image': kakaoAccount['profile']['image']
                     }
-                    console.log(authObj)
+                    localStorage.setItem('kakao_info', kakaoUserData['nickname']);
                     kakaoLoginApi(kakaoUserData)
                 },
                 fail: res => {
@@ -90,7 +90,6 @@ function kakao_login() {
 
 // 소셜 유저 회원가입위해 카카오 유저 정보(이메일, 닉네임) 백엔드로 보내주기
 async function kakaoLoginApi(kakaoUserData) {
-
     const response = await fetch(`${back_end_url}/users/kakao/callback/`, {
         method: 'POST',
         headers: {
@@ -101,15 +100,17 @@ async function kakaoLoginApi(kakaoUserData) {
     }
     )
     response_json = await response.json()
-
+    
     if (response.status == 200) {
         localStorage.setItem("access", response_json.access);
         localStorage.setItem("refresh", response_json.refresh);
-
+        
         // PAYLOAD
         const accessToken = response_json.access;
+        
         const base64Url = accessToken.split(".")[1];
         const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        
         const jsonPayload = decodeURIComponent(
             atob(base64)
             .split("")

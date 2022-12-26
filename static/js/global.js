@@ -2,8 +2,8 @@
 // 전역변수는 어디서 사용하는지 적어주기
 
 
-//const front_end_url ="http://127.0.0.1:5500"
-//const back_end_url ="http://127.0.0.1:8000"
+// const front_end_url ="http://127.0.0.1:5500"
+// const back_end_url ="http://127.0.0.1:8000"
 
 const front_end_url = "http://bluecomma.shop"
 const back_end_url = "http://www.carrotww.shop"
@@ -50,6 +50,7 @@ async function logout() {
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
     localStorage.removeItem("payload");
+    localStorage.removeItem("kakao_info");
 
     window.location.href = `${front_end_url}/login_signup.html`
 }
@@ -59,22 +60,47 @@ async function navbar() {
     if (localStorage.getItem("payload")) {
         const payload = localStorage.getItem("payload");
         const payload_parse = JSON.parse(payload)
-        const nickname = document.getElementById("nickname")
-        nickname.innerText = `${payload_parse.nickname}님`
+        
+        const user_id = payload_parse.user_id
 
-        const signup = document.getElementById("signup")
-        signup.style.display = 'none';
+        if (payload_parse.hasOwnProperty('nickname') == false) {
+            let kakao_nickname = localStorage.getItem('kakao_info')
+            
+            var nickname = document.getElementById("nickname")
+            nickname.innerText = `${kakao_nickname}님`
+            
+            const signup = document.getElementById("signup")
+            signup.style.display = 'none';
 
-        const login = document.getElementById("login")
-        login.style.display = 'none';
+            const login = document.getElementById("login")
+            login.style.display = 'none';
 
-        const nav_menu = document.getElementById("nav_menu")
+            const nav_menu = document.getElementById("nav_menu")
 
-        const mypage = `<li id="mypage" onclick="window.location.href='./mypage.html?id=${payload_parse.user_id}'">마이페이지</li>`
-        nav_menu.insertAdjacentHTML("beforeend", mypage);
+            const mypage = `<li id="mypage" onclick="window.location.href='./mypage.html?id=${payload_parse.user_id}'">마이페이지</li>`
+            nav_menu.insertAdjacentHTML("beforeend", mypage);
 
-        const logout = `<li id="logout" onclick="logout()">로그아웃</li>`
-        nav_menu.insertAdjacentHTML("beforeend", logout);
+            const logout = `<li id="logout" onclick="logout()">로그아웃</li>`
+            nav_menu.insertAdjacentHTML("beforeend", logout);
+            
+        } else {
+            var nickname = document.getElementById("nickname")
+            nickname.innerText = `${payload_parse.nickname}님`
+
+            const signup = document.getElementById("signup")
+            signup.style.display = 'none';
+
+            const login = document.getElementById("login")
+            login.style.display = 'none';
+
+            const nav_menu = document.getElementById("nav_menu")
+
+            const mypage = `<li id="mypage" onclick="window.location.href='./mypage.html?id=${payload_parse.user_id}'">마이페이지</li>`
+            nav_menu.insertAdjacentHTML("beforeend", mypage);
+
+            const logout = `<li id="logout" onclick="logout()">로그아웃</li>`
+            nav_menu.insertAdjacentHTML("beforeend", logout);
+        }
     };
 };
 
