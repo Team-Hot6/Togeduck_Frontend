@@ -72,42 +72,79 @@ async function show_tag_fuc() {
         // Promise 안에 담긴 데이터 꺼내오기
         .then(data => {
             var tags = document.getElementById("all_tags ");
-            const name = document.createElement("span");
-            name.innerText = data['category']
+            
             for (i = 0; i < data.length; i++) {
-                const pk = data[i]['id']
+                
                 const tag = document.createElement("button"); // 버튼 요소 생성
+                //const label = document.createElement("label")
+                //tag.setAttribute("type", "checkbox")
                 tag.setAttribute("class", "mylabel"); // css class 지정
-                tag.id = pk
+                tag.id = data[i]['id']
                 tag.setAttribute("onclick", "TagsPick(this.id)"); // 선택한 버튼 클릭 시 해당 함수 호출
                 tag.innerText = data[i]['category']; // 버튼이름 값 지정
+                //label.innerText = data[i]['category'];
+                //label.setAttribute("class", "mylabel")
                 tags.appendChild(tag)
-                //name.append(tag.innerText)
-            }
+                //tags.appendChild(label)
+                
+                
+                
+            } console.log(tags,'ㅇㅅㅇ') 
+            $('.mylabel').click(function() {
+                console.log('>ㅁㅇ',this)
+                console.log('>_ㅇ',alltag)
+                //$(this).toggleClass('strictOn');
+                // $(this).toggleClass('strictOff');
+                // ifStrict = $(this).hasClass('strictOff');
+                console.log(alltag > 3 ,'ddddddddddddddd')
+                if (alltag) {
+                    $(this).toggleClass('strictOff');
+                ifStrict = $(this).hasClass('strictOff');
+                    console.log('-ㅁ-')
+                }
+                else{
+                    console.log('-=-=-=-=-=-=-=-=-=')
+                    $(this).removeClass('strictOff');
+                }
+                })
+           
+             
         });
 }
 
 
 // tag 값 목록으로 묶어주기
 async function AllTagsPick(val) {
+    
     if (alltag.includes(val)) {
         for (i = 0; i < alltag.length; i++) {
             if (alltag[i] == val) {
+                
                 alltag.splice(i, i);
                 i--; // 해당 인덱스도 삭제
+                console.log('두번',val)
+                
+                
             }
-        }
+    
+        } 
     } else {
         if (alltag.length == 3) {
+            //$(this).removeClass('strictOff');
             alert("4개 이상 tag를 선택할 수 없습니다.")
         } else {
             alltag.push(val);
+            
         }
-    } console.log(alltag,'태그 ㅇㅁㅇ')
+    } 
+ 
+    
 }
 
 // tag 버튼 값 가져오기
 async function TagsPick(val) {
+ 
+  
     AllTagsPick(val);
 }
 
