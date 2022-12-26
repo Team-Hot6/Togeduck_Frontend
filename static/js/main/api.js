@@ -282,7 +282,10 @@ async function like_article(article_id) {
         method: "POST",
     })
     const response_json = await response.json()
-    if (response_json["msg"] == "추천"){
+    if (response.status == 401){
+        alert('로그인이 필요합니다!')
+        window.location.reload();
+    } else if (response_json["msg"] == "추천"){
         alert('게시글 추천 완료')
         window.location.reload();
     } else if(response_json["msg"] == "취소"){

@@ -50,6 +50,7 @@ async function logout() {
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
     localStorage.removeItem("payload");
+    localStorage.removeItem("kakao_info");
 
     window.location.href = `${front_end_url}/login_signup.html`
 }
@@ -63,9 +64,7 @@ async function navbar() {
         const user_id = payload_parse.user_id
 
         if (payload_parse.hasOwnProperty('nickname') == false) {
-            const response = await get_nickname(user_id)
-            const data = await response.json()
-            let kakao_nickname = data['nickname']
+            let kakao_nickname = localStorage.getItem('kakao_info')
             
             var nickname = document.getElementById("nickname")
             nickname.innerText = `${kakao_nickname}님`
