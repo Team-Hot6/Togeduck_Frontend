@@ -368,6 +368,66 @@ do {
     number++;
 } while (number < 5);
 
+
+// 워크샵 생성, 수정 시 입력값 실시간 검증
+async function info_check(obj) {
+
+    if (obj.id == "address"){
+        const address_check = document.getElementById("address_check")
+        if (obj.value.length > 20){
+            address_check.style.display = "block";
+            address_check.innerText = "20자이내로 작성해주세요"   
+        }else{
+            address_check.style.display = "none";
+        }
+    }
+
+    if (obj.id == "title"){
+        const title_check = document.getElementById("title_check")
+        if (obj.value.length > 20){
+            title_check.style.display = "block";
+            title_check.innerText = "20자이내로 작성해주세요"        
+        }else{
+            title_check.style.display = "none";
+        }
+    }
+
+    if (obj.id == "amount"){
+        const amount_check = document.getElementById("amount_check")
+        if (obj.value > 1000000){
+            amount_check.style.display = "block";
+            amount_check.innerText = "100만원 이내로 작성해주세요"        
+        }else if(obj.value < 0){
+            amount_check.style.display = "block";
+            amount_check.innerText = "음수가 아닌 정수로 입력해주세요" 
+        }else{
+            amount_check.style.display = "none";
+        }
+    }
+
+    if (obj.id == "max_guest"){
+        const max_guest_check = document.getElementById("max_guest_check")
+        if (obj.value > 100 || obj.value == 0){
+            max_guest_check.style.display = "block";
+            max_guest_check.innerText = "1명 이상 100명 미만으로 작성해주세요"        
+        }else if(obj.value < 0){
+            max_guest_check.style.display = "block";
+            max_guest_check.innerText = "음수가 아닌 정수로 입력해주세요" 
+        }else{
+            max_guest_check.style.display = "none";
+        }
+    }
+
+    if (obj.id == "content"){
+        const content_check = document.getElementById("content_check")
+        if (obj.value.length > 500 ){
+            content_check.style.display = "block";
+            content_check.innerText = "500자 이내로 내용을 작성해주세요"        
+        }
+    }
+}
+
+
 // 워크샵 작성
 async function workshop_post() {
 
@@ -383,13 +443,24 @@ async function workshop_post() {
     const date = document.getElementById("date").value;
 
     if (workshop_image == undefined) {
-        alert("이미지를 업로드해주세요")
-        return
+        return alert("이미지를 업로드해주세요")
     }
+    else{
+        blank_check = [content, workshop_image, title, max_guest, category, location, address1, address2, date]
+        no_write = [undefined, 0, ""]
 
-    if (address2.length > 20) {
-        alert("상세주소는 최대 20자 이하입니다")
-        return
+        for (i = 0; i < no_write.length; i++) {
+            result = blank_check.includes(no_write[i])
+            if(result == true){
+                return alert("빈 항목을 작성해주세요")
+            }
+        }
+    }
+    if (max_guest<1 || max_guest>100){
+        return alert("모집인원은 1명 이상 100명 미만으로 작성해주세요")
+    } 
+    if(amount<0 || amount>1000000) {
+        return alert("참가비는 0~100만원 이내로 작성 가능합니다")
     }
 
     const formData = new FormData();
@@ -416,8 +487,10 @@ async function workshop_post() {
     if (response.status == 200) {
         alert("새로운 워크샵이 생성되었습니다.");
         window.location.replace(`${front_end_url}/workshop.html`)
-    } else {
-        alert('모든 항목에 내용을 작성해주세요', response.status);
+    } else if (response.status == 401) {
+        alert('재로그인이 필요합니다');
+    } else if (response.status == 400) {
+        alert('작성내용을 다시 확인해주세요');
     }
 }
 
@@ -441,9 +514,11 @@ async function workshop_put(workshop_id) {
     const address2 = document.getElementById("address").value; // 상세주소
     const date = document.getElementById("date").value;
 
-    if (address2.length > 20) {
-        alert("상세주소는 최대 20자 이하입니다")
-        return
+    if (max_guest<1 || max_guest>100){
+        return alert("모집인원은 1명 이상 100명 미만으로 작성해주세요")
+    } 
+    if(amount<0 || amount>1000000) {
+        return alert("참가비는 0~100만원 이내로 작성 가능합니다")
     }
 
     const formData = new FormData();
@@ -462,17 +537,6 @@ async function workshop_put(workshop_id) {
     formData.append("address", address1);
     formData.append("address2", address2);
 
-    console.log(title,'제목')
-    console.log(content,'내용')
-    console.log(date,'날짜')
-    console.log(max_guest,'인원수')
-    console.log(amount,'가격')
-    console.log(category,'카테고리')
-    console.log(location,'지역')
-    console.log(address1,'주소')
-    console.log(address2,'상세주소')
-
-
     const response = await fetch(`${back_end_url}/workshops/${workshop_id}/`, {
         headers: {
             Authorization: "Bearer " + localStorage.getItem("access")
@@ -481,10 +545,12 @@ async function workshop_put(workshop_id) {
         body: formData
     })
     if (response.status == 200) {
-        alert("워크샵 수정 됐습니다")
+        alert("워크샵 수정 완료")
         window.location.replace(`${front_end_url}/workshop_detail.html?id=${workshop_id}`)
-    } else {
-        alert(response.status)
+    } else if (response.status == 401) {
+        alert('재로그인이 필요합니다');
+    } else if (response.status == 400) {
+        alert('작성내용을 다시 확인해주세요');
     }
 }
 

@@ -151,15 +151,20 @@ function sumit_send_message_Enterkey() {
 
 // 모달 띄우기
 function modal_view() {
-    const modal_id = document.getElementById('modal');
-    modal_id.style.display = 'block';
-    modal_id.style.position = 'fixed';
-    modal_id.style.top = '50%';
-    modal_id.style.left = '50%';
-    modal_id.style.transform = "translate(-50%, -25%)";
+    // 로그인 사용자만 사용할 수 있도록 검증
+    const access_token = localStorage.getItem("access");
+    if (access_token == null){
+        alert("로그인이 필요한 서비스입니다.")
+    }else{
+        const modal_id = document.getElementById('modal');
+        modal_id.style.display = 'block';
+        modal_id.style.position = 'fixed';
+        modal_id.style.top = '50%';
+        modal_id.style.left = '50%';
+        modal_id.style.transform = "translate(-50%, -25%)";
 
-    login_user_opponent_list()
-
+        login_user_opponent_list()
+    }
 };
 
 // 모달 닫기
