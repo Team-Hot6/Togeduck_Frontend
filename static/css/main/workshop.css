@@ -27,7 +27,7 @@
 }
 
 .popular_workshops_wrap::-webkit-scrollbar{
-    height: 4px;
+    height: 7px;
     /* display: none; */
 }
 
@@ -72,9 +72,16 @@
 }
 
 .popular_workshop_title{
+    /* clear:both; */
+    width: 200px;
+    height: auto;
     font-size: 1.2rem;
     font-weight: 600;
     text-align: center;
+    overflow:hidden;
+    /* word-break: keep-all; */
+    white-space:normal;
+   
 }
 
 

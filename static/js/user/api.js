@@ -42,6 +42,7 @@ async function handleLogin() {
     }
 }
 
+
 //로그아웃
 async function handleIogout() {
     localStorage.removeItem("access");
@@ -51,10 +52,10 @@ async function handleIogout() {
 
 
 //취미
-window.onload = () => {
-    show_tag_fuc() // backend에서 tag 가져오기
-    alltag = new Array(); // 전체 테그 담을 리스트 선언
-}
+
+show_tag_fuc() // backend에서 tag 가져오기
+alltag = new Array(); // 전체 테그 담을 리스트 선언
+
 
 
 // tag 불러오는 함수
@@ -77,15 +78,12 @@ async function show_tag_fuc() {
                 
                 const tag = document.createElement("button"); // 버튼 요소 생성
                 tag.setAttribute("class", "mylabel"); // css class 지정
+
                 tag.id = data[i]['id']
                 tag.setAttribute("onclick", "TagsPick(this.id)"); // 선택한 버튼 클릭 시 해당 함수 호출
                 tag.innerText = data[i]['category']; // 버튼이름 값 지정
-   
                 tags.appendChild(tag)
-    
-                
-                
-                
+
             } 
             $('.mylabel').click(function() {
            
@@ -132,8 +130,15 @@ async function AllTagsPick(val) {
 }
 
 // tag 버튼 값 가져오기
-async function TagsPick(val) {
-    AllTagsPick(val);
+async function TagsPick(val, obj) {
+    if (alltag.includes(val)){
+        index = alltag.indexOf(val)
+        alltag.splice(index, 1);
+        obj.classList.toggle('pick_tag');
+    }else{
+        AllTagsPick(val);
+        obj.classList.toggle('pick_tag');
+    }
 }
 
 

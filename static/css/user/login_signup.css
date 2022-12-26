@@ -1,3 +1,14 @@
+
+.logo_img{
+  width:150%;
+  height:150%;
+  object-fit:cover;
+}
+
+/* .kakao_login_btn{
+  border: 0;
+} */
+
 .board {
     margin: auto;
     max-width: 700px;
@@ -204,4 +215,5 @@
   .mylabel {
     border-radius: 24px;
     padding: 5px;
+
   }

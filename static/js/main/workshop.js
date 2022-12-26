@@ -74,7 +74,7 @@ async function workshop_list(page, sort) {
 
         
     }
-    window.scrollTo(0,230);
+    window.scrollTo(0,0);
 }
 
 // 모든 취미 카테고리 목록 출력
@@ -147,7 +147,7 @@ async function workshop_pick_list(category_id, category_name, page, sort) {
             }
         }
     }
-    window.scrollTo(0,230);
+    window.scrollTo(0,0);
 }
 
 // 워크샵 상세 페이지로 이동
@@ -160,4 +160,16 @@ async function workshop_detail_move(workshop_id) {
 async function workshop_page_move(page_nunber) {
     const url = `${front_end_url}/workshop.html?page=${page_nunber}`
     window.location.href = url
+}
+
+// 워크샵 생성 페이지로 이동
+async function workshop_post_page_move() {
+    const access_token = localStorage.getItem("access");
+
+    if (access_token == null){
+        alert("로그인이 필요한 서비스입니다.")
+    }else{
+        const url = `${front_end_url}/workshop_posting.html`
+        window.location.href = url
+    }
 }
