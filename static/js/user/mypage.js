@@ -113,7 +113,7 @@ async function myPageProfile_fuc() {
             mypagePutButtonFrame.appendChild(mypagePutButton)
 
             const mypageDeleteButton = document.createElement('button')
-            mypageDeleteButton.setAttribute('onclick', 'user_delete()')
+            mypageDeleteButton.setAttribute('onclick', 'confirm_delete()')
             mypageDeleteButton.setAttribute('class', 'mypage_put_button')
             mypageDeleteButton.innerText = '회원탈퇴'
             mypageLeftSide.appendChild(mypageDeleteButton)
@@ -551,6 +551,29 @@ async function password_move() {
     let id = urlParams.get('id');
     const url = `${front_end_url}/mypage_put.html?id=${id}` 
     window.location.href = url
+}
+
+//회원탈퇴 컨펌
+function confirm_delete(){
+    if (window.confirm('탈퇴하시겠씅니까?!?!?'))
+            {
+                if (window.confirm('증말요!?'))
+            {
+                if (window.confirm('마지막 기회ㅋㅋ'))
+            {
+                alert('메룽룽')
+                user_delete()
+    } else {
+        window.location.replace(`${front_end_url}/mypage.html`)
+            }
+    } else {
+        window.location.replace(`${front_end_url}/mypage.html`)
+            }
+                
+    } else {
+        window.location.replace(`${front_end_url}/mypage.html`)
+            }
+
 }
 
 // 회원탈퇴

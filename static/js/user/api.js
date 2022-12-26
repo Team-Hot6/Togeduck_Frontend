@@ -73,38 +73,60 @@ async function show_tag_fuc() {
         // Promise 안에 담긴 데이터 꺼내오기
         .then(data => {
             var tags = document.getElementById("all_tags ");
-            const name = document.createElement("span");
-            name.innerText = data['category']
+            
             for (i = 0; i < data.length; i++) {
-                const pk = data[i]['id']
+                
                 const tag = document.createElement("button"); // 버튼 요소 생성
                 tag.setAttribute("class", "mylabel"); // css class 지정
-                tag.id = pk
-                tag.setAttribute("onclick", "TagsPick(this.id, this)"); // 선택한 버튼 클릭 시 해당 함수 호출
+
+                tag.id = data[i]['id']
+                tag.setAttribute("onclick", "TagsPick(this.id)"); // 선택한 버튼 클릭 시 해당 함수 호출
                 tag.innerText = data[i]['category']; // 버튼이름 값 지정
                 tags.appendChild(tag)
-                //name.append(tag.innerText)
-            }
+
+            } 
+            $('.mylabel').click(function() {
+           
+                $(this).toggleClass('strictOff');
+                ifStrict = $(this).hasClass('strictOff'); // 분기문 true/false
+          
+                if (alltag.includes(this.id) == false) { // 태그리스트 안에 없는 id면 
+                    $(this).removeClass('strictOff'); // 색깔 지워줌
+                 }
+               
+                })
+           
+             
         });
 }
 
 
 // tag 값 목록으로 묶어주기
 async function AllTagsPick(val) {
+    
     if (alltag.includes(val)) {
         for (i = 0; i < alltag.length; i++) {
             if (alltag[i] == val) {
+                
                 alltag.splice(i, i);
                 i--; // 해당 인덱스도 삭제
+                console.log('두번',val)
+                
+                
             }
-        }
+    
+        } 
     } else {
         if (alltag.length == 3) {
+          
             alert("4개 이상 tag를 선택할 수 없습니다.")
         } else {
             alltag.push(val);
+            
         }
-    } console.log(alltag,'태그 ㅇㅁㅇ')
+    } 
+ 
+    
 }
 
 // tag 버튼 값 가져오기
