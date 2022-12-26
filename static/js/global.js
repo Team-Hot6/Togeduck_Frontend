@@ -50,7 +50,6 @@ async function logout() {
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
     localStorage.removeItem("payload");
-    localStorage.removeItem("kakao_info");
 
     window.location.href = `${front_end_url}/login_signup.html`
 }
@@ -60,47 +59,22 @@ async function navbar() {
     if (localStorage.getItem("payload")) {
         const payload = localStorage.getItem("payload");
         const payload_parse = JSON.parse(payload)
-        
-        const user_id = payload_parse.user_id
+        const nickname = document.getElementById("nickname")
+        nickname.innerText = `${payload_parse.nickname}님`
 
-        if (payload_parse.hasOwnProperty('nickname') == false) {
-            let kakao_nickname = localStorage.getItem('kakao_info')
-            
-            var nickname = document.getElementById("nickname")
-            nickname.innerText = `${kakao_nickname}님`
-            
-            const signup = document.getElementById("signup")
-            signup.style.display = 'none';
+        const signup = document.getElementById("signup")
+        signup.style.display = 'none';
 
-            const login = document.getElementById("login")
-            login.style.display = 'none';
+        const login = document.getElementById("login")
+        login.style.display = 'none';
 
-            const nav_menu = document.getElementById("nav_menu")
+        const nav_menu = document.getElementById("nav_menu")
 
-            const mypage = `<li id="mypage" onclick="window.location.href='./mypage.html?id=${payload_parse.user_id}'">마이페이지</li>`
-            nav_menu.insertAdjacentHTML("beforeend", mypage);
+        const mypage = `<li id="mypage" onclick="window.location.href='./mypage.html?id=${payload_parse.user_id}'">마이페이지</li>`
+        nav_menu.insertAdjacentHTML("beforeend", mypage);
 
-            const logout = `<li id="logout" onclick="logout()">로그아웃</li>`
-            nav_menu.insertAdjacentHTML("beforeend", logout);
-            
-        } else {
-            var nickname = document.getElementById("nickname")
-            nickname.innerText = `${payload_parse.nickname}님`
-
-            const signup = document.getElementById("signup")
-            signup.style.display = 'none';
-
-            const login = document.getElementById("login")
-            login.style.display = 'none';
-
-            const nav_menu = document.getElementById("nav_menu")
-
-            const mypage = `<li id="mypage" onclick="window.location.href='./mypage.html?id=${payload_parse.user_id}'">마이페이지</li>`
-            nav_menu.insertAdjacentHTML("beforeend", mypage);
-
-            const logout = `<li id="logout" onclick="logout()">로그아웃</li>`
-            nav_menu.insertAdjacentHTML("beforeend", logout);
-        }
+        const logout = `<li id="logout" onclick="logout()">로그아웃</li>`
+        nav_menu.insertAdjacentHTML("beforeend", logout);
     };
 };
 

@@ -77,7 +77,6 @@ function kakao_login() {
                         'nickname': kakaoAccount['profile']['nickname'],
                         'profile_image': kakaoAccount['profile']['image']
                     }
-                    localStorage.setItem('kakao_info', kakaoUserData['nickname']);
                     kakaoLoginApi(kakaoUserData)
                 },
                 fail: res => {
