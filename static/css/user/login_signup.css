@@ -202,5 +202,6 @@
   }
 
   .pick_tag{
-    background-color: aqua;
+    background-color: rgb(248, 188, 35);
+    /* border: 0px; */
   }

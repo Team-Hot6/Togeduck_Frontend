@@ -95,11 +95,7 @@ async function AllTagsPick(val) {
             }
         }
     } else {
-        if (alltag.length == 3) {
-            alert("4개 이상 tag를 선택할 수 없습니다.")
-        } else {
-            alltag.push(val);
-        }
+        alltag.push(val);
     }
 }
 
@@ -110,12 +106,14 @@ async function TagsPick(val, obj) {
         alltag.splice(index, 1);
         obj.classList.toggle('pick_tag');
     }else{
-        AllTagsPick(val);
-        obj.classList.toggle('pick_tag');
+        if(alltag.length < 3){
+            AllTagsPick(val);
+            obj.classList.toggle('pick_tag');
+        }else{
+            alert("4개 이상 선택할 수 없습니다.")
+        }
     }
 }
-
-
 
 //회원가입
 async function handleSign() {
