@@ -73,6 +73,8 @@ async function show_tag_fuc() {
         // Promise 안에 담긴 데이터 꺼내오기
         .then(data => {
             var tags = document.getElementById("all_tags ");
+            const name = document.createElement("span");
+            name.innerText = data['category']
             for (i = 0; i < data.length; i++) {
                 const pk = data[i]['id']
                 const tag = document.createElement("button"); // 버튼 요소 생성
@@ -81,6 +83,7 @@ async function show_tag_fuc() {
                 tag.setAttribute("onclick", "TagsPick(this.id)"); // 선택한 버튼 클릭 시 해당 함수 호출
                 tag.innerText = data[i]['category']; // 버튼이름 값 지정
                 tags.appendChild(tag)
+                //name.append(tag.innerText)
             }
         });
 }
@@ -101,7 +104,7 @@ async function AllTagsPick(val) {
         } else {
             alltag.push(val);
         }
-    }
+    } console.log(alltag,'태그 ㅇㅁㅇ')
 }
 
 // tag 버튼 값 가져오기
