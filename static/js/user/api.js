@@ -91,21 +91,23 @@ async function show_tag_fuc() {
                 
             } console.log(tags,'ㅇㅅㅇ') 
             $('.mylabel').click(function() {
-                console.log('>ㅁㅇ',this)
+                console.log('>ㅁㅇ',this.id)
                 console.log('>_ㅇ',alltag)
                 //$(this).toggleClass('strictOn');
-                // $(this).toggleClass('strictOff');
-                // ifStrict = $(this).hasClass('strictOff');
-                console.log(alltag > 3 ,'ddddddddddddddd')
-                if (alltag) {
-                    $(this).toggleClass('strictOff');
+                $(this).toggleClass('strictOff');
                 ifStrict = $(this).hasClass('strictOff');
-                    console.log('-ㅁ-')
-                }
-                else{
-                    console.log('-=-=-=-=-=-=-=-=-=')
+                console.log(this.classList[1] === "strictOff",'ddddddddddddddd')
+                console.log(this.classList,'ㅇㅇㅇㅇㅇㅇㅇㅇㅇ')
+                console.log(this.classList.length ,'7777777777777')
+                if (alltag.includes(this.id) == false) {
                     $(this).removeClass('strictOff');
-                }
+                
+                    console.log('-ㅁ-')
+                 }
+                // else{
+                //     console.log('-=-=-=-=-=-=-=-=-=')
+                //     $(this).removeClass('strictOff');
+                // }
                 })
            
              
