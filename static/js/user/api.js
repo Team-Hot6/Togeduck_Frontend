@@ -76,38 +76,26 @@ async function show_tag_fuc() {
             for (i = 0; i < data.length; i++) {
                 
                 const tag = document.createElement("button"); // 버튼 요소 생성
-                //const label = document.createElement("label")
-                //tag.setAttribute("type", "checkbox")
                 tag.setAttribute("class", "mylabel"); // css class 지정
                 tag.id = data[i]['id']
                 tag.setAttribute("onclick", "TagsPick(this.id)"); // 선택한 버튼 클릭 시 해당 함수 호출
                 tag.innerText = data[i]['category']; // 버튼이름 값 지정
-                //label.innerText = data[i]['category'];
-                //label.setAttribute("class", "mylabel")
+   
                 tags.appendChild(tag)
-                //tags.appendChild(label)
+    
                 
                 
                 
-            } console.log(tags,'ㅇㅅㅇ') 
+            } 
             $('.mylabel').click(function() {
-                console.log('>ㅁㅇ',this.id)
-                console.log('>_ㅇ',alltag)
-                //$(this).toggleClass('strictOn');
+           
                 $(this).toggleClass('strictOff');
-                ifStrict = $(this).hasClass('strictOff');
-                console.log(this.classList[1] === "strictOff",'ddddddddddddddd')
-                console.log(this.classList,'ㅇㅇㅇㅇㅇㅇㅇㅇㅇ')
-                console.log(this.classList.length ,'7777777777777')
-                if (alltag.includes(this.id) == false) {
-                    $(this).removeClass('strictOff');
-                
-                    console.log('-ㅁ-')
+                ifStrict = $(this).hasClass('strictOff'); // 분기문 true/false
+          
+                if (alltag.includes(this.id) == false) { // 태그리스트 안에 없는 id면 
+                    $(this).removeClass('strictOff'); // 색깔 지워줌
                  }
-                // else{
-                //     console.log('-=-=-=-=-=-=-=-=-=')
-                //     $(this).removeClass('strictOff');
-                // }
+               
                 })
            
              
@@ -132,7 +120,7 @@ async function AllTagsPick(val) {
         } 
     } else {
         if (alltag.length == 3) {
-            //$(this).removeClass('strictOff');
+          
             alert("4개 이상 tag를 선택할 수 없습니다.")
         } else {
             alltag.push(val);
@@ -145,8 +133,6 @@ async function AllTagsPick(val) {
 
 // tag 버튼 값 가져오기
 async function TagsPick(val) {
- 
-  
     AllTagsPick(val);
 }
 
