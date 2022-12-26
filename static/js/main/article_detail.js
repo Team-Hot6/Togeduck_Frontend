@@ -28,9 +28,6 @@ async function LoadDeatail(article_id) {
     const likes = document.getElementById('likes')
     likes.innerText = '👍 ' + data['like']
 
-    const article_image = document.getElementById('article_image')
-    article_image.src = `${back_end_url}` + data['article_image']
-
     const viewer = toastui.Editor.factory({
         el: document.querySelector('#viewer'),
         viewer: true,

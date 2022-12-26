@@ -20,11 +20,8 @@ window.onload = async function LoadCategory() {
 async function handleArticleCreate() {
     const category = document.getElementById('category').value
     const title = document.getElementById('title').value
-    // const content = document.getElementById('content').value
     const content = editor.getHTML();
-    
-    const image = document.getElementById('formFile').files[0]
-    
+
     if (category == '카테고리를 선택해주세요!'){
         alert('카테고리를 선택해주세요!')
         document.getElementById('category').focus();
@@ -33,11 +30,11 @@ async function handleArticleCreate() {
         alert('글 제목을 입력해주세요!')
         document.getElementById('title').focus();
     } 
-    else if (content == ''){
+    else if (content == '<p><br></p>'){
         alert('글 내용을 입력해주세요!')
-        document.getElementById('content').focus();
+        editor.focus();
     } else {
-        create_article(title, content, image, category)
+        create_article(title, content, category)
     }
 }
 
