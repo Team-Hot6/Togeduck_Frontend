@@ -47,15 +47,15 @@ async function article_list(page, sort) {
         page_numbers.innerHTML = ''
 
         for (let i = 0; i < page_range; i++){
-            const page_number = `<button type="button" class="page_number" onclick="move_article_page(${i+1}, '${sort}')">${i+1}</button>`
+            const page_number = `<button type="button" class="page_number" onclick="article_list(${i+1}, '${sort}')">${i+1}</button>`
             page_numbers.insertAdjacentHTML('beforeend', page_number)
         }
     }
 
     // 게시글 베스트 TOP 10
     const response_lank = await get_lank_articles()
-    const data_lank = await response_lank.json()
-
+    const data_lank= await response_lank.json()
+    
     best_article_list.innerHTML = ``
 
     for (let i = 0; i < 10; i++) {
@@ -163,7 +163,7 @@ async function select_article_list(category_id, page, sort) {
             page_numbers.innerHTML = ''
 
             for (let i = 0; i < page_range; i++){
-                const page_number = `<button type="button" class="page_number" onclick="move_category_page(${category_id}, ${i+1}, '${sort}')">${i+1}</button>`
+                const page_number = `<button type="button" class="page_number" onclick="select_article_list(${category_id}, ${i+1}, '${sort}')">${i+1}</button>`
                 page_numbers.insertAdjacentHTML('beforeend', page_number)
         }
         }
@@ -177,17 +177,4 @@ function ArticleCreatePage() {
     } else {
         alert('게시글 작성은 로그인 된 사용자만 가능합니다!')
     }
-}
-
-
-// 전체 게시글 페이지 이동
-async function move_article_page(page_number, sort) {
-    const url = `${front_end_url}/community.html?page=${page_number}&sort=${sort}`
-    window.location.href = url
-}
-
-// 카테고리 선택 시 페이지 이동
-async function move_category_page(category_id, page_number, sort) {
-    const url = `${front_end_url}/community.html?category_id=${category_id}&page=${page_number}&sort=${sort}`
-    window.location.href = url
 }
