@@ -457,10 +457,10 @@ async function workshop_post() {
         }
     }
     if (max_guest<1 || max_guest>100){
-        return alert("모집인원은 1명 이상 100명 미만으로 작성해주세요")
+        return alert("모집인원은 1명 이상 100명 이하로 작성해주세요")
     } 
     if(amount<0 || amount>1000000) {
-        return alert("참가비는 0~100만원 이내로 작성 가능합니다")
+        return alert("참가비는 0원~100만원 이내로 작성 가능합니다")
     }
 
     const formData = new FormData();
@@ -515,10 +515,10 @@ async function workshop_put(workshop_id) {
     const date = document.getElementById("date").value;
 
     if (max_guest<1 || max_guest>100){
-        return alert("모집인원은 1명 이상 100명 미만으로 작성해주세요")
+        return alert("모집인원은 1명 이상 100명 이하로 작성해주세요")
     } 
     if(amount<0 || amount>1000000) {
-        return alert("참가비는 0~100만원 이내로 작성 가능합니다")
+        return alert("참가비는 0원~100만원 이내로 작성 가능합니다")
     }
 
     const formData = new FormData();

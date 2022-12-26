@@ -56,28 +56,28 @@
 
 
               <label class="label" for="input">상세주소</label>
-              <input class="input e" type="text" id="address" maxlength="20" onchange="info_check(this)"> <!-- maxlength = "20" -->
+              <input class="input e" type="text" id="address" maxlength="20" onchange="info_check(this)" placeholder="20자 이내로 작성해주세요"> <!-- maxlength = "20" -->
               <div class="check_msg" id="address_check"></div>
 
               <label class="label" for="input">제목</label>
-              <input class="input" type="text" id="title" maxlength="20" onchange="info_check(this)">
+              <input class="input" type="text" id="title" maxlength="20" onchange="info_check(this)" placeholder="20자 이내로 작성해주세요">
               <div class="check_msg" id="title_check"></div>
 
               <label class="label" for="date">일시</label>
               <input type="datetime-local" id="date" onchange="time_check()" style="width: 200px;">
 
               <label class="label" for="input">참가비</label>
-              <input class="input" type="text" id="amount" onchange="info_check(this)">
+              <input class="input" type="text" id="amount" onchange="info_check(this)" placeholder="0원~100만원 이내로 작성해주세요">
               <div class="check_msg" id="amount_check"></div>
 
               <label class="label" for="input">모집인원</label>
-              <input class="input e" type="text" id="max_guest" onchange="info_check(this)">
+              <input class="input e" type="text" id="max_guest" onchange="info_check(this)" placeholder="1명~100명 이내로 작성해주세요">
               <div class="check_msg" id="max_guest_check"></div>
               
 
               <label class="label" for="textarea">워크샵 소개<p id="count"></p>
               </label>
-              <textarea class="textarea e" rows="7" cols="25" id="content" maxlength="500" onchange="info_check(this)"></textarea>
+              <textarea class="textarea e" rows="7" cols="25" id="content" maxlength="500" onchange="info_check(this)" placeholder="500자 이내로 작성해주세요"></textarea>
               <div class="check_msg" id="content_check"></div>
             </div>
           </div>
