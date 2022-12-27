@@ -203,17 +203,23 @@ async function workshop_review_view(workshop_id) {
             const delete_btn = document.getElementById(`delete_btn(${data[i].id})`)
             
             const payload = localStorage.getItem("payload");
-            const payload_parse = JSON.parse(payload)
-            user_id = payload_parse.user_id
-            //put_btn.style.display = "none"
             
-            if (user_id != data[i].user_id || payload_parse == null) {
-
-                //update_btn.style.display = "none"
+            //put_btn.style.display = "none"
+            if (payload == null){
                 put_btn.style.display = "none"
                 update.style.display = "none"
-                delete_btn.style.display = "none"
+                delete_btn.style.display = "none" 
+            }else{ 
+                const payload_parse = JSON.parse(payload)
+                user_id = payload_parse.user_id
 
+                if (user_id != data[i].user_id || payload == null) {
+
+                    //update_btn.style.display = "none"
+                    put_btn.style.display = "none"
+                    update.style.display = "none"
+                    delete_btn.style.display = "none"
+                }
             }
         }
     }
