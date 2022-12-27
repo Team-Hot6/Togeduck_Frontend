@@ -15,10 +15,11 @@ async function LoadDeatail(article_id) {
 
     const title = document.getElementById('article_title')
     title.innerText = data['title']
-
+    
+    const author_id = data['user_id']
     const author = document.getElementById('author')
     author.innerText = data['user']
-
+    
     const datetime = document.getElementById('datetime')
     datetime.innerText = '- ' + data['date'] + ' ' + data['time']
 
@@ -36,11 +37,11 @@ async function LoadDeatail(article_id) {
 
     // 글 작성자만 수정, 삭제 버튼이 보이도록 설정
     const user_id = localStorage.getItem('payload')
-    nickname = JSON.parse(user_id)
-
-    if (data['user'] == nickname['nickname']) {
+    login_user = JSON.parse(user_id)['user_id']
+    
+    if (data['user_id'] == login_user) {
         const article_btn = document.getElementById('article_btn')
-        temp_html = `<button type="button" class="btn btn-warning fw-bold" onclick="LoadArticleUpdate(article_id)">글 수정</button>
+        temp_html = `<button type="button" class="btn btn-warning fw-bold" onclick="LoadArticleUpdate(article_id, ${author_id})">글 수정</button>
                     <button type="button" class="btn btn-warning fw-bold" onclick="delete_article(article_id)">글 삭제</button>
                     `
         article_btn.innerHTML = temp_html
@@ -53,10 +54,11 @@ async function LoadDeatail_comment(article_id) {
     const data = await response.json()
 
     const login_user = localStorage.getItem('payload')
-    const login_user_nickname = JSON.parse(login_user)['nickname']
-
+    const login_user_id = JSON.parse(login_user)['user_id']
+    
     for (let i = 0; i < data.length; i++) {
         let comment_id = data[i]['id']
+        let user_id = data[i]['user_id']
         let nickname = data[i]['user']
         let comment = data[i]['content']
         let date = data[i]['created_at'].replace('T', ' ').substr(5, 5);
@@ -94,7 +96,7 @@ async function LoadDeatail_comment(article_id) {
         comment_list.insertAdjacentHTML('beforeend', temp_html)
 
         // 댓글 작성자가 로그인한 유저와 같은 경우 (댓글 삭제 버튼)
-        if (login_user_nickname == nickname) {
+        if (user_id == login_user_id) {
             let delete_btn = document.getElementById(`delete_btn${comment_id}`)
             delete_btn.innerHTML = `<button type="button" class="btn btn-warning fw-bold" onclick="delete_comment(article_id, ${comment_id})">삭제</button>`
         }
@@ -109,6 +111,7 @@ async function LoadDeatail_comment(article_id) {
             for (let i = 0; i < reply.length; i++){
                 let reply_id = reply[i]['id']
                 let reply_user = reply[i]['user']
+                let reply_user_id = reply[i]['user_id']
                 let content = reply[i]['content']
                 let date = reply[i]['date']
                 let time = reply[i]['time']
@@ -126,7 +129,7 @@ async function LoadDeatail_comment(article_id) {
                                 </div>` 
                 reply_box.insertAdjacentHTML('beforeend', reply_html)
 
-                if (login_user_nickname == reply_user) {
+                if (login_user_id == reply_user_id) {
                     let reply_delete_btn = document.getElementById(`reply_delete_btn${reply_id}`)
                     reply_delete_btn.innerHTML = `<button type="button" class="btn btn-warning fw-bold" onclick="delete_reply(${article_id}, ${comment_id}, ${reply_id})">삭제</button>`
                 }
@@ -173,12 +176,11 @@ async function handleCommentCreate() {
 }
 
 // 게시글 수정 버튼
-async function LoadArticleUpdate(article_id) {
-    // 게시글 작성자가 맞는지 확인
-    const author = document.getElementById('author').innerText
-    const user_id = localStorage.getItem('payload')
-    const nickname = JSON.parse(user_id)['nickname']
-    if (author == nickname) {
+async function LoadArticleUpdate(article_id, author_id) {
+    const payload = localStorage.getItem('payload')
+    const user_id = JSON.parse(payload)['user_id']
+
+    if (author_id == user_id) {
         replace_article_update(article_id)
     } else {
         alert('게시글을 수정할 권한이 없습니다!')

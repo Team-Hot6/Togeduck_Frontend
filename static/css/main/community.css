@@ -26,3 +26,8 @@ h1 {
     font-size: 28px;
     font-weight: bold;
 }
+th {
+    background: moccasin;
+    color: black;
+    text-align: center;
+}
