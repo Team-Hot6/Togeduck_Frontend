@@ -109,10 +109,7 @@ async function AllTagsPick(val) {
             if (alltag[i] == val) {
                 
                 alltag.splice(i, i);
-                i--; // 해당 인덱스도 삭제
-                console.log('두번',val)
-                
-                
+                i--; // 해당 인덱스도 삭제 
             }
     
         } 
@@ -121,12 +118,9 @@ async function AllTagsPick(val) {
           
             alert("4개 이상 tag를 선택할 수 없습니다.")
         } else {
-            alltag.push(val);
-            
+            alltag.push(val);   
         }
     } 
- 
-    
 }
 
 // tag 버튼 값 가져오기
