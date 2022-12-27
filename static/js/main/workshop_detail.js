@@ -100,7 +100,7 @@ geocoder.addressSearch(`${data.address}`, function(result, status) {
         // 로그인 사용자의 닉네임
         const payload = localStorage.getItem("payload");
         const payload_parse = JSON.parse(payload)
-        console.log(payload_parse,'-------------')
+
         // 로그인 사용자와 워크샵의 호스트가 동일인물이 아니라면 <문의하기> 버튼을 출력한다
         if (payload_parse.user_id != data.host_id) {
             const chat_button_label = document.getElementById("chat_button_wrap")
@@ -123,7 +123,7 @@ geocoder.addressSearch(`${data.address}`, function(result, status) {
                 put_delete_box.innerHTML = `<button type="button" onclick="workshop_apply_for(${workshop_id})">워크샵 신청</button>`
             }
         }
-        console.log(data['likes'],'iiiiiiiiiii^a^')
+
         const likes = document.getElementById("liked") // 좋아요
         if (data['likes'].includes(payload_parse.user_id)) {
             
@@ -204,7 +204,6 @@ async function workshop_review_view(workshop_id) {
             
             const payload = localStorage.getItem("payload");
             const payload_parse = JSON.parse(payload)
-            console.log(payload_parse,'+++++++')
             user_id = payload_parse.user_id
             //put_btn.style.display = "none"
             
@@ -281,7 +280,6 @@ async function review_put(id) {
     review_id = id
     //const content = document.getElementById(`update_button(${id})`).value // input 박스 
     const content = document.getElementById(`input_content${id}`).value // 수정된 텍스트 박스
-    console.log(workshop_id, review_id, content,'ㅇㅅㅇ')
     const response = await workshop_review_put(workshop_id, review_id, content)
 
     // const content_previous = document.getElementById(`update(${id})`).previousElementSibling // 
