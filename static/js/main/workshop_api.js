@@ -67,11 +67,7 @@ async function workshop_review_post(workshop_id, review_post) {
         method: 'POST',
         body: JSON.stringify(reviewData)
     })
-    if (response.status == 200) {
-        return response
-    } else {
-        alert(response.status)
-    }
+    return response
 }
 
 // 워크샵 리뷰 수정

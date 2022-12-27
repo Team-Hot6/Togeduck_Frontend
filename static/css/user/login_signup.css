@@ -200,3 +200,20 @@
     border-color: white;
     
   }
+
+   button:active {
+    color: red;
+  }
+  
+  .strictOn {
+    background-color: #2dffd0;
+  }
+  
+  .strictOff {
+    background-color: #fea5c3;
+  }
+  .mylabel {
+    border-radius: 24px;
+    padding: 5px;
+
+  }

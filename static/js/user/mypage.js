@@ -112,6 +112,13 @@ async function myPageProfile_fuc() {
             mypageLeftSide.appendChild(mypagePutButton)
             mypagePutButtonFrame.appendChild(mypagePutButton)
 
+            const mypageDeleteButton = document.createElement('button')
+            mypageDeleteButton.setAttribute('onclick', 'confirm_delete()')
+            mypageDeleteButton.setAttribute('class', 'mypage_put_button')
+            mypageDeleteButton.innerText = '회원탈퇴'
+            mypageLeftSide.appendChild(mypageDeleteButton)
+            mypagePutButtonFrame.appendChild(mypageDeleteButton)
+
         })
 
 }
@@ -542,6 +549,55 @@ async function workshop_apply_move(workshop_id) {
 async function password_move() {
     const urlParams = new URLSearchParams(window.location.search);
     let id = urlParams.get('id');
-    const url = `${front_end_url}/mypage_put.html?id=${id}` // 수정 예정
+    const url = `${front_end_url}/mypage_put.html?id=${id}` 
     window.location.href = url
+}
+
+//회원탈퇴 컨펌
+function confirm_delete(){
+    if (window.confirm('탈퇴하시겠씅니까?!?!?'))
+            {
+                if (window.confirm('증말요!?'))
+            {
+                if (window.confirm('마지막 기회ㅋㅋ'))
+            {
+                alert('메룽룽')
+                user_delete()
+    } else {
+        window.location.replace(`${front_end_url}/mypage.html`)
+            }
+    } else {
+        window.location.replace(`${front_end_url}/mypage.html`)
+            }
+                
+    } else {
+        window.location.replace(`${front_end_url}/mypage.html`)
+            }
+
+}
+
+// 회원탈퇴
+async function user_delete(){
+    const response = await fetch(`${back_end_url}/users/${payload_parse.user_id}/`, {
+        headers:{
+            Authorization:'Bearer '+localStorage.getItem("access"),
+        },
+        method:'DELETE'
+    })
+
+    
+        alert('탈퇴하시겠씁니까?')
+        alert('정말로요?')
+        alert('구제불능이시군요')
+
+        if(response.status == 204){
+            localStorage.removeItem("access")
+            localStorage.removeItem("refresh")
+            localStorage.removeItem("payload")
+            window.location.replace(`${front_end_url}/workshop.html`)
+            alert("탈퇴하셨습니다 ;ㅅ;")
+        }else{
+            alert("접근 권한이 없습니다")
+            window.location.replace(`${front_end_url}/mypage.html`)
+        }
 }

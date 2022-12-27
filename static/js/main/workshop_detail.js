@@ -100,7 +100,7 @@ geocoder.addressSearch(`${data.address}`, function(result, status) {
         // 로그인 사용자의 닉네임
         const payload = localStorage.getItem("payload");
         const payload_parse = JSON.parse(payload)
-
+        console.log(payload_parse,'-------------')
         // 로그인 사용자와 워크샵의 호스트가 동일인물이 아니라면 <문의하기> 버튼을 출력한다
         if (payload_parse.user_id != data.host_id) {
             const chat_button_label = document.getElementById("chat_button_wrap")
@@ -123,6 +123,25 @@ geocoder.addressSearch(`${data.address}`, function(result, status) {
                 put_delete_box.innerHTML = `<button type="button" onclick="workshop_apply_for(${workshop_id})">워크샵 신청</button>`
             }
         }
+        console.log(data['likes'],'iiiiiiiiiii^a^')
+        const likes = document.getElementById("liked") // 좋아요
+        if (data['likes'].includes(payload_parse.user_id)) {
+            
+              
+                $(likes).addClass('btn_unlike');
+                $('.ani_heart_m').addClass('hi');
+                $('.ani_heart_m').removeClass('bye');
+              
+            //likes.classList.add('btn_unlike')
+        } else {
+            $(likes).hasClass('btn_unlike')
+                $(likes).removeClass('btn_unlike');
+                $('.ani_heart_m').removeClass('hi');
+                $('.ani_heart_m').addClass('bye');
+              
+            //likes.classList.remove('btn_unlike')
+        }
+
     }
 }
 
@@ -151,39 +170,49 @@ async function workshop_review_view(workshop_id) {
 
             const review = data[i].content
             const user = data[i].user
-            const created_at = data[i].created_at
-            const updated_at = data[i].updated_at
+            
+            //const created_at = data[i].created_at 생성일 데이터
+            //const created_at = new Date(data[i].created_at).toLocaleString("ko-kr") 생성일 날짜 
+            //<p style="font-size:10px" id="created_at">${created_at}</p> 생성일 태그
+            const updated_at = new Date(data[i].updated_at).toLocaleString("ko-kr")
 
             const new_review = `
                       <div id="review_list(${data[i].id})" class="comment">
                         <div id="user"  style="font-size:15px" class="comment-header">${user}</div>
                         
-                        <p style="font-size:10px" id="created_at">${created_at}</p>
-                        <p style="font-size:10px" id="updated_at">${updated_at}</p>
-                        <input style="color : #046582;" id="update_button(${data[i].id})" class="comment-body" value=" ${review}">
                         
+                        <p style="font-size:10px" id="updated_at">${updated_at}</p>
+                        <div id="id_${data[i].id}"  style="font-size:15px" class="comment-header">
+                        <p id="update_button(${data[i].id})"  style="font-size:15px" class="comment-header">${review}</p>
+                        <button  id="update(${data[i].id})" type="button" onclick="updateMode(${data[i].id})" > 수정</button>
                         <button  id="put_btn(${data[i].id})" type="button" onclick="review_put(${data[i].id})" > 수정완료</button>
-                        <button id="delete_btn(${data[i].id})" type="button" onclick="review_delete(${data[i].id})">삭제버튼</button>
+
+                        <button id="delete_btn(${data[i].id})" type="button" onclick="review_delete(${data[i].id})">삭제</button>
+                        </div>
                       </div>
                     `
 
             list.insertAdjacentHTML("beforeend", new_review)
 
+            // <input style="color : #046582;" id="update_button(${data[i].id})" class="comment-body" value=" ${review}"> // 인풋박스
             //<button  id="update(${data[i].id})" type="button" onclick="updateMode(${data[i].id})" > 수정하기</button> // 수정화면 버튼
             //<div id="comment-footer${data[i].id}" class="comment-footer" ></div>
             //const update_btn = document.getElementById(`comment-footer${data[i].id}`)
             const put_btn = document.getElementById(`put_btn(${data[i].id})`)
-            //const update = document.getElementById(`update(${data[i].id})`)
+            const update = document.getElementById(`update(${data[i].id})`)
             const delete_btn = document.getElementById(`delete_btn(${data[i].id})`)
+            
             const payload = localStorage.getItem("payload");
             const payload_parse = JSON.parse(payload)
+            console.log(payload_parse,'+++++++')
             user_id = payload_parse.user_id
-
-            if (user_id != data[i].user_id) {
+            //put_btn.style.display = "none"
+            
+            if (user_id != data[i].user_id || payload_parse == null) {
 
                 //update_btn.style.display = "none"
                 put_btn.style.display = "none"
-                //update.style.display = "none"
+                update.style.display = "none"
                 delete_btn.style.display = "none"
 
             }
@@ -192,35 +221,67 @@ async function workshop_review_view(workshop_id) {
 }
 
 
-// 리뷰 수정 화면 -> 추후 수정 예정
+// 리뷰 수정 화면 
 function updateMode(id) {
 
+    const update_ = document.getElementById(`update(${id})`); //수정하기 버튼
+    update_.style.visibility = "hidden" // 수정 버튼 숨기기
+
     //const content = document.getElementById(`update_button(${id})`) // 원래 리뷰 내용
-    const content = document.getElementById(`update(${id})`).previousElementSibling
-    content.style.visibility = "hidden"; // 원래 내용 숨기기
+    const content = document.getElementById(`update(${id})`).previousElementSibling // 수정하기 버튼의 위에 노드 내용 가져옴 
+    content.style.visibility = "hidden"; // 원래 내용 박스 숨기기
 
     const input_content = document.createElement("textarea"); // 수정할 수 있는 입력창
     input_content.setAttribute("id", `input_content${id}`); // 수정 내용
     //input_content.setAttribute("placeholder", "수정할 내용을 입력해주세요")
-    input_content.value = content.value; // 안하면 공란처리
+    input_content.value = content.innerHTML// 수정전 내용 보여주기 // input->value div-> innerHTML
     input_content.rows = 3;
+    
+    // const update_button = document.createElement("button") // 수정 완료 버튼 
+    // update_button.setAttribute("id", `put${id}`)
+    // update_button.setAttribute("type", "button")
+    // update_button.setAttribute("onclick", "review_put(id)")
+    // update_button.innerText = '수정 완료'
 
-    const reviews_list = document.getElementById(`review_list(${id})`); // 넣을 댓글창
-    reviews_list.insertBefore(input_content, content);
+    const update_delete = document.createElement("button") // 수정 취소 버튼 생성
+    update_delete.setAttribute("id", `${id}`)
+    update_delete.setAttribute("onclick", "update_delete(id)")
+    update_delete.innerText = '수정 취소'
 
+    const reviews_list = document.getElementById(`id_${id}`); // 넣을 댓글 리스트-> div id
+    reviews_list.insertBefore(input_content, content); // 원래 내용 -> 수정 내용 바꿈
+    reviews_list.appendChild(update_delete); // 리스트에 수정취소 버튼 붙여줌 (수정 버튼 누르면 나타나게)
+    //reviews_list.appendChild(update_button)
+    
 
-    const update_button = document.getElementById(`update(${id})`); //수정하기 버튼
-    update_button.setAttribute("onclick", "review_put(id)");
+    //update_.style.visibility = "visible"
+    //update_.setAttribute("onclick", "updateMode(id)");
+    
     // 업데이트 버튼을 가져오고 클릭시 review_put(id) 함수 실행
 }
 
+// 수정 취소
+function update_delete(id){
+   
+    const inputCommentContent = document.getElementById(`input_content${id}`) // 수정 텍스트
+    inputCommentContent.remove() // 수정할 텍스트 박스 제거
+    
+    const commentContent = document.getElementById(`update_button(${id})`) // 수정 전 텍스트
+    commentContent.style.visibility = "visible" // 수정 전 텍스트 보여주기
+
+    const delete_button = document.getElementById(`${id}`) // 수정취소 버튼
+    delete_button.remove() // 수정취소버튼 반복 안 되게 삭제
+
+    const update_ = document.getElementById(`update(${id})`); //수정하기 버튼
+    update_.style.visibility = "visible" // 수정 버튼 다시 보여주기
+}
 //리뷰 수정
 async function review_put(id) {
 
     review_id = id
-    const content = document.getElementById(`update_button(${id})`).value // input 박스 
-        //const content = document.getElementById(`input_content${id}`).value // 수정된 텍스트 박스
-
+    //const content = document.getElementById(`update_button(${id})`).value // input 박스 
+    const content = document.getElementById(`input_content${id}`).value // 수정된 텍스트 박스
+    console.log(workshop_id, review_id, content,'ㅇㅅㅇ')
     const response = await workshop_review_put(workshop_id, review_id, content)
 
     // const content_previous = document.getElementById(`update(${id})`).previousElementSibling // 
@@ -234,7 +295,7 @@ async function review_put(id) {
 
         alert("댓글을 수정 했습니다.")
     } else {
-        alert(response.status, '작성자가 아닙니다')
+        alert("작성자가 아닙니다")
     }
     window.location.reload()
 }
@@ -248,8 +309,8 @@ async function workshop_review_POST(workshop_id) {
 
     if (response.status == 200) {
         alert('댓글이 작성되었습니다.')
-    } else {
-        alert(response.status)
+    } else if (response.status == 401) {
+        alert('로그인 후 이용해 주세욤')
     }
     location.reload()
 }
@@ -276,7 +337,7 @@ async function Like_post(workshop_id) {
     if (response.status == 200) {
 
         data = await response.json()
-
+  
         alert(`${data['msg']}`)
 
     } else if (response.status == 401) {
@@ -396,10 +457,10 @@ async function workshop_post() {
         }
     }
     if (max_guest<1 || max_guest>100){
-        return alert("모집인원은 1명 이상 100명 미만으로 작성해주세요")
+        return alert("모집인원은 1명 이상 100명 이하로 작성해주세요")
     } 
     if(amount<0 || amount>1000000) {
-        return alert("참가비는 0~100만원 이내로 작성 가능합니다")
+        return alert("참가비는 0원~100만원 이내로 작성 가능합니다")
     }
 
     const formData = new FormData();
@@ -454,10 +515,10 @@ async function workshop_put(workshop_id) {
     const date = document.getElementById("date").value;
 
     if (max_guest<1 || max_guest>100){
-        return alert("모집인원은 1명 이상 100명 미만으로 작성해주세요")
+        return alert("모집인원은 1명 이상 100명 이하로 작성해주세요")
     } 
     if(amount<0 || amount>1000000) {
-        return alert("참가비는 0~100만원 이내로 작성 가능합니다")
+        return alert("참가비는 0원~100만원 이내로 작성 가능합니다")
     }
 
     const formData = new FormData();

@@ -32,7 +32,12 @@
     box-shadow: 0 2px 4px 0 rgba(228, 89, 89, 0.2);
 }
 
-.img_emoti {
+.btn_unlike .img_emoti {
+    background-position: -30px -120px;
+}
+
+
+.img_emoti { 
     display: inline-block;
     overflow: hidden;
     font-size: 0;
@@ -62,39 +67,32 @@
     pointer-events: none;
 }
 
-
-/* 라이크 버튼 */
-
-.button {
-    --color: #1E2235;
-    --coor-hover: #1E2235;
-    --color-active: #fff;
-    --icon: #BBC1E1;
-    --icon-hover: #8A91B4;
-    --icon-active: #fff;
-    --background: #fff;
-    --background-hover: #fff;
-    --background-active: #362A89;
-    --border: #E1E6F9;
-    --border-active: #362A89;
-    --shadow: rgba(0, 17, 119, 0.025);
-    display: block;
-    outline: none;
-    cursor: pointer;
-    position: relative;
-    border: 0;
-    background: none;
-    padding: 8px 20px 8px 24px;
-    border-radius: 9px;
-    line-height: 27px;
-    font-family: inherit;
-    font-weight: 600;
-    font-size: 14px;
-    color: var(--color);
-    --webkit-appearance: none;
-    -webkit-tap-highlight-color: transparent;
-    transition: color 0.2s linear;
+.ani_heart_m.hi {
+    background-image: url(https://mk.kakaocdn.net/dn/emoticon/static/images/webstore/retina/zzim_on_m.png);
+    -webkit-background-size: 9000px 125px;
+    background-size: 9000px 125px;
+    animation: on_m 1.06s steps(72);
 }
+
+.ani_heart_m.bye {
+    background-image: url(https://mk.kakaocdn.net/dn/emoticon/static/images/webstore/retina/zzim_off_m.png);
+    -webkit-background-size: 8250px 125px;
+    background-size: 8250px 125px;
+    animation: off_m 1.06s steps(66);
+}
+
+@keyframes on_m {
+  from { background-position: 0 }
+  to { background-position: -9000px }
+}
+
+@keyframes off_m {
+  from { background-position: 0 }
+  to { background-position: -8250px }
+}
+
+
+
 
 
 /*사진 업로드*/
