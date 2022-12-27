@@ -319,6 +319,12 @@ async function workshop_review_POST(workshop_id) {
     location.reload()
 }
 
+function workshop_review_POST_Enterkey() {
+    if (window.event.keyCode == 13) {
+        workshop_review_POST(workshop_id);
+    }
+}
+
 // 리뷰 삭제
 async function review_delete(id) {
     review_id = id
