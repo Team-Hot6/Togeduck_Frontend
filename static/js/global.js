@@ -5,8 +5,8 @@
 //const front_end_url ="http://127.0.0.1:5500"
 //const back_end_url ="http://127.0.0.1:8000"
 
-const front_end_url = "http://bluecomma.shop"
-const back_end_url = "http://www.carrotww.shop"
+const front_end_url = "https://bluecomma.shop"
+const back_end_url = "https://www.carrotww.shop"
 const base_websocket_url = `ws://${window.location.host}`
 const websocketBaseUrl = "ws://3.34.40.115/ws/socket-server"
 const websocket_Chat_BaseUrl = "ws://3.34.40.115"
