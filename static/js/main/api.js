@@ -1,6 +1,27 @@
 // 로그인 된 사용자 정보 
 const token = localStorage.getItem("access");
 
+var setCookie = function(name, value, exp) {
+    var todayDate = new Date();
+    var need_hour = todayDate.getHours()
+    var need_min = todayDate.getMinutes()
+    var need_sec = todayDate.getSeconds()
+    todayDate.setTime(todayDate.getTime() + exp*24*60*60*1000)
+    todayDate.setHours(todayDate.getHours() - need_hour);
+    todayDate.setMinutes(todayDate.getMinutes() - need_min)
+    todayDate.setSeconds(todayDate.getSeconds() - need_sec)
+    document.cookie = name + '=' + value + ';expires=' + todayDate + ';path=/' + ';SameSite=None' + ';Secure';
+};
+
+var getCookie = function(name) {
+    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return value? value[2] : null;
+};
+
+var deleteCookie = function(name) {
+    document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
+}
+
 // 로그인 하는 로직
 async function sign_in() {
     const email = document.getElementById("login_id").value
@@ -83,8 +104,38 @@ function replace_article_detail(article_id) {
 
 // 게시글 상세 페이지의 API 호출하여 특정 게시글 데이터 요청
 async function get_article_detail(article_id) {
+    let article_view_str = getCookie('article_views')
+    if (article_view_str) {
+        let article_view_array = article_view_str.split('|')
+        if (article_view_array.includes(article_id)) {
+            const response = await fetch(`${back_end_url}/articles/${article_id}/?articleview=${article_view_str}`, {
+                mode: 'cors',
+                method: "GET",
+                credentials: 'same-origin',
+            })
+            return response
+        }
+        else {
+            const response = await fetch(`${back_end_url}/articles/${article_id}/?articleview=${article_view_str}`, {
+                mode: 'cors',
+                method: "GET",
+                credentials: 'same-origin',
+            })
+            article_view_str += `|${article_id}`
+            setCookie('article_views', article_view_str, 1)
+            return response
+        }
+    }
+    else {
+        article_view_str = article_id
+        setCookie('article_views', article_view_str, 1)
+    }
+
+    // deleteCookie('article_views')
     const response = await fetch(`${back_end_url}/articles/${article_id}/`, {
+        mode: 'cors',
         method: "GET",
+        credentials: 'same-origin',
     })
     return response
 }
