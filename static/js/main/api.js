@@ -3,13 +3,13 @@ const token = localStorage.getItem("access");
 
 var setCookie = function(name, value, exp) {
     var todayDate = new Date();
-    // var need_hour = todayDate.getHours()
-    // var need_min = todayDate.getMinutes()
-    // var need_sec = todayDate.getSeconds()
-    // todayDate.setTime(todayDate.getTime() + exp*24*60*60*1000)
-    // todayDate.setHours(todayDate.getHours() - need_hour);
-    // todayDate.setMinutes(todayDate.getMinutes() - need_min)
-    // todayDate.setSeconds(todayDate.getSeconds() - need_sec)
+    var need_hour = todayDate.getHours()
+    var need_min = todayDate.getMinutes()
+    var need_sec = todayDate.getSeconds()
+    todayDate.setTime(todayDate.getTime() + exp*24*60*60*1000)
+    todayDate.setHours(todayDate.getHours() - need_hour);
+    todayDate.setMinutes(todayDate.getMinutes() - need_min)
+    todayDate.setSeconds(todayDate.getSeconds() - need_sec)
     document.cookie = name + '=' + value + ';expires=' + todayDate + ';path=/' + ';SameSite=None' + ';Secure';
 };
 
@@ -108,7 +108,6 @@ async function get_article_detail(article_id) {
     if (article_view_str) {
         let article_view_array = article_view_str.split('|')
         if (article_view_array.includes(article_id)) {
-            console.log('있음')
             const response = await fetch(`${back_end_url}/articles/${article_id}/?articleview=${article_view_str}`, {
                 mode: 'cors',
                 method: "GET",
@@ -117,7 +116,6 @@ async function get_article_detail(article_id) {
             return response
         }
         else {
-            console.log('없음')
             const response = await fetch(`${back_end_url}/articles/${article_id}/?articleview=${article_view_str}`, {
                 mode: 'cors',
                 method: "GET",
@@ -129,7 +127,6 @@ async function get_article_detail(article_id) {
         }
     }
     else {
-        console.log('아예없음')
         article_view_str = article_id
         setCookie('article_views', article_view_str, 1)
     }
