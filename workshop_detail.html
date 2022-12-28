@@ -86,10 +86,10 @@
                                 </div>
 
                                 <div class="comment-area comment-box active">
-                                    <form class="comment-form">
-                                        <input id="review_post" class="comment-form__field comment-field">
+                                    <!-- <form class="comment-form"> -->
+                                        <input id="review_post" class="comment-form__field comment-field" onkeyup="workshop_review_POST_Enterkey()">
                                         <button id="review_button" type="button" class="comment-form__submit submit-comment" onclick="workshop_review_POST(workshop_id)">Comment</button>
-                                    </form>
+                                    <!-- </form> -->
                                 </div>
                             </div>
                             <div id="list" class="comment-list"></div>
