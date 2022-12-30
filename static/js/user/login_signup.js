@@ -78,6 +78,8 @@ function kakao_login() {
                         'profile_image': kakaoAccount['profile']['image']
                     }
                     kakaoLoginApi(kakaoUserData)
+                    localStorage.setItem("kakao", "True");
+
                 },
                 fail: res => {
                     console.log('카카오 로그인 실패')

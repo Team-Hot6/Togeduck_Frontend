@@ -51,6 +51,12 @@ async function logout() {
     localStorage.removeItem("refresh");
     localStorage.removeItem("payload");
 
+    kakao = localStorage.getItem("kakao");
+
+    if (kakao == "True"){
+        alert("소셜로그인 사용자")
+    }
+
     window.location.href = `${front_end_url}/login_signup.html`
 }
 
@@ -94,3 +100,25 @@ fetch("../../../chat.html").then(response => {
 }).then(data => {
     document.querySelector("chat").innerHTML = data
 })
+
+
+// access 토큰 유효기간 검증, 만료되었다면 연관 정보 삭제
+async function access_check() {
+    const payload = localStorage.getItem("payload");
+    // payload가 없다면 함수 실행 중지
+    if(!payload) {
+        return
+    }
+    
+    // payload가 없다면 현재 시각과 만료일 비교
+    const payload_parse = JSON.parse(payload);
+    let now = Date.now()/ 1000 | 0; // access 토큰 만료양식에 따라 단위 변환
+
+    if(now > payload_parse.exp){
+        localStorage.removeItem("payload");
+        localStorage.removeItem("access");
+        localStorage.removeItem("refresh");
+    }
+};
+
+access_check()
